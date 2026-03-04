@@ -1,0 +1,314 @@
+import { type DataConnection, Peer } from 'peerjs';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
+import type { PeerMessage, RoomState, VoteValue } from '../types/domain';
+
+const MAX_PEERS = 12;
+
+interface UsePeerSessionReturn {
+	broadcastState: (state: RoomState) => void;
+	castVote: (vote: VoteValue) => void;
+	error: null | string;
+	initGuest: (roomId: string, name: string) => void;
+	initHost: (name: string) => void;
+	leaveRoom: () => void;
+	resetBoard: () => void;
+	revealVotes: () => void;
+	roomState: RoomState | null;
+}
+
+export function usePeerSession(): UsePeerSessionReturn {
+	const [roomState, setRoomState] = useState<RoomState | null>(null);
+	const [error, setError] = useState<null | string>(null);
+
+	const peerRef = useRef<Peer | null>(null);
+	const connectionsRef = useRef<Map<string, DataConnection>>(new Map());
+	const isHostRef = useRef<boolean>(false);
+
+	// ---------------------------------------------------------
+	// Core Dispatchers
+	// ---------------------------------------------------------
+
+	const broadcastState = useCallback((state: RoomState) => {
+		if (!isHostRef.current) return;
+		setRoomState(state); // Update local Host view
+
+		connectionsRef.current.forEach((conn) => {
+			if (conn.open) {
+				conn.send({
+					payload: { state },
+					type: 'SYNC_STATE',
+				} satisfies PeerMessage);
+			}
+		});
+	}, []);
+
+	const sendToHost = useCallback((message: PeerMessage) => {
+		if (isHostRef.current) return;
+		// Guests only have one connection (the Host), usually stored by the Host's ID
+		const hostConn = Array.from(connectionsRef.current.values())[0];
+		if (hostConn && hostConn.open) {
+			hostConn.send(message);
+		} else {
+			setError('Connection to host lost.');
+		}
+	}, []);
+
+	// ---------------------------------------------------------
+	// Event Handlers
+	// ---------------------------------------------------------
+
+	const handleMessage = useCallback(
+		(message: unknown, senderId: string) => {
+			const msg = message as PeerMessage;
+
+			setRoomState((prevState) => {
+				if (!prevState) return prevState;
+
+				if (isHostRef.current) {
+					// HOST Logic: Act on Guest messages and broadcast
+					const newState = { ...prevState };
+
+					switch (msg.type) {
+						case 'JOIN_ROOM':
+							if (newState.users.length >= MAX_PEERS) {
+								// Ignore if full, could send rejection here later
+								return prevState;
+							}
+							newState.users = [
+								...newState.users,
+								{
+									id: msg.payload.peerId,
+									isConnected: true,
+									isHost: false,
+									name: msg.payload.name,
+									vote: null,
+								},
+							];
+							break;
+
+						case 'SUBMIT_VOTE':
+							newState.users = newState.users.map((u) =>
+								u.id === senderId
+									? { ...u, vote: msg.payload.vote }
+									: u,
+							);
+							break;
+
+						case 'TOGGLE_REVEAL':
+							newState.isRevealed = true;
+							break;
+
+						case 'RESET_SESSION':
+							newState.isRevealed = false;
+							newState.users = newState.users.map((u) => ({
+								...u,
+								vote: null,
+							}));
+							break;
+					}
+
+					broadcastState(newState); // Push active sync
+					return newState;
+				} else {
+					// GUEST Logic: Only listen to SYNC_STATE
+					if (msg.type === 'SYNC_STATE') {
+						return msg.payload.state;
+					}
+					return prevState;
+				}
+			});
+		},
+		[broadcastState],
+	);
+
+	const setupConnectionListeners = useCallback(
+		(conn: DataConnection) => {
+			conn.on('data', (data) => {
+				handleMessage(data, conn.peer);
+			});
+
+			conn.on('close', () => {
+				connectionsRef.current.delete(conn.peer);
+
+				if (isHostRef.current) {
+					setRoomState((prev) => {
+						if (!prev) return prev;
+						const updatedUsers = prev.users.map((u) =>
+							u.id === conn.peer
+								? { ...u, isConnected: false }
+								: u,
+						);
+						const newState = { ...prev, users: updatedUsers };
+						broadcastState(newState);
+						return newState;
+					});
+				} else {
+					setError('Host disconnected. Session ended.');
+					setRoomState(null);
+				}
+			});
+
+			conn.on('error', (err) => {
+				console.error('Connection error:', err);
+			});
+		},
+		[handleMessage, broadcastState],
+	);
+
+	// ---------------------------------------------------------
+	// Initializers
+	// ---------------------------------------------------------
+
+	const initHost = useCallback(
+		(name: string) => {
+			isHostRef.current = true;
+			const peer = new Peer();
+			peerRef.current = peer;
+
+			peer.on('open', (id) => {
+				// Host initializes the master state
+				setRoomState({
+					isRevealed: false,
+					roomId: id,
+					users: [
+						{
+							id,
+							isConnected: true,
+							isHost: true,
+							name,
+							vote: null,
+						},
+					],
+				});
+			});
+
+			peer.on('connection', (conn) => {
+				if (connectionsRef.current.size >= MAX_PEERS - 1) {
+					// -1 because Host is 1 peer
+					console.warn('Room is full. Rejecting connection.');
+					setTimeout(() => conn.close(), 500);
+					return;
+				}
+				connectionsRef.current.set(conn.peer, conn);
+
+				conn.on('open', () => {
+					setupConnectionListeners(conn);
+					// We sync state immediately so the new guest gets the board,
+					// but they haven't "Joined" the roster yet. They will send JOIN_ROOM.
+				});
+			});
+
+			peer.on('error', (err) => setError(err.message));
+		},
+		[setupConnectionListeners],
+	);
+
+	const initGuest = useCallback(
+		(roomId: string, name: string) => {
+			isHostRef.current = false;
+			const peer = new Peer();
+			peerRef.current = peer;
+
+			peer.on('open', (id) => {
+				const conn = peer.connect(roomId);
+				connectionsRef.current.set(roomId, conn);
+
+				conn.on('open', () => {
+					setupConnectionListeners(conn);
+					// Immediately announce presence to Host
+					conn.send({
+						payload: { name, peerId: id },
+						type: 'JOIN_ROOM',
+					} satisfies PeerMessage);
+				});
+			});
+
+			peer.on('error', (err) => setError(err.message));
+		},
+		[setupConnectionListeners],
+	);
+
+	// ---------------------------------------------------------
+	// Public Actions
+	// ---------------------------------------------------------
+
+	const castVote = useCallback(
+		(vote: VoteValue) => {
+			if (isHostRef.current) {
+				setRoomState((prev) => {
+					if (!prev) return prev;
+					const updatedUsers = prev.users.map((u) =>
+						u.id === peerRef.current?.id ? { ...u, vote } : u,
+					);
+					const newState = { ...prev, users: updatedUsers };
+					broadcastState(newState);
+					return newState;
+				});
+			} else {
+				sendToHost({ payload: { vote }, type: 'SUBMIT_VOTE' });
+			}
+		},
+		[sendToHost, broadcastState],
+	);
+
+	const revealVotes = useCallback(() => {
+		if (isHostRef.current) {
+			setRoomState((prev) => {
+				if (!prev) return prev;
+				const newState = { ...prev, isRevealed: true };
+				broadcastState(newState);
+				return newState;
+			});
+		} else {
+			sendToHost({ payload: undefined, type: 'TOGGLE_REVEAL' });
+		}
+	}, [sendToHost, broadcastState]);
+
+	const resetBoard = useCallback(() => {
+		if (isHostRef.current) {
+			setRoomState((prev) => {
+				if (!prev) return prev;
+				const clearedUsers = prev.users.map((u) => ({
+					...u,
+					vote: null,
+				}));
+				const newState = {
+					...prev,
+					isRevealed: false,
+					users: clearedUsers,
+				};
+				broadcastState(newState);
+				return newState;
+			});
+		} else {
+			sendToHost({ payload: undefined, type: 'RESET_SESSION' });
+		}
+	}, [sendToHost, broadcastState]);
+
+	const leaveRoom = useCallback(() => {
+		connectionsRef.current.forEach((conn) => conn.close());
+		connectionsRef.current.clear();
+		peerRef.current?.destroy();
+		setRoomState(null);
+		setError(null);
+		isHostRef.current = false;
+	}, []);
+
+	// Cleanup on unmount
+	useEffect(() => {
+		return () => leaveRoom();
+	}, [leaveRoom]);
+
+	return {
+		broadcastState,
+		castVote,
+		error,
+		initGuest,
+		initHost,
+		leaveRoom,
+		resetBoard,
+		revealVotes,
+		roomState,
+	};
+}
