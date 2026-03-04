@@ -12,6 +12,7 @@ interface UsePeerSessionReturn {
 	initGuest: (roomId: string, name: string) => void;
 	initHost: (name: string) => void;
 	leaveRoom: () => void;
+	localUserId: null | string;
 	resetBoard: () => void;
 	revealVotes: () => void;
 	roomState: RoomState | null;
@@ -20,6 +21,7 @@ interface UsePeerSessionReturn {
 export function usePeerSession(): UsePeerSessionReturn {
 	const [roomState, setRoomState] = useState<RoomState | null>(null);
 	const [error, setError] = useState<null | string>(null);
+	const [localUserId, setLocalUserId] = useState<null | string>(null);
 
 	const peerRef = useRef<Peer | null>(null);
 	const connectionsRef = useRef<Map<string, DataConnection>>(new Map());
@@ -167,6 +169,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 			peerRef.current = peer;
 
 			peer.on('open', (id) => {
+				setLocalUserId(id);
 				// Host initializes the master state
 				setRoomState({
 					isRevealed: false,
@@ -211,6 +214,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 			peerRef.current = peer;
 
 			peer.on('open', (id) => {
+				setLocalUserId(id);
 				const conn = peer.connect(roomId);
 				connectionsRef.current.set(roomId, conn);
 
@@ -292,6 +296,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 		peerRef.current?.destroy();
 		setRoomState(null);
 		setError(null);
+		setLocalUserId(null);
 		isHostRef.current = false;
 	}, []);
 
@@ -307,6 +312,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 		initGuest,
 		initHost,
 		leaveRoom,
+		localUserId,
 		resetBoard,
 		revealVotes,
 		roomState,

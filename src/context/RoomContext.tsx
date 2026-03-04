@@ -9,6 +9,7 @@ interface RoomContextValue {
 	initGuest: (roomId: string, name: string) => void;
 	initHost: (name: string) => void;
 	leaveRoom: () => void;
+	localUserId: null | string;
 	resetBoard: () => void;
 	revealVotes: () => void;
 	roomState: RoomState | null;
@@ -23,6 +24,7 @@ export function RoomProvider({ children }: { children: ReactNode }) {
 		initGuest,
 		initHost,
 		leaveRoom,
+		localUserId,
 		resetBoard,
 		revealVotes,
 		roomState,
@@ -36,6 +38,7 @@ export function RoomProvider({ children }: { children: ReactNode }) {
 				initGuest,
 				initHost,
 				leaveRoom,
+				localUserId,
 				resetBoard,
 				revealVotes,
 				roomState,
