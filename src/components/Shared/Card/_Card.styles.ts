@@ -1,16 +1,6 @@
 import styled from '@emotion/styled';
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-interface CardProps extends Omit<
-	ButtonHTMLAttributes<HTMLButtonElement>,
-	'value'
-> {
-	value: ReactNode;
-	isSelected?: boolean;
-	isHidden?: boolean; // Used in Roster when votes are cast but not revealed
-}
-
-const StyledCard = styled.button<{
+export const Card = styled.button<{
 	'data-selected': boolean;
 	'data-hidden': boolean;
 }>`
@@ -77,23 +67,3 @@ const StyledCard = styled.button<{
 		}
 	}
 `;
-
-export function Card({
-	isHidden = false,
-	isSelected = false,
-	value,
-	...props
-}: CardProps) {
-	return (
-		<StyledCard
-			data-hidden={isHidden}
-			data-selected={isSelected}
-			{...props}
-			// Ensure screen readers handle the hidden state
-			aria-label={isHidden ? 'Vote submitted, hidden' : `Select ${value}`}
-		>
-			{/* If hidden, the CSS pseudo-element renders the checkmark. Text stays hidden. */}
-			{value}
-		</StyledCard>
-	);
-}

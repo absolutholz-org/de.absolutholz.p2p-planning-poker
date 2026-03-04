@@ -25,27 +25,30 @@ src/components/
 ## File Content Guidelines & Agent Handoffs
 
 ### 1. `_[ComponentName].types.ts` (TypeScript Types)
+
 - Define and export a single interface named `[ComponentName]Props`.
 - This interface should contain all the props for the component.
 - Use JSDoc comments to describe each prop.
 - Clearly distinguish between required and optional props.
 
 ### 2. `_[ComponentName].styles.ts` (Styled Components & Theming)
+
 - **AGENT HANDOFF:** You MUST follow the CSS custom property, mobile-first, and touch-target rules defined by `@DESIGN_SYSTEM_ARCHITECT.md`.
 - Use `@emotion/styled` strictly as a structural scoping mechanism.
 - Do not use a JavaScript theme object. Inject native CSS variables for all colors, spacing, and typography linked from `src/index.css`.
 - Prefix transient props with a dollar sign (`$`).
 
 **Example Scaffold:**
+
 ```typescript
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const Container = styled.div<{ $disabled?: boolean }>`
   /* Delegate visual tokens to index.css / DESIGN_SYSTEM_ARCHITECT */
   background-color: var(--sys-color-surface);
   padding: var(--sys-spacing-md);
   opacity: ${({ $disabled }) => ($disabled ? 0.5 : 1)};
-  cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
+  cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
 `;
 
 export const Label = styled.span`
@@ -54,6 +57,7 @@ export const Label = styled.span`
 ```
 
 ### 3. `_[ComponentName].tsx` (The Component)
+
 This is the main component file (function component).
 
 - Import types from `./_[ComponentName].types` and styled components from `./_[ComponentName].styles` (using `import * as S from '...'`).
@@ -62,6 +66,7 @@ This is the main component file (function component).
 - **AGENT HANDOFF (DATA):** If WebRTC or peer data is needed, use custom hooks compliant with `@PEERJS_EXPERT.md`, such as `useRoom()` from `src/context/RoomContext.tsx`.
 
 **Example Scaffold:**
+
 ```typescript
 import { useId } from "react";
 import * as S from "./_[ComponentName].styles";
@@ -86,18 +91,22 @@ export function MyComponent({ label, disabled = false, onClick }: MyComponentPro
 ```
 
 ### 4. `index.ts` (Barrel File)
+
 Create a single `index.ts` file to export the component for cleaner imports.
 
 **Example:**
+
 ```typescript
-export { MyComponent } from "./_[ComponentName]";
+export { MyComponent } from './_[ComponentName]';
 ```
 
 ### 5. `_[ComponentName].stories.tsx` (Storybook Stories)
+
 - **AGENT HANDOFF (STORYBOOK):** Follow the CSF 3.0 conventions outlined by `@STORYBOOK_EXPERT.md`.
 - Import `Meta` and `StoryObj` from `@storybook/react-vite`.
 - The meta object must be fully typed and include `layout: 'centered'` and `tags: ['autodocs']`.
-- Create separate, named stories for all important variants and states (e.g., Default, Disabled, Interactive). 
+- Create separate, named stories for all important variants and states (e.g., Default, Disabled, Interactive).
 
 ## Execution Principle
+
 When asked to build or refactor a component, do not generate the code in a vacuum. Actively synthesize the structure defined in this document with the design rules in `@DESIGN_SYSTEM_ARCHITECT.md`, the compliance rules in `@A11Y_UX_ADVOCATE.md`, and the data rules via the room context.

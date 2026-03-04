@@ -1,64 +1,9 @@
-import styled from '@emotion/styled';
 import { useState } from 'react';
 
-import { useRoom } from '../../context/RoomContext';
-import { Button } from '../Shared/Button';
-import { Dialog } from '../Shared/Dialog';
-
-const HeaderContainer = styled.header`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: var(--sys-spacing-md) var(--sys-spacing-xl);
-	background-color: var(--sys-color-surface);
-	border-bottom: 1px solid var(--sys-color-border);
-	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-	position: sticky;
-	top: 0;
-	z-index: 10;
-`;
-
-const Brand = styled.div`
-	font-weight: bold;
-	font-size: 1.25rem;
-	color: var(--sys-color-primary);
-	display: flex;
-	align-items: center;
-	gap: var(--sys-spacing-sm);
-`;
-
-const RoomInfo = styled.div`
-	display: flex;
-	align-items: center;
-	gap: var(--sys-spacing-md);
-`;
-
-const RoomCodeBadge = styled.button`
-	background: var(--sys-color-bg);
-	border: 1px solid var(--sys-color-border);
-	padding: var(--sys-spacing-xs) var(--sys-spacing-md);
-	border-radius: var(--sys-radius-pill);
-	font-family: monospace;
-	font-size: 0.875rem;
-	color: var(--sys-color-text-secondary);
-	cursor: pointer;
-	transition: all 0.2s;
-
-	&:hover {
-		background: var(--sys-color-border);
-		color: var(--sys-color-text-primary);
-	}
-
-	&:focus-visible {
-		outline: none;
-		box-shadow: 0 0 0 3px var(--sys-color-focus);
-	}
-`;
-
-const Actions = styled.div`
-	display: flex;
-	gap: var(--sys-spacing-sm);
-`;
+import { useRoom } from '../../../context/RoomContext';
+import { Button } from '../../Shared/Button';
+import { Dialog } from '../../Shared/Dialog';
+import * as S from './_RoomHeader.styles';
 
 export function RoomHeader() {
 	const { resetBoard, revealVotes, roomState } = useRoom();
@@ -84,21 +29,21 @@ export function RoomHeader() {
 
 	return (
 		<>
-			<HeaderContainer>
-				<Brand>
+			<S.HeaderContainer>
+				<S.Brand>
 					<span aria-hidden="true">🃏</span> P2P Poker
-				</Brand>
+				</S.Brand>
 
-				<RoomInfo>
-					<RoomCodeBadge
+				<S.RoomInfo>
+					<S.RoomCodeBadge
 						onClick={handleCopyCode}
 						aria-label={`Room Code is ${roomState.roomId}. Click to copy.`}
 					>
 						{copied ? 'Copied!' : `Code: ${roomState.roomId}`}
-					</RoomCodeBadge>
-				</RoomInfo>
+					</S.RoomCodeBadge>
+				</S.RoomInfo>
 
-				<Actions>
+				<S.Actions>
 					<Button
 						variant="secondary"
 						onClick={() => setIsResetDialogOpen(true)}
@@ -116,8 +61,8 @@ export function RoomHeader() {
 					>
 						Reveal Votes
 					</Button>
-				</Actions>
-			</HeaderContainer>
+				</S.Actions>
+			</S.HeaderContainer>
 
 			<Dialog
 				isOpen={isResetDialogOpen}

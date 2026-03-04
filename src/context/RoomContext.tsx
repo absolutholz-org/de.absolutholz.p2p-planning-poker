@@ -15,7 +15,10 @@ interface RoomContextValue {
 	roomState: RoomState | null;
 }
 
-const RoomContext = createContext<RoomContextValue | undefined>(undefined);
+// eslint-disable-next-line react-refresh/only-export-components
+export const RoomContext = createContext<RoomContextValue | undefined>(
+	undefined,
+);
 
 export function RoomProvider({ children }: { children: ReactNode }) {
 	const {

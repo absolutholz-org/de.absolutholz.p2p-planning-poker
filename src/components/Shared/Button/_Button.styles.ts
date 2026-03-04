@@ -1,15 +1,8 @@
 import styled from '@emotion/styled';
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-type ButtonVariant = 'primary' | 'secondary' | 'danger';
+import type { ButtonVariant } from './_Button.types';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-	children: ReactNode;
-	variant?: ButtonVariant;
-}
-
-// Map variants to our CSS Custom Properties from index.css
-const StyledButton = styled.button<{ 'data-variant': ButtonVariant }>`
+export const Button = styled.button<{ 'data-variant': ButtonVariant }>`
 	/* A11Y requirement: 48px min touch target */
 	min-height: 48px;
 	min-width: 48px;
@@ -70,15 +63,3 @@ const StyledButton = styled.button<{ 'data-variant': ButtonVariant }>`
 		}
 	}
 `;
-
-export function Button({
-	children,
-	variant = 'primary',
-	...props
-}: ButtonProps) {
-	return (
-		<StyledButton data-variant={variant} {...props}>
-			{children}
-		</StyledButton>
-	);
-}
