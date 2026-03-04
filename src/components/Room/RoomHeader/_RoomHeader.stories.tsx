@@ -63,7 +63,7 @@ export const Default: Story = {};
 
 export const Revealed: Story = {
 	args: {
-		// @ts-expect-error Custom prop for dynamic context injection
+		// Custom prop for dynamic context injection
 		mockRevealed: true,
 	},
 };

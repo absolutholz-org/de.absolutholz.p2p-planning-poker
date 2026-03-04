@@ -80,7 +80,7 @@ export const HiddenVotes: Story = {};
 
 export const RevealedVotes: Story = {
 	args: {
-		// @ts-expect-error Mock contextual state
+		// Mock contextual state
 		mockRevealed: true,
 	},
 };
