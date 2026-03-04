@@ -1,0 +1,74 @@
+:root {
+  /* System Spacing */
+  --sys-spacing-xs: 4px;
+  --sys-spacing-sm: 8px;
+  --sys-spacing-md: 16px;
+  --sys-spacing-lg: 24px;
+  --sys-spacing-xl: 32px;
+
+  /* System Radius */
+  --sys-radius-sm: 4px;
+  --sys-radius-md: 8px;
+  --sys-radius-lg: 12px;
+  --sys-radius-pill: 9999px;
+
+  /* System Colors - Light Mode Default */
+  --sys-color-bg: #f8fafc;
+  --sys-color-surface: #ffffff;
+  --sys-color-text-primary: #0f172a;
+  --sys-color-text-secondary: #64748b;
+
+  --sys-color-primary: #3b82f6;
+  --sys-color-primary-hover: #2563eb;
+  --sys-color-primary-text: #ffffff;
+
+  --sys-color-success: #10b981;
+  --sys-color-warning: #f59e0b;
+  --sys-color-danger: #ef4444;
+
+  --sys-color-border: #e2e8f0;
+  --sys-color-focus: rgba(59, 130, 246, 0.5);
+
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: var(--sys-color-text-primary);
+  background-color: var(--sys-color-bg);
+
+  font-synthesize: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark Mode Overrides */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sys-color-bg: #0f172a;
+    --sys-color-surface: #1e293b;
+    --sys-color-text-primary: #f8fafc;
+    --sys-color-text-secondary: #94a3b8;
+    --sys-color-border: #334155;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
