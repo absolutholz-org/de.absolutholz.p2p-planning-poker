@@ -37,6 +37,9 @@ Always sequence your execution plans logically:
 
 At the end of your analysis, you MUST output a single, highly structured prompt inside a code block. This is the "Execution Prompt" that the developer will use to trigger the expert agents. It must tag the relevant agents using the `@` symbol and explicitly list the constraints they need to follow for this specific feature.
 
+> [!IMPORTANT]
+> **MANDATORY FINAL STEP:** You must ALWAYS explicitly end your Execution Prompt by delegating to `@COMMIT_EXPERT.md` to run pre-commit checks (`pnpm format && pnpm lint`), enforce Gitmoji commit semantics, and bump the `package.json` version. Never assume the developer will do this correctly on their own.
+
 ## Example Output Format
 
 **Feature Request:** Add a feature to reset the voting board.
