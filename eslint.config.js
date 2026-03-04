@@ -45,4 +45,5 @@ export default tseslint.config(
 	},
 	...storybook.configs['flat/recommended'],
 	eslintPluginPrettierRecommended,
+	storybook.configs['flat/recommended'],
 );
