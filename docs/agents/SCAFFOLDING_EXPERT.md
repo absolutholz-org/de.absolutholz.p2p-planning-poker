@@ -26,10 +26,11 @@ src/components/
 
 ### 1. `_[ComponentName].types.ts` (TypeScript Types)
 
-- Define and export a single interface named `[ComponentName]Props`.
+- Define and export a single interface exactly named `I[ComponentName]` (never `[ComponentName]Props`).
 - This interface should contain all the props for the component.
 - Use JSDoc comments to describe each prop.
 - Clearly distinguish between required and optional props.
+- Always use explicit imports for React properties and types (e.g., `import { RefObject, ReactNode } from 'react'` instead of `React.RefObject`).
 
 ### 2. `_[ComponentName].styles.ts` (Styled Components & Theming)
 
@@ -70,9 +71,9 @@ This is the main component file (function component).
 ```typescript
 import { useId } from "react";
 import * as S from "./_[ComponentName].styles";
-import type { MyComponentProps } from "./_[ComponentName].types";
+import type { IMyComponent } from "./_[ComponentName].types";
 
-export function MyComponent({ label, disabled = false, onClick }: MyComponentProps) {
+export function MyComponent({ label, disabled = false, onClick }: IMyComponent) {
 	const id = useId();
 
 	return (
