@@ -72,7 +72,25 @@ export function usePeerSession(): UsePeerSessionReturn {
 					const newState = { ...prevState };
 
 					switch (msg.type) {
-						case 'JOIN_ROOM':
+						case 'JOIN_ROOM': {
+							// Guard against duplicate UI keys caused by WebRTC connection race conditions
+							if (
+								newState.users.some(
+									(u) => u.id === msg.payload.peerId,
+								)
+							) {
+								newState.users = newState.users.map((u) =>
+									u.id === msg.payload.peerId
+										? {
+												...u,
+												isConnected: true,
+												name: msg.payload.name,
+											}
+										: u,
+								);
+								break;
+							}
+
 							if (newState.users.length >= MAX_PEERS) {
 								// Ignore if full, could send rejection here later
 								return prevState;
@@ -88,6 +106,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 								},
 							];
 							break;
+						}
 
 						case 'SUBMIT_VOTE':
 							newState.users = newState.users.map((u) =>
