@@ -3,15 +3,14 @@ import styled from '@emotion/styled';
 export const TriggerButton = styled.button`
 	display: flex;
 	align-items: center;
-	gap: var(--sys-spacing-sm);
-	height: 44px; /* Match ThemeSwitcher height */
+	justify-content: center;
+	width: 44px;
+	height: 44px;
 	background: transparent;
 	border: 1px solid var(--sys-color-border);
-	padding: 0 var(--sys-spacing-md);
-	border-radius: var(--sys-radius-pill);
+	border-radius: var(--sys-radius-lg);
 	color: var(--sys-color-text-primary);
-	font-weight: 500;
-	font-size: 0.875rem;
+	font-size: 1.125rem;
 	cursor: pointer;
 	transition: all 0.2s ease;
 
@@ -27,7 +26,7 @@ export const TriggerButton = styled.button`
 export const MenuContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	min-width: 140px;
+	min-width: 160px;
 `;
 
 export const MenuItem = styled.button<{ 'data-active': boolean }>`

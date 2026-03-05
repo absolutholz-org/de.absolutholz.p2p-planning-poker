@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { Popover } from '../Popover';
 import * as S from './_LanguageSwitcher.styles';
 import type { LanguageSwitcherProps } from './_LanguageSwitcher.types';
 
@@ -25,19 +26,53 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
 		i18n.changeLanguage(code);
 	};
 
+	const currentLang =
+		SUPPORTED_LANGUAGES.find((l) => i18n.language?.startsWith(l.code)) ||
+		SUPPORTED_LANGUAGES[0];
+
 	return (
-		<S.SwitcherContainer className={className} aria-label="Select language">
-			{SUPPORTED_LANGUAGES.map(({ code, label, title }) => (
-				<S.LanguageButton
-					key={code}
-					title={title}
-					aria-label={`Change language to ${title}`}
-					data-active={i18n.language?.startsWith(code) ?? false}
-					onClick={() => handleLanguageChange(code)}
+		<Popover
+			align="end"
+			renderTrigger={({
+				popoverTarget,
+				ref,
+			}: {
+				popoverTarget: string;
+				ref: React.RefObject<HTMLButtonElement>;
+			}) => (
+				<S.TriggerButton
+					className={className}
+					ref={ref}
+					popoverTarget={popoverTarget}
+					aria-label="Select language"
 				>
-					{label}
-				</S.LanguageButton>
-			))}
-		</S.SwitcherContainer>
+					<span aria-hidden="true">🌐</span> {currentLang.label}{' '}
+					<span
+						aria-hidden="true"
+						style={{ fontSize: '0.7em', marginLeft: '4px' }}
+					>
+						▼
+					</span>
+				</S.TriggerButton>
+			)}
+		>
+			<S.MenuContainer>
+				{SUPPORTED_LANGUAGES.map(({ code, title }) => {
+					const isActive = i18n.language?.startsWith(code) ?? false;
+					return (
+						<S.MenuItem
+							key={code}
+							title={title}
+							aria-label={`Change language to ${title}`}
+							data-active={isActive}
+							onClick={() => handleLanguageChange(code)}
+						>
+							{title}{' '}
+							{isActive && <span className="check">✓</span>}
+						</S.MenuItem>
+					);
+				})}
+			</S.MenuContainer>
+		</Popover>
 	);
 }
