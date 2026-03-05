@@ -14,7 +14,7 @@ import { type ITooltip } from './_Tooltip.types';
 export const Tooltip = ({ children, content, position = 'top' }: ITooltip) => {
 	const triggerRef = useRef<HTMLElement | null>(null);
 	const popoverRef = useRef<HTMLDivElement>(null);
-	const hideTimeoutRef = useRef<NodeJS.Timeout>();
+	const hideTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 	const popoverId = useId();
 
 	// Handle Escape key dismissal (WCAG 1.4.13)
