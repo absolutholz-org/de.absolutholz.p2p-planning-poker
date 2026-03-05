@@ -5,8 +5,20 @@ import { Popover } from './_Popover';
 const meta = {
 	args: {
 		align: 'end',
-		children: (
-			<div style={{ minWidth: '150px', padding: '16px' }}>
+		children: [
+			<button
+				key="trigger"
+				style={{
+					background: 'var(--sys-color-bg)',
+					border: '1px solid var(--sys-color-border)',
+					borderRadius: 'var(--sys-radius-pill)',
+					cursor: 'pointer',
+					padding: '8px 16px',
+				}}
+			>
+				Open Menu
+			</button>,
+			<div key="content" style={{ minWidth: '150px', padding: '16px' }}>
 				<p style={{ fontWeight: 500, margin: 0 }}>Menu Content</p>
 				<p
 					style={{
@@ -17,23 +29,8 @@ const meta = {
 				>
 					Native DOM top-layer.
 				</p>
-			</div>
-		),
-		renderTrigger: ({ popoverTarget, ref }) => (
-			<button
-				ref={ref}
-				popoverTarget={popoverTarget}
-				style={{
-					background: 'var(--sys-color-bg)',
-					border: '1px solid var(--sys-color-border)',
-					borderRadius: 'var(--sys-radius-pill)',
-					cursor: 'pointer',
-					padding: '8px 16px',
-				}}
-			>
-				Open Menu
-			</button>
-		),
+			</div>,
+		],
 	},
 	component: Popover,
 	parameters: {
