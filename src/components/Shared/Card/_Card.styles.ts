@@ -17,7 +17,7 @@ export const Card = styled.button<{
 	border: 2px solid var(--sys-color-border);
 	border-radius: var(--sys-radius-lg);
 
-	font-size: 2.25rem;
+	font-size: var(--sys-font-size-3xl);
 	font-weight: 800;
 	cursor: pointer;
 	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -66,7 +66,7 @@ export const Card = styled.button<{
 		&::after {
 			content: '✓';
 			color: var(--sys-color-text-primary);
-			font-size: 1.25rem;
+			font-size: var(--sys-font-size-xl);
 			position: absolute;
 		}
 	}

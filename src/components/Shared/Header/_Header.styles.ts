@@ -18,7 +18,7 @@ export const HeaderContainer = styled.header`
 
 export const Brand = styled.div`
 	font-weight: 700;
-	font-size: 1.125rem;
+	font-size: var(--sys-font-size-lg);
 	color: var(--sys-color-text-primary);
 	display: flex;
 	align-items: center;
@@ -50,7 +50,7 @@ export const BrandText = styled.div`
 		gap: 2px;
 
 		span {
-			font-size: 0.875rem;
+			font-size: var(--sys-font-size-sm);
 		}
 	}
 `;
@@ -65,7 +65,7 @@ export const LogoIcon = styled.div`
 	align-items: center;
 	justify-content: center;
 	font-weight: 800;
-	font-size: 1rem;
+	font-size: var(--sys-font-size-md);
 `;
 
 export const Actions = styled.div`

@@ -29,7 +29,7 @@ export const Title = styled.h2`
 	margin-top: 0;
 	margin-bottom: var(--sys-spacing-sm);
 	color: var(--sys-color-text-primary);
-	font-size: 1.25rem;
+	font-size: var(--sys-font-size-xl);
 `;
 
 export const Message = styled.p`

@@ -8,7 +8,7 @@ export const RosterContainer = styled.section`
 `;
 
 export const SectionTitle = styled.h2`
-	font-size: 0.75rem;
+	font-size: var(--sys-font-size-xs);
 	font-weight: 700;
 	letter-spacing: 0.05em;
 	text-transform: uppercase;
@@ -24,7 +24,7 @@ export const VoteCountBadge = styled.div`
 	border: 1px solid var(--sys-color-border);
 	padding: 4px 12px;
 	border-radius: var(--sys-radius-pill);
-	font-size: 0.75rem;
+	font-size: var(--sys-font-size-xs);
 	font-weight: 600;
 	color: var(--sys-color-text-secondary);
 `;
@@ -59,7 +59,7 @@ export const ParticipantSlot = styled.div<{
 		min-width: 32px;
 		height: 32px;
 		width: 32px;
-		font-size: 1rem;
+		font-size: var(--sys-font-size-md);
 		border-radius: 50%;
 		pointer-events: none;
 	}
@@ -72,13 +72,13 @@ export const ParticipantInfo = styled.div`
 `;
 
 export const Name = styled.span`
-	font-size: 0.875rem;
+	font-size: var(--sys-font-size-sm);
 	font-weight: 600;
 	color: var(--sys-color-text-primary);
 `;
 
 export const StatusText = styled.span`
-	font-size: 0.75rem;
+	font-size: var(--sys-font-size-xs);
 	color: var(--sys-color-text-secondary);
 `;
 
@@ -104,7 +104,7 @@ export const EmptyStatusCircle = styled.div`
 `;
 
 export const DisconnectedBadge = styled.span`
-	font-size: 0.7rem;
+	font-size: var(--sys-font-size-xs);
 	color: var(--sys-color-danger);
 	font-weight: 500;
 `;

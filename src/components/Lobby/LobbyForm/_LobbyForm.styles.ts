@@ -27,13 +27,13 @@ export const Title = styled.h1`
 	color: var(--sys-color-text-primary);
 	margin-bottom: var(--sys-spacing-sm);
 	font-weight: 700;
-	font-size: 1.5rem;
+	font-size: var(--sys-font-size-2xl);
 `;
 
 export const SubTitle = styled.p`
 	color: var(--sys-color-text-secondary);
 	margin-bottom: var(--sys-spacing-lg);
-	font-size: 0.875rem;
+	font-size: var(--sys-font-size-sm);
 	line-height: 1.5;
 `;
 
@@ -52,7 +52,7 @@ export const LabelRow = styled.div`
 
 export const Label = styled.label`
 	font-weight: 700;
-	font-size: 0.75rem;
+	font-size: var(--sys-font-size-xs);
 	letter-spacing: 0.05em;
 	text-transform: uppercase;
 	color: var(--sys-color-text-secondary);
@@ -62,7 +62,7 @@ export const Label = styled.label`
 `;
 
 export const OptionalLabel = styled.span`
-	font-size: 0.75rem;
+	font-size: var(--sys-font-size-xs);
 	color: var(--sys-color-text-secondary);
 	opacity: 0.7;
 `;
@@ -73,7 +73,7 @@ export const Input = styled.input`
 	padding: 0 var(--sys-spacing-md);
 	border: 1px solid var(--sys-color-border);
 	border-radius: var(--sys-radius-md);
-	font-size: 1rem;
+	font-size: var(--sys-font-size-md);
 	font-family: inherit;
 	width: 100%;
 	background-color: var(--sys-color-bg);
@@ -87,7 +87,7 @@ export const Input = styled.input`
 `;
 
 export const HelperText = styled.p`
-	font-size: 0.875rem;
+	font-size: var(--sys-font-size-sm);
 	color: var(--sys-color-text-secondary);
 	margin-top: 2px;
 `;

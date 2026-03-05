@@ -13,7 +13,23 @@
   --sys-radius-lg: 12px;
   --sys-radius-xl: 16px;
   --sys-radius-xxl: 24px;
-  --sys-radius-pill: 9999px;
+  --sys-radius-pill: calc(infinity * 1px);
+
+  /* System Font Sizes */
+  --sys-font-size-xs: 0.75rem;
+  /* 12px */
+  --sys-font-size-sm: 0.875rem;
+  /* 14px */
+  --sys-font-size-md: 1rem;
+  /* 16px */
+  --sys-font-size-lg: 1.125rem;
+  /* 18px */
+  --sys-font-size-xl: 1.25rem;
+  /* 20px */
+  --sys-font-size-2xl: 1.5rem;
+  /* 24px */
+  --sys-font-size-3xl: 2.25rem;
+  /* 36px */
 
   /* System Colors - Light Mode Default */
   --sys-color-bg: #fafafa;

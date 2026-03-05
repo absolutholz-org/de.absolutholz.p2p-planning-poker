@@ -6,7 +6,7 @@ export const DeckContainer = styled.section`
 `;
 
 export const SectionTitle = styled.h2`
-	font-size: 0.75rem;
+	font-size: var(--sys-font-size-xs);
 	letter-spacing: 0.05em;
 	text-transform: uppercase;
 	color: var(--sys-color-text-secondary);

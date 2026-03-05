@@ -18,7 +18,7 @@ export const SubHeaderContainer = styled.div`
 `;
 
 export const RoomCodeLabel = styled.div`
-	font-size: 0.75rem;
+	font-size: var(--sys-font-size-xs);
 	font-weight: 700;
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
@@ -27,7 +27,7 @@ export const RoomCodeLabel = styled.div`
 `;
 
 export const RoomCodeValue = styled.div`
-	font-size: 1.25rem;
+	font-size: var(--sys-font-size-xl);
 	font-weight: 700;
 	color: var(--sys-color-text-primary);
 	font-variant-numeric: tabular-nums;
@@ -66,7 +66,7 @@ export const ShareMenuItem = styled.button`
 	border: none;
 	border-radius: var(--sys-radius-sm);
 	color: var(--sys-color-text-primary);
-	font-size: 0.875rem;
+	font-size: var(--sys-font-size-sm);
 	cursor: pointer;
 
 	&:hover {
@@ -88,7 +88,7 @@ export const Toast = styled.div`
 	color: var(--sys-color-bg);
 	padding: var(--sys-spacing-md) var(--sys-spacing-lg);
 	border-radius: var(--sys-radius-pill);
-	font-size: 0.875rem;
+	font-size: var(--sys-font-size-sm);
 	font-weight: 500;
 	z-index: 50;
 	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
@@ -130,7 +130,7 @@ export const Actions = styled.div`
 		/* Ensure buttons stretch perfectly inside the grid cells */
 		button {
 			width: 100%;
-			font-size: 0.875rem;
+			font-size: var(--sys-font-size-sm);
 			padding: var(--sys-spacing-sm);
 		}
 	}

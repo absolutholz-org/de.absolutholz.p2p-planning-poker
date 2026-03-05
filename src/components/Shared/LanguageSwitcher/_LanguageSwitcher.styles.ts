@@ -11,7 +11,7 @@ export const TriggerButton = styled.button`
 	border-radius: var(--sys-radius-pill);
 	color: var(--sys-color-text-primary);
 	font-weight: 500;
-	font-size: 0.875rem;
+	font-size: var(--sys-font-size-sm);
 	cursor: pointer;
 	transition: all 0.2s ease;
 
@@ -40,7 +40,7 @@ export const MenuItem = styled.button<{ 'data-active': boolean }>`
 	border: none;
 	width: 100%;
 	text-align: left;
-	font-size: 0.875rem;
+	font-size: var(--sys-font-size-sm);
 	color: var(--sys-color-text-primary);
 	border-radius: var(--sys-radius-sm);
 	cursor: pointer;

@@ -13,7 +13,7 @@ export const Button = styled.button<{ 'data-variant': ButtonVariant }>`
 	padding: var(--sys-spacing-sm) var(--sys-spacing-lg);
 
 	font-family: inherit;
-	font-size: 1rem;
+	font-size: var(--sys-font-size-md);
 	font-weight: 500;
 
 	border-radius: var(--sys-radius-md);
