@@ -37,6 +37,17 @@
         "title": "Reset Board",
         "message": "Are you sure you want to clear all current votes? This action will apply to all connected peers and cannot be undone.",
         "confirm": "Reset Votes"
+      },
+      "share": {
+        "button": "Share",
+        "native": "Share via...",
+        "copy_link": "Copy Link",
+        "copy_code": "Copy Code",
+        "link_copied": "Link copied to clipboard!",
+        "code_copied": "Code copied to clipboard!",
+        "fallback_error": "Sharing not supported on this browser.",
+        "aria_open": "Open share menu",
+        "aria_close": "Close share menu"
       }
     },
     "deck": {

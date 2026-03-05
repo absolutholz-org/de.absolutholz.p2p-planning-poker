@@ -10,18 +10,55 @@ export function RoomHeader() {
 	const { t } = useTranslation();
 	const { resetBoard, revealVotes, roomState } = useRoom();
 	const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
-	const [copied, setCopied] = useState(false);
+	const [isShareOpen, setIsShareOpen] = useState(false);
+	const [toastMessage, setToastMessage] = useState<string | null>(null);
 
 	if (!roomState) return null;
+
+	const showToast = (message: string) => {
+		setToastMessage(message);
+		setTimeout(() => setToastMessage(null), 3000);
+	};
+
+	const getShareUrl = () => {
+		if (typeof window === 'undefined') return '';
+		return `${window.location.origin}${window.location.pathname}?room=${roomState.roomId}`;
+	};
+
+	const handleNativeShare = async () => {
+		try {
+			if (navigator.share) {
+				await navigator.share({
+					title: t('common.poker'),
+					url: getShareUrl(),
+				});
+			} else {
+				showToast(t('room.header.share.fallback_error'));
+			}
+		} catch (err) {
+			console.error('Error sharing', err);
+		}
+		setIsShareOpen(false);
+	};
+
+	const handleCopyLink = async () => {
+		try {
+			await navigator.clipboard.writeText(getShareUrl());
+			showToast(t('room.header.share.link_copied'));
+		} catch (err) {
+			console.error('Failed to copy link', err);
+		}
+		setIsShareOpen(false);
+	};
 
 	const handleCopyCode = async () => {
 		try {
 			await navigator.clipboard.writeText(roomState.roomId);
-			setCopied(true);
-			setTimeout(() => setCopied(false), 2000);
+			showToast(t('room.header.share.code_copied'));
 		} catch (err) {
 			console.error('Failed to copy text: ', err);
 		}
+		setIsShareOpen(false);
 	};
 
 	const handleReset = () => {
@@ -31,24 +68,50 @@ export function RoomHeader() {
 
 	return (
 		<>
+			{toastMessage && (
+				<S.Toast role="status" aria-live="polite">
+					{toastMessage}
+				</S.Toast>
+			)}
 			<S.HeaderContainer>
 				<S.Brand>
 					<span aria-hidden="true">🃏</span> {t('common.poker')}
 				</S.Brand>
 
 				<S.RoomInfo>
-					<S.RoomCodeBadge
-						onClick={handleCopyCode}
-						aria-label={t('room.header.aria.copy', {
-							code: roomState.roomId,
-						})}
-					>
-						{copied
-							? t('room.header.code_badge.copied')
-							: t('room.header.code_badge.default', {
-									code: roomState.roomId,
-								})}
-					</S.RoomCodeBadge>
+					<S.ShareWrapper>
+						<Button
+							variant="secondary"
+							onClick={() => setIsShareOpen(!isShareOpen)}
+							aria-expanded={isShareOpen}
+							aria-label={
+								isShareOpen
+									? t('room.header.share.aria_close')
+									: t('room.header.share.aria_open')
+							}
+						>
+							{t('room.header.share.button')}
+						</Button>
+
+						{isShareOpen && (
+							<S.ShareMenu>
+								{typeof navigator !== 'undefined' &&
+									!!navigator.share && (
+										<S.ShareMenuItem
+											onClick={handleNativeShare}
+										>
+											{t('room.header.share.native')}
+										</S.ShareMenuItem>
+									)}
+								<S.ShareMenuItem onClick={handleCopyLink}>
+									{t('room.header.share.copy_link')}
+								</S.ShareMenuItem>
+								<S.ShareMenuItem onClick={handleCopyCode}>
+									{t('room.header.share.copy_code')}
+								</S.ShareMenuItem>
+							</S.ShareMenu>
+						)}
+					</S.ShareWrapper>
 				</S.RoomInfo>
 
 				<S.Actions>

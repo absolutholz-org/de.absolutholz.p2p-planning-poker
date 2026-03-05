@@ -9,7 +9,13 @@ export function LobbyForm() {
 	const { t } = useTranslation();
 	const { error, initGuest, initHost } = useRoom();
 	const [name, setName] = useState('');
-	const [roomCode, setRoomCode] = useState('');
+	const [roomCode, setRoomCode] = useState(() => {
+		if (typeof window !== 'undefined') {
+			const search = new URLSearchParams(window.location.search);
+			return search.get('room') || '';
+		}
+		return '';
+	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	const handleSubmit = (e: FormEvent) => {

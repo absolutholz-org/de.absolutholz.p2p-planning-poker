@@ -37,6 +37,17 @@
         "title": "Réinitialiser le Tableau",
         "message": "Êtes-vous sûr de vouloir effacer tous les votes actuels ? Cette action s'appliquera à tous les participants connectés et ne peut être annulée.",
         "confirm": "Réinitialiser les Votes"
+      },
+      "share": {
+        "button": "Partager",
+        "native": "Partager via...",
+        "copy_link": "Copier le lien",
+        "copy_code": "Copier le code",
+        "link_copied": "Lien copié dans le presse-papiers !",
+        "code_copied": "Code copié dans le presse-papiers !",
+        "fallback_error": "Le partage n'est pas pris en charge sur ce navigateur.",
+        "aria_open": "Ouvrir le menu de partage",
+        "aria_close": "Fermer le menu de partage"
       }
     },
     "deck": {

@@ -37,6 +37,17 @@
         "title": "Redefinir Quadro",
         "message": "Tem certeza de que deseja limpar todos os votos atuais? Esta ação será aplicada a todos os participantes conectados e não pode ser desfeita.",
         "confirm": "Redefinir Votos"
+      },
+      "share": {
+        "button": "Compartilhar",
+        "native": "Compartilhar via...",
+        "copy_link": "Copiar Link",
+        "copy_code": "Copiar Código",
+        "link_copied": "Link copiado para a área de transferência!",
+        "code_copied": "Código copiado para a área de transferência!",
+        "fallback_error": "Compartilhamento não suportado neste navegador.",
+        "aria_open": "Abrir menu de compartilhamento",
+        "aria_close": "Fechar menu de compartilhamento"
       }
     },
     "deck": {

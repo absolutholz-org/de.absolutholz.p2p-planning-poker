@@ -37,6 +37,17 @@
         "title": "Board zurücksetzen",
         "message": "Bist du dir sicher, dass du alle aktuellen Votes löschen möchtest? Diese Aktion gilt für alle verbundenen Teilnehmer und kann nicht rückgängig gemacht werden.",
         "confirm": "Votes zurücksetzen"
+      },
+      "share": {
+        "button": "Teilen",
+        "native": "Teilen über...",
+        "copy_link": "Link kopieren",
+        "copy_code": "Code kopieren",
+        "link_copied": "Link in die Zwischenablage kopiert!",
+        "code_copied": "Code in die Zwischenablage kopiert!",
+        "fallback_error": "Teilen wird von diesem Browser nicht unterstützt.",
+        "aria_open": "Teilen-Menü öffnen",
+        "aria_close": "Teilen-Menü schließen"
       }
     },
     "deck": {
