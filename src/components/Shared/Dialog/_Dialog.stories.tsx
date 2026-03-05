@@ -8,8 +8,8 @@ const meta = {
 		confirmText: 'Reset Votes',
 		isOpen: true,
 		message: 'Are you sure you want to clear all current votes?',
-		onCancel: () => { },
-		onConfirm: () => { },
+		onCancel: () => {},
+		onConfirm: () => {},
 		title: 'Reset Board',
 	},
 	argTypes: {
