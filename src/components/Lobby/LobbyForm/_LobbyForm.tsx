@@ -26,6 +26,9 @@ export function LobbyForm() {
 		} else {
 			initGuest(roomCode.trim(), name.trim());
 		}
+
+		// Fail-safe unlock after 8 seconds if connection stalls silently
+		setTimeout(() => setIsSubmitting(false), 8000);
 	};
 
 	useEffect(() => {

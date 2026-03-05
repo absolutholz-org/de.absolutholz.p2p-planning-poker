@@ -129,7 +129,8 @@ export function usePeerSession(): UsePeerSessionReturn {
 							break;
 					}
 
-					broadcastState(newState); // Push active sync
+					// Push active sync purely outside the React evaluation cycle to prevent StrictMode side-effect locking
+					setTimeout(() => broadcastState(newState), 0);
 					return newState;
 				} else {
 					// GUEST Logic: Only listen to SYNC_STATE
