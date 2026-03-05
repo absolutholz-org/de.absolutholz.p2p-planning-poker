@@ -21,10 +21,10 @@ export function SchemeSwitcher() {
 	useEffect(() => {
 		const root = document.documentElement;
 		if (scheme === 'system') {
-			root.removeAttribute('data-scheme');
+			root.removeAttribute('data-color-scheme');
 			localStorage.removeItem('scheme-preference');
 		} else {
-			root.setAttribute('data-scheme', scheme);
+			root.setAttribute('data-color-scheme', scheme);
 			localStorage.setItem('scheme-preference', scheme);
 		}
 	}, [scheme]);
