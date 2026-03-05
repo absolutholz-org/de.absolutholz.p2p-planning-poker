@@ -73,46 +73,47 @@ export function RoomHeader() {
 					{toastMessage}
 				</S.Toast>
 			)}
-			<S.HeaderContainer>
-				<S.Brand>
-					<span aria-hidden="true">🃏</span> {t('common.poker')}
-				</S.Brand>
-
+			<S.SubHeaderContainer>
 				<S.RoomInfo>
-					<S.ShareWrapper>
-						<Button
-							variant="secondary"
-							onClick={() => setIsShareOpen(!isShareOpen)}
-							aria-expanded={isShareOpen}
-							aria-label={
-								isShareOpen
-									? t('room.header.share.aria_close')
-									: t('room.header.share.aria_open')
-							}
-						>
-							{t('room.header.share.button')}
-						</Button>
-
-						{isShareOpen && (
-							<S.ShareMenu>
-								{typeof navigator !== 'undefined' &&
-									!!navigator.share && (
-										<S.ShareMenuItem
-											onClick={handleNativeShare}
-										>
-											{t('room.header.share.native')}
-										</S.ShareMenuItem>
-									)}
-								<S.ShareMenuItem onClick={handleCopyLink}>
-									{t('room.header.share.copy_link')}
-								</S.ShareMenuItem>
-								<S.ShareMenuItem onClick={handleCopyCode}>
-									{t('room.header.share.copy_code')}
-								</S.ShareMenuItem>
-							</S.ShareMenu>
-						)}
-					</S.ShareWrapper>
+					<S.RoomCodeLabel>ROOM CODE</S.RoomCodeLabel>
+					<S.RoomCodeValue>
+						{roomState.roomId.split('-')[0].toUpperCase()}
+					</S.RoomCodeValue>
 				</S.RoomInfo>
+
+				<S.ShareWrapper>
+					<Button
+						variant="secondary"
+						onClick={() => setIsShareOpen(!isShareOpen)}
+						aria-expanded={isShareOpen}
+						aria-label={
+							isShareOpen
+								? t('room.header.share.aria_close')
+								: t('room.header.share.aria_open')
+						}
+					>
+						{t('room.header.share.button')}
+					</Button>
+
+					{isShareOpen && (
+						<S.ShareMenu>
+							{typeof navigator !== 'undefined' &&
+								!!navigator.share && (
+									<S.ShareMenuItem
+										onClick={handleNativeShare}
+									>
+										{t('room.header.share.native')}
+									</S.ShareMenuItem>
+								)}
+							<S.ShareMenuItem onClick={handleCopyLink}>
+								{t('room.header.share.copy_link')}
+							</S.ShareMenuItem>
+							<S.ShareMenuItem onClick={handleCopyCode}>
+								{t('room.header.share.copy_code')}
+							</S.ShareMenuItem>
+						</S.ShareMenu>
+					)}
+				</S.ShareWrapper>
 
 				<S.Actions>
 					<Button
@@ -129,11 +130,12 @@ export function RoomHeader() {
 						onClick={revealVotes}
 						aria-label={t('room.header.aria.reveal')}
 						disabled={roomState.isRevealed}
+						style={{ color: 'var(--sys-color-primary-text)' }}
 					>
-						{t('common.actions.reveal')}
+						👁️ {t('common.actions.reveal')}
 					</Button>
 				</S.Actions>
-			</S.HeaderContainer>
+			</S.SubHeaderContainer>
 
 			<Dialog
 				isOpen={isResetDialogOpen}

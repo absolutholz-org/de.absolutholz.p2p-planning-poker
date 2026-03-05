@@ -4,9 +4,9 @@ export const Card = styled.button<{
 	'data-selected': boolean;
 	'data-hidden': boolean;
 }>`
-	/* A11Y requirement: 48px min touch target */
-	min-height: 80px;
-	min-width: 60px;
+	/* Mobile First Scaling */
+	flex: 0 0 72px; /* Lock exact width to force precise 4-column wrapping over 400px container */
+	aspect-ratio: 2.5 / 3.5;
 
 	display: flex;
 	align-items: center;
@@ -17,8 +17,8 @@ export const Card = styled.button<{
 	border: 2px solid var(--sys-color-border);
 	border-radius: var(--sys-radius-lg);
 
-	font-size: 1.5rem;
-	font-weight: bold;
+	font-size: 2.25rem;
+	font-weight: 800;
 	cursor: pointer;
 	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 	box-shadow:
@@ -35,26 +35,38 @@ export const Card = styled.button<{
 		border-color: var(--sys-color-primary);
 	}
 
-	/* Selected State for VotingDeck */
 	&[data-selected='true'] {
 		border-color: var(--sys-color-primary);
 		background-color: var(--sys-color-primary);
 		color: var(--sys-color-primary-text);
 		transform: translateY(-8px);
-		box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.5);
+		box-shadow: 0 10px 15px -3px var(--sys-color-focus);
+		position: relative;
+
+		&::after {
+			content: '';
+			position: absolute;
+			bottom: -12px;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 6px;
+			height: 6px;
+			border-radius: 50%;
+			background-color: var(--sys-color-text-primary);
+		}
 	}
 
 	/* Hidden State for Roster (Pending reveal) */
 	&[data-hidden='true'] {
-		background-color: var(--sys-color-success);
-		border-color: var(--sys-color-success);
+		background-color: transparent;
+		border-color: var(--sys-color-border);
 		color: transparent; /* Hide text */
-		/* Add a generic checkmark or pattern using pseudo element if desired */
 		position: relative;
 
 		&::after {
 			content: '✓';
-			color: var(--sys-color-surface);
+			color: var(--sys-color-text-primary);
+			font-size: 1.25rem;
 			position: absolute;
 		}
 	}

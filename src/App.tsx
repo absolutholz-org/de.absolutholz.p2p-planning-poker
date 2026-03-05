@@ -5,7 +5,7 @@ import { LobbyForm } from './components/Lobby/LobbyForm';
 import { RoomHeader } from './components/Room/RoomHeader';
 import { Roster } from './components/Room/Roster';
 import { VotingDeck } from './components/Room/VotingDeck';
-import { LanguageSwitcher } from './components/Shared/LanguageSwitcher';
+import { Header } from './components/Shared/Header';
 import { RoomProvider, useRoom } from './context/RoomContext';
 
 function RoomView() {
@@ -39,11 +39,13 @@ function AppContent() {
 
 	return (
 		<div className="app-container">
-			<LanguageSwitcher className="global-language-switcher" />
-			<Routes>
-				<Route path="/" element={<LobbyForm />} />
-				<Route path="/room/:roomId" element={<RoomView />} />
-			</Routes>
+			<Header />
+			<main className="main-content">
+				<Routes>
+					<Route path="/" element={<LobbyForm />} />
+					<Route path="/room/:roomId" element={<RoomView />} />
+				</Routes>
+			</main>
 		</div>
 	);
 }

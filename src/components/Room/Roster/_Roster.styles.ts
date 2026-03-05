@@ -3,56 +3,108 @@ import styled from '@emotion/styled';
 export const RosterContainer = styled.section`
 	max-width: 800px;
 	margin: 0 auto;
-	padding: var(--sys-spacing-xl) var(--sys-spacing-md);
+	padding: var(--sys-spacing-xl) 0;
+	border-top: 1px solid var(--sys-color-border);
 `;
 
 export const SectionTitle = styled.h2`
-	font-size: 1.125rem;
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
 	color: var(--sys-color-text-secondary);
-	margin-bottom: var(--sys-spacing-lg);
+	margin-bottom: var(--sys-spacing-xl);
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 `;
 
-export const ParticipantGrid = styled.div`
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-	gap: var(--sys-spacing-lg);
+export const VoteCountBadge = styled.div`
+	background: var(--sys-color-surface);
+	border: 1px solid var(--sys-color-border);
+	padding: 4px 12px;
+	border-radius: var(--sys-radius-pill);
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: var(--sys-color-text-secondary);
 `;
 
-export const ParticipantSlot = styled.div<{ 'data-connected': boolean }>`
+export const ParticipantGrid = styled.div`
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: var(--sys-spacing-md);
+`;
+
+export const ParticipantSlot = styled.div<{
+	'data-connected': boolean;
+	'data-empty': boolean;
+}>`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: var(--sys-spacing-md) var(--sys-spacing-lg);
+	background: ${(props) =>
+		props['data-empty'] ? 'transparent' : 'var(--sys-color-surface)'};
+	border: ${(props) =>
+		props['data-empty']
+			? '1px dashed var(--sys-color-border)'
+			: '1px solid var(--sys-color-border)'};
+	border-radius: var(--sys-radius-xl);
+	opacity: ${(props) => (props['data-connected'] ? 1 : 0.5)};
+	transition: all 0.2s ease;
+
+	/* Scale the card layout down slightly when nested in roster */
+	button {
+		min-height: 32px;
+		min-width: 32px;
+		height: 32px;
+		width: 32px;
+		font-size: 1rem;
+		border-radius: 50%;
+		pointer-events: none;
+	}
+`;
+
+export const ParticipantInfo = styled.div`
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	gap: var(--sys-spacing-sm);
-	opacity: ${(props) => (props['data-connected'] ? 1 : 0.5)};
-	transition: opacity 0.2s ease;
+	gap: 2px;
 `;
 
 export const Name = styled.span`
 	font-size: 0.875rem;
-	font-weight: 500;
+	font-weight: 600;
 	color: var(--sys-color-text-primary);
-	text-align: center;
-	max-width: 100%;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
 `;
 
-export const EmptyCardSlot = styled.div`
-	min-height: 80px;
-	min-width: 60px;
+export const StatusText = styled.span`
+	font-size: 0.75rem;
+	color: var(--sys-color-text-secondary);
+`;
+
+export const ParticipantAction = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+`;
+
+export const EmptyStatusCircle = styled.div`
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
 	border: 2px dashed var(--sys-color-border);
-	border-radius: var(--sys-radius-lg);
-	background-color: transparent;
+	opacity: 0.5;
+	animation: spin 4s linear infinite;
+
+	@keyframes spin {
+		100% {
+			transform: rotate(360deg);
+		}
+	}
 `;
 
 export const DisconnectedBadge = styled.span`
-	font-size: 0.75rem;
+	font-size: 0.7rem;
 	color: var(--sys-color-danger);
-	background: rgba(239, 68, 68, 0.1);
-	padding: 2px 6px;
-	border-radius: var(--sys-radius-sm);
+	font-weight: 500;
 `;

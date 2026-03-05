@@ -5,29 +5,32 @@
   --sys-spacing-md: 16px;
   --sys-spacing-lg: 24px;
   --sys-spacing-xl: 32px;
+  --sys-spacing-xxl: 48px;
 
   /* System Radius */
   --sys-radius-sm: 4px;
   --sys-radius-md: 8px;
   --sys-radius-lg: 12px;
+  --sys-radius-xl: 16px;
+  --sys-radius-xxl: 24px;
   --sys-radius-pill: 9999px;
 
   /* System Colors - Light Mode Default */
-  --sys-color-bg: #f8fafc;
+  --sys-color-bg: #fafafa;
   --sys-color-surface: #ffffff;
-  --sys-color-text-primary: #0f172a;
-  --sys-color-text-secondary: #64748b;
+  --sys-color-text-primary: #18181b;
+  --sys-color-text-secondary: #71717a;
 
-  --sys-color-primary: #3b82f6;
-  --sys-color-primary-hover: #2563eb;
+  --sys-color-primary: #18181b;
+  --sys-color-primary-hover: #27272a;
   --sys-color-primary-text: #ffffff;
 
   --sys-color-success: #10b981;
   --sys-color-warning: #f59e0b;
   --sys-color-danger: #ef4444;
 
-  --sys-color-border: #e2e8f0;
-  --sys-color-focus: rgba(59, 130, 246, 0.5);
+  --sys-color-border: #e5e5e5;
+  --sys-color-focus: rgba(24, 24, 27, 0.3);
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -46,11 +49,17 @@
 /* Dark Mode Overrides */
 @media (prefers-color-scheme: dark) {
   :root {
-    --sys-color-bg: #0f172a;
-    --sys-color-surface: #1e293b;
-    --sys-color-text-primary: #f8fafc;
-    --sys-color-text-secondary: #94a3b8;
-    --sys-color-border: #334155;
+    --sys-color-bg: #09090b;
+    --sys-color-surface: #18181b;
+    --sys-color-text-primary: #fafafa;
+    --sys-color-text-secondary: #a1a1aa;
+
+    --sys-color-primary: #fafafa;
+    --sys-color-primary-hover: #e4e4e7;
+    --sys-color-primary-text: #18181b;
+
+    --sys-color-border: #27272a;
+    --sys-color-focus: rgba(250, 250, 250, 0.3);
   }
 }
 

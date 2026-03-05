@@ -5,13 +5,13 @@ export const Container = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	min-height: 100vh;
+	min-height: calc(100vh - 80px); /* Account for global header */
 	padding: var(--sys-spacing-md);
 `;
 
 export const FormCard = styled.form`
 	background-color: var(--sys-color-surface);
-	border-radius: var(--sys-radius-lg);
+	border-radius: var(--sys-radius-xxl);
 	padding: var(--sys-spacing-xl);
 	max-width: 480px;
 	width: 100%;
@@ -24,20 +24,47 @@ export const FormCard = styled.form`
 `;
 
 export const Title = styled.h1`
-	text-align: center;
-	color: var(--sys-color-primary);
+	color: var(--sys-color-text-primary);
 	margin-bottom: var(--sys-spacing-sm);
+	font-weight: 700;
+	font-size: 1.5rem;
+`;
+
+export const SubTitle = styled.p`
+	color: var(--sys-color-text-secondary);
+	margin-bottom: var(--sys-spacing-lg);
+	font-size: 0.875rem;
+	line-height: 1.5;
 `;
 
 export const FieldLine = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: var(--sys-spacing-xs);
+	position: relative;
+`;
+
+export const LabelRow = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 `;
 
 export const Label = styled.label`
-	font-weight: 500;
-	color: var(--sys-color-text-primary);
+	font-weight: 700;
+	font-size: 0.75rem;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	color: var(--sys-color-text-secondary);
+	display: flex;
+	align-items: center;
+	gap: var(--sys-spacing-xs);
+`;
+
+export const OptionalLabel = styled.span`
+	font-size: 0.75rem;
+	color: var(--sys-color-text-secondary);
+	opacity: 0.7;
 `;
 
 export const Input = styled.input`

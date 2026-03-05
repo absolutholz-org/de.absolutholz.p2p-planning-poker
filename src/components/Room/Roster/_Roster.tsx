@@ -16,17 +16,12 @@ export function Roster() {
 			aria-live="polite"
 		>
 			<S.SectionTitle>
-				<span>
-					{t('room.roster.title', {
-						count: roomState.users.length,
-						max: 12,
-					})}
-				</span>
-				{roomState.isRevealed && (
-					<span style={{ color: 'var(--sys-color-primary)' }}>
-						{t('room.roster.revealed_badge')}
-					</span>
-				)}
+				<span>{t('room.roster.title_label', 'TEAM ROSTER')}</span>
+				<S.VoteCountBadge>
+					{roomState.users.filter((u) => u.vote).length} /{' '}
+					{roomState.users.length}{' '}
+					{t('room.roster.voted_label', 'Voted')}
+				</S.VoteCountBadge>
 			</S.SectionTitle>
 
 			<S.ParticipantGrid>
@@ -34,31 +29,38 @@ export function Roster() {
 					<S.ParticipantSlot
 						key={user.id}
 						data-connected={user.isConnected}
+						data-empty={!user.vote}
 					>
-						{user.vote ? (
-							<Card
-								value={user.vote}
-								isHidden={!roomState.isRevealed}
-								tabIndex={-1} // Not interactive
-							/>
-						) : (
-							<S.EmptyCardSlot
-								aria-label={t('room.roster.aria.not_voted', {
-									name: user.name,
-								})}
-							/>
-						)}
+						<S.ParticipantInfo>
+							<S.Name title={user.name}>
+								{user.name} {user.isHost && '👑'}
+							</S.Name>
+							<S.StatusText>
+								{user.vote
+									? t('room.roster.status.ready', 'Ready')
+									: t(
+											'room.roster.status.thinking',
+											'Thinking...',
+										)}
+							</S.StatusText>
+							{!user.isConnected && (
+								<S.DisconnectedBadge>
+									{t('room.roster.disconnected')}
+								</S.DisconnectedBadge>
+							)}
+						</S.ParticipantInfo>
 
-						<S.Name title={user.name}>
-							{user.name}{' '}
-							{user.isHost && t('room.roster.host_badge')}
-						</S.Name>
-
-						{!user.isConnected && (
-							<S.DisconnectedBadge>
-								{t('room.roster.disconnected')}
-							</S.DisconnectedBadge>
-						)}
+						<S.ParticipantAction>
+							{user.vote ? (
+								<Card
+									value={user.vote}
+									isHidden={!roomState.isRevealed}
+									tabIndex={-1} // Not interactive
+								/>
+							) : (
+								<S.EmptyStatusCircle />
+							)}
+						</S.ParticipantAction>
 					</S.ParticipantSlot>
 				))}
 			</S.ParticipantGrid>

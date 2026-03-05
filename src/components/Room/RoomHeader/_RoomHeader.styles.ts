@@ -1,31 +1,41 @@
 import styled from '@emotion/styled';
 
-export const HeaderContainer = styled.header`
+export const SubHeaderContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: var(--sys-spacing-md) var(--sys-spacing-xl);
-	background-color: var(--sys-color-surface);
-	border-bottom: 1px solid var(--sys-color-border);
-	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-	position: sticky;
-	top: 0;
-	z-index: 10;
+	padding: var(--sys-spacing-xl) 0;
+	margin: 0 auto;
+	max-width: 1200px;
+	width: 100%;
+
+	@media (max-width: 600px) {
+		flex-direction: column;
+		align-items: stretch; /* Stretch children (Actions) to full width */
+		gap: var(--sys-spacing-lg);
+		padding: var(--sys-spacing-md) var(--sys-spacing-sm);
+	}
 `;
 
-export const Brand = styled.div`
-	font-weight: bold;
+export const RoomCodeLabel = styled.div`
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--sys-color-text-secondary);
+	margin-bottom: 4px;
+`;
+
+export const RoomCodeValue = styled.div`
 	font-size: 1.25rem;
-	color: var(--sys-color-primary);
-	display: flex;
-	align-items: center;
-	gap: var(--sys-spacing-sm);
+	font-weight: 700;
+	color: var(--sys-color-text-primary);
+	font-variant-numeric: tabular-nums;
 `;
 
 export const RoomInfo = styled.div`
 	display: flex;
-	align-items: center;
-	gap: var(--sys-spacing-md);
+	flex-direction: column;
 `;
 
 export const ShareWrapper = styled.div`
@@ -111,4 +121,17 @@ export const Toast = styled.div`
 export const Actions = styled.div`
 	display: flex;
 	gap: var(--sys-spacing-sm);
+
+	@media (max-width: 600px) {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		width: 100%;
+
+		/* Ensure buttons stretch perfectly inside the grid cells */
+		button {
+			width: 100%;
+			font-size: 0.875rem;
+			padding: var(--sys-spacing-sm);
+		}
+	}
 `;

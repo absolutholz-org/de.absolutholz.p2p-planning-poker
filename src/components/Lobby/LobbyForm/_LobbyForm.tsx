@@ -43,22 +43,18 @@ export function LobbyForm() {
 			<S.FormCard onSubmit={handleSubmit}>
 				<div>
 					<S.Title>{t('common.poker')}</S.Title>
-					<p
-						style={{
-							color: 'var(--sys-color-text-secondary)',
-							textAlign: 'center',
-						}}
-					>
-						{t('lobby.title')}
-					</p>
+					<S.SubTitle>{t('lobby.title')}</S.SubTitle>
 				</div>
 
 				{error && <S.ErrorMessage role="alert">{error}</S.ErrorMessage>}
 
 				<S.FieldLine>
-					<S.Label htmlFor="playerName">
-						{t('lobby.name.label')}
-					</S.Label>
+					<S.LabelRow>
+						<S.Label htmlFor="playerName">
+							<span aria-hidden="true">👤</span>{' '}
+							{t('lobby.name.label')}
+						</S.Label>
+					</S.LabelRow>
 					<S.Input
 						id="playerName"
 						type="text"
@@ -73,9 +69,13 @@ export function LobbyForm() {
 
 				{!roomId && (
 					<S.FieldLine>
-						<S.Label htmlFor="roomCode">
-							{t('lobby.roomCode.label')}
-						</S.Label>
+						<S.LabelRow>
+							<S.Label htmlFor="roomCode">
+								<span aria-hidden="true">🔑</span>{' '}
+								{t('lobby.roomCode.label')}
+							</S.Label>
+							<S.OptionalLabel>Optional</S.OptionalLabel>
+						</S.LabelRow>
 						<S.Input
 							id="roomCode"
 							type="text"
@@ -83,9 +83,6 @@ export function LobbyForm() {
 							value={roomCode}
 							onChange={(e) => setRoomCode(e.target.value)}
 						/>
-						<S.HelperText>
-							{t('lobby.roomCode.placeholder')}
-						</S.HelperText>
 					</S.FieldLine>
 				)}
 
@@ -93,8 +90,8 @@ export function LobbyForm() {
 					{isSubmitting
 						? 'Connecting...'
 						: roomCode.trim()
-							? t('lobby.submit.join')
-							: t('lobby.submit.create')}
+							? `${t('lobby.submit.join')} ➔`
+							: `${t('lobby.submit.create')} ➔`}
 				</Button>
 			</S.FormCard>
 		</S.Container>

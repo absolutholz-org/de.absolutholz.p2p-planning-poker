@@ -55,11 +55,10 @@ export const Button = styled.button<{ 'data-variant': ButtonVariant }>`
 	&[data-variant='danger'] {
 		background-color: transparent;
 		color: var(--sys-color-danger);
-		border-color: var(--sys-color-danger);
+		border-color: var(--sys-color-border);
 
 		&:hover:not(:disabled) {
-			background-color: var(--sys-color-danger);
-			color: var(--sys-color-surface);
+			border-color: var(--sys-color-danger);
 		}
 	}
 `;
