@@ -37,7 +37,7 @@ export function SchemeSwitcher() {
 				ref,
 			}: {
 				popoverTarget: string;
-				ref: React.RefObject<HTMLButtonElement>;
+				ref: React.RefObject<HTMLButtonElement | null>;
 			}) => (
 				<S.TriggerButton
 					ref={ref}

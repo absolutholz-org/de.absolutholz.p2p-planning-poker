@@ -38,7 +38,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
 				ref,
 			}: {
 				popoverTarget: string;
-				ref: React.RefObject<HTMLButtonElement>;
+				ref: React.RefObject<HTMLButtonElement | null>;
 			}) => (
 				<S.TriggerButton
 					className={className}
