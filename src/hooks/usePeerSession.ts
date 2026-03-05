@@ -65,9 +65,9 @@ export function usePeerSession(): UsePeerSessionReturn {
 			const msg = message as PeerMessage;
 
 			setRoomState((prevState) => {
-				if (!prevState) return prevState;
-
 				if (isHostRef.current) {
+					if (!prevState) return prevState;
+
 					// HOST Logic: Act on Guest messages and broadcast
 					const newState = { ...prevState };
 

@@ -1,4 +1,4 @@
-import { type FormEvent, useState } from 'react';
+import { type FormEvent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
@@ -27,6 +27,13 @@ export function LobbyForm() {
 			initGuest(roomCode.trim(), name.trim());
 		}
 	};
+
+	useEffect(() => {
+		if (error) {
+			// eslint-disable-next-line react-hooks/set-state-in-effect
+			setIsSubmitting(false);
+		}
+	}, [error]);
 
 	return (
 		<S.Container>
