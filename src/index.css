@@ -31,23 +31,6 @@
   --sys-font-size-3xl: 2.25rem;
   /* 36px */
 
-  /* System Colors - Light Mode Default */
-  --sys-color-bg: #fafafa;
-  --sys-color-surface: #ffffff;
-  --sys-color-text-primary: #18181b;
-  --sys-color-text-secondary: #71717a;
-
-  --sys-color-primary: #18181b;
-  --sys-color-primary-hover: #27272a;
-  --sys-color-primary-text: #ffffff;
-
-  --sys-color-success: #10b981;
-  --sys-color-warning: #f59e0b;
-  --sys-color-danger: #ef4444;
-
-  --sys-color-border: #e5e5e5;
-  --sys-color-focus: rgba(24, 24, 27, 0.3);
-
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -62,60 +45,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* Dark Mode Overrides */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --sys-color-bg: #09090b;
-    --sys-color-surface: #18181b;
-    --sys-color-text-primary: #fafafa;
-    --sys-color-text-secondary: #a1a1aa;
-
-    --sys-color-primary: #fafafa;
-    --sys-color-primary-hover: #e4e4e7;
-    --sys-color-primary-text: #18181b;
-
-    --sys-color-border: #27272a;
-    --sys-color-focus: rgba(250, 250, 250, 0.3);
-  }
-}
-
-/* Explicit Application Overrides */
-:root[data-color-scheme='light'] {
-  --sys-color-bg: #fafafa;
-  --sys-color-surface: #ffffff;
-  --sys-color-text-primary: #18181b;
-  --sys-color-text-secondary: #71717a;
-
-  --sys-color-primary: #18181b;
-  --sys-color-primary-hover: #27272a;
-  --sys-color-primary-text: #ffffff;
-
-  --sys-color-success: #10b981;
-  --sys-color-warning: #f59e0b;
-  --sys-color-danger: #ef4444;
-
-  --sys-color-border: #e5e5e5;
-  --sys-color-focus: rgba(24, 24, 27, 0.3);
-
-  color-scheme: light;
-}
-
-:root[data-color-scheme='dark'] {
-  --sys-color-bg: #09090b;
-  --sys-color-surface: #18181b;
-  --sys-color-text-primary: #fafafa;
-  --sys-color-text-secondary: #a1a1aa;
-
-  --sys-color-primary: #fafafa;
-  --sys-color-primary-hover: #e4e4e7;
-  --sys-color-primary-text: #18181b;
-
-  --sys-color-border: #27272a;
-  --sys-color-focus: rgba(250, 250, 250, 0.3);
-
-  color-scheme: dark;
 }
 
 *,
