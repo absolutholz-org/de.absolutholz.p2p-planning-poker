@@ -3,8 +3,8 @@ import styled from '@emotion/styled';
 export const Tooltip = styled.div`
 	margin: 0;
 	padding: var(--sys-spacing-xs) var(--sys-spacing-md);
-	background-color: var(--sys-color-on-surface); /* slate-800 approx */
-	color: var(--sys-color-surface); /* slate-50 approx */
+	background-color: var(--sys-color-primary);
+	color: var(--sys-color-primary-text);
 	font-size: var(--sys-font-size-xs);
 	font-weight: 500;
 	border-radius: var(--sys-radius-sm);
