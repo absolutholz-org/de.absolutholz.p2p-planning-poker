@@ -1,4 +1,3 @@
-import './index.css';
 import './i18n/config';
 
 import { StrictMode } from 'react';

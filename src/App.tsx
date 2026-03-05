@@ -1,3 +1,4 @@
+import { Global } from '@emotion/react';
 import { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
@@ -7,7 +8,7 @@ import { Roster } from './components/Room/Roster';
 import { VotingDeck } from './components/Room/VotingDeck';
 import { Header } from './components/Shared/Header';
 import { RoomProvider, useRoom } from './context/RoomContext';
-import { GlobalThemeStyles } from './theme/GlobalStyles';
+import { globalStyles } from './theme/GlobalStyles';
 
 function RoomView() {
 	const { roomState } = useRoom();
@@ -54,7 +55,7 @@ function AppContent() {
 function App() {
 	return (
 		<RoomProvider>
-			<GlobalThemeStyles />
+			<Global styles={globalStyles} />
 			<AppContent />
 		</RoomProvider>
 	);
