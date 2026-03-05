@@ -1,19 +1,30 @@
+import { useTranslation } from 'react-i18next';
+
 import { useRoom } from '../../../context/RoomContext';
 import { Card } from '../../Shared/Card';
 import * as S from './_Roster.styles';
 
 export function Roster() {
+	const { t } = useTranslation();
 	const { roomState } = useRoom();
 
 	if (!roomState) return null;
 
 	return (
-		<S.RosterContainer aria-label="Team roster" aria-live="polite">
+		<S.RosterContainer
+			aria-label={t('room.roster.aria.label')}
+			aria-live="polite"
+		>
 			<S.SectionTitle>
-				<span>Team Roster ({roomState.users.length}/12)</span>
+				<span>
+					{t('room.roster.title', {
+						count: roomState.users.length,
+						max: 12,
+					})}
+				</span>
 				{roomState.isRevealed && (
 					<span style={{ color: 'var(--sys-color-primary)' }}>
-						Votes Revealed!
+						{t('room.roster.revealed_badge')}
 					</span>
 				)}
 			</S.SectionTitle>
@@ -32,17 +43,20 @@ export function Roster() {
 							/>
 						) : (
 							<S.EmptyCardSlot
-								aria-label={`${user.name} has not voted yet`}
+								aria-label={t('room.roster.aria.not_voted', {
+									name: user.name,
+								})}
 							/>
 						)}
 
 						<S.Name title={user.name}>
-							{user.name} {user.isHost && '👑'}
+							{user.name}{' '}
+							{user.isHost && t('room.roster.host_badge')}
 						</S.Name>
 
 						{!user.isConnected && (
 							<S.DisconnectedBadge>
-								Disconnected
+								{t('room.roster.disconnected')}
 							</S.DisconnectedBadge>
 						)}
 					</S.ParticipantSlot>

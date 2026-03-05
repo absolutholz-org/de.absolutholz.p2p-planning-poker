@@ -1,0 +1,57 @@
+{
+  "common": {
+    "actions": {
+      "cancel": "Abbrechen",
+      "reset": "Zurücksetzen",
+      "reveal": "Votes aufdecken"
+    },
+    "poker": "P2P Poker"
+  },
+  "lobby": {
+    "title": "Planungssession beitreten",
+    "name": {
+      "label": "Dein Name",
+      "placeholder": "Gib deinen Anzeigenamen ein (z.B. Alice)"
+    },
+    "roomCode": {
+      "label": "Raumcode (Optional)",
+      "placeholder": "Code eingeben oder leer lassen um Host zu sein"
+    },
+    "submit": {
+      "join": "Raum beitreten",
+      "create": "Raum erstellen"
+    }
+  },
+  "room": {
+    "header": {
+      "code_badge": {
+        "copied": "Kopiert!",
+        "default": "Code: {{code}}"
+      },
+      "aria": {
+        "copy": "Der Raumcode ist {{code}}. Zum Kopieren klicken.",
+        "reset": "Voting-Board für alle Teilnehmer zurücksetzen",
+        "reveal": "Votes für alle Teilnehmer aufdecken"
+      },
+      "reset_dialog": {
+        "title": "Board zurücksetzen",
+        "message": "Bist du dir sicher, dass du alle aktuellen Votes löschen möchtest? Diese Aktion gilt für alle verbundenen Teilnehmer und kann nicht rückgängig gemacht werden.",
+        "confirm": "Votes zurücksetzen"
+      }
+    },
+    "deck": {
+      "title": "Gib deinen Vote ab",
+      "aria_label": "Voting-Deck"
+    },
+    "roster": {
+      "title": "Team-Liste ({{count}}/{{max}})",
+      "revealed_badge": "Votes aufgedeckt!",
+      "disconnected": "Getrennt",
+      "host_badge": "👑",
+      "aria": {
+        "label": "Team-Liste",
+        "not_voted": "{{name}} hat noch nicht abgestimmt"
+      }
+    }
+  }
+}

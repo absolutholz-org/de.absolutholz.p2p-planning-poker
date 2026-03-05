@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { useRoom } from '../../../context/RoomContext';
 import type { VoteValue } from '../../../types/domain';
 import { Card } from '../../Shared/Card';
@@ -16,6 +18,7 @@ const FIBONACCI_SCALE: VoteValue[] = [
 ];
 
 export function VotingDeck() {
+	const { t } = useTranslation();
 	const { castVote, localUserId, roomState } = useRoom();
 
 	if (!roomState) return null;
@@ -25,8 +28,8 @@ export function VotingDeck() {
 	const myVote = myUser?.vote;
 
 	return (
-		<S.DeckContainer aria-label="Voting deck">
-			<S.SectionTitle>Cast Your Vote</S.SectionTitle>
+		<S.DeckContainer aria-label={t('room.deck.aria_label')}>
+			<S.SectionTitle>{t('room.deck.title')}</S.SectionTitle>
 			<S.Grid>
 				{FIBONACCI_SCALE.map((value) => (
 					<Card

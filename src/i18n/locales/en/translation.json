@@ -1,0 +1,57 @@
+{
+  "common": {
+    "actions": {
+      "cancel": "Cancel",
+      "reset": "Reset",
+      "reveal": "Reveal Votes"
+    },
+    "poker": "P2P Poker"
+  },
+  "lobby": {
+    "title": "Join Planning Session",
+    "name": {
+      "label": "Your Name",
+      "placeholder": "Enter your display name (e.g. Alice)"
+    },
+    "roomCode": {
+      "label": "Room Code (Optional)",
+      "placeholder": "Enter code or leave blank to host"
+    },
+    "submit": {
+      "join": "Join Room",
+      "create": "Create Room"
+    }
+  },
+  "room": {
+    "header": {
+      "code_badge": {
+        "copied": "Copied!",
+        "default": "Code: {{code}}"
+      },
+      "aria": {
+        "copy": "Room Code is {{code}}. Click to copy.",
+        "reset": "Reset the voting board for all peers",
+        "reveal": "Reveal votes to all peers"
+      },
+      "reset_dialog": {
+        "title": "Reset Board",
+        "message": "Are you sure you want to clear all current votes? This action will apply to all connected peers and cannot be undone.",
+        "confirm": "Reset Votes"
+      }
+    },
+    "deck": {
+      "title": "Cast Your Vote",
+      "aria_label": "Voting deck"
+    },
+    "roster": {
+      "title": "Team Roster ({{count}}/{{max}})",
+      "revealed_badge": "Votes Revealed!",
+      "disconnected": "Disconnected",
+      "host_badge": "👑",
+      "aria": {
+        "label": "Team roster",
+        "not_voted": "{{name}} has not voted yet"
+      }
+    }
+  }
+}

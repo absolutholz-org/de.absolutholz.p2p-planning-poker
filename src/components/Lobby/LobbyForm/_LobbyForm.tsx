@@ -1,10 +1,12 @@
 import { type FormEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useRoom } from '../../../context/RoomContext';
 import { Button } from '../../Shared/Button';
 import * as S from './_LobbyForm.styles';
 
 export function LobbyForm() {
+	const { t } = useTranslation();
 	const { error, initGuest, initHost } = useRoom();
 	const [name, setName] = useState('');
 	const [roomCode, setRoomCode] = useState('');
@@ -28,44 +30,48 @@ export function LobbyForm() {
 		<S.Container>
 			<S.FormCard onSubmit={handleSubmit}>
 				<div>
-					<S.Title>P2P Planning Poker</S.Title>
+					<S.Title>{t('common.poker')}</S.Title>
 					<p
 						style={{
 							color: 'var(--sys-color-text-secondary)',
 							textAlign: 'center',
 						}}
 					>
-						Serverless agile estimation
+						{t('lobby.title')}
 					</p>
 				</div>
 
 				{error && <S.ErrorMessage role="alert">{error}</S.ErrorMessage>}
 
 				<S.FieldLine>
-					<S.Label htmlFor="playerName">Your Name</S.Label>
+					<S.Label htmlFor="playerName">
+						{t('lobby.name.label')}
+					</S.Label>
 					<S.Input
 						id="playerName"
 						type="text"
 						required
 						autoFocus
 						maxLength={25}
-						placeholder="E.g., Jane Doe"
+						placeholder={t('lobby.name.placeholder')}
 						value={name}
 						onChange={(e) => setName(e.target.value)}
 					/>
 				</S.FieldLine>
 
 				<S.FieldLine>
-					<S.Label htmlFor="roomCode">Room Code (Optional)</S.Label>
+					<S.Label htmlFor="roomCode">
+						{t('lobby.roomCode.label')}
+					</S.Label>
 					<S.Input
 						id="roomCode"
 						type="text"
-						placeholder="Paste code to join existing room"
+						placeholder={t('lobby.roomCode.placeholder')}
 						value={roomCode}
 						onChange={(e) => setRoomCode(e.target.value)}
 					/>
 					<S.HelperText>
-						Leave blank to create a new session.
+						{t('lobby.roomCode.placeholder')}
 					</S.HelperText>
 				</S.FieldLine>
 
@@ -73,8 +79,8 @@ export function LobbyForm() {
 					{isSubmitting
 						? 'Connecting...'
 						: roomCode.trim()
-							? 'Join Room'
-							: 'Create Room'}
+							? t('lobby.submit.join')
+							: t('lobby.submit.create')}
 				</Button>
 			</S.FormCard>
 		</S.Container>

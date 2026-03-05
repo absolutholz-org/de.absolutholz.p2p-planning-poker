@@ -1,0 +1,57 @@
+{
+  "common": {
+    "actions": {
+      "cancel": "Annuler",
+      "reset": "Réinitialiser",
+      "reveal": "Révéler les votes"
+    },
+    "poker": "P2P Poker"
+  },
+  "lobby": {
+    "title": "Rejoindre la Session de Planification",
+    "name": {
+      "label": "Votre Nom",
+      "placeholder": "Saisissez votre pseudo (ex. Alice)"
+    },
+    "roomCode": {
+      "label": "Code de la Salle (Optionnel)",
+      "placeholder": "Entrez le code ou laissez vide pour héberger"
+    },
+    "submit": {
+      "join": "Rejoindre la Salle",
+      "create": "Créer la Salle"
+    }
+  },
+  "room": {
+    "header": {
+      "code_badge": {
+        "copied": "Copié !",
+        "default": "Code : {{code}}"
+      },
+      "aria": {
+        "copy": "Le code de la salle est {{code}}. Cliquez pour copier.",
+        "reset": "Réinitialiser le tableau de vote pour tous les participants",
+        "reveal": "Révéler les votes à tous les participants"
+      },
+      "reset_dialog": {
+        "title": "Réinitialiser le Tableau",
+        "message": "Êtes-vous sûr de vouloir effacer tous les votes actuels ? Cette action s'appliquera à tous les participants connectés et ne peut être annulée.",
+        "confirm": "Réinitialiser les Votes"
+      }
+    },
+    "deck": {
+      "title": "Déposez votre Vote",
+      "aria_label": "Paquet de votes"
+    },
+    "roster": {
+      "title": "Liste de l'Équipe ({{count}}/{{max}})",
+      "revealed_badge": "Votes Révélés !",
+      "disconnected": "Déconnecté",
+      "host_badge": "👑",
+      "aria": {
+        "label": "Liste de l'équipe",
+        "not_voted": "{{name}} n'a pas encore voté"
+      }
+    }
+  }
+}

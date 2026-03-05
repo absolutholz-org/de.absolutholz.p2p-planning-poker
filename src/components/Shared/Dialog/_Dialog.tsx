@@ -1,18 +1,20 @@
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Button } from '../Button';
 import * as S from './_Dialog.styles';
 import type { DialogProps } from './_Dialog.types';
 
 export function Dialog({
-	cancelText = 'Cancel',
-	confirmText = 'Confirm',
+	cancelText,
+	confirmText,
 	isOpen,
 	message,
 	onCancel,
 	onConfirm,
 	title,
 }: DialogProps) {
+	const { t } = useTranslation();
 	const dialogRef = useRef<HTMLDivElement>(null);
 
 	// A11Y focus trapping: when dialog opens, focus the container
@@ -42,10 +44,10 @@ export function Dialog({
 				<S.Message id="dialog-message">{message}</S.Message>
 				<S.Actions>
 					<Button variant="secondary" onClick={onCancel}>
-						{cancelText}
+						{cancelText || t('common.actions.cancel')}
 					</Button>
 					<Button variant="danger" onClick={onConfirm}>
-						{confirmText}
+						{confirmText || t('common.actions.reset')}
 					</Button>
 				</S.Actions>
 			</S.DialogBox>

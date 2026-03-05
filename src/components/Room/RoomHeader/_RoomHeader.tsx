@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useRoom } from '../../../context/RoomContext';
 import { Button } from '../../Shared/Button';
@@ -6,6 +7,7 @@ import { Dialog } from '../../Shared/Dialog';
 import * as S from './_RoomHeader.styles';
 
 export function RoomHeader() {
+	const { t } = useTranslation();
 	const { resetBoard, revealVotes, roomState } = useRoom();
 	const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
 	const [copied, setCopied] = useState(false);
@@ -31,15 +33,21 @@ export function RoomHeader() {
 		<>
 			<S.HeaderContainer>
 				<S.Brand>
-					<span aria-hidden="true">🃏</span> P2P Poker
+					<span aria-hidden="true">🃏</span> {t('common.poker')}
 				</S.Brand>
 
 				<S.RoomInfo>
 					<S.RoomCodeBadge
 						onClick={handleCopyCode}
-						aria-label={`Room Code is ${roomState.roomId}. Click to copy.`}
+						aria-label={t('room.header.aria.copy', {
+							code: roomState.roomId,
+						})}
 					>
-						{copied ? 'Copied!' : `Code: ${roomState.roomId}`}
+						{copied
+							? t('room.header.code_badge.copied')
+							: t('room.header.code_badge.default', {
+									code: roomState.roomId,
+								})}
 					</S.RoomCodeBadge>
 				</S.RoomInfo>
 
@@ -47,28 +55,28 @@ export function RoomHeader() {
 					<Button
 						variant="secondary"
 						onClick={() => setIsResetDialogOpen(true)}
-						aria-label="Reset the voting board for all peers"
+						aria-label={t('room.header.aria.reset')}
 						disabled={roomState.users.every((u) => u.vote === null)}
 					>
-						Reset
+						{t('common.actions.reset')}
 					</Button>
 
 					<Button
 						variant="primary"
 						onClick={revealVotes}
-						aria-label="Reveal votes to all peers"
+						aria-label={t('room.header.aria.reveal')}
 						disabled={roomState.isRevealed}
 					>
-						Reveal Votes
+						{t('common.actions.reveal')}
 					</Button>
 				</S.Actions>
 			</S.HeaderContainer>
 
 			<Dialog
 				isOpen={isResetDialogOpen}
-				title="Reset Board"
-				message="Are you sure you want to clear all current votes? This action will apply to all connected peers and cannot be undone."
-				confirmText="Reset Votes"
+				title={t('room.header.reset_dialog.title')}
+				message={t('room.header.reset_dialog.message')}
+				confirmText={t('room.header.reset_dialog.confirm')}
 				onConfirm={handleReset}
 				onCancel={() => setIsResetDialogOpen(false)}
 			/>
