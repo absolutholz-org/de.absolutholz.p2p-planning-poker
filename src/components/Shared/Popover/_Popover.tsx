@@ -51,7 +51,7 @@ export function Popover({
 
 	return (
 		<>
-			{renderTrigger({ popovertarget: id, ref: triggerRef })}
+			{renderTrigger({ popoverTarget: id, ref: triggerRef })}
 			<S.PopoverContent
 				id={id}
 				popover="auto"
