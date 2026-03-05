@@ -16,7 +16,9 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
 
 	useEffect(() => {
 		// Enforce a11y & L10n structural requirements when language changes
-		document.documentElement.lang = i18n.language;
+		if (i18n.language) {
+			document.documentElement.lang = i18n.language;
+		}
 	}, [i18n.language]);
 
 	const handleLanguageChange = (code: string) => {
@@ -30,7 +32,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
 					key={code}
 					title={title}
 					aria-label={`Change language to ${title}`}
-					data-active={i18n.language.startsWith(code)}
+					data-active={i18n.language?.startsWith(code) ?? false}
 					onClick={() => handleLanguageChange(code)}
 				>
 					{label}
