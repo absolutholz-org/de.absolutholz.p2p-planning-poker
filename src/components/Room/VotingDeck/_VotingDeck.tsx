@@ -13,7 +13,7 @@ const FIBONACCI_SCALE: VoteValue[] = [
 	'8',
 	'13',
 	'21',
-	'Coffee',
+	'☕️',
 	'?',
 ];
 

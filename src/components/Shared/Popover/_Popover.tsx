@@ -54,13 +54,11 @@ export function Popover({
 			{renderTrigger({ popovertarget: id, ref: triggerRef })}
 			<S.PopoverContent
 				id={id}
-				// @ts-expect-error React 18 popover types can be unsynchronized in legacy environments
 				popover="auto"
 				ref={popoverRef}
 				onClick={(e) => {
 					// Auto dismiss logic when a semantic button/link action resolves within the card
 					if ((e.target as HTMLElement).closest('button, a')) {
-						// @ts-expect-error native DOM extension feature
 						popoverRef.current?.hidePopover?.();
 					}
 				}}

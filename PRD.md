@@ -36,7 +36,7 @@ Because there is no central server, the application relies on a "Host" and "Gues
 
 The application relies on passing strict message payloads over PeerJS data channels.
 
-**Voting Scale:** Standard Fibonacci `[0, 1, 2, 3, 5, 8, 13, 21, "Coffee", "?"]`
+**Voting Scale:** Standard Fibonacci `[0, 1, 2, 3, 5, 8, 13, 21, "☕️", "?"]`
 
 | Action/Event    | Sender → Receiver | Description                                                                             |
 | --------------- | ----------------- | --------------------------------------------------------------------------------------- |

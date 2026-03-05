@@ -6,7 +6,7 @@ export type VoteValue =
 	| '8'
 	| '13'
 	| '21'
-	| 'Coffee'
+	| '☕️'
 	| '?'
 	| null;
 
