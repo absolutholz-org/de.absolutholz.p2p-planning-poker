@@ -18,15 +18,16 @@ export const Tooltip = ({ children, content, position = 'top' }: ITooltip) => {
 	const popoverId = useId();
 
 	// Handle Escape key dismissal (WCAG 1.4.13)
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+
 	const handleKeyDown = useCallback((e: KeyboardEvent) => {
 		if (e.key === 'Escape') {
+			// eslint-disable-next-line react-hooks/immutability
 			hidePopover(0);
 		}
 	}, []);
 
 	// Handle scroll dismissal to prevent detached tooltips
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+
 	const handleScroll = useCallback(() => {
 		hidePopover(0);
 	}, []);
