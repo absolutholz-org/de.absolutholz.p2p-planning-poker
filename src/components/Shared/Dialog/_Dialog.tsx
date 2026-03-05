@@ -7,6 +7,7 @@ import type { DialogProps } from './_Dialog.types';
 
 export function Dialog({
 	cancelText,
+	children,
 	confirmText,
 	isOpen,
 	message,
@@ -53,7 +54,10 @@ export function Dialog({
 					</S.CloseButton>
 				</S.DialogHeader>
 
-				<S.DialogContent id="dialog-message">{message}</S.DialogContent>
+				<S.DialogContent id="dialog-message">
+					{message && <p>{message}</p>}
+					{children}
+				</S.DialogContent>
 
 				<S.DialogFooter>
 					<Button variant="secondary" onClick={onCancel}>

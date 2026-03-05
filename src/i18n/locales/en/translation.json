@@ -47,7 +47,9 @@
         "code_copied": "Code copied to clipboard!",
         "fallback_error": "Sharing not supported on this browser.",
         "aria_open": "Open share menu",
-        "aria_close": "Close share menu"
+        "aria_close": "Close share menu",
+        "dialog_title": "Share Room",
+        "dialog_desc": "Invite your team to this session."
       }
     },
     "deck": {

@@ -14,7 +14,11 @@ export interface DialogProps {
 	/**
 	 * The descriptive message of the dialog.
 	 */
-	message: string;
+	message?: string;
+	/**
+	 * Optional custom content to render inside the dialog.
+	 */
+	children?: React.ReactNode;
 	/**
 	 * Callback fired when the cancel button or overlay is clicked.
 	 */

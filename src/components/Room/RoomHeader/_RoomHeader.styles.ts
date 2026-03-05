@@ -17,65 +17,11 @@ export const SubHeaderContainer = styled.div`
 	}
 `;
 
-export const RoomCodeLabel = styled.div`
-	font-size: var(--sys-font-size-xs);
-	font-weight: 700;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-	color: var(--sys-color-text-secondary);
-	margin-bottom: 4px;
-`;
-
-export const RoomCodeValue = styled.div`
-	font-size: var(--sys-font-size-xl);
-	font-weight: 700;
-	color: var(--sys-color-text-primary);
-	font-variant-numeric: tabular-nums;
-`;
-
-export const RoomInfo = styled.div`
-	display: flex;
-	flex-direction: column;
-`;
-
 export const ShareWrapper = styled.div`
 	position: relative;
-`;
 
-export const ShareMenu = styled.div`
-	position: absolute;
-	top: 100%;
-	left: 0;
-	margin-top: var(--sys-spacing-sm);
-	background: var(--sys-color-surface);
-	border: 1px solid var(--sys-color-border);
-	border-radius: var(--sys-radius-md);
-	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-	padding: var(--sys-spacing-xs);
-	display: flex;
-	flex-direction: column;
-	min-width: 220px;
-	z-index: 20;
-`;
-
-export const ShareMenuItem = styled.button`
-	text-align: left;
-	padding: var(--sys-spacing-sm) var(--sys-spacing-md);
-	min-height: 48px; /* A11y touch target */
-	background: transparent;
-	border: none;
-	border-radius: var(--sys-radius-sm);
-	color: var(--sys-color-text-primary);
-	font-size: var(--sys-font-size-sm);
-	cursor: pointer;
-
-	&:hover {
-		background: var(--sys-color-bg);
-	}
-
-	&:focus-visible {
-		outline: 2px solid var(--sys-color-focus);
-		outline-offset: -2px;
+	@media (min-width: 1024px) {
+		display: none;
 	}
 `;
 
