@@ -1,31 +1,33 @@
 import { useEffect, useState } from 'react';
 
 import { Popover } from '../Popover';
-import * as S from './_ThemeSwitcher.styles';
+import * as S from './_SchemeSwitcher.styles';
 
-type Theme = 'light' | 'dark' | 'system';
+type Scheme = 'light' | 'dark' | 'system';
 
-const THEMES: { id: Theme; label: string; icon: string }[] = [
+const SCHEMES: { id: Scheme; label: string; icon: string }[] = [
 	{ icon: '☀️', id: 'light', label: 'Light' },
 	{ icon: '🌙', id: 'dark', label: 'Dark' },
 	{ icon: '🖥️', id: 'system', label: 'System' },
 ];
 
-export function ThemeSwitcher() {
-	const [theme, setTheme] = useState<Theme>(() => {
-		return (localStorage.getItem('theme-preference') as Theme) || 'system';
+export function SchemeSwitcher() {
+	const [scheme, setScheme] = useState<Scheme>(() => {
+		return (
+			(localStorage.getItem('scheme-preference') as Scheme) || 'system'
+		);
 	});
 
 	useEffect(() => {
 		const root = document.documentElement;
-		if (theme === 'system') {
-			root.removeAttribute('data-theme');
-			localStorage.removeItem('theme-preference');
+		if (scheme === 'system') {
+			root.removeAttribute('data-scheme');
+			localStorage.removeItem('scheme-preference');
 		} else {
-			root.setAttribute('data-theme', theme);
-			localStorage.setItem('theme-preference', theme);
+			root.setAttribute('data-scheme', scheme);
+			localStorage.setItem('scheme-preference', scheme);
 		}
-	}, [theme]);
+	}, [scheme]);
 
 	return (
 		<Popover
@@ -40,18 +42,18 @@ export function ThemeSwitcher() {
 				<S.TriggerButton
 					ref={ref}
 					popoverTarget={popoverTarget}
-					aria-label="Toggle theme"
+					aria-label="Toggle scheme"
 				>
 					<span aria-hidden="true">🖥️</span>
 				</S.TriggerButton>
 			)}
 		>
 			<S.MenuContainer>
-				{THEMES.map(({ icon, id, label }) => (
+				{SCHEMES.map(({ icon, id, label }) => (
 					<S.MenuItem
 						key={id}
-						data-active={theme === id}
-						onClick={() => setTheme(id)}
+						data-active={scheme === id}
+						onClick={() => setScheme(id)}
 					>
 						<span>
 							<span
@@ -65,7 +67,7 @@ export function ThemeSwitcher() {
 							</span>{' '}
 							{label}
 						</span>
-						{theme === id && <span className="check">✓</span>}
+						{scheme === id && <span className="check">✓</span>}
 					</S.MenuItem>
 				))}
 			</S.MenuContainer>

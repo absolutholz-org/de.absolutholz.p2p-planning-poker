@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { ThemeSwitcher } from './_ThemeSwitcher';
+import { SchemeSwitcher } from './_SchemeSwitcher';
 
 const meta = {
-	component: ThemeSwitcher,
+	component: SchemeSwitcher,
 	parameters: {
 		backgrounds: {
 			default: 'light',
@@ -11,8 +11,8 @@ const meta = {
 		layout: 'centered',
 	},
 	tags: ['autodocs'],
-	title: 'Shared/ThemeSwitcher',
-} satisfies Meta<typeof ThemeSwitcher>;
+	title: 'Shared/SchemeSwitcher',
+} satisfies Meta<typeof SchemeSwitcher>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

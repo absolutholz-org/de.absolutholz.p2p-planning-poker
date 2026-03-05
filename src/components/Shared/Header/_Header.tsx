@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useRoom } from '../../../context/RoomContext';
 import { LanguageSwitcher } from '../LanguageSwitcher';
-import { ThemeSwitcher } from '../ThemeSwitcher';
+import { SchemeSwitcher } from '../SchemeSwitcher';
 import * as S from './_Header.styles';
 
 export function Header() {
@@ -39,7 +39,7 @@ export function Header() {
 
 			<S.Actions>
 				<LanguageSwitcher />
-				<ThemeSwitcher />
+				<SchemeSwitcher />
 			</S.Actions>
 		</S.HeaderContainer>
 	);

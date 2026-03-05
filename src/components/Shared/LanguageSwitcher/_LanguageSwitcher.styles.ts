@@ -4,7 +4,7 @@ export const TriggerButton = styled.button`
 	display: flex;
 	align-items: center;
 	gap: var(--sys-spacing-sm);
-	height: 44px; /* Match ThemeSwitcher height */
+	height: 44px; /* Match SchemeSwitcher height */
 	background: transparent;
 	border: 1px solid var(--sys-color-border);
 	padding: 0 var(--sys-spacing-md);
