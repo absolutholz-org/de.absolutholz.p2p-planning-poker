@@ -22,7 +22,7 @@ export function RoomHeader() {
 
 	const getShareUrl = () => {
 		if (typeof window === 'undefined') return '';
-		return `${window.location.origin}${window.location.pathname}?room=${roomState.roomId}`;
+		return `${window.location.origin}/room/${roomState.roomId}`;
 	};
 
 	const handleNativeShare = async () => {

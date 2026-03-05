@@ -1,5 +1,6 @@
 import { type FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
 import { useRoom } from '../../../context/RoomContext';
 import { Button } from '../../Shared/Button';
@@ -8,14 +9,9 @@ import * as S from './_LobbyForm.styles';
 export function LobbyForm() {
 	const { t } = useTranslation();
 	const { error, initGuest, initHost } = useRoom();
+	const { roomId } = useParams<{ roomId?: string }>();
 	const [name, setName] = useState('');
-	const [roomCode, setRoomCode] = useState(() => {
-		if (typeof window !== 'undefined') {
-			const search = new URLSearchParams(window.location.search);
-			return search.get('room') || '';
-		}
-		return '';
-	});
+	const [roomCode, setRoomCode] = useState(roomId || '');
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	const handleSubmit = (e: FormEvent) => {
@@ -65,21 +61,23 @@ export function LobbyForm() {
 					/>
 				</S.FieldLine>
 
-				<S.FieldLine>
-					<S.Label htmlFor="roomCode">
-						{t('lobby.roomCode.label')}
-					</S.Label>
-					<S.Input
-						id="roomCode"
-						type="text"
-						placeholder={t('lobby.roomCode.placeholder')}
-						value={roomCode}
-						onChange={(e) => setRoomCode(e.target.value)}
-					/>
-					<S.HelperText>
-						{t('lobby.roomCode.placeholder')}
-					</S.HelperText>
-				</S.FieldLine>
+				{!roomId && (
+					<S.FieldLine>
+						<S.Label htmlFor="roomCode">
+							{t('lobby.roomCode.label')}
+						</S.Label>
+						<S.Input
+							id="roomCode"
+							type="text"
+							placeholder={t('lobby.roomCode.placeholder')}
+							value={roomCode}
+							onChange={(e) => setRoomCode(e.target.value)}
+						/>
+						<S.HelperText>
+							{t('lobby.roomCode.placeholder')}
+						</S.HelperText>
+					</S.FieldLine>
+				)}
 
 				<Button type="submit" disabled={!name.trim() || isSubmitting}>
 					{isSubmitting
