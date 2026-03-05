@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { useMenuNavigation } from '../../../hooks/useMenuNavigation';
 import { Popover } from '../Popover';
 import * as S from './_LanguageSwitcher.styles';
 import type { LanguageSwitcherProps } from './_LanguageSwitcher.types';
@@ -13,6 +14,9 @@ const SUPPORTED_LANGUAGES = [
 ];
 
 export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
+	const menuRef = useRef<HTMLDivElement>(null);
+	useMenuNavigation(menuRef);
+
 	const { i18n } = useTranslation();
 
 	useEffect(() => {
@@ -56,12 +60,14 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
 				</S.TriggerButton>
 			)}
 		>
-			<S.MenuContainer>
+			<S.MenuContainer ref={menuRef} role="menu">
 				{SUPPORTED_LANGUAGES.map(({ code, title }) => {
 					const isActive = i18n.language?.startsWith(code) ?? false;
 					return (
 						<S.MenuItem
 							key={code}
+							role="menuitem"
+							tabIndex={-1}
 							title={title}
 							aria-label={`Change language to ${title}`}
 							data-active={isActive}

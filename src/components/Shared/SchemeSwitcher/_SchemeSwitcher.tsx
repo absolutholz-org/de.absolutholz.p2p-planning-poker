@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
+import { useMenuNavigation } from '../../../hooks/useMenuNavigation';
 import { Popover } from '../Popover';
 import * as S from './_SchemeSwitcher.styles';
 
@@ -12,6 +13,9 @@ const SCHEMES: { id: Scheme; label: string; icon: string }[] = [
 ];
 
 export function SchemeSwitcher() {
+	const menuRef = useRef<HTMLDivElement>(null);
+	useMenuNavigation(menuRef);
+
 	const [scheme, setScheme] = useState<Scheme>(() => {
 		return (
 			(localStorage.getItem('scheme-preference') as Scheme) || 'system'
@@ -48,10 +52,12 @@ export function SchemeSwitcher() {
 				</S.TriggerButton>
 			)}
 		>
-			<S.MenuContainer>
+			<S.MenuContainer ref={menuRef} role="menu">
 				{SCHEMES.map(({ icon, id, label }) => (
 					<S.MenuItem
 						key={id}
+						role="menuitem"
+						tabIndex={-1}
 						data-active={scheme === id}
 						onClick={() => setScheme(id)}
 					>
