@@ -35,31 +35,16 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
 		SUPPORTED_LANGUAGES[0];
 
 	return (
-		<Popover
-			align="end"
-			renderTrigger={({
-				popoverTarget,
-				ref,
-			}: {
-				popoverTarget: string;
-				ref: React.RefObject<HTMLButtonElement | null>;
-			}) => (
-				<S.TriggerButton
-					className={className}
-					ref={ref}
-					popoverTarget={popoverTarget}
-					aria-label="Select language"
+		<Popover align="end">
+			<S.TriggerButton className={className} aria-label="Select language">
+				<span aria-hidden="true">🌐</span> {currentLang.label}{' '}
+				<span
+					aria-hidden="true"
+					style={{ fontSize: '0.7em', marginLeft: '4px' }}
 				>
-					<span aria-hidden="true">🌐</span> {currentLang.label}{' '}
-					<span
-						aria-hidden="true"
-						style={{ fontSize: '0.7em', marginLeft: '4px' }}
-					>
-						▼
-					</span>
-				</S.TriggerButton>
-			)}
-		>
+					▼
+				</span>
+			</S.TriggerButton>
 			<S.MenuContainer ref={menuRef} role="menu">
 				{SUPPORTED_LANGUAGES.map(({ code, title }) => {
 					const isActive = i18n.language?.startsWith(code) ?? false;

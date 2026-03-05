@@ -1,10 +1,8 @@
-import type { ReactNode, RefObject } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 
 export interface PopoverProps {
-	renderTrigger: (props: {
-		popoverTarget: string;
-		ref: RefObject<HTMLButtonElement | null>;
-	}) => ReactNode;
-	children: ReactNode;
-	align?: 'start' | 'end';
+	/** First child is the trigger element, the rest of the children are the popover content. */
+	children: [ReactElement, ...ReactNode[]];
+	/** Preferred position of the popover */
+	align?: 'start' | 'end' | 'top' | 'right' | 'bottom' | 'left';
 }

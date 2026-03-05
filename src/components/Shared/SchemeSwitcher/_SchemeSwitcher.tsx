@@ -34,24 +34,10 @@ export function SchemeSwitcher() {
 	}, [scheme]);
 
 	return (
-		<Popover
-			align="end"
-			renderTrigger={({
-				popoverTarget,
-				ref,
-			}: {
-				popoverTarget: string;
-				ref: React.RefObject<HTMLButtonElement | null>;
-			}) => (
-				<S.TriggerButton
-					ref={ref}
-					popoverTarget={popoverTarget}
-					aria-label="Toggle scheme"
-				>
-					<span aria-hidden="true">🖥️</span>
-				</S.TriggerButton>
-			)}
-		>
+		<Popover align="end">
+			<S.TriggerButton aria-label="Toggle scheme">
+				<span aria-hidden="true">🖥️</span>
+			</S.TriggerButton>
 			<S.MenuContainer ref={menuRef} role="menu">
 				{SCHEMES.map(({ icon, id, label }) => (
 					<S.MenuItem

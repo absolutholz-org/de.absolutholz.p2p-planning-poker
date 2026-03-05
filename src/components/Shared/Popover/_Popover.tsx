@@ -1,17 +1,43 @@
-import { useEffect, useId, useLayoutEffect, useRef } from 'react';
+import {
+	Children,
+	cloneElement,
+	useEffect,
+	useId,
+	useLayoutEffect,
+	useRef,
+} from 'react';
 
+import {
+	type FloatingPosition,
+	useFloatingPosition,
+} from '../../../hooks/useFloatingPosition';
 import * as S from './_Popover.styles';
 import type { PopoverProps } from './_Popover.types';
 
-export function Popover({
-	align = 'end',
-	children,
-	renderTrigger,
-}: PopoverProps) {
+export function Popover({ align = 'bottom', children }: PopoverProps) {
 	const rawId = useId();
 	const id = `popover-${rawId.replace(/:/g, '')}`; // Safe DOM string
-	const triggerRef = useRef<HTMLButtonElement>(null);
+	const triggerRef = useRef<HTMLElement>(null);
 	const popoverRef = useRef<HTMLDivElement>(null);
+
+	const childrenArray = Children.toArray(children);
+	const trigger = childrenArray[0] as React.ReactElement;
+	const popoverContent = childrenArray.slice(1);
+
+	// Map generic alignments to valid floating positions
+	const position: FloatingPosition =
+		align === 'start'
+			? 'left'
+			: align === 'end'
+				? 'right'
+				: (align as FloatingPosition);
+
+	const { updatePosition } = useFloatingPosition({
+		gap: 8,
+		popoverRef,
+		position,
+		triggerRef,
+	});
 
 	// Force DOM attributes to bypass @emotion/is-prop-valid stripping modern HTML Popover hooks
 	useLayoutEffect(() => {
@@ -30,28 +56,37 @@ export function Popover({
 		const handleToggle = (e: Event) => {
 			// Cast event to standard toggle payload without triggering any-type lints
 			const toggleEvent = e as Event & { newState: string };
-			if (toggleEvent.newState === 'open' && triggerRef.current) {
-				const rect = triggerRef.current.getBoundingClientRect();
-
-				// Base top anchoring against the bottom of the bounding element
-				popover.style.top = `${rect.bottom + 8}px`;
-
-				// Calc alignment hooks
-				if (align === 'end') {
-					popover.style.left = `${rect.right - popover.offsetWidth}px`;
-				} else {
-					popover.style.left = `${rect.left}px`;
-				}
+			if (toggleEvent.newState === 'open') {
+				requestAnimationFrame(() => updatePosition());
 			}
 		};
 
 		popover.addEventListener('toggle', handleToggle);
 		return () => popover.removeEventListener('toggle', handleToggle);
-	}, [align]);
+	}, [updatePosition]);
+
+	const mergedRef = (node: HTMLElement) => {
+		triggerRef.current = node;
+		const childElement = trigger as React.ReactElement & {
+			ref?: React.Ref<HTMLElement>;
+		};
+		const childRef = childElement.ref;
+		if (typeof childRef === 'function') {
+			childRef(node);
+		} else if (childRef && typeof childRef === 'object') {
+			(childRef as { current: HTMLElement | null }).current = node;
+		}
+	};
 
 	return (
 		<>
-			{renderTrigger({ popoverTarget: id, ref: triggerRef })}
+			{/* eslint-disable react-hooks/refs */}
+			{/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+			{cloneElement(trigger as React.ReactElement<any>, {
+				popovertarget: id,
+				ref: mergedRef,
+			})}
+			{/* eslint-enable react-hooks/refs */}
 			<S.PopoverContent
 				id={id}
 				popover="auto"
@@ -63,7 +98,7 @@ export function Popover({
 					}
 				}}
 			>
-				{children}
+				{popoverContent}
 			</S.PopoverContent>
 		</>
 	);
