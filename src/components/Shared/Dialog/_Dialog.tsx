@@ -15,42 +15,55 @@ export function Dialog({
 	title,
 }: DialogProps) {
 	const { t } = useTranslation();
-	const dialogRef = useRef<HTMLDivElement>(null);
+	const dialogRef = useRef<HTMLDialogElement>(null);
 
-	// A11Y focus trapping: when dialog opens, focus the container
 	useEffect(() => {
-		if (isOpen && dialogRef.current) {
-			dialogRef.current.focus();
+		const dialog = dialogRef.current;
+		if (!dialog) return;
+
+		if (isOpen) {
+			dialog.showModal();
+		} else {
+			dialog.close();
 		}
 	}, [isOpen]);
 
-	if (!isOpen) return null;
+	const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
+		if (e.target === dialogRef.current) {
+			onCancel();
+		}
+	};
 
 	return (
-		<S.Overlay
-			onClick={onCancel}
-			// ARIA modal attributes
-			role="dialog"
-			aria-modal="true"
+		<S.DialogBase
+			ref={dialogRef}
+			onCancel={onCancel} // Natively handles Escape key
+			onClick={handleBackdropClick}
 			aria-labelledby="dialog-title"
 			aria-describedby="dialog-message"
 		>
-			<S.DialogBox
-				ref={dialogRef}
-				tabIndex={-1} // Allow programmatic focus
-				onClick={(e) => e.stopPropagation()} // Prevent clicking inside from closing
-			>
-				<S.Title id="dialog-title">{title}</S.Title>
-				<S.Message id="dialog-message">{message}</S.Message>
-				<S.Actions>
+			<S.DialogContainer onClick={(e) => e.stopPropagation()}>
+				<S.DialogHeader>
+					<S.DialogTitle id="dialog-title">{title}</S.DialogTitle>
+					<S.CloseButton
+						onClick={onCancel}
+						aria-label={t('common.actions.cancel')}
+					>
+						<span aria-hidden="true">&times;</span>
+					</S.CloseButton>
+				</S.DialogHeader>
+
+				<S.DialogContent id="dialog-message">{message}</S.DialogContent>
+
+				<S.DialogFooter>
 					<Button variant="secondary" onClick={onCancel}>
 						{cancelText || t('common.actions.cancel')}
 					</Button>
 					<Button variant="danger" onClick={onConfirm}>
 						{confirmText || t('common.actions.reset')}
 					</Button>
-				</S.Actions>
-			</S.DialogBox>
-		</S.Overlay>
+				</S.DialogFooter>
+			</S.DialogContainer>
+		</S.DialogBase>
 	);
 }
