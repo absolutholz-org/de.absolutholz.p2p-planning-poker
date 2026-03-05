@@ -10,21 +10,25 @@ This application provides a real-time agile estimation tool for small teams (up 
 - **Host/Guest Model:** The first user creates a room and acts as the authoritative state host.
 - **Real-Time Syncing:** Instantaneous vote casting, revealing, and resetting across all connected clients.
 - **Ephemeral Sessions:** No database means zero data persistence once the Host closes the session.
+- **Deep Linking:** Dynamic SPA routing ensures users can share semantic URLs (`/room/:roomId`) natively to instantly onboard teammates.
+- **Global Localization:** Fully localized in English, German, French, and Portuguese contexts seamlessly.
 - **Fibonacci Scale:** Standard agile voting scale `[1, 2, 3, 5, 8, 13, 21, "Coffee", "?"]`.
 
 ## 🛠️ Tech Stack
 
 - **Package Manager:** `pnpm`
 - **Frontend:** React (Bootstrapped with Vite)
+- **Routing:** React Router DOM for SPA deep-linking
 - **Styling:** CSS-in-JS via Emotion (`@emotion/react`, `@emotion/styled`)
+- **Localization:** `react-i18next`
 - **Networking:** WebRTC via `peerjs`
 
 ## 🏗️ Architecture
 
 Because this app lacks a centralized server, it relies on a Host/Guest network topology:
 
-1. **The Host:** Generates a session. Their browser holds the single source of truth for the room's React state. Their unique PeerJS ID serves as the "Room Code."
-2. **The Guests:** Up to 11 additional team members join using the Host's Room Code, establishing a direct WebRTC connection to the Host's browser.
+1. **The Host:** Generates a session. Their browser holds the single source of truth for the room's React state. They are assigned a permanent room URL.
+2. **The Guests:** Up to 11 additional team members join by opening the Host's semantic deep-link URL (`/room/:roomId`), establishing a direct WebRTC connection natively.
 3. **Data Flow:** Guests send discrete actions (`JOIN_ROOM`, `SUBMIT_VOTE`) to the Host. The Host updates the master state and broadcasts the complete, updated state back to all Guests.
 
 ## 💻 Quick Start

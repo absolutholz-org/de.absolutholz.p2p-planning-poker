@@ -32,14 +32,14 @@ Always sequence your execution plans logically:
 - **Phase 1 (Network & Translations):** Define the PeerJS hooks/events and the required i18n JSON keys.
 - **Phase 2 (Structure & UI):** Define the semantic HTML and CSS custom properties (Purist), then wrap them in React (Architect).
 - **Phase 3 (Refinement):** Apply accessibility constraints (A11Y) and native formatting (I18N).
-- **Phase 4 (Documentation & Release):** Generate Stories (Storybook) and define the commit structure (DevOps).
+- **Phase 4 (Documentation & Release):** Update central documentation (`PRD.md`, `README.md`), generate Stories (Storybook), and define the commit structure (DevOps).
 
 ### 3. Prompt Construction
 
 At the end of your analysis, you MUST output a single, highly structured prompt inside a code block. This is the "Execution Prompt" that the developer will use to trigger the expert agents. It must tag the relevant agents using the `@` symbol and explicitly list the constraints they need to follow for this specific feature.
 
 > [!IMPORTANT]
-> **MANDATORY FINAL STEP:** You must ALWAYS explicitly end your Execution Prompt by delegating to `@COMMIT_EXPERT.md` to run pre-commit checks (`pnpm format && pnpm lint`), enforce Gitmoji commit semantics, and bump the `package.json` version. Never assume the developer will do this correctly on their own.
+> **MANDATORY FINAL STEP:** You must ALWAYS explicitly end your Execution Prompt by delegating an agent to synchronize the central `PRD.md` and `README.md` documentation if the feature alters the product scope or architecture. Following documentation, delegate to `@COMMIT_EXPERT.md` to run pre-commit checks (`pnpm format && pnpm lint`), enforce Gitmoji commit semantics, and bump the `package.json` version. Never assume the developer will do this correctly on their own.
 
 ## Example Output Format
 
@@ -63,5 +63,6 @@ Please implement the "Reset Board" feature using the following strict sequence:
 2. I18N: `@I18N_L10N_EXPERT.md`, define the required JSON translation keys for a reset warning. Do not allow hardcoded strings in the UI.
 3. UI: `@DESIGN_SYSTEM_ARCHITECT.md`, add a "Reset" button to the header. When clicked, it should open the existing `Dialog` component.
 4. A11Y: `@A11Y_UX_ADVOCATE.md`, ensure the "Reset" button has an `aria-label` specifying *what* is being reset, and ensure focus returns to the header when the dialog closes.
-5. COMMIT: `@COMMIT_EXPERT.md`, run `pnpm format` and `pnpm lint`, then instruct the developer to manually stage their changes. Once staged, commit them using the proper `✨` Gitmoji, and finally bump the version in `package.json`.
+5. DOCS: Update `PRD.md` and `README.md` to document the new Reset Board functionality.
+6. COMMIT: `@COMMIT_EXPERT.md`, run `pnpm format` and `pnpm lint`, then instruct the developer to manually stage their changes. Once staged, commit them using the proper `✨` Gitmoji, and finally bump the version in `package.json`.
 ```

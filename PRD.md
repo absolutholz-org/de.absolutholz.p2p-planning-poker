@@ -12,13 +12,15 @@ The team will adhere to the following tools to maintain a small, consistent foot
 - **Frontend Framework:** React (Vite recommended)
 - **Styling:** CSS-in-JS using Emotion (`@emotion/react` and `@emotion/styled`)
 - **Networking:** WebRTC via the `peerjs` library (using their free public signaling server to broker initial connections).
+- **Routing:** Client-side SPA semantic routing via `react-router-dom`.
+- **Localization:** Multi-language support (EN, DE, FR, PT) via `react-i18next`.
 
 ## 3. Architecture: The Host/Guest Model
 
 Because there is no central server, the application relies on a "Host" and "Guest" topology.
 
-- **The Host:** The first user to initialize a session becomes the Host. Their browser holds the single source of truth for the room's state. The Host's automatically generated PeerJS ID acts as the "Room Code."
-- **The Guests:** Up to 11 additional team members join the session by entering the Host's Room Code. They establish a direct WebRTC data connection to the Host.
+- **The Host:** The first user to initialize a session becomes the Host. Their browser holds the single source of truth for the room's state. The Host is automatically routed to a permanent session URL (`/room/:roomId`).
+- **The Guests:** Up to 11 additional team members join the session by navigating to the Host's deep-linked URL. They establish a direct WebRTC data connection to the Host upon entry.
 - **Data Flow:** Guests send their actions (e.g., casting a vote) to the Host. The Host updates the master state and instantly broadcasts the updated state back to all connected Guests.
 
 ## 4. User Stories
@@ -48,9 +50,9 @@ The application relies on passing strict message payloads over PeerJS data chann
 
 The interface should be clean and split into two primary views.
 
-- **Lobby View:** A simple entry form containing inputs for "Name" and "Room Code" (optional). Leaving the Room Code blank and proceeding creates a new room as a Host.
+- **Lobby View:** A simple entry form containing inputs for "Name" and "Room Code" (conditionally hidden if accessed via a deep link). Leaving the Room Code blank and proceeding creates a new room as a Host.
 - **Estimation View:**
-- **Header:** Clearly displays the current Room Code (with a click-to-copy feature) alongside the "Reveal" and "Reset" controls.
+- **Header:** Clearly displays a dynamic "Share" menu (with native OS sharing and clipboard deep-link copying) alongside the "Reveal" and "Reset" controls.
 - **Voting Deck:** A grid of cards representing the voting scale. Emotion should be used to style active/selected states when a user clicks their choice.
 - **Team Roster:** A visual list of up to 12 participants.
 - _If votes are hidden:_ Show a neutral icon for pending votes and a checkmark for completed votes.
