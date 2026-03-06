@@ -8,7 +8,7 @@
     "poker": "P2P Planning Poker"
   },
   "lobby": {
-    "title": "Join Planning Session",
+    "title": "Join Session",
     "name": {
       "label": "Your Name",
       "placeholder": "Enter your display name (e.g. Alice)"
