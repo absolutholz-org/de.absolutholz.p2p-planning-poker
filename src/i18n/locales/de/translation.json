@@ -20,7 +20,8 @@
     "submit": {
       "join": "Raum beitreten",
       "create": "Raum erstellen"
-    }
+    },
+    "extra_text": "Keine Anmeldung erforderlich. P2P Poker ist ein serverloses Echtzeit-Schätzungstool, basierend auf WebRTC."
   },
   "room": {
     "header": {

@@ -41,63 +41,70 @@ export function LobbyForm() {
 
 	return (
 		<PageContainer>
-			<S.FormCard onSubmit={handleSubmit}>
-				<S.Title>{t('common.poker')}</S.Title>
-				<S.SubTitle>{t('lobby.title')}</S.SubTitle>
+			<S.ContentWrapper>
+				<S.FormCard onSubmit={handleSubmit}>
+					<S.Title>{t('common.poker')}</S.Title>
+					<S.SubTitle>{t('lobby.title')}</S.SubTitle>
 
-				{error && <S.ErrorMessage role="alert">{error}</S.ErrorMessage>}
+					{error && (
+						<S.ErrorMessage role="alert">{error}</S.ErrorMessage>
+					)}
 
-				<S.FieldLine>
-					<S.LabelRow>
-						<S.Label htmlFor="playerName">
-							<span aria-hidden="true">👤</span>{' '}
-							{t('lobby.name.label')}
-						</S.Label>
-					</S.LabelRow>
-					<S.Input
-						id="playerName"
-						type="text"
-						required
-						autoFocus
-						maxLength={25}
-						placeholder={t('lobby.name.placeholder')}
-						value={name}
-						onChange={(e) => setName(e.target.value)}
-					/>
-				</S.FieldLine>
-
-				{!roomId && (
 					<S.FieldLine>
 						<S.LabelRow>
-							<S.Label htmlFor="roomCode">
-								<span aria-hidden="true">🔑</span>{' '}
-								{t('lobby.roomCode.label')}
+							<S.Label htmlFor="playerName">
+								<span aria-hidden="true">👤</span>{' '}
+								{t('lobby.name.label')}
 							</S.Label>
-							<S.OptionalLabel>Optional</S.OptionalLabel>
 						</S.LabelRow>
 						<S.Input
-							id="roomCode"
+							id="playerName"
 							type="text"
-							placeholder={t('lobby.roomCode.placeholder')}
-							value={roomCode}
-							onChange={(e) => setRoomCode(e.target.value)}
+							required
+							autoFocus
+							maxLength={25}
+							placeholder={t('lobby.name.placeholder')}
+							value={name}
+							onChange={(e) => setName(e.target.value)}
 						/>
 					</S.FieldLine>
-				)}
 
-				<S.Footer>
-					<Button
-						type="submit"
-						disabled={!name.trim() || isSubmitting}
-					>
-						{isSubmitting
-							? 'Connecting...'
-							: roomCode.trim()
-								? `${t('lobby.submit.join')} ➔`
-								: `${t('lobby.submit.create')} ➔`}
-					</Button>
-				</S.Footer>
-			</S.FormCard>
+					{!roomId && (
+						<S.FieldLine>
+							<S.LabelRow>
+								<S.Label htmlFor="roomCode">
+									<span aria-hidden="true">🔑</span>{' '}
+									{t('lobby.roomCode.label')}
+								</S.Label>
+								<S.OptionalLabel>Optional</S.OptionalLabel>
+							</S.LabelRow>
+							<S.Input
+								id="roomCode"
+								type="text"
+								placeholder={t('lobby.roomCode.placeholder')}
+								value={roomCode}
+								onChange={(e) => setRoomCode(e.target.value)}
+							/>
+						</S.FieldLine>
+					)}
+
+					<S.Footer>
+						<Button
+							type="submit"
+							disabled={!name.trim() || isSubmitting}
+						>
+							{isSubmitting
+								? 'Connecting...'
+								: roomCode.trim()
+									? `${t('lobby.submit.join')} ➔`
+									: `${t('lobby.submit.create')} ➔`}
+						</Button>
+					</S.Footer>
+				</S.FormCard>
+				<S.ExtraText>
+					<p>{t('lobby.extra_text')}</p>
+				</S.ExtraText>
+			</S.ContentWrapper>
 		</PageContainer>
 	);
 }

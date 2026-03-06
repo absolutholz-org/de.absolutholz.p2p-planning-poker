@@ -1,14 +1,18 @@
 import styled from '@emotion/styled';
 
+export const ContentWrapper = styled.div`
+	margin-inline: auto;
+	margin-top: var(--sys-spacing-xl);
+	max-width: 30rem;
+`;
+
 export const FormCard = styled.form`
 	background-color: var(--sys-color-surface);
+	border: 1px solid var(--sys-color-border);
 	border-radius: var(--sys-radius-xxl);
 	box-shadow:
 		0 10px 15px -3px rgba(0, 0, 0, 0.1),
 		0 4px 6px -2px rgba(0, 0, 0, 0.05);
-	margin-inline: auto;
-	margin-top: var(--sys-spacing-xl);
-	max-width: 30rem;
 	padding: var(--sys-spacing-xl);
 	width: 100%;
 `;
@@ -16,7 +20,7 @@ export const FormCard = styled.form`
 export const Title = styled.h1`
 	color: var(--sys-color-text-primary);
 	font-size: var(--sys-font-size-2xl);
-	font-weight: 700;
+	font-weight: 600;
 	margin-bottom: var(--sys-spacing-sm);
 `;
 
@@ -24,18 +28,18 @@ export const SubTitle = styled.p`
 	color: var(--sys-color-text-secondary);
 	font-size: var(--sys-font-size-sm);
 	line-height: 1.5;
-	margin-bottom: var(--sys-spacing-lg);
+	margin-bottom: var(--sys-spacing-xl);
 `;
 
 export const FieldLine = styled.div`
-	margin-top: var(--sys-spacing-lg);
+	margin-top: var(--sys-spacing-md);
 `;
 
 export const LabelRow = styled.div`
 	align-items: center;
 	display: flex;
 	justify-content: space-between;
-	margin-bottom: var(--sys-spacing-xs);
+	margin-bottom: var(--sys-spacing-sm);
 `;
 
 export const Label = styled.label`
@@ -92,4 +96,12 @@ export const Footer = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin-top: var(--sys-spacing-lg);
+`;
+
+export const ExtraText = styled.div`
+	color: var(--sys-color-text-secondary);
+	font-size: var(--sys-font-size-xs);
+	margin-top: var(--sys-spacing-xl);
+	padding-inline: var(--sys-spacing-xl);
+	text-align: center;
 `;
