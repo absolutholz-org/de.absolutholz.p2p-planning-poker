@@ -5,8 +5,6 @@ export const SubHeaderContainer = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	padding: var(--sys-spacing-xl) 0;
-	margin: 0 auto;
-	max-width: 1200px;
 	width: 100%;
 
 	@media (max-width: 600px) {

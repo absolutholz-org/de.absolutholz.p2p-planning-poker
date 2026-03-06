@@ -8,6 +8,7 @@ import { RoomHeader } from './components/Room/RoomHeader';
 import { Roster } from './components/Room/Roster';
 import { VotingDeck } from './components/Room/VotingDeck';
 import { Header } from './components/Shared/Header';
+import { PageContainer } from './components/Shared/PageContainer';
 import { ShareContent } from './components/Shared/ShareDialog';
 import { RoomProvider, useRoom } from './context/RoomContext';
 import { globalStyles } from './theme/GlobalStyles';
@@ -19,14 +20,13 @@ const RoomLayout = styled.div`
 	width: 100%;
 `;
 
-const RoomContent = styled.main`
+const RoomContent = styled(PageContainer)`
 	display: flex;
 	flex: 1;
 	overflow: hidden;
 	gap: var(--sys-spacing-xl);
-	padding: var(--sys-spacing-lg);
-	max-width: 1600px;
-	margin: 0 auto;
+	padding-top: var(--sys-spacing-lg);
+	padding-bottom: var(--sys-spacing-lg);
 	width: 100%;
 
 	@media (max-width: 1024px) {
