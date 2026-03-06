@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
 
 import { useRoom } from '../../../context/RoomContext';
-import { Card } from '../../Shared/Card';
 import * as S from './_Roster.styles';
+import { Participant } from './Participant';
 
 export function Roster() {
 	const { t } = useTranslation();
@@ -26,42 +26,11 @@ export function Roster() {
 
 			<S.ParticipantGrid>
 				{roomState.users.map((user) => (
-					<S.ParticipantSlot
+					<Participant
 						key={user.id}
-						data-connected={user.isConnected}
-						data-empty={!user.vote}
-					>
-						<S.ParticipantInfo>
-							<S.Name title={user.name}>
-								{user.name} {user.isHost && '👑'}
-							</S.Name>
-							<S.StatusText>
-								{user.vote
-									? t('room.roster.status.ready', 'Ready')
-									: t(
-											'room.roster.status.thinking',
-											'Thinking...',
-										)}
-							</S.StatusText>
-							{!user.isConnected && (
-								<S.DisconnectedBadge>
-									{t('room.roster.disconnected')}
-								</S.DisconnectedBadge>
-							)}
-						</S.ParticipantInfo>
-
-						<S.ParticipantAction>
-							{user.vote ? (
-								<Card
-									value={user.vote}
-									isHidden={!roomState.isRevealed}
-									tabIndex={-1} // Not interactive
-								/>
-							) : (
-								<S.EmptyStatusCircle />
-							)}
-						</S.ParticipantAction>
-					</S.ParticipantSlot>
+						user={user}
+						isRevealed={roomState.isRevealed}
+					/>
 				))}
 			</S.ParticipantGrid>
 		</S.RosterContainer>
