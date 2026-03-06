@@ -63,6 +63,9 @@ export const globalStyles = css`
 		--sys-font-size-2xl: 1.5rem; /* 24px */
 		--sys-font-size-3xl: 2.25rem; /* 36px */
 
+		--page-content-padding: var(--sys-spacing-md);
+		--page-content-max-width: 52rem;
+
 		font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 		line-height: 1.5;
 		font-weight: 400;
@@ -77,6 +80,10 @@ export const globalStyles = css`
 		text-rendering: optimizeLegibility;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
+
+		@media screen and (min-width: 768px) {
+			--page-content-padding: var(--sys-spacing-lg);
+		}
 
 		${mapThemeToVariables(lightTheme)}
 	}
