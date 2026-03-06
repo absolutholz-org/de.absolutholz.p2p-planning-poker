@@ -1,4 +1,5 @@
-import { Global } from '@emotion/react';
+import createCache from '@emotion/cache';
+import { CacheProvider, Global } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
@@ -12,6 +13,12 @@ import { PageContainer } from './components/Shared/PageContainer';
 import { ShareContent } from './components/Shared/ShareDialog';
 import { RoomProvider, useRoom } from './context/RoomContext';
 import { globalStyles } from './theme/GlobalStyles';
+
+// Disable standard Emotion vendor prefixes because modern browsers don't need them
+const emotionCache = createCache({
+	key: 'css',
+	stylisPlugins: [],
+});
 
 const RoomLayout = styled.div`
 	display: flex;
@@ -94,10 +101,12 @@ function AppContent() {
 
 function App() {
 	return (
-		<RoomProvider>
-			<Global styles={globalStyles} />
-			<AppContent />
-		</RoomProvider>
+		<CacheProvider value={emotionCache}>
+			<RoomProvider>
+				<Global styles={globalStyles} />
+				<AppContent />
+			</RoomProvider>
+		</CacheProvider>
 	);
 }
 
