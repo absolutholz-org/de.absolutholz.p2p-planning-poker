@@ -15,14 +15,6 @@ export const SubHeaderContainer = styled.div`
 	}
 `;
 
-export const ShareWrapper = styled.div`
-	position: relative;
-
-	@media (min-width: 1024px) {
-		display: none;
-	}
-`;
-
 export const Toast = styled.div`
 	position: fixed;
 	bottom: var(--sys-spacing-xl);

@@ -10,7 +10,6 @@ import { Roster } from './components/Room/Roster';
 import { VotingDeck } from './components/Room/VotingDeck';
 import { Header } from './components/Shared/Header';
 import { PageContainer } from './components/Shared/PageContainer';
-import { ShareContent } from './components/Shared/ShareDialog';
 import { RoomProvider, useRoom } from './context/RoomContext';
 import { globalStyles } from './theme/GlobalStyles';
 
@@ -42,18 +41,6 @@ const RoomContent = styled(PageContainer)`
 	}
 `;
 
-const DesktopSidebar = styled.aside`
-	display: none;
-
-	@media (min-width: 1024px) {
-		display: flex;
-		flex-direction: column;
-		gap: var(--sys-spacing-lg);
-		width: 380px;
-		flex-shrink: 0;
-	}
-`;
-
 function RoomView() {
 	const { roomState } = useRoom();
 
@@ -66,10 +53,7 @@ function RoomView() {
 			<RoomHeader />
 			<RoomContent>
 				<VotingDeck />
-				<DesktopSidebar>
-					<ShareContent roomId={roomState.roomId} />
-					<Roster />
-				</DesktopSidebar>
+				<Roster />
 			</RoomContent>
 		</RoomLayout>
 	);

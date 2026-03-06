@@ -25,17 +25,14 @@ export function RoomHeader() {
 		<>
 			<PageContainer>
 				<S.SubHeaderContainer>
-					{/* Mobile: Show "Share" button, Tablet+: Show Dialog Inline inline components later, for now just button */}
-					<S.ShareWrapper>
-						<Button
-							variant="secondary"
-							onClick={() => setIsShareOpen(true)}
-							aria-expanded={isShareOpen}
-							aria-label={t('room.header.share.aria_open')}
-						>
-							{t('room.header.share.button')}
-						</Button>
-					</S.ShareWrapper>
+					<Button
+						variant="secondary"
+						onClick={() => setIsShareOpen(true)}
+						aria-expanded={isShareOpen}
+						aria-label={t('room.header.share.aria_open')}
+					>
+						{t('room.header.share.button')}
+					</Button>
 
 					<S.Actions>
 						<Button
