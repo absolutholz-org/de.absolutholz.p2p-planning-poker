@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { PageContainer } from './_PageContainer';
+import { PageContainer } from '.';
 
 const meta = {
 	component: PageContainer,
