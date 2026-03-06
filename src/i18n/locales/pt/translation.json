@@ -9,6 +9,7 @@
   },
   "lobby": {
     "title": "Entrar na Sessão",
+    "subtitle": "Insira seus dados para entrar em uma sala de planning poker ou crie uma nova sessão se nenhum código for fornecido.",
     "name": {
       "label": "Seu Nome",
       "placeholder": "Digite seu nome de exibição (ex. Alice)"

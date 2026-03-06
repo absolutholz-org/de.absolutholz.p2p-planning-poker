@@ -9,6 +9,7 @@
   },
   "lobby": {
     "title": "Rejoindre la Session",
+    "subtitle": "Saisissez vos informations pour rejoindre une salle de planning poker ou créez une nouvelle session si aucun code n'est fourni.",
     "name": {
       "label": "Votre Nom",
       "placeholder": "Saisissez votre pseudo (ex. Alice)"

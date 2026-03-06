@@ -43,8 +43,8 @@ export function LobbyForm() {
 		<PageContainer>
 			<S.ContentWrapper>
 				<S.FormCard onSubmit={handleSubmit}>
-					<S.Title>{t('common.poker')}</S.Title>
-					<S.SubTitle>{t('lobby.title')}</S.SubTitle>
+					<S.Title>{t('lobby.title')}</S.Title>
+					<S.SubTitle>{t('lobby.subtitle')}</S.SubTitle>
 
 					{error && (
 						<S.ErrorMessage role="alert">{error}</S.ErrorMessage>

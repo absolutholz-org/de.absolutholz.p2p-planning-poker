@@ -9,6 +9,7 @@
   },
   "lobby": {
     "title": "Session beitreten",
+    "subtitle": "Gib deine Daten ein, um einem Planning-Poker-Raum beizutreten, oder erstelle eine neue Session, falls kein Code angegeben wird.",
     "name": {
       "label": "Dein Name",
       "placeholder": "Gib deinen Anzeigenamen ein (z.B. Alice)"
