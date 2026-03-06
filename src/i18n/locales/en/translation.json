@@ -9,6 +9,7 @@
   },
   "lobby": {
     "title": "Join Session",
+    "subtitle": "Enter your details to join a planning poker room or create a new session if no code is provided.",
     "name": {
       "label": "Your Name",
       "placeholder": "Enter your display name (e.g. Alice)"
