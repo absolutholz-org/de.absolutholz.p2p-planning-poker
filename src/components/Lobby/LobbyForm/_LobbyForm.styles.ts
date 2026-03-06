@@ -1,20 +1,13 @@
 import styled from '@emotion/styled';
 
-export const Container = styled.div`
-	align-items: center;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	min-height: calc(100vh - 80px); /* Account for global header */
-	padding: var(--sys-spacing-md) 0;
-`;
-
 export const FormCard = styled.form`
 	background-color: var(--sys-color-surface);
 	border-radius: var(--sys-radius-xxl);
 	box-shadow:
 		0 10px 15px -3px rgba(0, 0, 0, 0.1),
 		0 4px 6px -2px rgba(0, 0, 0, 0.05);
+	margin-inline: auto;
+	margin-top: var(--sys-spacing-xl);
 	max-width: 30rem;
 	padding: var(--sys-spacing-xl);
 	width: 100%;
