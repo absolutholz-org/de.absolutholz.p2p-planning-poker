@@ -60,7 +60,7 @@
       "title": "Liste de l'Équipe ({{count}}/{{max}})",
       "revealed_badge": "Votes Révélés !",
       "disconnected": "Déconnecté",
-      "host_badge": "👑",
+      "you": "vous",
       "aria": {
         "label": "Liste de l'équipe",
         "not_voted": "{{name}} n'a pas encore voté"

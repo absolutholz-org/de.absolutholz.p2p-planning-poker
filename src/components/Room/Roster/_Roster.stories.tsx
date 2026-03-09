@@ -84,3 +84,69 @@ export const RevealedVotes: Story = {
 		mockRevealed: true,
 	},
 };
+
+export const FullRoom: Story = {
+	decorators: [
+		(Story) => {
+			const fullUsers = Array.from({ length: 12 }).map((_, i) => ({
+				id: String(i + 1),
+				isConnected: true,
+				isHost: i === 0,
+				name: `Player ${i + 1}`,
+				vote: '5' as const,
+			}));
+
+			return (
+				<RoomContext.Provider
+					value={{
+						castVote: () => {},
+						error: null,
+						initGuest: () => {},
+						initHost: () => {},
+						leaveRoom: () => {},
+						localUserId: '2',
+						resetBoard: () => {},
+						revealVotes: () => {},
+						roomState: { ...MOCK_ROOM_STATE, users: fullUsers },
+					}}
+				>
+					<Story />
+				</RoomContext.Provider>
+			);
+		},
+	],
+};
+
+export const JustHost: Story = {
+	decorators: [
+		(Story) => {
+			const hostUser = [
+				{
+					id: '1',
+					isConnected: true,
+					isHost: true,
+					name: 'Alice (Host)',
+					vote: null,
+				},
+			];
+
+			return (
+				<RoomContext.Provider
+					value={{
+						castVote: () => {},
+						error: null,
+						initGuest: () => {},
+						initHost: () => {},
+						leaveRoom: () => {},
+						localUserId: '1',
+						resetBoard: () => {},
+						revealVotes: () => {},
+						roomState: { ...MOCK_ROOM_STATE, users: hostUser },
+					}}
+				>
+					<Story />
+				</RoomContext.Provider>
+			);
+		},
+	],
+};

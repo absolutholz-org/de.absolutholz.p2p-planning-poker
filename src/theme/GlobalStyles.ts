@@ -41,6 +41,7 @@ export const globalStyles = css`
 		/* System Spacing */
 		--sys-spacing-xs: 4px;
 		--sys-spacing-sm: 8px;
+		--sys-spacing-sm-md: 12px;
 		--sys-spacing-md: 16px;
 		--sys-spacing-lg: 24px;
 		--sys-spacing-xl: 32px;

@@ -62,7 +62,7 @@ export function LobbyForm() {
 							type="text"
 							required
 							autoFocus
-							maxLength={25}
+							maxLength={16}
 							placeholder={t('lobby.name.placeholder')}
 							value={name}
 							onChange={(e) => setName(e.target.value)}

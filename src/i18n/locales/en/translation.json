@@ -62,7 +62,7 @@
       "title": "Team Roster ({{count}}/{{max}})",
       "revealed_badge": "Votes Revealed!",
       "disconnected": "Disconnected",
-      "host_badge": "👑",
+      "you": "you",
       "aria": {
         "label": "Team roster",
         "not_voted": "{{name}} has not voted yet"

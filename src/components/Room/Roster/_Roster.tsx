@@ -2,11 +2,11 @@ import { useTranslation } from 'react-i18next';
 
 import { useRoom } from '../../../context/RoomContext';
 import * as S from './_Roster.styles';
-import { Participant } from './Participant';
+import { ParticipantConnected } from './Participant/ParticipantConnected';
 
 export function Roster() {
 	const { t } = useTranslation();
-	const { roomState } = useRoom();
+	const { localUserId, roomState } = useRoom();
 
 	if (!roomState) return null;
 
@@ -18,7 +18,7 @@ export function Roster() {
 			<S.SectionTitle>
 				<span>{t('room.roster.title_label', 'TEAM ROSTER')}</span>
 				<S.VoteCountBadge>
-					{roomState.users.filter((u) => u.vote).length} /{' '}
+					{roomState.users.filter((u) => u.vote !== null).length} /{' '}
 					{roomState.users.length}{' '}
 					{t('room.roster.voted_label', 'Voted')}
 				</S.VoteCountBadge>
@@ -26,10 +26,18 @@ export function Roster() {
 
 			<S.ParticipantGrid>
 				{roomState.users.map((user) => (
-					<Participant
+					<ParticipantConnected
 						key={user.id}
-						user={user}
+						isHost={user.isHost}
+						isMe={user.id === localUserId}
 						isRevealed={roomState.isRevealed}
+						isConnected={user.isConnected}
+						vote={user.vote}
+						name={user.name}
+						readyText={t('room.roster.status.ready')}
+						thinkingText={t('room.roster.status.thinking')}
+						disconnectedText={t('room.roster.disconnected')}
+						youText={t('room.roster.you')}
 					/>
 				))}
 			</S.ParticipantGrid>
