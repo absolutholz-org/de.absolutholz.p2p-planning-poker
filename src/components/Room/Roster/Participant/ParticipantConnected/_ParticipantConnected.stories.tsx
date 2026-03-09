@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { ParticipantConnected } from './_ParticipantConnected';
+import { ParticipantConnected } from '.';
 
 const meta = {
 	component: ParticipantConnected,
@@ -23,77 +23,77 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	args: {
+		disconnectedText: 'test',
+		isConnected: true,
 		isHost: false,
 		isMe: false,
 		isRevealed: false,
 		name: 'Alice',
-		status: 'thinking',
+		readyText: 'test',
+		thinkingText: 'test',
 		vote: null,
+		youText: 'test',
 	},
 };
 
 export const Ready: Story = {
 	args: {
-		isHost: false,
-		isMe: false,
-		isRevealed: false,
-		name: 'Alice',
-		status: 'ready',
+		...Default.args,
 		vote: '5',
 	},
 };
 
 export const Revealed: Story = {
 	args: {
+		...Default.args,
 		isHost: false,
 		isMe: false,
 		isRevealed: true,
 		name: 'Alice',
-		status: 'ready',
 		vote: '5',
 	},
 };
 
 export const IsHost: Story = {
 	args: {
+		...Default.args,
 		isHost: true,
 		isMe: false,
 		isRevealed: false,
 		name: 'Bob',
-		status: 'thinking',
 		vote: null,
 	},
 };
 
 export const IsMe: Story = {
 	args: {
+		...Default.args,
 		isHost: false,
 		isMe: true,
 		isRevealed: false,
 		name: 'Charlie',
-		status: 'thinking',
 		vote: null,
 	},
 };
 
 export const Disconnected: Story = {
 	args: {
+		...Default.args,
 		isHost: false,
 		isMe: false,
 		isRevealed: false,
 		name: 'Dave',
-		status: 'disconnected',
 		vote: null,
 	},
 };
 
 export const DisconnectedWithVote: Story = {
 	args: {
+		...Default.args,
 		isHost: false,
 		isMe: false,
 		isRevealed: true,
 		name: 'Dave',
-		status: 'disconnected',
 		vote: '13',
 	},
 };
