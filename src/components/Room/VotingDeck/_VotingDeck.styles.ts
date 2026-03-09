@@ -1,25 +1,22 @@
 import styled from '@emotion/styled';
 
-export const DeckContainer = styled.section`
-	padding: var(--sys-spacing-xl) 0;
-	margin-top: var(--sys-spacing-xl);
-`;
+export const DeckContainer = styled.section``;
 
 export const SectionTitle = styled.h2`
-	font-size: var(--sys-font-size-xs);
-	letter-spacing: 0.05em;
-	text-transform: uppercase;
 	color: var(--sys-color-text-secondary);
+	font-size: var(--sys-font-size-xs);
+	font-weight: 700;
+	letter-spacing: 0.05em;
 	margin-bottom: var(--sys-spacing-xl);
 	text-align: center;
-	font-weight: 700;
+	text-transform: uppercase;
 `;
 
 export const Grid = styled.div`
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
 	gap: var(--sys-spacing-md);
-	max-width: 400px; /* Constrain tightly to force the 4-4-1 wrapping cleanly */
+	justify-content: center;
 	margin: 0 auto;
+	max-width: 25rem; /* Constrain tightly to force the 4-4-1 wrapping cleanly */
 `;

@@ -19,25 +19,24 @@ const emotionCache = createCache({
 	stylisPlugins: [],
 });
 
-const RoomLayout = styled.div`
-	display: flex;
-	flex-direction: column;
-	height: 100vh;
-	width: 100%;
-`;
+const LAYOUT_BREAKPOINT = '45rem';
+
+const RoomLayout = styled.div``;
 
 const RoomContent = styled(PageContainer)`
-	display: flex;
-	flex: 1;
-	overflow: hidden;
-	gap: var(--sys-spacing-xl);
-	padding-top: var(--sys-spacing-lg);
-	padding-bottom: var(--sys-spacing-lg);
-	width: 100%;
+	@media (min-width: ${LAYOUT_BREAKPOINT}) {
+		display: grid;
+		gap: var(--sys-spacing-xxl);
+		grid-template-columns: 1fr auto;
+	}
+`;
 
-	@media (max-width: 1024px) {
-		flex-direction: column;
-		overflow-y: auto;
+const Divider = styled.div`
+	border-top: 1px solid var(--sys-color-border);
+	margin-block: var(--sys-spacing-xl);
+
+	@media (min-width: ${LAYOUT_BREAKPOINT}) {
+		display: none;
 	}
 `;
 
@@ -53,6 +52,7 @@ function RoomView() {
 			<RoomHeader />
 			<RoomContent>
 				<VotingDeck />
+				<Divider />
 				<Roster />
 			</RoomContent>
 		</RoomLayout>

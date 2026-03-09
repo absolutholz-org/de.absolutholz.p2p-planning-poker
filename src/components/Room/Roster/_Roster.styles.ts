@@ -1,10 +1,8 @@
 import styled from '@emotion/styled';
 
 export const RosterContainer = styled.section`
-	max-width: 800px;
-	margin: 0 auto;
-	padding: var(--sys-spacing-xl) 0;
-	border-top: 1px solid var(--sys-color-border);
+	// margin-inline: auto;
+	// max-width: 800px;
 `;
 
 export const SectionTitle = styled.h2`

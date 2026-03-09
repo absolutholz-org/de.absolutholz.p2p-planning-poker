@@ -16,21 +16,21 @@ export const SubHeaderContainer = styled.div`
 `;
 
 export const Toast = styled.div`
-	position: fixed;
-	bottom: var(--sys-spacing-xl);
-	left: 50%;
-	transform: translateX(-50%);
-	background: var(--sys-color-text-primary);
-	color: var(--sys-color-bg);
-	padding: var(--sys-spacing-md) var(--sys-spacing-lg);
-	border-radius: var(--sys-radius-pill);
-	font-size: var(--sys-font-size-sm);
-	font-weight: 500;
-	z-index: 50;
-	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 	animation:
 		fadein 0.3s,
 		fadeout 0.3s 2.5s forwards;
+	background: var(--sys-color-text-primary);
+	border-radius: var(--sys-radius-pill);
+	bottom: var(--sys-spacing-xl);
+	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+	color: var(--sys-color-bg);
+	font-size: var(--sys-font-size-sm);
+	font-weight: 500;
+	left: 50%;
+	padding: var(--sys-spacing-md) var(--sys-spacing-lg);
+	position: fixed;
+	transform: translateX(-50%);
+	z-index: 50;
 
 	@keyframes fadein {
 		from {
