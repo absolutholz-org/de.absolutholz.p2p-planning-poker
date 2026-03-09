@@ -57,9 +57,12 @@
       "aria_label": "Baralho de votação"
     },
     "roster": {
-      "title": "Lista da Equipe ({{count}}/{{max}})",
+      "title": "Lista da Equipe",
       "revealed_badge": "Votos Revelados!",
       "disconnected": "Desconectado",
+      "ready": "Pronto",
+      "thinking": "Pensando...",
+      "voted_label": "Votado",
       "you": "tu",
       "aria": {
         "label": "Lista da Equipe",

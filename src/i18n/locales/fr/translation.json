@@ -57,9 +57,12 @@
       "aria_label": "Paquet de votes"
     },
     "roster": {
-      "title": "Liste de l'Équipe ({{count}}/{{max}})",
+      "title": "Liste de l'Équipe",
       "revealed_badge": "Votes Révélés !",
       "disconnected": "Déconnecté",
+      "ready": "Prêt",
+      "thinking": "En train de réfléchir...",
+      "voted_label": "Voté",
       "you": "vous",
       "aria": {
         "label": "Liste de l'équipe",

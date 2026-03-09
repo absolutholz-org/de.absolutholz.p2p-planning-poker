@@ -57,9 +57,12 @@
       "aria_label": "Voting-Deck"
     },
     "roster": {
-      "title": "Team-Liste ({{count}}/{{max}})",
+      "title": "Team-Liste",
       "revealed_badge": "Votes aufgedeckt!",
       "disconnected": "Getrennt",
+      "ready": "Bereit",
+      "thinking": "Denken...",
+      "voted_label": "Gestimmt",
       "you": "Sie",
       "aria": {
         "label": "Team-Liste",

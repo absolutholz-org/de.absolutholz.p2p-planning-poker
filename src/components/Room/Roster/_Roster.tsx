@@ -16,11 +16,10 @@ export function Roster() {
 			aria-live="polite"
 		>
 			<S.SectionTitle>
-				<span>{t('room.roster.title_label', 'TEAM ROSTER')}</span>
+				<span>{t('room.roster.title')}</span>
 				<S.VoteCountBadge>
 					{roomState.users.filter((u) => u.vote !== null).length} /{' '}
-					{roomState.users.length}{' '}
-					{t('room.roster.voted_label', 'Voted')}
+					{roomState.users.length} {t('room.roster.voted_label')}
 				</S.VoteCountBadge>
 			</S.SectionTitle>
 
@@ -34,8 +33,8 @@ export function Roster() {
 						isConnected={user.isConnected}
 						vote={user.vote}
 						name={user.name}
-						readyText={t('room.roster.status.ready')}
-						thinkingText={t('room.roster.status.thinking')}
+						readyText={t('room.roster.ready')}
+						thinkingText={t('room.roster.thinking')}
 						disconnectedText={t('room.roster.disconnected')}
 						youText={t('room.roster.you')}
 					/>

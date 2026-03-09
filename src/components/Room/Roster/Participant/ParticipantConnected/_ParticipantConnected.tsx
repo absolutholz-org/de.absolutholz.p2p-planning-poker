@@ -22,7 +22,9 @@ export function ParticipantConnected({
 					)}
 					{name}{' '}
 					{isMe && (
-						<S.Participant_MeBadge>{youText}</S.Participant_MeBadge>
+						<S.Participant_MeBadge>
+							({youText})
+						</S.Participant_MeBadge>
 					)}
 				</>
 				{!isConnected ? (

@@ -71,6 +71,7 @@ export function RoomHeader() {
 				message={t('room.header.reset_dialog.message')}
 				confirmText={t('room.header.reset_dialog.confirm')}
 				onConfirm={handleReset}
+				cancelText={t('common.actions.cancel')}
 				onCancel={() => setIsResetDialogOpen(false)}
 			/>
 		</>

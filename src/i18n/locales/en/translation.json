@@ -59,8 +59,11 @@
       "aria_label": "Voting deck"
     },
     "roster": {
-      "title": "Team Roster ({{count}}/{{max}})",
+      "title": "Team Roster",
       "revealed_badge": "Votes Revealed!",
+      "ready": "Ready",
+      "thinking": "Thinking...",
+      "voted_label": "Voted",
       "disconnected": "Disconnected",
       "you": "you",
       "aria": {
