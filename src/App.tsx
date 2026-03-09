@@ -8,6 +8,7 @@ import { LobbyForm } from './components/Lobby/LobbyForm';
 import { RoomHeader } from './components/Room/RoomHeader';
 import { Roster } from './components/Room/Roster';
 import { VotingDeck } from './components/Room/VotingDeck';
+import { Divider } from './components/Shared/Divider';
 import { Header } from './components/Shared/Header';
 import { PageContainer } from './components/Shared/PageContainer';
 import { RoomProvider, useRoom } from './context/RoomContext';
@@ -31,15 +32,6 @@ const RoomContent = styled(PageContainer)`
 	}
 `;
 
-const Divider = styled.div`
-	border-top: 1px solid var(--sys-color-border);
-	margin-block: var(--sys-spacing-xl);
-
-	@media (min-width: ${LAYOUT_BREAKPOINT}) {
-		display: none;
-	}
-`;
-
 function RoomView() {
 	const { roomState } = useRoom();
 
@@ -52,7 +44,7 @@ function RoomView() {
 			<RoomHeader />
 			<RoomContent>
 				<VotingDeck />
-				<Divider />
+				<Divider hideOnDesktop />
 				<Roster />
 			</RoomContent>
 		</RoomLayout>
