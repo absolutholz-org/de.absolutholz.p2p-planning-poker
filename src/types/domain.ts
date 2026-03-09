@@ -1,14 +1,7 @@
-export type VoteValue =
-	| '1'
-	| '2'
-	| '3'
-	| '5'
-	| '8'
-	| '13'
-	| '21'
-	| '☕️'
-	| '?'
-	| null;
+import { type FIBONACCI_SCALE } from '../constants/domain';
+
+type BaseVoteValue = (typeof FIBONACCI_SCALE)[number];
+export type VoteValue = BaseVoteValue | null;
 
 export interface User {
 	id: string; // The PeerJS ID (and Room Code for the Host)

@@ -2,7 +2,7 @@ export interface DialogProps {
 	/**
 	 * Text for the cancel button.
 	 */
-	cancelText?: string;
+	cancelText: string;
 	/**
 	 * Text for the confirm button.
 	 */
@@ -26,7 +26,7 @@ export interface DialogProps {
 	/**
 	 * Callback fired when the confirm button is clicked.
 	 */
-	onConfirm: () => void;
+	onConfirm?: () => void;
 	/**
 	 * The main heading of the dialog.
 	 */

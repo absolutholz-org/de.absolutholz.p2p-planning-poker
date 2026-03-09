@@ -1,21 +1,9 @@
 import { useTranslation } from 'react-i18next';
 
+import { FIBONACCI_SCALE } from '../../../constants/domain';
 import { useRoom } from '../../../context/RoomContext';
-import type { VoteValue } from '../../../types/domain';
 import { Card } from '../../Shared/Card';
 import * as S from './_VotingDeck.styles';
-
-const FIBONACCI_SCALE: VoteValue[] = [
-	'1',
-	'2',
-	'3',
-	'5',
-	'8',
-	'13',
-	'21',
-	'☕️',
-	'?',
-];
 
 export function VotingDeck() {
 	const { t } = useTranslation();

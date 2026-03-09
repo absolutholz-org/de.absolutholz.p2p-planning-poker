@@ -60,12 +60,16 @@ export function Dialog({
 				</S.DialogContent>
 
 				<S.DialogFooter>
-					<Button variant="secondary" onClick={onCancel}>
-						{cancelText || t('common.actions.cancel')}
-					</Button>
-					<Button variant="danger" onClick={onConfirm}>
-						{confirmText || t('common.actions.reset')}
-					</Button>
+					{onCancel && cancelText && (
+						<Button variant="secondary" onClick={onCancel}>
+							{cancelText}
+						</Button>
+					)}
+					{onConfirm && confirmText && (
+						<Button variant="danger" onClick={onConfirm}>
+							{confirmText}
+						</Button>
+					)}
 				</S.DialogFooter>
 			</S.DialogContainer>
 		</S.DialogBase>

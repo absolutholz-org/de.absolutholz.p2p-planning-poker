@@ -112,7 +112,6 @@ export function ShareDialog({ isOpen, onClose, roomId }: ShareDialogProps) {
 		<Dialog
 			isOpen={isOpen}
 			onCancel={onClose}
-			onConfirm={onClose} // Not used but required by Dialog API
 			title={t('room.header.share.dialog_title')}
 			cancelText={t('common.actions.cancel')}
 		>
