@@ -7,24 +7,33 @@ const MAX_PEERS = 12;
 
 export type ConnectionStatus = 'idle' | 'connecting' | 'connected' | 'error';
 
-// Free, public STUN servers and open relay TURN server for strict NATs
-const PEER_CONFIG = {
-	config: {
-		iceServers: [
-			{ urls: 'stun:stun.l.google.com:19302' },
-			{ urls: 'stun:stun1.l.google.com:19302' },
-			{ urls: 'stun:stun2.l.google.com:19302' },
-			{
-				credential: 'openrelayproject',
-				urls: [
-					// Force TCP on port 443 for TURN to instantly bypass corporate UDP blocking
-					'turn:openrelay.metered.ca:443?transport=tcp',
-				],
-				username: 'openrelayproject',
-			},
-		],
-	},
-	debug: 3, // MAXIMUM log verbosity for diagnostic tracking
+// Dynamically fetch TURN credentials from Metered.ca
+const fetchIceServers = async () => {
+	try {
+		const response = await fetch(
+			'https://planningpoker-absolutholz.metered.live/api/v1/turn/credentials?apiKey=fGwE2NHkMPXcdQtxE7YQ-LkFIvBLkBytjwHdYOCSii-g9lNf',
+		);
+		const iceServers = await response.json();
+		return iceServers;
+	} catch (error) {
+		console.error('Failed to fetch TURN credentials:', error);
+		return [];
+	}
+};
+
+const getPeerConfig = async () => {
+	const turnServers = await fetchIceServers();
+	return {
+		config: {
+			iceServers: [
+				{ urls: 'stun:stun.l.google.com:19302' },
+				{ urls: 'stun:stun1.l.google.com:19302' },
+				{ urls: 'stun:stun2.l.google.com:19302' },
+				...turnServers,
+			],
+		},
+		debug: 3, // MAXIMUM log verbosity for diagnostic tracking
+	};
 };
 
 interface UsePeerSessionReturn {
@@ -233,63 +242,70 @@ export function usePeerSession(): UsePeerSessionReturn {
 			setConnectionStatus('connecting');
 			setError(null);
 			isHostRef.current = true;
-			const peer = requestedPeerId
-				? new Peer(requestedPeerId, PEER_CONFIG)
-				: new Peer(PEER_CONFIG);
-			peerRef.current = peer;
-			setupPeerSignalingReconnection(peer);
 
-			peer.on('open', (id) => {
-				setLocalUserId(id);
-				// Host initializes the master state
-				const initialState: RoomState = restoredState || {
-					isRevealed: false,
-					roomId: id,
-					users: [
-						{
-							id,
-							isConnected: true,
-							isHost: true,
-							name,
-							vote: null,
-						},
-					],
-				};
+			getPeerConfig().then((peerConfig) => {
+				const peer = requestedPeerId
+					? new Peer(requestedPeerId, peerConfig)
+					: new Peer(peerConfig);
+				peerRef.current = peer;
+				setupPeerSignalingReconnection(peer);
 
-				setRoomState(initialState);
-				sessionStorage.setItem('p2p_role', 'host');
-				sessionStorage.setItem('p2p_room_id', id);
-				sessionStorage.setItem('p2p_name', name);
-				sessionStorage.setItem(
-					'p2p_room_state',
-					JSON.stringify(initialState),
-				);
-				setConnectionStatus('connected');
-			});
+				peer.on('open', (id) => {
+					setLocalUserId(id);
+					// Host initializes the master state
+					const initialState: RoomState = restoredState || {
+						isRevealed: false,
+						roomId: id,
+						users: [
+							{
+								id,
+								isConnected: true,
+								isHost: true,
+								name,
+								vote: null,
+							},
+						],
+					};
 
-			peer.on('connection', (conn) => {
-				console.log(`[Host] Incoming connection from ${conn.peer}...`);
-				if (connectionsRef.current.size >= MAX_PEERS - 1) {
-					// -1 because Host is 1 peer
-					console.warn('[Host] Room is full. Rejecting connection.');
-					setTimeout(() => conn.close(), 500);
-					return;
-				}
-				connectionsRef.current.set(conn.peer, conn);
-
-				conn.on('open', () => {
-					console.log(
-						`[Host] Connection established and open with ${conn.peer}`,
+					setRoomState(initialState);
+					sessionStorage.setItem('p2p_role', 'host');
+					sessionStorage.setItem('p2p_room_id', id);
+					sessionStorage.setItem('p2p_name', name);
+					sessionStorage.setItem(
+						'p2p_room_state',
+						JSON.stringify(initialState),
 					);
-					setupConnectionListeners(conn);
-					// We sync state immediately so the new guest gets the board,
-					// but they haven't "Joined" the roster yet. They will send JOIN_ROOM.
+					setConnectionStatus('connected');
 				});
-			});
 
-			peer.on('error', (err) => {
-				console.error('[Host] PeerJS Error:', err.type, err);
-				setError(`[${err.type}] ${err.message}`);
+				peer.on('connection', (conn) => {
+					console.log(
+						`[Host] Incoming connection from ${conn.peer}...`,
+					);
+					if (connectionsRef.current.size >= MAX_PEERS - 1) {
+						// -1 because Host is 1 peer
+						console.warn(
+							'[Host] Room is full. Rejecting connection.',
+						);
+						setTimeout(() => conn.close(), 500);
+						return;
+					}
+					connectionsRef.current.set(conn.peer, conn);
+
+					conn.on('open', () => {
+						console.log(
+							`[Host] Connection established and open with ${conn.peer}`,
+						);
+						setupConnectionListeners(conn);
+						// We sync state immediately so the new guest gets the board,
+						// but they haven't "Joined" the roster yet. They will send JOIN_ROOM.
+					});
+				});
+
+				peer.on('error', (err) => {
+					console.error('[Host] PeerJS Error:', err.type, err);
+					setError(`[${err.type}] ${err.message}`);
+				});
 			});
 		},
 		[setupConnectionListeners, setupPeerSignalingReconnection],
@@ -300,68 +316,74 @@ export function usePeerSession(): UsePeerSessionReturn {
 			setConnectionStatus('connecting');
 			setError(null);
 			isHostRef.current = false;
-			const peer = new Peer(PEER_CONFIG);
-			peerRef.current = peer;
-			setupPeerSignalingReconnection(peer);
 
-			peer.on('open', (id) => {
-				setLocalUserId(id);
+			getPeerConfig().then((peerConfig) => {
+				const peer = new Peer(peerConfig);
+				peerRef.current = peer;
+				setupPeerSignalingReconnection(peer);
 
-				// Ensure reliable data channel for better cross-device connection
-				console.log(`[Guest] Dialing host ${roomId}...`);
-				const conn = peer.connect(roomId, { reliable: true });
-				connectionsRef.current.set(roomId, conn);
+				peer.on('open', (id) => {
+					setLocalUserId(id);
 
-				// Probe the underlying WebRTC state if possible
-				if (conn.peerConnection) {
-					conn.peerConnection.addEventListener(
-						'iceconnectionstatechange',
-						() => {
-							console.log(
-								`[Guest] ICE State shifted to: ${conn.peerConnection.iceConnectionState}`,
-							);
-						},
-					);
-				}
+					// Ensure reliable data channel for better cross-device connection
+					console.log(`[Guest] Dialing host ${roomId}...`);
+					const conn = peer.connect(roomId, { reliable: true });
+					connectionsRef.current.set(roomId, conn);
 
-				sessionStorage.setItem('p2p_role', 'guest');
-				sessionStorage.setItem('p2p_room_id', roomId);
-				sessionStorage.setItem('p2p_name', name);
+					// Probe the underlying WebRTC state if possible
+					if (conn.peerConnection) {
+						conn.peerConnection.addEventListener(
+							'iceconnectionstatechange',
+							() => {
+								console.log(
+									`[Guest] ICE State shifted to: ${conn.peerConnection.iceConnectionState}`,
+								);
+							},
+						);
+					}
 
-				// Timeout if WebRTC gets stuck connecting
-				connectionTimeoutRef.current = setTimeout(() => {
-					console.error(
-						'[Guest] Hard timeout hit after 15s waiting for STUN/TURN.',
-					);
-					// Determine if the ICE connection even made progress
-					const iceState =
-						conn.peerConnection?.iceConnectionState || 'unknown';
+					sessionStorage.setItem('p2p_role', 'guest');
+					sessionStorage.setItem('p2p_room_id', roomId);
+					sessionStorage.setItem('p2p_name', name);
 
-					setError(
-						`Connection timeout (ICE state: ${iceState}). Strict firewall or symmetric NAT active.`,
-					);
-					setConnectionStatus('error');
-					peer.destroy();
-				}, 15000);
+					// Timeout if WebRTC gets stuck connecting
+					connectionTimeoutRef.current = setTimeout(() => {
+						console.error(
+							'[Guest] Hard timeout hit after 15s waiting for STUN/TURN.',
+						);
+						// Determine if the ICE connection even made progress
+						const iceState =
+							conn.peerConnection?.iceConnectionState ||
+							'unknown';
 
-				conn.on('open', () => {
-					console.log(`[Guest] Connection OPEN with host ${roomId}!`);
-					clearTimeout(connectionTimeoutRef.current);
-					setConnectionStatus('connected');
-					setupConnectionListeners(conn);
-					// Immediately announce presence to Host
-					conn.send({
-						payload: { name, peerId: id },
-						type: 'JOIN_ROOM',
-					} satisfies PeerMessage);
+						setError(
+							`Connection timeout (ICE state: ${iceState}). Strict firewall or symmetric NAT active.`,
+						);
+						setConnectionStatus('error');
+						peer.destroy();
+					}, 15000);
+
+					conn.on('open', () => {
+						console.log(
+							`[Guest] Connection OPEN with host ${roomId}!`,
+						);
+						clearTimeout(connectionTimeoutRef.current);
+						setConnectionStatus('connected');
+						setupConnectionListeners(conn);
+						// Immediately announce presence to Host
+						conn.send({
+							payload: { name, peerId: id },
+							type: 'JOIN_ROOM',
+						} satisfies PeerMessage);
+					});
 				});
-			});
 
-			peer.on('error', (err) => {
-				console.error('[Guest] PeerJS Error:', err.type, err);
-				clearTimeout(connectionTimeoutRef.current);
-				setError(`[${err.type}] ${err.message}`);
-				setConnectionStatus('error');
+				peer.on('error', (err) => {
+					console.error('[Guest] PeerJS Error:', err.type, err);
+					clearTimeout(connectionTimeoutRef.current);
+					setError(`[${err.type}] ${err.message}`);
+					setConnectionStatus('error');
+				});
 			});
 		},
 		[setupConnectionListeners, setupPeerSignalingReconnection],
