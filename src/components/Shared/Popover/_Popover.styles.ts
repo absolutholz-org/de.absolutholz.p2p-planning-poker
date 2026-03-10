@@ -15,7 +15,7 @@ export const PopoverContent = styled.div`
 	border: 1px solid var(--sys-color-border);
 	border-radius: var(--sys-radius-lg);
 	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-	min-width: 180px;
+	min-width: 11.25rem;
 
 	/* Top layer animation handling */
 	transition:
@@ -36,7 +36,7 @@ export const PopoverContent = styled.div`
 	@starting-style {
 		&:popover-open {
 			opacity: 0;
-			transform: translateY(-8px);
+			transform: translateY(-0.5rem);
 		}
 	}
 `;

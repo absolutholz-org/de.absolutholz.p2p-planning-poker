@@ -4,8 +4,8 @@ import type { ButtonVariant } from './_Button.types';
 
 export const Button = styled.button<{ 'data-variant': ButtonVariant }>`
 	/* A11Y requirement: 48px min touch target */
-	min-height: 48px;
-	min-width: 48px;
+	min-height: 3rem;
+	min-width: 3rem;
 
 	display: inline-flex;
 	align-items: center;

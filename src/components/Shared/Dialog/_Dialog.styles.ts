@@ -8,7 +8,7 @@ export const fadeIn = keyframes`
 `;
 
 export const slideUp = keyframes`
-  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  from { opacity: 0; transform: scale(0.95) translateY(0.625rem); }
   to { opacity: 1; transform: scale(1) translateY(0); }
 `;
 
