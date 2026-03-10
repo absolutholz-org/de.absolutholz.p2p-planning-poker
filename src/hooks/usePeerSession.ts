@@ -17,15 +17,12 @@ const PEER_CONFIG = {
 			{
 				credential: 'openrelayproject',
 				urls: [
-					'turn:openrelay.metered.ca:80',
-					'turn:openrelay.metered.ca:443',
+					// Force TCP on port 443 for TURN to instantly bypass corporate UDP blocking
 					'turn:openrelay.metered.ca:443?transport=tcp',
 				],
 				username: 'openrelayproject',
 			},
 		],
-		// FORCE TURN RELAY FOR DEBUGGING SYMMETRIC NAT
-		iceTransportPolicy: 'relay' as const,
 	},
 };
 
@@ -317,7 +314,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 					);
 					setConnectionStatus('error');
 					peer.destroy();
-				}, 10000);
+				}, 15000);
 
 				conn.on('open', () => {
 					clearTimeout(connectionTimeoutRef.current);
