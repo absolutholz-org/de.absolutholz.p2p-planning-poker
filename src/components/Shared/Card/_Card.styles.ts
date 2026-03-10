@@ -5,7 +5,7 @@ export const Card = styled.button<{
 	'data-hidden': boolean;
 }>`
 	/* Mobile First Scaling */
-	flex: 0 0 72px; /* Lock exact width to force precise 4-column wrapping over 400px container */
+	flex: 0 0 4.5rem; /* Lock exact width to force precise 4-column wrapping over 400px container */
 	aspect-ratio: 2.5 / 3.5;
 
 	display: flex;
@@ -31,7 +31,7 @@ export const Card = styled.button<{
 	}
 
 	&:hover:not(:disabled) {
-		transform: translateY(-4px);
+		transform: translateY(-0.25rem);
 		border-color: var(--sys-color-primary);
 	}
 
@@ -39,18 +39,18 @@ export const Card = styled.button<{
 		border-color: var(--sys-color-primary);
 		background-color: var(--sys-color-primary);
 		color: var(--sys-color-primary-text);
-		transform: translateY(-8px);
+		transform: translateY(-0.5rem);
 		box-shadow: 0 10px 15px -3px var(--sys-color-focus);
 		position: relative;
 
 		&::after {
 			content: '';
 			position: absolute;
-			bottom: -12px;
+			bottom: -0.75rem;
 			left: 50%;
 			transform: translateX(-50%);
-			width: 6px;
-			height: 6px;
+			width: 0.375rem;
+			height: 0.375rem;
 			border-radius: 50%;
 			background-color: var(--sys-color-text-primary);
 		}
