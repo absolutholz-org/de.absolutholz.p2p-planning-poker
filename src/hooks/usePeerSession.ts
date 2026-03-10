@@ -9,25 +9,37 @@ export type ConnectionStatus = 'idle' | 'connecting' | 'connected' | 'error';
 
 // Dynamically fetch TURN credentials from Metered.ca
 const fetchIceServers = async () => {
+	const fallbackRelay = [
+		{
+			credential: 'openrelayproject',
+			urls: [
+				'turn:openrelay.metered.ca:443?transport=tcp',
+				'turn:openrelay.metered.ca:80',
+			],
+			username: 'openrelayproject',
+		},
+	];
+
 	try {
 		const response = await fetch(
 			'https://planningpoker-absolutholz.metered.live/api/v1/turn/credentials?apiKey=fGwE2NHkMPXcdQtxE7YQ-LkFIvBLkBytjwHdYOCSii-g9lNf',
 		);
 
 		if (!response.ok) {
-			console.error(
-				'Metered API error:',
-				response.status,
-				response.statusText,
+			console.warn(
+				`Metered API fetch failed (${response.status}). Falling back to static openrelay project credentials.`,
 			);
-			return [];
+			return fallbackRelay;
 		}
 
 		const iceServers = await response.json();
-		return Array.isArray(iceServers) ? iceServers : [];
+		return Array.isArray(iceServers) ? iceServers : fallbackRelay;
 	} catch (error) {
-		console.error('Failed to fetch TURN credentials:', error);
-		return [];
+		console.error(
+			'Failed to fetch TURN credentials, using static fallback:',
+			error,
+		);
+		return fallbackRelay;
 	}
 };
 
