@@ -33,6 +33,17 @@ Because this app lacks a centralized server, it relies on a Host/Guest network t
 2. **The Guests:** Up to 11 additional team members join by opening the Host's semantic deep-link URL (`/room/:roomId`), establishing a direct WebRTC connection. Guests use persistent Peer IDs to maintain their identity across page reloads.
 3. **Data Flow:** Guests send discrete actions (`JOIN_ROOM`, `SUBMIT_VOTE`) to the Host. The Host updates the master state and broadcasts the complete, updated state back to all Guests. If the Host briefly disappears, Guests will automatically attempt to reconnect.
 
+## 🎨 Design System & Styling
+
+This project follows a strict **Design Token** architecture. Developers MUST use the predefined CSS Custom Properties (`var(--sys-...)`) found in `src/theme/GlobalStyles.ts` for all styling.
+
+### Guidelines
+
+- **No Hardcoded Colors/Spacing:** Use `--sys-color-*` and `--sys-spacing-*` exclusively.
+- **Relative Units:** Use `rem` for all layout spacing (margins, paddings, gaps) to ensure accessibility and browser scaling.
+- **Pixel Exceptions:** Borders (`1px`) and corner radii (`--sys-radius-*`) remain in pixels to maintain visual crispness.
+- **Native First:** Leverage native CSS features (Grid, Flexbox, Media Queries) over JavaScript-based layout calculations.
+
 ## 💻 Quick Start
 
 ### Prerequisites
