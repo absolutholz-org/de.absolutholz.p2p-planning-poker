@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
 
+// import { useTranslation } from 'react-i18next';
 import { Button } from '../Button';
 import * as S from './_Dialog.styles';
 import type { DialogProps } from './_Dialog.types';
@@ -15,7 +15,7 @@ export function Dialog({
 	onConfirm,
 	title,
 }: DialogProps) {
-	const { t } = useTranslation();
+	// const { t } = useTranslation();
 	const dialogRef = useRef<HTMLDialogElement>(null);
 
 	useEffect(() => {
@@ -46,12 +46,12 @@ export function Dialog({
 			<S.DialogContainer onClick={(e) => e.stopPropagation()}>
 				<S.DialogHeader>
 					<S.DialogTitle id="dialog-title">{title}</S.DialogTitle>
-					<S.CloseButton
+					{/* <S.CloseButton
 						onClick={onCancel}
 						aria-label={t('common.actions.cancel')}
 					>
 						<span aria-hidden="true">&times;</span>
-					</S.CloseButton>
+					</S.CloseButton> */}
 				</S.DialogHeader>
 
 				<S.DialogContent id="dialog-message">
