@@ -9,6 +9,7 @@ export type ConnectionStatus = 'idle' | 'connecting' | 'connected' | 'error';
 
 // Dynamically fetch TURN credentials from Metered.ca
 const fetchIceServers = async () => {
+	console.group('Relay Discovery');
 	const fallbackRelay = [
 		{
 			credential: 'openrelayproject',
@@ -33,12 +34,15 @@ const fetchIceServers = async () => {
 		}
 
 		const iceServers = await response.json();
+		console.log('Metered.ca TURN credentials retrieved successfully.');
+		console.groupEnd();
 		return Array.isArray(iceServers) ? iceServers : fallbackRelay;
 	} catch (error) {
 		console.error(
 			'Failed to fetch TURN credentials, using static fallback:',
 			error,
 		);
+		console.groupEnd();
 		return fallbackRelay;
 	}
 };
@@ -82,6 +86,12 @@ export function usePeerSession(): UsePeerSessionReturn {
 	const [localUserId, setLocalUserId] = useState<null | string>(null);
 	const [connectionStatus, setConnectionStatus] =
 		useState<ConnectionStatus>('idle');
+	const statusRef = useRef<ConnectionStatus>('idle');
+
+	// Sync statusRef with state
+	useEffect(() => {
+		statusRef.current = connectionStatus;
+	}, [connectionStatus]);
 
 	const peerRef = useRef<Peer | null>(null);
 	const connectionsRef = useRef<Map<string, DataConnection>>(new Map());
@@ -92,6 +102,18 @@ export function usePeerSession(): UsePeerSessionReturn {
 	const nameRef = useRef<string | null>(null);
 	const setupConnectionListenersRef =
 		useRef<(conn: DataConnection) => void>(undefined);
+	const initHostRef =
+		useRef<
+			(
+				name: string,
+				requestedPeerId?: string,
+				restoredState?: RoomState,
+			) => void
+		>(undefined);
+	const initGuestRef =
+		useRef<
+			(roomId: string, name: string, requestedPeerId?: string) => void
+		>(undefined);
 
 	// ---------------------------------------------------------
 	// Core Dispatchers
@@ -286,7 +308,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 
 					// Global timeout for reconnection
 					setTimeout(() => {
-						if (connectionStatus !== 'connected') {
+						if (statusRef.current !== 'connected') {
 							clearTimeout(reconnectTimeoutRef.current);
 							setError('Host connection lost permanently.');
 							setRoomState(null);
@@ -389,12 +411,27 @@ export function usePeerSession(): UsePeerSessionReturn {
 
 				peer.on('error', (err) => {
 					console.error('[Host] PeerJS Error:', err.type, err);
+
+					// 'unavailable-id' is the PeerJS error type when an ID is already in use
+					if (err.type === 'unavailable-id' && requestedPeerId) {
+						console.warn(
+							`[Host] Peer ID ${requestedPeerId} is still active on the server. Retrying with a fresh ID...`,
+						);
+						sessionStorage.removeItem('p2p_peer_id');
+						initHostRef.current?.(name, undefined, restoredState);
+						return;
+					}
+
 					setError(`[${err.type}] ${err.message}`);
 				});
 			});
 		},
 		[setupConnectionListeners, setupPeerSignalingReconnection],
 	);
+
+	useEffect(() => {
+		initHostRef.current = initHost;
+	}, [initHost]);
 
 	const initGuest = useCallback(
 		(roomId: string, name: string, requestedPeerId?: string) => {
@@ -471,6 +508,16 @@ export function usePeerSession(): UsePeerSessionReturn {
 				peer.on('error', (err) => {
 					console.error('[Guest] PeerJS Error:', err.type, err);
 					clearTimeout(connectionTimeoutRef.current);
+
+					if (err.type === 'unavailable-id' && requestedPeerId) {
+						console.warn(
+							`[Guest] Peer ID ${requestedPeerId} is still active on the server. Retrying with a fresh ID...`,
+						);
+						sessionStorage.removeItem('p2p_peer_id');
+						initGuestRef.current?.(roomId, name, undefined);
+						return;
+					}
+
 					setError(`[${err.type}] ${err.message}`);
 					setConnectionStatus('error');
 				});
@@ -478,6 +525,10 @@ export function usePeerSession(): UsePeerSessionReturn {
 		},
 		[setupConnectionListeners, setupPeerSignalingReconnection],
 	);
+
+	useEffect(() => {
+		initGuestRef.current = initGuest;
+	}, [initGuest]);
 
 	// ---------------------------------------------------------
 	// Public Actions
