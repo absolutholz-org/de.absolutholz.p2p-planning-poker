@@ -13,8 +13,18 @@ const fetchIceServers = async () => {
 		const response = await fetch(
 			'https://planningpoker-absolutholz.metered.live/api/v1/turn/credentials?apiKey=fGwE2NHkMPXcdQtxE7YQ-LkFIvBLkBytjwHdYOCSii-g9lNf',
 		);
+
+		if (!response.ok) {
+			console.error(
+				'Metered API error:',
+				response.status,
+				response.statusText,
+			);
+			return [];
+		}
+
 		const iceServers = await response.json();
-		return iceServers;
+		return Array.isArray(iceServers) ? iceServers : [];
 	} catch (error) {
 		console.error('Failed to fetch TURN credentials:', error);
 		return [];
