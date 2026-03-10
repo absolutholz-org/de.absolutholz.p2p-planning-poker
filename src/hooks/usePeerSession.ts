@@ -22,7 +22,7 @@ const fetchIceServers = async () => {
 
 	try {
 		const response = await fetch(
-			'https://planningpoker-absolutholz.metered.live/api/v1/turn/credentials?apiKey=fGwE2NHkMPXcdQtxE7YQ-LkFIvBLkBytjwHdYOCSii-g9lNf',
+			'https://planningpoker-absolutholz.metered.live/api/v1/turn/credentials?apiKey=7de25f8ab64843c06c55df688bbb4bb68c0b',
 		);
 
 		if (!response.ok) {
