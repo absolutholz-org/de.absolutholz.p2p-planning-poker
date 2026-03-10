@@ -7,13 +7,22 @@ const MAX_PEERS = 12;
 
 export type ConnectionStatus = 'idle' | 'connecting' | 'connected' | 'error';
 
-// Free, public STUN servers (No TURN)
+// Free, public STUN servers and open relay TURN server for strict NATs
 const PEER_CONFIG = {
 	config: {
 		iceServers: [
 			{ urls: 'stun:stun.l.google.com:19302' },
 			{ urls: 'stun:stun1.l.google.com:19302' },
 			{ urls: 'stun:stun2.l.google.com:19302' },
+			{
+				credential: 'openrelayproject',
+				urls: [
+					'turn:openrelay.metered.ca:80',
+					'turn:openrelay.metered.ca:443',
+					'turn:openrelay.metered.ca:443?transport=tcp',
+				],
+				username: 'openrelayproject',
+			},
 		],
 	},
 };
@@ -302,7 +311,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 				// Timeout if WebRTC gets stuck connecting
 				connectionTimeoutRef.current = setTimeout(() => {
 					setError(
-						'Connection to host timed out. A strict firewall or symmetric NAT may be blocking the P2P connection.',
+						'Connection to host timed out. A strict firewall or symmetric NAT may be blocking the P2P connection, and the free TURN relay is unreachable.',
 					);
 					setConnectionStatus('error');
 					peer.destroy();
