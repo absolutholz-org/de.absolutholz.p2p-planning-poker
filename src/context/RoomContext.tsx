@@ -1,10 +1,11 @@
 import { createContext, type ReactNode, useContext } from 'react';
 
-import { usePeerSession } from '../hooks/usePeerSession';
+import { type ConnectionStatus, usePeerSession } from '../hooks/usePeerSession';
 import type { RoomState, VoteValue } from '../types/domain';
 
 interface RoomContextValue {
 	castVote: (vote: VoteValue) => void;
+	connectionStatus: ConnectionStatus;
 	error: null | string;
 	initGuest: (roomId: string, name: string) => void;
 	initHost: (
@@ -27,6 +28,7 @@ export const RoomContext = createContext<RoomContextValue | undefined>(
 export function RoomProvider({ children }: { children: ReactNode }) {
 	const {
 		castVote,
+		connectionStatus,
 		error,
 		initGuest,
 		initHost,
@@ -41,6 +43,7 @@ export function RoomProvider({ children }: { children: ReactNode }) {
 		<RoomContext.Provider
 			value={{
 				castVote,
+				connectionStatus,
 				error,
 				initGuest,
 				initHost,

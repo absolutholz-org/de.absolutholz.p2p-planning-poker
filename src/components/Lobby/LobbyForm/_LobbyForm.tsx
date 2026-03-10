@@ -9,11 +9,10 @@ import * as S from './_LobbyForm.styles';
 
 export function LobbyForm() {
 	const { t } = useTranslation();
-	const { error, initGuest, initHost } = useRoom();
+	const { connectionStatus, error, initGuest, initHost } = useRoom();
 	const { roomId } = useParams<{ roomId?: string }>();
 	const [name, setName] = useState('');
 	const [roomCode, setRoomCode] = useState(roomId || '');
-	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	// Load previously saved name on initial mount
 	useEffect(() => {
@@ -32,7 +31,6 @@ export function LobbyForm() {
 			console.log(
 				`Attempting to recover ${role} session for room ${savedRoomId}`,
 			);
-			setIsSubmitting(true);
 
 			if (role === 'host' && savedStateStr) {
 				try {
@@ -41,7 +39,6 @@ export function LobbyForm() {
 				} catch (e) {
 					console.error('Failed to parse restored state', e);
 					sessionStorage.clear();
-					setIsSubmitting(false);
 				}
 			} else if (role === 'guest') {
 				initGuest(savedRoomId, savedName);
@@ -53,10 +50,9 @@ export function LobbyForm() {
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
 		const trimmedName = name.trim();
-		if (!trimmedName) return;
+		if (!trimmedName || connectionStatus === 'connecting') return;
 
 		localStorage.setItem('user-name', trimmedName);
-		setIsSubmitting(true);
 
 		// If no room code is provided, they are creating a new room as Host.
 		if (!roomCode.trim()) {
@@ -64,26 +60,12 @@ export function LobbyForm() {
 		} else {
 			initGuest(roomCode.trim(), trimmedName);
 		}
-
-		// Fail-safe unlock after 8 seconds if connection stalls silently
-		setTimeout(() => {
-			setIsSubmitting((current) => {
-				if (current) {
-					// We couldn't connect within 8 seconds. This typically happens
-					// across restrictive NATs or if the host completely closed their browser.
-					sessionStorage.clear(); // Clear any pending retry state
-				}
-				return false;
-			});
-		}, 8000);
 	};
 
 	useEffect(() => {
 		if (error) {
 			// Clear storage so we don't get stuck in a reload loop
 			sessionStorage.clear();
-
-			setIsSubmitting(false);
 		}
 	}, [error]);
 
@@ -139,9 +121,12 @@ export function LobbyForm() {
 					<S.Footer>
 						<Button
 							type="submit"
-							disabled={!name.trim() || isSubmitting}
+							disabled={
+								!name.trim() ||
+								connectionStatus === 'connecting'
+							}
 						>
-							{isSubmitting
+							{connectionStatus === 'connecting'
 								? 'Connecting...'
 								: roomCode.trim()
 									? `${t('lobby.submit.join')} ➔`

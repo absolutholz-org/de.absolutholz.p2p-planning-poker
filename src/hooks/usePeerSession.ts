@@ -5,9 +5,23 @@ import type { PeerMessage, RoomState, VoteValue } from '../types/domain';
 
 const MAX_PEERS = 12;
 
+export type ConnectionStatus = 'idle' | 'connecting' | 'connected' | 'error';
+
+// Free, public STUN servers (No TURN)
+const PEER_CONFIG = {
+	config: {
+		iceServers: [
+			{ urls: 'stun:stun.l.google.com:19302' },
+			{ urls: 'stun:stun1.l.google.com:19302' },
+			{ urls: 'stun:stun2.l.google.com:19302' },
+		],
+	},
+};
+
 interface UsePeerSessionReturn {
 	broadcastState: (state: RoomState) => void;
 	castVote: (vote: VoteValue) => void;
+	connectionStatus: ConnectionStatus;
 	error: null | string;
 	initGuest: (roomId: string, name: string) => void;
 	initHost: (
@@ -15,7 +29,7 @@ interface UsePeerSessionReturn {
 		requestedPeerId?: string,
 		restoredState?: RoomState,
 	) => void;
-	leaveRoom: () => void;
+	leaveRoom: (clearStorage?: boolean) => void;
 	localUserId: null | string;
 	resetBoard: () => void;
 	revealVotes: () => void;
@@ -26,10 +40,13 @@ export function usePeerSession(): UsePeerSessionReturn {
 	const [roomState, setRoomState] = useState<RoomState | null>(null);
 	const [error, setError] = useState<null | string>(null);
 	const [localUserId, setLocalUserId] = useState<null | string>(null);
+	const [connectionStatus, setConnectionStatus] =
+		useState<ConnectionStatus>('idle');
 
 	const peerRef = useRef<Peer | null>(null);
 	const connectionsRef = useRef<Map<string, DataConnection>>(new Map());
 	const isHostRef = useRef<boolean>(false);
+	const connectionTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
 	// ---------------------------------------------------------
 	// Core Dispatchers
@@ -189,17 +206,29 @@ export function usePeerSession(): UsePeerSessionReturn {
 		[handleMessage, broadcastState],
 	);
 
+	const setupPeerSignalingReconnection = useCallback((peer: Peer) => {
+		peer.on('disconnected', () => {
+			console.warn('Disconnected from signaling server. Reconnecting...');
+			if (!peer.destroyed) {
+				peer.reconnect();
+			}
+		});
+	}, []);
+
 	// ---------------------------------------------------------
 	// Initializers
 	// ---------------------------------------------------------
 
 	const initHost = useCallback(
 		(name: string, requestedPeerId?: string, restoredState?: RoomState) => {
+			setConnectionStatus('connecting');
+			setError(null);
 			isHostRef.current = true;
 			const peer = requestedPeerId
-				? new Peer(requestedPeerId)
-				: new Peer();
+				? new Peer(requestedPeerId, PEER_CONFIG)
+				: new Peer(PEER_CONFIG);
 			peerRef.current = peer;
+			setupPeerSignalingReconnection(peer);
 
 			peer.on('open', (id) => {
 				setLocalUserId(id);
@@ -226,6 +255,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 					'p2p_room_state',
 					JSON.stringify(initialState),
 				);
+				setConnectionStatus('connected');
 			});
 
 			peer.on('connection', (conn) => {
@@ -246,14 +276,17 @@ export function usePeerSession(): UsePeerSessionReturn {
 
 			peer.on('error', (err) => setError(err.message));
 		},
-		[setupConnectionListeners],
+		[setupConnectionListeners, setupPeerSignalingReconnection],
 	);
 
 	const initGuest = useCallback(
 		(roomId: string, name: string) => {
+			setConnectionStatus('connecting');
+			setError(null);
 			isHostRef.current = false;
-			const peer = new Peer();
+			const peer = new Peer(PEER_CONFIG);
 			peerRef.current = peer;
+			setupPeerSignalingReconnection(peer);
 
 			peer.on('open', (id) => {
 				setLocalUserId(id);
@@ -266,7 +299,18 @@ export function usePeerSession(): UsePeerSessionReturn {
 				sessionStorage.setItem('p2p_room_id', roomId);
 				sessionStorage.setItem('p2p_name', name);
 
+				// Timeout if WebRTC gets stuck connecting
+				connectionTimeoutRef.current = setTimeout(() => {
+					setError(
+						'Connection to host timed out. A strict firewall or symmetric NAT may be blocking the P2P connection.',
+					);
+					setConnectionStatus('error');
+					peer.destroy();
+				}, 10000);
+
 				conn.on('open', () => {
+					clearTimeout(connectionTimeoutRef.current);
+					setConnectionStatus('connected');
 					setupConnectionListeners(conn);
 					// Immediately announce presence to Host
 					conn.send({
@@ -276,9 +320,13 @@ export function usePeerSession(): UsePeerSessionReturn {
 				});
 			});
 
-			peer.on('error', (err) => setError(err.message));
+			peer.on('error', (err) => {
+				clearTimeout(connectionTimeoutRef.current);
+				setError(err.message);
+				setConnectionStatus('error');
+			});
 		},
-		[setupConnectionListeners],
+		[setupConnectionListeners, setupPeerSignalingReconnection],
 	);
 
 	// ---------------------------------------------------------
@@ -339,12 +387,14 @@ export function usePeerSession(): UsePeerSessionReturn {
 	}, [sendToHost, broadcastState]);
 
 	const leaveRoom = useCallback((clearStorage: boolean = true) => {
+		clearTimeout(connectionTimeoutRef.current);
 		connectionsRef.current.forEach((conn) => conn.close());
 		connectionsRef.current.clear();
 		peerRef.current?.destroy();
 		setRoomState(null);
 		setError(null);
 		setLocalUserId(null);
+		setConnectionStatus('idle');
 		isHostRef.current = false;
 
 		if (clearStorage) {
@@ -363,6 +413,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 	return {
 		broadcastState,
 		castVote,
+		connectionStatus,
 		error,
 		initGuest,
 		initHost,
