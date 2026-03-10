@@ -28,6 +28,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
 
 	const handleLanguageChange = (code: string) => {
 		i18n.changeLanguage(code);
+		localStorage.setItem('language-preference', code);
 	};
 
 	const currentLang =

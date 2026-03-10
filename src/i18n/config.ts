@@ -21,12 +21,14 @@ const resources = {
 	},
 };
 
+const initialLanguage = localStorage.getItem('language-preference') || 'en';
+
 i18n.use(initReactI18next).init({
 	fallbackLng: 'en',
 	interpolation: {
 		escapeValue: false, // react already escapes values from XSS natively
 	},
-	lng: 'en', // default language
+	lng: initialLanguage,
 	resources,
 });
 
