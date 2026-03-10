@@ -21,9 +21,7 @@ export const Card = styled.button<{
 	font-weight: 800;
 	cursor: pointer;
 	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-	box-shadow:
-		0 4px 6px -1px rgba(0, 0, 0, 0.1),
-		0 2px 4px -1px rgba(0, 0, 0, 0.06);
+	box-shadow: var(--sys-shadow-md);
 
 	&:focus-visible {
 		outline: none;

@@ -41,9 +41,7 @@ export const DialogContainer = styled.div`
 	background-color: var(--sys-color-surface);
 	border: 1px solid var(--sys-color-border);
 	border-radius: var(--sys-radius-xl);
-	box-shadow:
-		0 20px 25px -5px rgba(0, 0, 0, 0.1),
-		0 10px 10px -5px rgba(0, 0, 0, 0.04);
+	box-shadow: var(--sys-shadow-xl);
 	color: var(--sys-color-text-primary);
 	display: flex;
 	flex-direction: column;

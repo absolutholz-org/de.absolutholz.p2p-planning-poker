@@ -22,7 +22,7 @@ export const Toast = styled.div`
 	background: var(--sys-color-text-primary);
 	border-radius: var(--sys-radius-pill);
 	bottom: var(--sys-spacing-xl);
-	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+	box-shadow: var(--sys-shadow-lg);
 	color: var(--sys-color-bg);
 	font-size: var(--sys-font-size-sm);
 	font-weight: 500;

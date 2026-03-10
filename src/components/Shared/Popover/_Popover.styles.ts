@@ -14,7 +14,7 @@ export const PopoverContent = styled.div`
 	background-color: var(--sys-color-surface);
 	border: 1px solid var(--sys-color-border);
 	border-radius: var(--sys-radius-lg);
-	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+	box-shadow: var(--sys-shadow-lg);
 	min-width: 11.25rem;
 
 	/* Top layer animation handling */
