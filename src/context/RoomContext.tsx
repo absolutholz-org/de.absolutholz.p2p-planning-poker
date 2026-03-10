@@ -12,7 +12,7 @@ interface RoomContextValue {
 		requestedPeerId?: string,
 		restoredState?: RoomState,
 	) => void;
-	leaveRoom: () => void;
+	leaveRoom: (clearStorage?: boolean) => void;
 	localUserId: null | string;
 	resetBoard: () => void;
 	revealVotes: () => void;

@@ -338,7 +338,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 		}
 	}, [sendToHost, broadcastState]);
 
-	const leaveRoom = useCallback(() => {
+	const leaveRoom = useCallback((clearStorage: boolean = true) => {
 		connectionsRef.current.forEach((conn) => conn.close());
 		connectionsRef.current.clear();
 		peerRef.current?.destroy();
@@ -347,15 +347,17 @@ export function usePeerSession(): UsePeerSessionReturn {
 		setLocalUserId(null);
 		isHostRef.current = false;
 
-		sessionStorage.removeItem('p2p_role');
-		sessionStorage.removeItem('p2p_room_id');
-		sessionStorage.removeItem('p2p_name');
-		sessionStorage.removeItem('p2p_room_state');
+		if (clearStorage) {
+			sessionStorage.removeItem('p2p_role');
+			sessionStorage.removeItem('p2p_room_id');
+			sessionStorage.removeItem('p2p_name');
+			sessionStorage.removeItem('p2p_room_state');
+		}
 	}, []);
 
 	// Cleanup on unmount
 	useEffect(() => {
-		return () => leaveRoom();
+		return () => leaveRoom(false);
 	}, [leaveRoom]);
 
 	return {
