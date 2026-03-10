@@ -24,6 +24,7 @@ const PEER_CONFIG = {
 			},
 		],
 	},
+	debug: 3, // MAXIMUM log verbosity for diagnostic tracking
 };
 
 interface UsePeerSessionReturn {
@@ -267,22 +268,29 @@ export function usePeerSession(): UsePeerSessionReturn {
 			});
 
 			peer.on('connection', (conn) => {
+				console.log(`[Host] Incoming connection from ${conn.peer}...`);
 				if (connectionsRef.current.size >= MAX_PEERS - 1) {
 					// -1 because Host is 1 peer
-					console.warn('Room is full. Rejecting connection.');
+					console.warn('[Host] Room is full. Rejecting connection.');
 					setTimeout(() => conn.close(), 500);
 					return;
 				}
 				connectionsRef.current.set(conn.peer, conn);
 
 				conn.on('open', () => {
+					console.log(
+						`[Host] Connection established and open with ${conn.peer}`,
+					);
 					setupConnectionListeners(conn);
 					// We sync state immediately so the new guest gets the board,
 					// but they haven't "Joined" the roster yet. They will send JOIN_ROOM.
 				});
 			});
 
-			peer.on('error', (err) => setError(err.message));
+			peer.on('error', (err) => {
+				console.error('[Host] PeerJS Error:', err.type, err);
+				setError(`[${err.type}] ${err.message}`);
+			});
 		},
 		[setupConnectionListeners, setupPeerSignalingReconnection],
 	);
@@ -300,8 +308,21 @@ export function usePeerSession(): UsePeerSessionReturn {
 				setLocalUserId(id);
 
 				// Ensure reliable data channel for better cross-device connection
+				console.log(`[Guest] Dialing host ${roomId}...`);
 				const conn = peer.connect(roomId, { reliable: true });
 				connectionsRef.current.set(roomId, conn);
+
+				// Probe the underlying WebRTC state if possible
+				if (conn.peerConnection) {
+					conn.peerConnection.addEventListener(
+						'iceconnectionstatechange',
+						() => {
+							console.log(
+								`[Guest] ICE State shifted to: ${conn.peerConnection.iceConnectionState}`,
+							);
+						},
+					);
+				}
 
 				sessionStorage.setItem('p2p_role', 'guest');
 				sessionStorage.setItem('p2p_room_id', roomId);
@@ -309,14 +330,22 @@ export function usePeerSession(): UsePeerSessionReturn {
 
 				// Timeout if WebRTC gets stuck connecting
 				connectionTimeoutRef.current = setTimeout(() => {
+					console.error(
+						'[Guest] Hard timeout hit after 15s waiting for STUN/TURN.',
+					);
+					// Determine if the ICE connection even made progress
+					const iceState =
+						conn.peerConnection?.iceConnectionState || 'unknown';
+
 					setError(
-						'Connection to host timed out. A strict firewall or symmetric NAT may be blocking the P2P connection, and the free TURN relay is unreachable.',
+						`Connection timeout (ICE state: ${iceState}). Strict firewall or symmetric NAT active.`,
 					);
 					setConnectionStatus('error');
 					peer.destroy();
 				}, 15000);
 
 				conn.on('open', () => {
+					console.log(`[Guest] Connection OPEN with host ${roomId}!`);
 					clearTimeout(connectionTimeoutRef.current);
 					setConnectionStatus('connected');
 					setupConnectionListeners(conn);
@@ -329,8 +358,9 @@ export function usePeerSession(): UsePeerSessionReturn {
 			});
 
 			peer.on('error', (err) => {
+				console.error('[Guest] PeerJS Error:', err.type, err);
 				clearTimeout(connectionTimeoutRef.current);
-				setError(err.message);
+				setError(`[${err.type}] ${err.message}`);
 				setConnectionStatus('error');
 			});
 		},
