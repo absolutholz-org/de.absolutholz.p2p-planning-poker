@@ -11,7 +11,7 @@ The team will adhere to the following tools to maintain a small, consistent foot
 - **Package Manager:** `pnpm`
 - **Frontend Framework:** React (Vite recommended)
 - **Styling:** CSS-in-JS using Emotion (`@emotion/react` and `@emotion/styled`)
-- **Networking:** WebRTC via the `peerjs` library (using their free public signaling server to broker initial connections).
+- **Networking:** WebRTC via the `peerjs` library. Augmented with dynamic TURN/STUN relay credentials from Metered.ca for robust NAT traversal across corporate networks.
 - **Routing:** Client-side SPA semantic routing via `react-router-dom`.
 - **Localization:** Multi-language support (EN, DE, FR, PT) via `react-i18next`.
 
@@ -61,5 +61,6 @@ The interface should be clean and split into two primary views.
 ## 7. Constraints & Edge Cases
 
 - **Maximum Capacity:** The Host must reject any `JOIN_ROOM` requests that exceed the 12-person limit, sending an error message back to the attempting Guest.
-- **Guest Disconnection:** If a Guest closes their tab or loses connection, the Host must detect the dropped peer connection, remove the user from the state, and broadcast the updated roster.
-- **Host Disconnection:** If the Host drops offline, the session ceases to exist. Guests must be immediately routed back to the Lobby View with an alert stating the session has ended.
+- **Guest Disconnection:** If a Guest closes their tab or loses connection, the Host detects the drop and marks them as disconnected.
+- **Session Persistence:** Both Host and Guest states are periodically backed up to `sessionStorage`. This allows users to refresh their browser or recover from brief network drops without losing their identity or being kicked from the room.
+- **Host Disconnection:** If the Host drops offline, Guests enter a reconnection loop (up to 30 seconds). If the Host re-initializes within this window (e.g., after a page refresh), the session is seamlessly restored for all participants.
