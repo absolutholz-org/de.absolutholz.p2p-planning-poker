@@ -7,7 +7,11 @@ interface RoomContextValue {
 	castVote: (vote: VoteValue) => void;
 	error: null | string;
 	initGuest: (roomId: string, name: string) => void;
-	initHost: (name: string) => void;
+	initHost: (
+		name: string,
+		requestedPeerId?: string,
+		restoredState?: RoomState,
+	) => void;
 	leaveRoom: () => void;
 	localUserId: null | string;
 	resetBoard: () => void;

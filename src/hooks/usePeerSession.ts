@@ -10,7 +10,11 @@ interface UsePeerSessionReturn {
 	castVote: (vote: VoteValue) => void;
 	error: null | string;
 	initGuest: (roomId: string, name: string) => void;
-	initHost: (name: string) => void;
+	initHost: (
+		name: string,
+		requestedPeerId?: string,
+		restoredState?: RoomState,
+	) => void;
 	leaveRoom: () => void;
 	localUserId: null | string;
 	resetBoard: () => void;
@@ -43,6 +47,9 @@ export function usePeerSession(): UsePeerSessionReturn {
 				} satisfies PeerMessage);
 			}
 		});
+
+		// Persist state to session storage to survive page reloads
+		sessionStorage.setItem('p2p_room_state', JSON.stringify(state));
 	}, []);
 
 	const sendToHost = useCallback((message: PeerMessage) => {
@@ -135,6 +142,10 @@ export function usePeerSession(): UsePeerSessionReturn {
 				} else {
 					// GUEST Logic: Only listen to SYNC_STATE
 					if (msg.type === 'SYNC_STATE') {
+						sessionStorage.setItem(
+							'p2p_room_state',
+							JSON.stringify(msg.payload.state),
+						);
 						return msg.payload.state;
 					}
 					return prevState;
@@ -183,15 +194,17 @@ export function usePeerSession(): UsePeerSessionReturn {
 	// ---------------------------------------------------------
 
 	const initHost = useCallback(
-		(name: string) => {
+		(name: string, requestedPeerId?: string, restoredState?: RoomState) => {
 			isHostRef.current = true;
-			const peer = new Peer();
+			const peer = requestedPeerId
+				? new Peer(requestedPeerId)
+				: new Peer();
 			peerRef.current = peer;
 
 			peer.on('open', (id) => {
 				setLocalUserId(id);
 				// Host initializes the master state
-				setRoomState({
+				const initialState: RoomState = restoredState || {
 					isRevealed: false,
 					roomId: id,
 					users: [
@@ -203,7 +216,16 @@ export function usePeerSession(): UsePeerSessionReturn {
 							vote: null,
 						},
 					],
-				});
+				};
+
+				setRoomState(initialState);
+				sessionStorage.setItem('p2p_role', 'host');
+				sessionStorage.setItem('p2p_room_id', id);
+				sessionStorage.setItem('p2p_name', name);
+				sessionStorage.setItem(
+					'p2p_room_state',
+					JSON.stringify(initialState),
+				);
 			});
 
 			peer.on('connection', (conn) => {
@@ -235,8 +257,14 @@ export function usePeerSession(): UsePeerSessionReturn {
 
 			peer.on('open', (id) => {
 				setLocalUserId(id);
-				const conn = peer.connect(roomId);
+
+				// Ensure reliable data channel for better cross-device connection
+				const conn = peer.connect(roomId, { reliable: true });
 				connectionsRef.current.set(roomId, conn);
+
+				sessionStorage.setItem('p2p_role', 'guest');
+				sessionStorage.setItem('p2p_room_id', roomId);
+				sessionStorage.setItem('p2p_name', name);
 
 				conn.on('open', () => {
 					setupConnectionListeners(conn);
@@ -318,6 +346,11 @@ export function usePeerSession(): UsePeerSessionReturn {
 		setError(null);
 		setLocalUserId(null);
 		isHostRef.current = false;
+
+		sessionStorage.removeItem('p2p_role');
+		sessionStorage.removeItem('p2p_room_id');
+		sessionStorage.removeItem('p2p_name');
+		sessionStorage.removeItem('p2p_room_state');
 	}, []);
 
 	// Cleanup on unmount

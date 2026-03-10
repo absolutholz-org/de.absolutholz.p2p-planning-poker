@@ -35,7 +35,7 @@ All communication over the PeerJS data channels must conform to a strict, typed 
 ### 4. Ephemeral State & Constraints
 
 - You must enforce the 12-person maximum capacity limit. The Host must actively reject `JOIN_ROOM` attempts when full.
-- No data can be written to `localStorage`, `sessionStorage`, IndexedDB, or any server. Everything must be securely held in React state or a Context Provider, ensuring total data evaporation upon tab closure.
+- You are encouraged to use `localStorage` or `sessionStorage` to persist ephemeral state where it improves the user experience (e.g., surviving accidental page refreshes for active rooms), but all data must remain strictly on the client. No server databases are allowed.
 
 ## Example Enforcement: Processing a Vote Map
 
