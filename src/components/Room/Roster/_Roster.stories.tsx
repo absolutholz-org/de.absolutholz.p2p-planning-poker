@@ -47,6 +47,7 @@ const meta = {
 				<RoomContext.Provider
 					value={{
 						castVote: () => {},
+						connectionStatus: 'connected',
 						error: null,
 						initGuest: () => {},
 						initHost: () => {},
@@ -100,6 +101,7 @@ export const FullRoom: Story = {
 				<RoomContext.Provider
 					value={{
 						castVote: () => {},
+						connectionStatus: 'connected',
 						error: null,
 						initGuest: () => {},
 						initHost: () => {},
@@ -134,6 +136,7 @@ export const JustHost: Story = {
 				<RoomContext.Provider
 					value={{
 						castVote: () => {},
+						connectionStatus: 'connected',
 						error: null,
 						initGuest: () => {},
 						initHost: () => {},

@@ -23,6 +23,7 @@ const meta = {
 				<RoomContext.Provider
 					value={{
 						castVote: () => {},
+						connectionStatus: 'connected',
 						error: null,
 						initGuest: () => {},
 						initHost: () => {},
