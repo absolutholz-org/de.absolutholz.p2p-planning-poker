@@ -24,6 +24,8 @@ const PEER_CONFIG = {
 				username: 'openrelayproject',
 			},
 		],
+		// FORCE TURN RELAY FOR DEBUGGING SYMMETRIC NAT
+		iceTransportPolicy: 'relay' as const,
 	},
 };
 
