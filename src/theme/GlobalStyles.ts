@@ -30,18 +30,11 @@ const darkTheme = {
 	warning: 'oklch(0.76 0.177 75.32)',
 };
 
-const lightShadows = {
+const shadows = {
 	lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
 	md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
 	sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
 	xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-};
-
-const darkShadows = {
-	lg: '0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2)',
-	md: '0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2)',
-	sm: '0 1px 2px 0 rgba(0, 0, 0, 0.3)',
-	xl: '0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2)',
 };
 
 const mapEntriesToVariables = (
@@ -104,25 +97,22 @@ export const globalStyles = css`
 		}
 
 		${mapEntriesToVariables(lightTheme, 'color')}
-		${mapEntriesToVariables(lightShadows, 'shadow')}
+		${mapEntriesToVariables(shadows, 'shadow')}
 	}
 
 	@media (prefers-color-scheme: dark) {
 		:root {
 			${mapEntriesToVariables(darkTheme, 'color')}
-			${mapEntriesToVariables(darkShadows, 'shadow')}
 		}
 	}
 
 	:root[data-color-scheme='light'] {
 		${mapEntriesToVariables(lightTheme, 'color')}
-		${mapEntriesToVariables(lightShadows, 'shadow')}
 		color-scheme: light;
 	}
 
 	:root[data-color-scheme='dark'] {
 		${mapEntriesToVariables(darkTheme, 'color')}
-		${mapEntriesToVariables(darkShadows, 'shadow')}
 		color-scheme: dark;
 	}
 
