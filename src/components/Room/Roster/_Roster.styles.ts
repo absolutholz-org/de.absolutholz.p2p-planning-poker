@@ -30,6 +30,6 @@ export const VoteCountBadge = styled.div`
 
 export const ParticipantGrid = styled.div`
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr));
 	gap: var(--sys-spacing-md);
 `;

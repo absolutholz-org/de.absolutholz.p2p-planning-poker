@@ -80,7 +80,7 @@ export const Input = styled.input`
 export const HelperText = styled.p`
 	color: var(--sys-color-text-secondary);
 	font-size: var(--sys-font-size-sm);
-	margin-top: 2px;
+	margin-top: 0.125rem;
 `;
 
 export const ErrorMessage = styled.div`

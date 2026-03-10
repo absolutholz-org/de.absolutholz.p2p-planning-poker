@@ -41,13 +41,13 @@ export const Brand = styled.div`
 export const BrandText = styled.div`
 	display: flex;
 	align-items: center;
-	gap: 4px;
+	gap: var(--sys-spacing-xs);
 	line-height: 1;
 
 	@media (max-width: 600px) {
 		flex-direction: column;
 		align-items: flex-start;
-		gap: 2px;
+		gap: 0.125rem;
 
 		span {
 			font-size: var(--sys-font-size-sm);
@@ -56,9 +56,9 @@ export const BrandText = styled.div`
 `;
 
 export const LogoIcon = styled.div`
-	width: 32px;
-	height: 32px;
-	border-radius: 8px;
+	width: 2rem;
+	height: 2rem;
+	border-radius: var(--sys-radius-md);
 	background-color: var(--sys-color-text-primary);
 	color: var(--sys-color-bg);
 	display: flex;

@@ -35,7 +35,7 @@ export const Toast = styled.div`
 	@keyframes fadein {
 		from {
 			opacity: 0;
-			transform: translate(-50%, 20px);
+			transform: translate(-50%, 1.25rem);
 		}
 		to {
 			opacity: 1;
@@ -49,7 +49,7 @@ export const Toast = styled.div`
 		}
 		to {
 			opacity: 0;
-			transform: translate(-50%, 20px);
+			transform: translate(-50%, 1.25rem);
 		}
 	}
 `;

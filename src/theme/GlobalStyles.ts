@@ -39,13 +39,13 @@ const mapThemeToVariables = (theme: Record<string, string>) => {
 export const globalStyles = css`
 	:root {
 		/* System Spacing */
-		--sys-spacing-xs: 4px;
-		--sys-spacing-sm: 8px;
-		--sys-spacing-sm-md: 12px;
-		--sys-spacing-md: 16px;
-		--sys-spacing-lg: 24px;
-		--sys-spacing-xl: 32px;
-		--sys-spacing-xxl: 48px;
+		--sys-spacing-xs: 0.25rem; /* 4px */
+		--sys-spacing-sm: 0.5rem; /* 8px */
+		--sys-spacing-sm-md: 0.75rem; /* 12px */
+		--sys-spacing-md: 1rem; /* 16px */
+		--sys-spacing-lg: 1.5rem; /* 24px */
+		--sys-spacing-xl: 2rem; /* 32px */
+		--sys-spacing-xxl: 3rem; /* 48px */
 
 		/* System Radius */
 		--sys-radius-sm: 4px;
@@ -53,7 +53,7 @@ export const globalStyles = css`
 		--sys-radius-lg: 12px;
 		--sys-radius-xl: 16px;
 		--sys-radius-xxl: 24px;
-		--sys-radius-pill: calc(infinity * 1px);
+		--sys-radius-pill: 9999px;
 
 		/* System Font Sizes */
 		--sys-font-size-xs: 0.75rem; /* 12px */
@@ -125,9 +125,9 @@ export const globalStyles = css`
 		color: inherit;
 		cursor: pointer;
 		font: inherit;
-		margin: 0px;
+		margin: 0;
 		overflow: visible;
-		padding: 0px;
+		padding: 0;
 		width: auto;
 		-webkit-font-smoothing: inherit;
 	}
