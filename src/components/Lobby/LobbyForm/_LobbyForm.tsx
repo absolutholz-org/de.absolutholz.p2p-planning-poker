@@ -25,6 +25,7 @@ export function LobbyForm() {
 		const role = sessionStorage.getItem('p2p_role');
 		const savedRoomId = sessionStorage.getItem('p2p_room_id');
 		const savedName = sessionStorage.getItem('p2p_name');
+		const savedPeerId = sessionStorage.getItem('p2p_peer_id');
 		const savedStateStr = sessionStorage.getItem('p2p_room_state');
 
 		if (role && savedRoomId && savedName) {
@@ -35,13 +36,17 @@ export function LobbyForm() {
 			if (role === 'host' && savedStateStr) {
 				try {
 					const restoredState = JSON.parse(savedStateStr);
-					initHost(savedName, savedRoomId, restoredState);
+					initHost(
+						savedName,
+						savedPeerId || undefined,
+						restoredState,
+					);
 				} catch (e) {
 					console.error('Failed to parse restored state', e);
 					sessionStorage.clear();
 				}
 			} else if (role === 'guest') {
-				initGuest(savedRoomId, savedName);
+				initGuest(savedRoomId, savedName, savedPeerId || undefined);
 			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps

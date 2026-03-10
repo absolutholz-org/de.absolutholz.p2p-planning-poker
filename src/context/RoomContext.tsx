@@ -7,7 +7,7 @@ interface RoomContextValue {
 	castVote: (vote: VoteValue) => void;
 	connectionStatus: ConnectionStatus;
 	error: null | string;
-	initGuest: (roomId: string, name: string) => void;
+	initGuest: (roomId: string, name: string, requestedPeerId?: string) => void;
 	initHost: (
 		name: string,
 		requestedPeerId?: string,

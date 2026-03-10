@@ -63,7 +63,7 @@ interface UsePeerSessionReturn {
 	castVote: (vote: VoteValue) => void;
 	connectionStatus: ConnectionStatus;
 	error: null | string;
-	initGuest: (roomId: string, name: string) => void;
+	initGuest: (roomId: string, name: string, requestedPeerId?: string) => void;
 	initHost: (
 		name: string,
 		requestedPeerId?: string,
@@ -87,6 +87,11 @@ export function usePeerSession(): UsePeerSessionReturn {
 	const connectionsRef = useRef<Map<string, DataConnection>>(new Map());
 	const isHostRef = useRef<boolean>(false);
 	const connectionTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+	const reconnectTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+	const roomIdRef = useRef<string | null>(null);
+	const nameRef = useRef<string | null>(null);
+	const setupConnectionListenersRef =
+		useRef<(conn: DataConnection) => void>(undefined);
 
 	// ---------------------------------------------------------
 	// Core Dispatchers
@@ -219,6 +224,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 			});
 
 			conn.on('close', () => {
+				console.log(`Connection with ${conn.peer} closed.`);
 				connectionsRef.current.delete(conn.peer);
 
 				if (isHostRef.current) {
@@ -234,8 +240,59 @@ export function usePeerSession(): UsePeerSessionReturn {
 						return newState;
 					});
 				} else {
-					setError('Host disconnected. Session ended.');
-					setRoomState(null);
+					// GUEST Reconnection Logic
+					setConnectionStatus('connecting');
+					console.warn('Lost connection to host. Retrying in 3s...');
+
+					const attemptReconnect = () => {
+						if (!peerRef.current || peerRef.current.destroyed)
+							return;
+						if (connectionsRef.current.has(conn.peer)) return; // Already re-established
+
+						console.log('Attempting to reconnect to host...');
+						const newConn = peerRef.current.connect(conn.peer, {
+							reliable: true,
+						});
+						connectionsRef.current.set(conn.peer, newConn);
+
+						newConn.on('open', () => {
+							console.log('Successfully reconnected to host!');
+							clearTimeout(reconnectTimeoutRef.current);
+							setConnectionStatus('connected');
+							setupConnectionListenersRef.current?.(newConn);
+							// Re-join
+							newConn.send({
+								payload: {
+									name: nameRef.current || 'Unknown',
+									peerId: peerRef.current?.id || '',
+								},
+								type: 'JOIN_ROOM',
+							} satisfies PeerMessage);
+						});
+
+						newConn.on('error', (err) => {
+							console.error('Reconnection attempt failed:', err);
+							reconnectTimeoutRef.current = setTimeout(
+								attemptReconnect,
+								3000,
+							);
+						});
+					};
+
+					reconnectTimeoutRef.current = setTimeout(
+						attemptReconnect,
+						3000,
+					);
+
+					// Global timeout for reconnection
+					setTimeout(() => {
+						if (connectionStatus !== 'connected') {
+							clearTimeout(reconnectTimeoutRef.current);
+							setError('Host connection lost permanently.');
+							setRoomState(null);
+							setConnectionStatus('error');
+						}
+					}, 30000);
 				}
 			});
 
@@ -243,8 +300,13 @@ export function usePeerSession(): UsePeerSessionReturn {
 				console.error('Connection error:', err);
 			});
 		},
-		[handleMessage, broadcastState],
+		[handleMessage, broadcastState, connectionStatus],
 	);
+
+	// Keep the ref updated so attemptReconnect can call it
+	useEffect(() => {
+		setupConnectionListenersRef.current = setupConnectionListeners;
+	}, [setupConnectionListeners]);
 
 	const setupPeerSignalingReconnection = useCallback((peer: Peer) => {
 		peer.on('disconnected', () => {
@@ -274,6 +336,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 
 				peer.on('open', (id) => {
 					setLocalUserId(id);
+					sessionStorage.setItem('p2p_peer_id', id);
 					// Host initializes the master state
 					const initialState: RoomState = restoredState || {
 						isRevealed: false,
@@ -334,18 +397,23 @@ export function usePeerSession(): UsePeerSessionReturn {
 	);
 
 	const initGuest = useCallback(
-		(roomId: string, name: string) => {
+		(roomId: string, name: string, requestedPeerId?: string) => {
 			setConnectionStatus('connecting');
 			setError(null);
 			isHostRef.current = false;
+			roomIdRef.current = roomId;
+			nameRef.current = name;
 
 			getPeerConfig().then((peerConfig) => {
-				const peer = new Peer(peerConfig);
+				const peer = requestedPeerId
+					? new Peer(requestedPeerId, peerConfig)
+					: new Peer(peerConfig);
 				peerRef.current = peer;
 				setupPeerSignalingReconnection(peer);
 
 				peer.on('open', (id) => {
 					setLocalUserId(id);
+					sessionStorage.setItem('p2p_peer_id', id);
 
 					// Ensure reliable data channel for better cross-device connection
 					console.log(`[Guest] Dialing host ${roomId}...`);
@@ -478,12 +546,16 @@ export function usePeerSession(): UsePeerSessionReturn {
 		setLocalUserId(null);
 		setConnectionStatus('idle');
 		isHostRef.current = false;
+		clearTimeout(reconnectTimeoutRef.current);
+		roomIdRef.current = null;
+		nameRef.current = null;
 
 		if (clearStorage) {
 			sessionStorage.removeItem('p2p_role');
 			sessionStorage.removeItem('p2p_room_id');
 			sessionStorage.removeItem('p2p_name');
 			sessionStorage.removeItem('p2p_room_state');
+			sessionStorage.removeItem('p2p_peer_id');
 		}
 	}, []);
 
