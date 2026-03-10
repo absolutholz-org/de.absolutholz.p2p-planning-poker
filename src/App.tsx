@@ -11,6 +11,7 @@ import { VotingDeck } from './components/Room/VotingDeck';
 import { Divider } from './components/Shared/Divider';
 import { Header } from './components/Shared/Header';
 import { PageContainer } from './components/Shared/PageContainer';
+import { SkipLink } from './components/Shared/SkipLink';
 import { RoomProvider, useRoom } from './context/RoomContext';
 import { globalStyles } from './theme/GlobalStyles';
 
@@ -64,8 +65,9 @@ function AppContent() {
 
 	return (
 		<div className="app-container">
+			<SkipLink />
 			<Header />
-			<main className="main-content">
+			<main id="main-content" className="main-content" tabIndex={-1}>
 				<Routes>
 					<Route path="/" element={<LobbyForm />} />
 					<Route path="/room/:roomId" element={<RoomView />} />

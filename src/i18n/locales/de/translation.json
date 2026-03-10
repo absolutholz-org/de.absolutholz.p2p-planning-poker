@@ -5,7 +5,8 @@
       "reset": "Zurücksetzen",
       "reveal": "Votes aufdecken"
     },
-    "poker": "P2P Planning Poker"
+    "poker": "P2P Planning Poker",
+    "skipToMainContent": "Zum Hauptinhalt springen"
   },
   "lobby": {
     "title": "Session beitreten",
