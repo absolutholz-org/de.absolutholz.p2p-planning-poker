@@ -20,11 +20,12 @@ export const SectionTitle = styled.h2`
 export const VoteCountBadge = styled.div`
 	background: var(--sys-color-surface);
 	border: 1px solid var(--sys-color-border);
-	padding: 4px 12px;
 	border-radius: var(--sys-radius-pill);
+	color: var(--sys-color-text-secondary);
 	font-size: var(--sys-font-size-xs);
 	font-weight: 600;
-	color: var(--sys-color-text-secondary);
+	margin-block: calc(-1 * (var(--sys-spacing-xs) + 1px));
+	padding: var(--sys-spacing-xs) var(--sys-spacing-sm);
 `;
 
 export const ParticipantGrid = styled.div`
