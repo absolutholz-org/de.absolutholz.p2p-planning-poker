@@ -4,8 +4,8 @@ export const TriggerButton = styled.button`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 44px;
-	height: 44px;
+	width: 2.75rem;
+	height: 2.75rem;
 	background: transparent;
 	border: 1px solid var(--sys-color-border);
 	border-radius: var(--sys-radius-lg);
@@ -26,7 +26,7 @@ export const TriggerButton = styled.button`
 export const MenuContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	min-width: 160px;
+	min-width: 10rem;
 `;
 
 export const MenuItem = styled.button<{ 'data-active': boolean }>`
