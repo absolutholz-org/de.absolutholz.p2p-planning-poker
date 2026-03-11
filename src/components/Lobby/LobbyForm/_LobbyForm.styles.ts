@@ -103,3 +103,34 @@ export const ExtraText = styled.div`
 	padding-inline: var(--sys-spacing-xl);
 	text-align: center;
 `;
+
+export const DisclaimerText = styled.p`
+	color: var(--sys-color-text-secondary);
+	font-size: var(--sys-font-size-xs);
+	text-align: center;
+	margin-top: var(--sys-spacing-sm);
+`;
+
+export const FixedFooter = styled.footer`
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: var(--sys-spacing-md);
+	display: flex;
+	justify-content: center;
+	gap: var(--sys-spacing-lg);
+	background-color: transparent;
+`;
+
+export const FooterLink = styled.a`
+	color: var(--sys-color-text-secondary);
+	font-size: var(--sys-font-size-sm);
+	text-decoration: none;
+
+	&:hover,
+	&:focus-visible {
+		text-decoration: underline;
+		color: var(--sys-color-text-primary);
+	}
+`;

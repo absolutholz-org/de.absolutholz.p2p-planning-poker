@@ -137,11 +137,19 @@ export function LobbyForm() {
 									? `${t('lobby.submit.join')} ➔`
 									: `${t('lobby.submit.create')} ➔`}
 						</Button>
+						<S.DisclaimerText>
+							By joining, you agree to our Privacy Policy
+							regarding peer-to-peer connections.
+						</S.DisclaimerText>
 					</S.Footer>
 				</S.FormCard>
 				<S.ExtraText>
 					<p>{t('lobby.extra_text')}</p>
 				</S.ExtraText>
+				<S.FixedFooter>
+					<S.FooterLink href="#">Impressum</S.FooterLink>
+					<S.FooterLink href="#">Privacy Policy</S.FooterLink>
+				</S.FixedFooter>
 			</S.ContentWrapper>
 		</PageContainer>
 	);

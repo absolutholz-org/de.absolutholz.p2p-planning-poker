@@ -7,55 +7,15 @@ const MAX_PEERS = 12;
 
 export type ConnectionStatus = 'idle' | 'connecting' | 'connected' | 'error';
 
-// Dynamically fetch TURN credentials from Metered.ca
-const fetchIceServers = async () => {
-	console.group('Relay Discovery');
-	const fallbackRelay = [
-		{
-			credential: 'openrelayproject',
-			urls: [
-				'turn:openrelay.metered.ca:443?transport=tcp',
-				'turn:openrelay.metered.ca:80',
-			],
-			username: 'openrelayproject',
-		},
-	];
-
-	try {
-		const response = await fetch(
-			'https://planningpoker-absolutholz.metered.live/api/v1/turn/credentials?apiKey=7de25f8ab64843c06c55df688bbb4bb68c0b',
-		);
-
-		if (!response.ok) {
-			console.warn(
-				`Metered API fetch failed (${response.status}). Falling back to static openrelay project credentials.`,
-			);
-			return fallbackRelay;
-		}
-
-		const iceServers = await response.json();
-		console.log('Metered.ca TURN credentials retrieved successfully.');
-		console.groupEnd();
-		return Array.isArray(iceServers) ? iceServers : fallbackRelay;
-	} catch (error) {
-		console.error(
-			'Failed to fetch TURN credentials, using static fallback:',
-			error,
-		);
-		console.groupEnd();
-		return fallbackRelay;
-	}
-};
-
 const getPeerConfig = async () => {
-	const turnServers = await fetchIceServers();
 	return {
 		config: {
 			iceServers: [
-				{ urls: 'stun:stun.l.google.com:19302' },
-				{ urls: 'stun:stun1.l.google.com:19302' },
-				{ urls: 'stun:stun2.l.google.com:19302' },
-				...turnServers,
+				{
+					credential: import.meta.env.VITE_METERED_CREDENTIAL,
+					urls: import.meta.env.VITE_METERED_PROJECT_URL,
+					username: import.meta.env.VITE_METERED_USERNAME,
+				},
 			],
 		},
 		debug: 3, // MAXIMUM log verbosity for diagnostic tracking
