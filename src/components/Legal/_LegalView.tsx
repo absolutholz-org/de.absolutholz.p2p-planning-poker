@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import { useNavigate } from 'react-router-dom';
+import remarkBreaks from 'remark-breaks';
 
 import impressumDe from '../../assets/impressum-de.md?raw';
 import impressumEn from '../../assets/impressum-en.md?raw';
@@ -28,17 +29,17 @@ export function LegalView({ type }: LegalViewProps) {
 
 	return (
 		<PageContainer>
-			<S.ContentWrapper>
-				<S.BackButtonContainer>
-					<Button variant="secondary" onClick={() => navigate('/')}>
-						← Back to App
-					</Button>
-				</S.BackButtonContainer>
+			<S.BackButtonContainer>
+				<Button variant="secondary" onClick={() => navigate('/')}>
+					← Back to App
+				</Button>
+			</S.BackButtonContainer>
 
-				<S.MarkdownWrapper lang={isGerman ? 'de' : 'en'}>
-					<ReactMarkdown>{content}</ReactMarkdown>
-				</S.MarkdownWrapper>
-			</S.ContentWrapper>
+			<S.MarkdownWrapper lang={isGerman ? 'de' : 'en'}>
+				<ReactMarkdown remarkPlugins={[remarkBreaks]}>
+					{content}
+				</ReactMarkdown>
+			</S.MarkdownWrapper>
 		</PageContainer>
 	);
 }

@@ -1,18 +1,10 @@
 import styled from '@emotion/styled';
 
-export const ContentWrapper = styled.div`
-	margin: 0 auto;
-	max-width: 800px;
-	padding: var(--sys-spacing-xl) 0;
-	display: flex;
-	flex-direction: column;
-	gap: var(--sys-spacing-lg);
-`;
-
 export const BackButtonContainer = styled.div`
-	margin-bottom: var(--sys-spacing-lg);
 	display: flex;
 	justify-content: flex-start;
+	margin-bottom: var(--sys-spacing-lg);
+	margin-top: var(--sys-spacing-xl);
 `;
 
 export const MarkdownWrapper = styled.article`
@@ -49,8 +41,8 @@ export const MarkdownWrapper = styled.article`
 	}
 
 	p {
-		margin-bottom: var(--sys-spacing-md);
 		color: var(--sys-color-text-secondary);
+		margin-bottom: var(--sys-spacing-md);
 	}
 
 	hr {
@@ -76,9 +68,9 @@ export const MarkdownWrapper = styled.article`
 
 	ul,
 	ol {
+		color: var(--sys-color-text-secondary);
 		margin-bottom: var(--sys-spacing-md);
 		padding-left: var(--sys-spacing-xl);
-		color: var(--sys-color-text-secondary);
 	}
 
 	li {
@@ -87,10 +79,10 @@ export const MarkdownWrapper = styled.article`
 
 	code {
 		background-color: var(--sys-color-bg);
-		padding: 2px 4px;
 		border-radius: var(--sys-radius-sm);
-		font-family: inherit; // use simple monospace if preferred
-		font-size: 0.9em;
 		color: var(--sys-color-primary);
+		font-size: 0.9em;
+		font-family: inherit; // use simple monospace if preferred
+		padding: 2px 4px;
 	}
 `;

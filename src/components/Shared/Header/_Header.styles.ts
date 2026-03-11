@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 
 export const HeaderContainer = styled.header`
-	display: flex;
 	align-items: center;
-	justify-content: space-between;
-	padding: var(--sys-spacing-md) var(--sys-spacing-xxl);
 	background-color: var(--sys-color-bg);
 	border-bottom: 1px solid var(--sys-color-border);
+	display: flex;
+	justify-content: space-between;
+	padding: var(--sys-spacing-md) var(--page-content-padding);
 	position: sticky;
 	top: 0;
 	z-index: 50;
@@ -17,36 +17,36 @@ export const HeaderContainer = styled.header`
 `;
 
 export const Brand = styled.div`
-	font-weight: 700;
-	font-size: var(--sys-font-size-lg);
-	color: var(--sys-color-text-primary);
-	display: flex;
 	align-items: center;
-	gap: var(--sys-spacing-sm);
+	color: var(--sys-color-text-primary);
 	cursor: pointer;
-	user-select: none;
+	display: flex;
+	font-size: var(--sys-font-size-lg);
+	font-weight: 700;
+	gap: var(--sys-spacing-sm);
 	transition: opacity 0.2s ease;
+	user-select: none;
 
 	&:hover {
 		opacity: 0.8;
 	}
 
 	&:focus-visible {
+		border-radius: var(--sys-radius-sm);
 		outline: 2px solid var(--sys-color-focus);
 		outline-offset: 4px;
-		border-radius: var(--sys-radius-sm);
 	}
 `;
 
 export const BrandText = styled.div`
-	display: flex;
 	align-items: center;
+	display: flex;
 	gap: var(--sys-spacing-xs);
 	line-height: 1;
 
 	@media (max-width: 600px) {
-		flex-direction: column;
 		align-items: flex-start;
+		flex-direction: column;
 		gap: 0.125rem;
 
 		span {
@@ -56,16 +56,16 @@ export const BrandText = styled.div`
 `;
 
 export const LogoIcon = styled.div`
-	width: 2rem;
-	height: 2rem;
-	border-radius: var(--sys-radius-md);
+	align-items: center;
 	background-color: var(--sys-color-text-primary);
+	border-radius: var(--sys-radius-md);
 	color: var(--sys-color-bg);
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-weight: 800;
 	font-size: var(--sys-font-size-md);
+	font-weight: 800;
+	height: 2rem;
+	justify-content: center;
+	width: 2rem;
 `;
 
 export const Actions = styled.div`
