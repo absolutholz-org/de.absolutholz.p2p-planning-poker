@@ -38,21 +38,31 @@ export function PeerProvider({ children }: { children: ReactNode }) {
 		const initPeer = (idToUse?: string) => {
 			addLog(`Initializing Peer (ID: ${idToUse || 'new'})`);
 
+			const stunUrls = [import.meta.env.VITE_METERED_PROJECT_URL].filter(
+				Boolean,
+			);
+			const turnUrls = [
+				import.meta.env.VITE_METERED_TURN_URL,
+				import.meta.env.VITE_METERED_TURN_URL_TLS,
+			].filter(Boolean);
+
+			const iceServers = [];
+
+			if (stunUrls.length > 0) {
+				iceServers.push({ urls: stunUrls });
+			}
+
+			if (turnUrls.length > 0) {
+				iceServers.push({
+					credential: import.meta.env.VITE_METERED_CREDENTIAL,
+					urls: turnUrls,
+					username: import.meta.env.VITE_METERED_USERNAME,
+				});
+			}
+
 			const config = {
 				config: {
-					iceServers: [
-						{
-							urls: import.meta.env.VITE_METERED_PROJECT_URL,
-						},
-						{
-							credential: import.meta.env.VITE_METERED_CREDENTIAL,
-							urls: [
-								import.meta.env.VITE_METERED_TURN_URL,
-								import.meta.env.VITE_METERED_TURN_URL_TLS,
-							],
-							username: import.meta.env.VITE_METERED_USERNAME,
-						},
-					],
+					iceServers,
 				},
 				debug: 3,
 			};
