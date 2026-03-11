@@ -4,8 +4,6 @@ import styled from '@emotion/styled';
 import { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
-import impressumContent from './assets/impressum.md?raw';
-import privacyContent from './assets/privacy.md?raw';
 import { LegalView } from './components/Legal';
 import { LobbyForm } from './components/Lobby/LobbyForm';
 import { RoomHeader } from './components/Room/RoomHeader';
@@ -76,11 +74,11 @@ function AppContent() {
 					<Route path="/room/:roomId" element={<RoomView />} />
 					<Route
 						path="/impressum"
-						element={<LegalView content={impressumContent} />}
+						element={<LegalView type="impressum" />}
 					/>
 					<Route
 						path="/privacy"
-						element={<LegalView content={privacyContent} />}
+						element={<LegalView type="privacy" />}
 					/>
 				</Routes>
 			</main>

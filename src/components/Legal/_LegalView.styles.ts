@@ -12,7 +12,41 @@ export const ContentWrapper = styled.div`
 export const BackButtonContainer = styled.div`
 	margin-bottom: var(--sys-spacing-lg);
 	display: flex;
-	justify-content: flex-start;
+	justify-content: space-between;
+	align-items: center;
+`;
+
+export const ToggleGroup = styled.div`
+	display: flex;
+	background-color: var(--sys-color-surface);
+	border: 1px solid var(--sys-color-border);
+	border-radius: var(--sys-radius-md);
+	padding: 2px;
+	box-shadow: var(--sys-shadow-sm);
+`;
+
+export const ToggleButton = styled.button<{ active?: boolean }>`
+	background-color: ${(props) =>
+		props.active ? 'var(--sys-color-primary-container)' : 'transparent'};
+	color: ${(props) =>
+		props.active
+			? 'var(--sys-color-primary)'
+			: 'var(--sys-color-text-secondary)'};
+	border: none;
+	border-radius: calc(var(--sys-radius-md) - 2px);
+	padding: var(--sys-spacing-xs) var(--sys-spacing-md);
+	font-size: var(--sys-font-size-xs);
+	font-weight: 600;
+	cursor: pointer;
+	transition: all var(--sys-transition-fast);
+
+	&:hover:not(:disabled) {
+		background-color: ${(props) =>
+			props.active
+				? 'var(--sys-color-primary-container)'
+				: 'var(--sys-color-surface-hover)'};
+		color: var(--sys-color-primary);
+	}
 `;
 
 export const MarkdownWrapper = styled.article`
