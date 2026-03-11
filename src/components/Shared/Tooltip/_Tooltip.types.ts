@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
 
 export type Size = 'small' | 'medium' | 'large';
 export type ColorVariant = 'neutral' | 'green' | 'red' | 'yellow' | 'blue';
@@ -10,5 +10,5 @@ export interface ITooltip {
 	/** Preferred position of the tooltip relative to the child */
 	position?: 'top' | 'right' | 'bottom' | 'left';
 	/** The single child element to attach the tooltip to */
-	children: React.ReactElement;
+	children: ReactElement;
 }

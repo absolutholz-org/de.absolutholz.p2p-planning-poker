@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { type ComponentProps } from 'react';
 
 import { RoomContext } from '../../../context/RoomContext';
 import { RoomHeader } from './_RoomHeader';
@@ -54,7 +55,7 @@ const meta = {
 	tags: ['autodocs'],
 	title: 'Room/RoomHeader',
 } satisfies Meta<
-	React.ComponentProps<typeof RoomHeader> & { mockRevealed?: boolean }
+	ComponentProps<typeof RoomHeader> & { mockRevealed?: boolean }
 >;
 
 export default meta;

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { type ComponentProps } from 'react';
 
 import { RoomContext } from '../../../context/RoomContext';
 import { Roster } from './_Roster';
@@ -70,9 +71,7 @@ const meta = {
 	},
 	tags: ['autodocs'],
 	title: 'Room/Roster',
-} satisfies Meta<
-	React.ComponentProps<typeof Roster> & { mockRevealed?: boolean }
->;
+} satisfies Meta<ComponentProps<typeof Roster> & { mockRevealed?: boolean }>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

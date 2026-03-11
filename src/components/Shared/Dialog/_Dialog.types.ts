@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 export interface DialogProps {
 	/**
 	 * Text for the cancel button.
@@ -18,7 +20,7 @@ export interface DialogProps {
 	/**
 	 * Optional custom content to render inside the dialog.
 	 */
-	children?: React.ReactNode;
+	children?: ReactNode;
 	/**
 	 * Callback fired when the cancel button or overlay is clicked.
 	 */

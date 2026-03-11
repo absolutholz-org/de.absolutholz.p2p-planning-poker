@@ -1,6 +1,10 @@
 import {
 	Children,
 	cloneElement,
+	type FocusEvent,
+	type MouseEvent,
+	type ReactElement,
+	type Ref,
 	useCallback,
 	useEffect,
 	useId,
@@ -105,8 +109,8 @@ export const Tooltip = ({ children, content, position = 'top' }: ITooltip) => {
 
 	const mergedRef = (node: HTMLElement) => {
 		triggerRef.current = node;
-		const childElement = child as React.ReactElement & {
-			ref?: React.Ref<HTMLElement>;
+		const childElement = child as ReactElement & {
+			ref?: Ref<HTMLElement>;
 		};
 		const childRef = childElement.ref;
 		if (typeof childRef === 'function') {
@@ -119,28 +123,28 @@ export const Tooltip = ({ children, content, position = 'top' }: ITooltip) => {
 	return (
 		<>
 			{/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-			{cloneElement(child as React.ReactElement<any>, {
+			{cloneElement(child as ReactElement<any>, {
 				// Programmatically associate the tooltip with the trigger element
 				'aria-describedby': content ? popoverId : undefined,
-				onBlur: (e: React.FocusEvent<HTMLElement>) => {
+				onBlur: (e: FocusEvent<HTMLElement>) => {
 					hidePopover(0);
 					// eslint-disable-next-line @typescript-eslint/no-explicit-any
-					(child as React.ReactElement<any>).props.onBlur?.(e);
+					(child as ReactElement<any>).props.onBlur?.(e);
 				},
-				onFocus: (e: React.FocusEvent<HTMLElement>) => {
+				onFocus: (e: FocusEvent<HTMLElement>) => {
 					showPopover();
 					// eslint-disable-next-line @typescript-eslint/no-explicit-any
-					(child as React.ReactElement<any>).props.onFocus?.(e);
+					(child as ReactElement<any>).props.onFocus?.(e);
 				},
-				onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
+				onMouseEnter: (e: MouseEvent<HTMLElement>) => {
 					showPopover();
 					// eslint-disable-next-line @typescript-eslint/no-explicit-any
-					(child as React.ReactElement<any>).props.onMouseEnter?.(e);
+					(child as ReactElement<any>).props.onMouseEnter?.(e);
 				},
-				onMouseLeave: (e: React.MouseEvent<HTMLElement>) => {
+				onMouseLeave: (e: MouseEvent<HTMLElement>) => {
 					hidePopover();
 					// eslint-disable-next-line @typescript-eslint/no-explicit-any
-					(child as React.ReactElement<any>).props.onMouseLeave?.(e);
+					(child as ReactElement<any>).props.onMouseLeave?.(e);
 				},
 				ref: mergedRef,
 			})}

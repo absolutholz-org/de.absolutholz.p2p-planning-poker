@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { type MouseEvent, useEffect, useRef } from 'react';
 
 // import { useTranslation } from 'react-i18next';
 import { Button } from '../Button';
@@ -29,7 +29,7 @@ export function Dialog({
 		}
 	}, [isOpen]);
 
-	const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
+	const handleBackdropClick = (e: MouseEvent<HTMLDialogElement>) => {
 		if (e.target === dialogRef.current) {
 			onCancel();
 		}

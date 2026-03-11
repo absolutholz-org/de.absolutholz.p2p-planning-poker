@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { type ComponentProps } from 'react';
 
 import { RoomContext } from '../../../context/RoomContext';
 import { LobbyForm } from './_LobbyForm';
@@ -34,7 +35,7 @@ const meta = {
 	},
 	tags: ['autodocs'],
 	title: 'Lobby/LobbyForm',
-} satisfies Meta<React.ComponentProps<typeof LobbyForm> & { error?: string }>;
+} satisfies Meta<ComponentProps<typeof LobbyForm> & { error?: string }>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

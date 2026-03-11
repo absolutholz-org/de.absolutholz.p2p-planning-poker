@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { type ComponentProps } from 'react';
 
 import { RoomContext } from '../../../context/RoomContext';
 import { VotingDeck } from './_VotingDeck';
@@ -47,7 +48,7 @@ const meta = {
 	tags: ['autodocs'],
 	title: 'Room/VotingDeck',
 } satisfies Meta<
-	React.ComponentProps<typeof VotingDeck> & { mockRevealed?: boolean }
+	ComponentProps<typeof VotingDeck> & { mockRevealed?: boolean }
 >;
 
 export default meta;

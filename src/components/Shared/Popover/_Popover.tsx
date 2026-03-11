@@ -1,6 +1,8 @@
 import {
 	Children,
 	cloneElement,
+	type ReactElement,
+	type Ref,
 	useEffect,
 	useId,
 	useLayoutEffect,
@@ -21,7 +23,7 @@ export function Popover({ align = 'bottom', children }: PopoverProps) {
 	const popoverRef = useRef<HTMLDivElement>(null);
 
 	const childrenArray = Children.toArray(children);
-	const trigger = childrenArray[0] as React.ReactElement;
+	const trigger = childrenArray[0] as ReactElement;
 	const popoverContent = childrenArray.slice(1);
 
 	// Map generic alignments to valid floating positions
@@ -67,8 +69,8 @@ export function Popover({ align = 'bottom', children }: PopoverProps) {
 
 	const mergedRef = (node: HTMLElement) => {
 		triggerRef.current = node;
-		const childElement = trigger as React.ReactElement & {
-			ref?: React.Ref<HTMLElement>;
+		const childElement = trigger as ReactElement & {
+			ref?: Ref<HTMLElement>;
 		};
 		const childRef = childElement.ref;
 		if (typeof childRef === 'function') {
@@ -82,7 +84,7 @@ export function Popover({ align = 'bottom', children }: PopoverProps) {
 		<>
 			{/* eslint-disable react-hooks/refs */}
 			{/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-			{cloneElement(trigger as React.ReactElement<any>, {
+			{cloneElement(trigger as ReactElement<any>, {
 				popovertarget: id,
 				ref: mergedRef,
 			})}
