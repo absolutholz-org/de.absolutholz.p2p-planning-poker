@@ -35,7 +35,7 @@ export function LegalView({ type }: LegalViewProps) {
 					</Button>
 				</S.BackButtonContainer>
 
-				<S.MarkdownWrapper>
+				<S.MarkdownWrapper lang={isGerman ? 'de' : 'en'}>
 					<ReactMarkdown>{content}</ReactMarkdown>
 				</S.MarkdownWrapper>
 			</S.ContentWrapper>

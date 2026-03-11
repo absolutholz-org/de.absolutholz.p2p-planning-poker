@@ -16,14 +16,10 @@ export const BackButtonContainer = styled.div`
 `;
 
 export const MarkdownWrapper = styled.article`
-	background-color: var(--sys-color-surface);
-	border: 1px solid var(--sys-color-border);
-	border-radius: var(--sys-radius-xl);
-	box-shadow: var(--sys-shadow-md);
-	padding: var(--sys-spacing-xl);
 	color: var(--sys-color-text-primary);
 	font-size: var(--sys-font-size-md);
 	line-height: 1.6;
+	max-width: 65ch;
 
 	/* Markdown Typography Styling matching our Design System */
 
