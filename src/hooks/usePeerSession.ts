@@ -273,7 +273,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 				console.error('Connection error:', err);
 			});
 		},
-		[handleMessage, broadcastState, connectionStatus, peer],
+		[handleMessage, broadcastState, peer],
 	);
 
 	// Keep the ref updated so attemptReconnect can call it

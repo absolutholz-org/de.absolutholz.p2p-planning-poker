@@ -22,55 +22,91 @@ export function PeerProvider({ children }: { children: ReactNode }) {
 	const [error, setError] = useState<null | string>(null);
 
 	useEffect(() => {
-		const storedPeerId = sessionStorage.getItem('p2p_peer_id');
+		let isMounted = true;
 
-		const config = {
-			config: {
-				iceServers: [
-					{
-						urls: import.meta.env.VITE_METERED_PROJECT_URL,
-					},
-					{
-						credential: import.meta.env.VITE_METERED_CREDENTIAL,
-						urls: [
-							import.meta.env.VITE_METERED_TURN_URL,
-							import.meta.env.VITE_METERED_TURN_URL_TLS,
-						],
-						username: import.meta.env.VITE_METERED_USERNAME,
-					},
-				],
-				sdpSemantics: 'unified-plan',
-			},
-			debug: 3,
+		const initPeer = (idToUse?: string) => {
+			const config = {
+				config: {
+					iceServers: [
+						{
+							urls: import.meta.env.VITE_METERED_PROJECT_URL,
+						},
+						{
+							credential: import.meta.env.VITE_METERED_CREDENTIAL,
+							urls: [
+								import.meta.env.VITE_METERED_TURN_URL,
+								import.meta.env.VITE_METERED_TURN_URL_TLS,
+							],
+							username: import.meta.env.VITE_METERED_USERNAME,
+						},
+					],
+				},
+				debug: 3,
+			};
+
+			const newPeer = idToUse
+				? new Peer(idToUse, config)
+				: new Peer(config);
+
+			newPeer.on('open', (id) => {
+				if (!isMounted) return;
+				setPeerId(id);
+				setError(null);
+				sessionStorage.setItem('p2p_peer_id', id);
+				setPeer(newPeer);
+			});
+
+			newPeer.on('error', (err) => {
+				if (!isMounted) return;
+				console.error('[PeerContext] PeerJS Error:', err.type, err);
+
+				if (err.type === 'unavailable-id' && idToUse) {
+					console.warn(
+						'[PeerContext] ID unavailable, retrying with fresh ID...',
+					);
+					sessionStorage.removeItem('p2p_peer_id');
+					newPeer.destroy();
+					initPeer();
+					return;
+				}
+
+				setError(`[${err.type}] ${err.message}`);
+			});
+
+			newPeer.on('disconnected', () => {
+				if (!isMounted) return;
+				console.warn(
+					'[PeerContext] Disconnected from signaling server.',
+				);
+				if (!newPeer.destroyed) {
+					newPeer.reconnect();
+				}
+			});
+
+			// Heartbeat to keep connection alive on PeerJS Cloud
+			const heartbeat = setInterval(() => {
+				if (
+					newPeer.open &&
+					!newPeer.disconnected &&
+					!newPeer.destroyed
+				) {
+					// eslint-disable-next-line @typescript-eslint/no-explicit-any
+					(newPeer as any).socket?.send({ type: 'HEARTBEAT' });
+				}
+			}, 15000);
+
+			return () => {
+				clearInterval(heartbeat);
+				newPeer.destroy();
+			};
 		};
 
-		const newPeer = storedPeerId
-			? new Peer(storedPeerId, config)
-			: new Peer(config);
-
-		newPeer.on('open', (id) => {
-			setPeerId(id);
-			setError(null);
-			sessionStorage.setItem('p2p_peer_id', id);
-		});
-
-		newPeer.on('error', (err) => {
-			console.error('[PeerContext] PeerJS Error:', err.type, err);
-			setError(`[${err.type}] ${err.message}`);
-		});
-
-		newPeer.on('disconnected', () => {
-			console.warn('[PeerContext] Disconnected from signaling server.');
-			newPeer.reconnect();
-		});
-
-		// Use a slight delay to avoid "setState synchronously within an effect" warning in some React modes
-		// although for PeerJS instance it's usually fine, it helps with strict mode consistency.
-		const timeoutId = setTimeout(() => setPeer(newPeer), 0);
+		const storedPeerId = sessionStorage.getItem('p2p_peer_id');
+		const cleanup = initPeer(storedPeerId || undefined);
 
 		return () => {
-			clearTimeout(timeoutId);
-			newPeer.destroy();
+			isMounted = false;
+			cleanup?.();
 		};
 	}, []);
 
