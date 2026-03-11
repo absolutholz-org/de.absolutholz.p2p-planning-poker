@@ -1,7 +1,7 @@
 {
   "name": "p2p-planning-poker",
   "private": true,
-  "version": "0.15.19",
+  "version": "0.15.20",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -23,6 +23,7 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-i18next": "^16.5.4",
+    "react-markdown": "^10.1.0",
     "react-router-dom": "^7.13.1"
   },
   "devDependencies": {

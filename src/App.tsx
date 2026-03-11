@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
+import { Legal } from './components/Legal';
 import { LobbyForm } from './components/Lobby/LobbyForm';
 import { RoomHeader } from './components/Room/RoomHeader';
 import { Roster } from './components/Room/Roster';
@@ -71,6 +72,7 @@ function AppContent() {
 				<Routes>
 					<Route path="/" element={<LobbyForm />} />
 					<Route path="/room/:roomId" element={<RoomView />} />
+					<Route path="/legal" element={<Legal />} />
 				</Routes>
 			</main>
 		</div>

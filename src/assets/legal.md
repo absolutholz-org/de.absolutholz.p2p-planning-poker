@@ -1,0 +1,52 @@
+# Impressum & Datenschutzerklärung / Legal Notice & Privacy
+
+---
+
+## 🇩🇪 Deutsch
+
+### Impressum
+
+**Angaben gemäß § 5 TMG:**
+Stephen Wood
+Balanstr. 63
+81541 München
+
+**Kontakt:**
+E-Mail: absolutholz@yahoo.de
+
+### Datenschutzerklärung
+
+**1. Bereitstellung der Applikation (WebRTC)**
+Zur Bereitstellung der Echtzeit-Kommunikation nutzt diese Anwendung WebRTC. Hierbei werden IP-Adressen der Teilnehmer aus technischen Gründen direkt zwischen den Browsern der Nutzer im selben Raum ausgetauscht (Peer-to-Peer). Dies erfolgt auf Grundlage unseres berechtigten Interesses an der Bereitstellung der App-Funktionalität (Art. 6 Abs. 1 lit. f DSGVO).
+
+**2. Externe Dienstleister (STUN/TURN)**
+Um Verbindungen auch hinter Firewalls zu ermöglichen, nutzen wir STUN/TURN-Server des Anbieters Metered. Hierbei werden Verbindungsdaten (inkl. IP-Adresse) über deren Server in der EU geleitet. Mit dem Anbieter wurde ein Vertrag zur Auftragsverarbeitung (AVV) gemäß Art. 28 DSGVO geschlossen.
+
+**3. Lokale Speicherung (localStorage / sessionStorage)**
+Diese Anwendung speichert Ihren gewählten Benutzernamen im `localStorage` und die Raum-ID im `sessionStorage` Ihres Browsers. Diese Speicherung ist technisch zwingend erforderlich, um den von Ihnen ausdrücklich gewünschten Dienst zur Verfügung zu stellen. Eine Einwilligungspflicht (Cookie-Banner) entfällt daher gemäß § 25 Abs. 2 Nr. 2 TDDDG.
+
+---
+
+## 🇬🇧 English
+
+### Legal Notice
+
+**Information provided according to Sec. 5 German Telemedia Act (TMG):**
+Stephen Wood
+Balanstr. 63
+81541 München
+Germany
+
+**Contact:**
+Email: absolutholz@yahoo.de
+
+### Privacy Policy
+
+**1. Provision of the Application (WebRTC)**
+To provide real-time communication, this application uses WebRTC. For technical reasons, participants' IP addresses are exchanged directly between the browsers of users in the same room (peer-to-peer). This is done on the basis of our legitimate interest in providing the app's functionality (Art. 6 (1) (f) GDPR).
+
+**2. Third-Party Service Providers (STUN/TURN)**
+To enable connections behind firewalls, we use STUN/TURN servers provided by Metered. Connection data (including IP addresses) is routed through their servers in the EU. A Data Processing Agreement (DPA) pursuant to Art. 28 GDPR has been concluded with the provider.
+
+**3. Local Storage (localStorage / sessionStorage)**
+This application stores your chosen username in your browser's `localStorage` and the Room ID in `sessionStorage`. This storage is technically strictly necessary to provide the service you have explicitly requested. An obligation to obtain consent (cookie banner) is therefore waived in accordance with Sec. 25 (2) No. 2 TDDDG.
