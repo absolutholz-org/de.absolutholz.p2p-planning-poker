@@ -21,9 +21,14 @@
     },
     "submit": {
       "join": "Rejoindre la Salle",
-      "create": "Créer la Salle"
+      "error": "Erreur lors de l'accès à la salle",
+      "create": "Créer la Salle",
+      "extra_text": "Aucune inscription requise. Gratuit pour toujours."
     },
-    "extra_text": "Aucune inscription requise. P2P Poker est un outil d'estimation en temps réel sans serveur, propulsé par WebRTC."
+    "footer": {
+      "impressum": "Mentions Légales",
+      "privacy": "Politique de Confidentialité"
+    }
   },
   "room": {
     "header": {

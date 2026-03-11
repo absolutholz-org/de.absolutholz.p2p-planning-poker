@@ -1,1 +1,1 @@
-export * from './_Legal';
+export * from './_LegalView';

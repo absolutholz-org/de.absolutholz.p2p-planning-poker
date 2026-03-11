@@ -1,8 +1,9 @@
 import { type FormEvent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { useRoom } from '../../../context/RoomContext';
+import { AppFooter } from '../../Shared/AppFooter';
 import { Button } from '../../Shared/Button';
 import { PageContainer } from '../../Shared/PageContainer';
 import * as S from './_LobbyForm.styles';
@@ -146,12 +147,8 @@ export function LobbyForm() {
 				<S.ExtraText>
 					<p>{t('lobby.extra_text')}</p>
 				</S.ExtraText>
-				<S.FixedFooter>
-					<S.FooterLink as={Link} to="/legal">
-						Impressum & Privacy Policy
-					</S.FooterLink>
-				</S.FixedFooter>
 			</S.ContentWrapper>
+			<AppFooter />
 		</PageContainer>
 	);
 }

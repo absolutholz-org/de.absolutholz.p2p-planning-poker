@@ -21,9 +21,14 @@
     },
     "submit": {
       "join": "Entrar na Sala",
-      "create": "Criar Sala"
+      "create": "Criar Sala",
+      "error": "Erro ao entrar na sala"
     },
-    "extra_text": "Sem necessidade de registro. O P2P Poker é uma ferramenta de estimativa em tempo real e sem servidor, impulsionada pelo WebRTC."
+    "extra_text": "Sem necessidade de registro. O P2P Poker é uma ferramenta de estimativa em tempo real e sem servidor, impulsionada pelo WebRTC.",
+    "footer": {
+      "impressum": "Aviso Legal",
+      "privacy": "Política de Privacidade"
+    }
   },
   "room": {
     "header": {

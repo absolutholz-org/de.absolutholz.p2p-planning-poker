@@ -21,9 +21,14 @@
     },
     "submit": {
       "join": "Join Room",
-      "create": "Create Room"
+      "create": "Create Room",
+      "error": "Error joining room"
     },
-    "extra_text": "No sign-up required. P2P Poker is a serverless, real-time estimation tool powered by WebRTC."
+    "extra_text": "No sign-up required. Free forever.",
+    "footer": {
+      "impressum": "Legal Notice",
+      "privacy": "Privacy Policy"
+    }
   },
   "room": {
     "header": {
