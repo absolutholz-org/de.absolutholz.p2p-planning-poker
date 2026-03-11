@@ -1,26 +1,12 @@
-import { type DataConnection, Peer } from 'peerjs';
+import { type DataConnection } from 'peerjs';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { usePeer } from '../context/PeerContext';
 import type { PeerMessage, RoomState, VoteValue } from '../types/domain';
 
 const MAX_PEERS = 12;
 
 export type ConnectionStatus = 'idle' | 'connecting' | 'connected' | 'error';
-
-const getPeerConfig = async () => {
-	return {
-		config: {
-			iceServers: [
-				{
-					credential: import.meta.env.VITE_METERED_CREDENTIAL,
-					urls: import.meta.env.VITE_METERED_PROJECT_URL,
-					username: import.meta.env.VITE_METERED_USERNAME,
-				},
-			],
-		},
-		debug: 3, // MAXIMUM log verbosity for diagnostic tracking
-	};
-};
 
 interface UsePeerSessionReturn {
 	broadcastState: (state: RoomState) => void;
@@ -42,8 +28,8 @@ interface UsePeerSessionReturn {
 
 export function usePeerSession(): UsePeerSessionReturn {
 	const [roomState, setRoomState] = useState<RoomState | null>(null);
+	const { error: peerContextError, peer, peerId } = usePeer();
 	const [error, setError] = useState<null | string>(null);
-	const [localUserId, setLocalUserId] = useState<null | string>(null);
 	const [connectionStatus, setConnectionStatus] =
 		useState<ConnectionStatus>('idle');
 	const statusRef = useRef<ConnectionStatus>('idle');
@@ -53,7 +39,13 @@ export function usePeerSession(): UsePeerSessionReturn {
 		statusRef.current = connectionStatus;
 	}, [connectionStatus]);
 
-	const peerRef = useRef<Peer | null>(null);
+	useEffect(() => {
+		if (peerContextError) {
+			const timeoutId = setTimeout(() => setError(peerContextError), 0);
+			return () => clearTimeout(timeoutId);
+		}
+	}, [peerContextError]);
+
 	const connectionsRef = useRef<Map<string, DataConnection>>(new Map());
 	const isHostRef = useRef<boolean>(false);
 	const connectionTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
@@ -227,12 +219,11 @@ export function usePeerSession(): UsePeerSessionReturn {
 					console.warn('Lost connection to host. Retrying in 3s...');
 
 					const attemptReconnect = () => {
-						if (!peerRef.current || peerRef.current.destroyed)
-							return;
+						if (!peer || peer.destroyed) return;
 						if (connectionsRef.current.has(conn.peer)) return; // Already re-established
 
 						console.log('Attempting to reconnect to host...');
-						const newConn = peerRef.current.connect(conn.peer, {
+						const newConn = peer.connect(conn.peer, {
 							reliable: true,
 						});
 						connectionsRef.current.set(conn.peer, newConn);
@@ -246,7 +237,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 							newConn.send({
 								payload: {
 									name: nameRef.current || 'Unknown',
-									peerId: peerRef.current?.id || '',
+									peerId: peer?.id || '',
 								},
 								type: 'JOIN_ROOM',
 							} satisfies PeerMessage);
@@ -282,7 +273,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 				console.error('Connection error:', err);
 			});
 		},
-		[handleMessage, broadcastState, connectionStatus],
+		[handleMessage, broadcastState, connectionStatus, peer],
 	);
 
 	// Keep the ref updated so attemptReconnect can call it
@@ -290,103 +281,70 @@ export function usePeerSession(): UsePeerSessionReturn {
 		setupConnectionListenersRef.current = setupConnectionListeners;
 	}, [setupConnectionListeners]);
 
-	const setupPeerSignalingReconnection = useCallback((peer: Peer) => {
-		peer.on('disconnected', () => {
-			console.warn('Disconnected from signaling server. Reconnecting...');
-			if (!peer.destroyed) {
-				peer.reconnect();
-			}
-		});
-	}, []);
-
 	// ---------------------------------------------------------
 	// Initializers
 	// ---------------------------------------------------------
 
 	const initHost = useCallback(
-		(name: string, requestedPeerId?: string, restoredState?: RoomState) => {
+		(
+			name: string,
+			_requestedPeerId?: string,
+			restoredState?: RoomState,
+		) => {
+			if (!peer || !peerId) {
+				setError('PeerJS instance not ready.');
+				return;
+			}
 			setConnectionStatus('connecting');
 			setError(null);
 			isHostRef.current = true;
 
-			getPeerConfig().then((peerConfig) => {
-				const peer = requestedPeerId
-					? new Peer(requestedPeerId, peerConfig)
-					: new Peer(peerConfig);
-				peerRef.current = peer;
-				setupPeerSignalingReconnection(peer);
+			// Host initializes the master state
+			const initialState: RoomState = restoredState || {
+				isRevealed: false,
+				roomId: peerId,
+				users: [
+					{
+						id: peerId,
+						isConnected: true,
+						isHost: true,
+						name,
+						vote: null,
+					},
+				],
+			};
 
-				peer.on('open', (id) => {
-					setLocalUserId(id);
-					sessionStorage.setItem('p2p_peer_id', id);
-					// Host initializes the master state
-					const initialState: RoomState = restoredState || {
-						isRevealed: false,
-						roomId: id,
-						users: [
-							{
-								id,
-								isConnected: true,
-								isHost: true,
-								name,
-								vote: null,
-							},
-						],
-					};
+			setRoomState(initialState);
+			sessionStorage.setItem('p2p_role', 'host');
+			sessionStorage.setItem('p2p_room_id', peerId);
+			sessionStorage.setItem('p2p_name', name);
+			sessionStorage.setItem(
+				'p2p_room_state',
+				JSON.stringify(initialState),
+			);
+			setConnectionStatus('connected');
 
-					setRoomState(initialState);
-					sessionStorage.setItem('p2p_role', 'host');
-					sessionStorage.setItem('p2p_room_id', id);
-					sessionStorage.setItem('p2p_name', name);
-					sessionStorage.setItem(
-						'p2p_room_state',
-						JSON.stringify(initialState),
-					);
-					setConnectionStatus('connected');
-				});
+			peer.on('connection', (conn) => {
+				console.log(`[Host] Incoming connection from ${conn.peer}...`);
+				if (connectionsRef.current.size >= MAX_PEERS - 1) {
+					// -1 because Host is 1 peer
+					console.warn('[Host] Room is full. Rejecting connection.');
+					setTimeout(() => conn.close(), 500);
+					return;
+				}
+				connectionsRef.current.set(conn.peer, conn);
 
-				peer.on('connection', (conn) => {
+				conn.on('open', () => {
 					console.log(
-						`[Host] Incoming connection from ${conn.peer}...`,
+						`[Host] Connection established and open with ${conn.peer}`,
 					);
-					if (connectionsRef.current.size >= MAX_PEERS - 1) {
-						// -1 because Host is 1 peer
-						console.warn(
-							'[Host] Room is full. Rejecting connection.',
-						);
-						setTimeout(() => conn.close(), 500);
-						return;
-					}
-					connectionsRef.current.set(conn.peer, conn);
-
-					conn.on('open', () => {
-						console.log(
-							`[Host] Connection established and open with ${conn.peer}`,
-						);
-						setupConnectionListeners(conn);
-						// We sync state immediately so the new guest gets the board,
-						// but they haven't "Joined" the roster yet. They will send JOIN_ROOM.
-					});
-				});
-
-				peer.on('error', (err) => {
-					console.error('[Host] PeerJS Error:', err.type, err);
-
-					// 'unavailable-id' is the PeerJS error type when an ID is already in use
-					if (err.type === 'unavailable-id' && requestedPeerId) {
-						console.warn(
-							`[Host] Peer ID ${requestedPeerId} is still active on the server. Retrying with a fresh ID...`,
-						);
-						sessionStorage.removeItem('p2p_peer_id');
-						initHostRef.current?.(name, undefined, restoredState);
-						return;
-					}
-
-					setError(`[${err.type}] ${err.message}`);
+					setupConnectionListeners(conn);
+					// We sync state immediately so the new guest gets the board,
+					// but they haven't "Joined" the roster yet. They will send JOIN_ROOM.
 				});
 			});
 		},
-		[setupConnectionListeners, setupPeerSignalingReconnection],
+		[peer, peerId, setupConnectionListeners],
 	);
 
 	useEffect(() => {
@@ -394,96 +352,73 @@ export function usePeerSession(): UsePeerSessionReturn {
 	}, [initHost]);
 
 	const initGuest = useCallback(
-		(roomId: string, name: string, requestedPeerId?: string) => {
+		(roomId: string, name: string) => {
+			if (!peer || !peerId) {
+				setError('PeerJS instance not ready.');
+				return;
+			}
 			setConnectionStatus('connecting');
 			setError(null);
 			isHostRef.current = false;
 			roomIdRef.current = roomId;
 			nameRef.current = name;
 
-			getPeerConfig().then((peerConfig) => {
-				const peer = requestedPeerId
-					? new Peer(requestedPeerId, peerConfig)
-					: new Peer(peerConfig);
-				peerRef.current = peer;
-				setupPeerSignalingReconnection(peer);
+			// Ensure reliable data channel for better cross-device connection
+			console.log(`[Guest] Dialing host ${roomId}...`);
+			const conn = peer.connect(roomId, { reliable: true });
+			connectionsRef.current.set(roomId, conn);
 
-				peer.on('open', (id) => {
-					setLocalUserId(id);
-					sessionStorage.setItem('p2p_peer_id', id);
-
-					// Ensure reliable data channel for better cross-device connection
-					console.log(`[Guest] Dialing host ${roomId}...`);
-					const conn = peer.connect(roomId, { reliable: true });
-					connectionsRef.current.set(roomId, conn);
-
-					// Probe the underlying WebRTC state if possible
-					if (conn.peerConnection) {
-						conn.peerConnection.addEventListener(
-							'iceconnectionstatechange',
-							() => {
-								console.log(
-									`[Guest] ICE State shifted to: ${conn.peerConnection.iceConnectionState}`,
-								);
-							},
-						);
-					}
-
-					sessionStorage.setItem('p2p_role', 'guest');
-					sessionStorage.setItem('p2p_room_id', roomId);
-					sessionStorage.setItem('p2p_name', name);
-
-					// Timeout if WebRTC gets stuck connecting
-					connectionTimeoutRef.current = setTimeout(() => {
-						console.error(
-							'[Guest] Hard timeout hit after 15s waiting for STUN/TURN.',
-						);
-						// Determine if the ICE connection even made progress
-						const iceState =
-							conn.peerConnection?.iceConnectionState ||
-							'unknown';
-
-						setError(
-							`Connection timeout (ICE state: ${iceState}). Strict firewall or symmetric NAT active.`,
-						);
-						setConnectionStatus('error');
-						peer.destroy();
-					}, 15000);
-
-					conn.on('open', () => {
+			// Probe the underlying WebRTC state if possible
+			if (conn.peerConnection) {
+				conn.peerConnection.addEventListener(
+					'iceconnectionstatechange',
+					() => {
 						console.log(
-							`[Guest] Connection OPEN with host ${roomId}!`,
+							`[Guest] ICE State shifted to: ${conn.peerConnection.iceConnectionState}`,
 						);
-						clearTimeout(connectionTimeoutRef.current);
-						setConnectionStatus('connected');
-						setupConnectionListeners(conn);
-						// Immediately announce presence to Host
-						conn.send({
-							payload: { name, peerId: id },
-							type: 'JOIN_ROOM',
-						} satisfies PeerMessage);
-					});
-				});
+					},
+				);
+			}
 
-				peer.on('error', (err) => {
-					console.error('[Guest] PeerJS Error:', err.type, err);
-					clearTimeout(connectionTimeoutRef.current);
+			sessionStorage.setItem('p2p_role', 'guest');
+			sessionStorage.setItem('p2p_room_id', roomId);
+			sessionStorage.setItem('p2p_name', name);
 
-					if (err.type === 'unavailable-id' && requestedPeerId) {
-						console.warn(
-							`[Guest] Peer ID ${requestedPeerId} is still active on the server. Retrying with a fresh ID...`,
-						);
-						sessionStorage.removeItem('p2p_peer_id');
-						initGuestRef.current?.(roomId, name, undefined);
-						return;
-					}
+			// Timeout if WebRTC gets stuck connecting
+			connectionTimeoutRef.current = setTimeout(() => {
+				console.error(
+					'[Guest] Hard timeout hit after 15s waiting for STUN/TURN.',
+				);
+				// Determine if the ICE connection even made progress
+				const iceState =
+					conn.peerConnection?.iceConnectionState || 'unknown';
 
-					setError(`[${err.type}] ${err.message}`);
-					setConnectionStatus('error');
-				});
+				setError(
+					`Connection timeout (ICE state: ${iceState}). Strict firewall or symmetric NAT active.`,
+				);
+				setConnectionStatus('error');
+			}, 15000);
+
+			conn.on('open', () => {
+				console.log(`[Guest] Connection OPEN with host ${roomId}!`);
+				clearTimeout(connectionTimeoutRef.current);
+				setConnectionStatus('connected');
+				setupConnectionListeners(conn);
+				// Immediately announce presence to Host
+				conn.send({
+					payload: { name, peerId: peerId },
+					type: 'JOIN_ROOM',
+				} satisfies PeerMessage);
+			});
+
+			conn.on('error', (err) => {
+				console.error('[Guest] Connection Error:', err);
+				clearTimeout(connectionTimeoutRef.current);
+				setError(`Connection error: ${err.type}`);
+				setConnectionStatus('error');
 			});
 		},
-		[setupConnectionListeners, setupPeerSignalingReconnection],
+		[peer, peerId, setupConnectionListeners],
 	);
 
 	useEffect(() => {
@@ -500,7 +435,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 				setRoomState((prev) => {
 					if (!prev) return prev;
 					const updatedUsers = prev.users.map((u) =>
-						u.id === peerRef.current?.id ? { ...u, vote } : u,
+						u.id === peerId ? { ...u, vote } : u,
 					);
 					const newState = { ...prev, users: updatedUsers };
 					broadcastState(newState);
@@ -510,7 +445,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 				sendToHost({ payload: { vote }, type: 'SUBMIT_VOTE' });
 			}
 		},
-		[sendToHost, broadcastState],
+		[sendToHost, broadcastState, peerId],
 	);
 
 	const revealVotes = useCallback(() => {
@@ -551,10 +486,8 @@ export function usePeerSession(): UsePeerSessionReturn {
 		clearTimeout(connectionTimeoutRef.current);
 		connectionsRef.current.forEach((conn) => conn.close());
 		connectionsRef.current.clear();
-		peerRef.current?.destroy();
 		setRoomState(null);
 		setError(null);
-		setLocalUserId(null);
 		setConnectionStatus('idle');
 		isHostRef.current = false;
 		clearTimeout(reconnectTimeoutRef.current);
@@ -583,7 +516,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 		initGuest,
 		initHost,
 		leaveRoom,
-		localUserId,
+		localUserId: peerId,
 		resetBoard,
 		revealVotes,
 		roomState,

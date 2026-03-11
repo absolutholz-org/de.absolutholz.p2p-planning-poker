@@ -13,6 +13,7 @@ import { Divider } from './components/Shared/Divider';
 import { Header } from './components/Shared/Header';
 import { PageContainer } from './components/Shared/PageContainer';
 import { SkipLink } from './components/Shared/SkipLink';
+import { PeerProvider } from './context/PeerContext';
 import { RoomProvider, useRoom } from './context/RoomContext';
 import { globalStyles } from './theme/GlobalStyles';
 
@@ -89,10 +90,12 @@ function AppContent() {
 function App() {
 	return (
 		<CacheProvider value={emotionCache}>
-			<RoomProvider>
-				<Global styles={globalStyles} />
-				<AppContent />
-			</RoomProvider>
+			<PeerProvider>
+				<RoomProvider>
+					<Global styles={globalStyles} />
+					<AppContent />
+				</RoomProvider>
+			</PeerProvider>
 		</CacheProvider>
 	);
 }
