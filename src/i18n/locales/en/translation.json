@@ -28,7 +28,8 @@
     "footer": {
       "impressum": "Legal Notice",
       "privacy": "Privacy Policy"
-    }
+    },
+    "privacy_disclaimer": "By joining, you agree to our Privacy Policy regarding peer-to-peer connections."
   },
   "room": {
     "header": {

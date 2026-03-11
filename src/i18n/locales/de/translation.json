@@ -28,7 +28,8 @@
     "footer": {
       "impressum": "Impressum",
       "privacy": "Datenschutzerklärung"
-    }
+    },
+    "privacy_disclaimer": "Mit dem Beitritt erklärst du dich mit unserer Datenschutzerklärung bezüglich Peer-to-Peer-Verbindungen einverstanden."
   },
   "room": {
     "header": {

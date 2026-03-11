@@ -28,7 +28,8 @@
     "footer": {
       "impressum": "Mentions Légales",
       "privacy": "Politique de Confidentialité"
-    }
+    },
+    "privacy_disclaimer": "En rejoignant, vous acceptez notre politique de confidentialité concernant les connexions peer-to-peer."
   },
   "room": {
     "header": {
