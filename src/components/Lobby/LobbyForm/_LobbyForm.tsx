@@ -2,6 +2,7 @@ import { type FormEvent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
+import { usePeer } from '../../../context/PeerContext';
 import { useRoom } from '../../../context/RoomContext';
 import { AppFooter } from '../../Shared/AppFooter';
 import { Button } from '../../Shared/Button';
@@ -11,6 +12,7 @@ import * as S from './_LobbyForm.styles';
 export function LobbyForm() {
 	const { t } = useTranslation();
 	const { connectionStatus, error, initGuest, initHost } = useRoom();
+	const { logs } = usePeer();
 	const { roomId } = useParams<{ roomId?: string }>();
 	const [name, setName] = useState('');
 	const [roomCode, setRoomCode] = useState(roomId || '');
@@ -147,6 +149,16 @@ export function LobbyForm() {
 					<p>{t('lobby.extra_text')}</p>
 				</S.ExtraText>
 			</S.ContentWrapper>
+			{logs.length > 0 && (
+				<S.DebugSection>
+					<h3>Connectivity Diagnostics</h3>
+					<S.DebugList>
+						{logs.map((log: string, i: number) => (
+							<li key={i}>{log}</li>
+						))}
+					</S.DebugList>
+				</S.DebugSection>
+			)}
 			<AppFooter />
 		</PageContainer>
 	);

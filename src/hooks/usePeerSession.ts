@@ -28,7 +28,7 @@ interface UsePeerSessionReturn {
 
 export function usePeerSession(): UsePeerSessionReturn {
 	const [roomState, setRoomState] = useState<RoomState | null>(null);
-	const { error: peerContextError, peer, peerId } = usePeer();
+	const { addLog, error: peerContextError, peer, peerId } = usePeer();
 	const [error, setError] = useState<null | string>(null);
 	const [connectionStatus, setConnectionStatus] =
 		useState<ConnectionStatus>('idle');
@@ -229,7 +229,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 						connectionsRef.current.set(conn.peer, newConn);
 
 						newConn.on('open', () => {
-							console.log('Successfully reconnected to host!');
+							addLog('Successfully reconnected to host!');
 							clearTimeout(reconnectTimeoutRef.current);
 							setConnectionStatus('connected');
 							setupConnectionListenersRef.current?.(newConn);
@@ -273,7 +273,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 				console.error('Connection error:', err);
 			});
 		},
-		[handleMessage, broadcastState, peer],
+		[handleMessage, broadcastState, peer, addLog],
 	);
 
 	// Keep the ref updated so attemptReconnect can call it
@@ -325,7 +325,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 			setConnectionStatus('connected');
 
 			peer.on('connection', (conn) => {
-				console.log(`[Host] Incoming connection from ${conn.peer}...`);
+				addLog(`[Host] Incoming connection from ${conn.peer}...`);
 				if (connectionsRef.current.size >= MAX_PEERS - 1) {
 					// -1 because Host is 1 peer
 					console.warn('[Host] Room is full. Rejecting connection.');
@@ -335,7 +335,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 				connectionsRef.current.set(conn.peer, conn);
 
 				conn.on('open', () => {
-					console.log(
+					addLog(
 						`[Host] Connection established and open with ${conn.peer}`,
 					);
 					setupConnectionListeners(conn);
@@ -344,7 +344,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 				});
 			});
 		},
-		[peer, peerId, setupConnectionListeners],
+		[peer, peerId, setupConnectionListeners, addLog],
 	);
 
 	useEffect(() => {
@@ -364,7 +364,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 			nameRef.current = name;
 
 			// Ensure reliable data channel for better cross-device connection
-			console.log(`[Guest] Dialing host ${roomId}...`);
+			addLog(`[Guest] Dialing host ${roomId}...`);
 			const conn = peer.connect(roomId, { reliable: true });
 			connectionsRef.current.set(roomId, conn);
 
@@ -373,7 +373,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 				conn.peerConnection.addEventListener(
 					'iceconnectionstatechange',
 					() => {
-						console.log(
+						addLog(
 							`[Guest] ICE State shifted to: ${conn.peerConnection.iceConnectionState}`,
 						);
 					},
@@ -400,7 +400,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 			}, 15000);
 
 			conn.on('open', () => {
-				console.log(`[Guest] Connection OPEN with host ${roomId}!`);
+				addLog(`[Guest] Connection OPEN with host ${roomId}!`);
 				clearTimeout(connectionTimeoutRef.current);
 				setConnectionStatus('connected');
 				setupConnectionListeners(conn);
@@ -418,7 +418,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 				setConnectionStatus('error');
 			});
 		},
-		[peer, peerId, setupConnectionListeners],
+		[peer, peerId, setupConnectionListeners, addLog],
 	);
 
 	useEffect(() => {

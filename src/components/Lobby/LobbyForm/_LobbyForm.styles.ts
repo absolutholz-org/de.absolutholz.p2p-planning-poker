@@ -75,6 +75,37 @@ export const Input = styled.input`
 	}
 `;
 
+export const DebugSection = styled.section`
+	background: #fdf2f2;
+	border: 1px solid #fecaca;
+	border-radius: var(--radius-md);
+	font-family: var(--font-mono);
+	font-size: var(--font-size-xs);
+	margin: var(--space-xl) auto;
+	max-width: var(--lobby-card-width);
+	padding: var(--space-md);
+	width: 100%;
+
+	h3 {
+		color: #991b1b;
+		margin-bottom: var(--space-xs);
+		text-transform: uppercase;
+	}
+`;
+
+export const DebugList = styled.ul`
+	list-style: none;
+	max-height: 200px;
+	overflow-y: auto;
+	padding: 0;
+
+	li {
+		border-bottom: 1px solid #fee2e2;
+		color: #b91c1c;
+		padding: 2px 0;
+	}
+`;
+
 export const HelperText = styled.p`
 	color: var(--sys-color-text-secondary);
 	font-size: var(--sys-font-size-sm);
@@ -83,7 +114,7 @@ export const HelperText = styled.p`
 
 export const ErrorMessage = styled.div`
 	background-color: rgba(239, 68, 68, 0.1);
-	border-radius: var(--sys-radius-md);
+	border-radius: var(--radius-md);
 	color: var(--sys-color-danger);
 	font-weight: 500;
 	padding: var(--sys-spacing-sm);

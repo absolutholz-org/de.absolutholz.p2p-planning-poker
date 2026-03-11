@@ -9,7 +9,9 @@ import {
 } from 'react';
 
 interface PeerContextValue {
+	addLog: (msg: string) => void;
 	error: null | string;
+	logs: string[];
 	peer: null | Peer;
 	peerId: null | string;
 }
@@ -20,11 +22,22 @@ export function PeerProvider({ children }: { children: ReactNode }) {
 	const [peer, setPeer] = useState<null | Peer>(null);
 	const [peerId, setPeerId] = useState<null | string>(null);
 	const [error, setError] = useState<null | string>(null);
+	const [logs, setLogs] = useState<string[]>([]);
+
+	const addLog = (msg: string) => {
+		console.log(`[PeerContext] ${msg}`);
+		setLogs((prev) => [
+			...prev.slice(-49),
+			`${new Date().toLocaleTimeString()}: ${msg}`,
+		]);
+	};
 
 	useEffect(() => {
 		let isMounted = true;
 
 		const initPeer = (idToUse?: string) => {
+			addLog(`Initializing Peer (ID: ${idToUse || 'new'})`);
+
 			const config = {
 				config: {
 					iceServers: [
@@ -50,23 +63,26 @@ export function PeerProvider({ children }: { children: ReactNode }) {
 
 			newPeer.on('open', (id) => {
 				if (!isMounted) return;
+				addLog(`Peer open with ID: ${id}`);
 				setPeerId(id);
 				setError(null);
 				sessionStorage.setItem('p2p_peer_id', id);
 				setPeer(newPeer);
 			});
 
+			newPeer.on('connection', (conn) => {
+				addLog(`Incoming connection from: ${conn.peer}`);
+			});
+
 			newPeer.on('error', (err) => {
 				if (!isMounted) return;
-				console.error('[PeerContext] PeerJS Error:', err.type, err);
+				addLog(`Peer Error: ${err.type} - ${err.message}`);
 
 				if (err.type === 'unavailable-id' && idToUse) {
-					console.warn(
-						'[PeerContext] ID unavailable, retrying with fresh ID...',
-					);
+					addLog('ID unavailable, retrying with fresh ID...');
 					sessionStorage.removeItem('p2p_peer_id');
 					newPeer.destroy();
-					initPeer();
+					setTimeout(() => initPeer(), 500); // Slight delay
 					return;
 				}
 
@@ -75,28 +91,19 @@ export function PeerProvider({ children }: { children: ReactNode }) {
 
 			newPeer.on('disconnected', () => {
 				if (!isMounted) return;
-				console.warn(
-					'[PeerContext] Disconnected from signaling server.',
-				);
+				addLog('Disconnected from signaling server.');
 				if (!newPeer.destroyed) {
+					addLog('Attempting to reconnect...');
 					newPeer.reconnect();
 				}
 			});
 
-			// Heartbeat to keep connection alive on PeerJS Cloud
-			const heartbeat = setInterval(() => {
-				if (
-					newPeer.open &&
-					!newPeer.disconnected &&
-					!newPeer.destroyed
-				) {
-					// eslint-disable-next-line @typescript-eslint/no-explicit-any
-					(newPeer as any).socket?.send({ type: 'HEARTBEAT' });
-				}
-			}, 15000);
+			newPeer.on('close', () => {
+				addLog('Peer instance closed.');
+			});
 
 			return () => {
-				clearInterval(heartbeat);
+				addLog('Destroying Peer instance.');
 				newPeer.destroy();
 			};
 		};
@@ -111,7 +118,7 @@ export function PeerProvider({ children }: { children: ReactNode }) {
 	}, []);
 
 	return (
-		<PeerContext.Provider value={{ error, peer, peerId }}>
+		<PeerContext.Provider value={{ addLog, error, logs, peer, peerId }}>
 			{children}
 		</PeerContext.Provider>
 	);
