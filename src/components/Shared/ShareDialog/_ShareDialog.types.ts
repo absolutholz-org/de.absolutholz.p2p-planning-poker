@@ -1,4 +1,4 @@
-export interface ShareDialogProps {
+export interface IShareDialog {
 	/**
 	 * Whether the share dialog is currently visible.
 	 */

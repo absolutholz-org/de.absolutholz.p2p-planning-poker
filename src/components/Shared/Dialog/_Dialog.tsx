@@ -3,7 +3,7 @@ import { type MouseEvent, useEffect, useRef } from 'react';
 // import { useTranslation } from 'react-i18next';
 import { Button } from '../Button';
 import * as S from './_Dialog.styles';
-import type { DialogProps } from './_Dialog.types';
+import type { IDialog } from './_Dialog.types';
 
 export function Dialog({
 	cancelText,
@@ -14,7 +14,7 @@ export function Dialog({
 	onCancel,
 	onConfirm,
 	title,
-}: DialogProps) {
+}: IDialog) {
 	// const { t } = useTranslation();
 	const dialogRef = useRef<HTMLDialogElement>(null);
 

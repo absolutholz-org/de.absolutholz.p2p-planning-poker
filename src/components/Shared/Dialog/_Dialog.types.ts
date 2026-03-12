@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-export interface DialogProps {
+export interface IDialog {
 	/**
 	 * Text for the cancel button.
 	 */

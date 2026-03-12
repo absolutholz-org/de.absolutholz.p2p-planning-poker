@@ -6,7 +6,7 @@ import * as HeaderStyles from '../../Room/RoomHeader/_RoomHeader.styles'; // Re-
 import { Button } from '../Button';
 import { Dialog } from '../Dialog';
 import * as S from './_ShareDialog.styles';
-import type { ShareDialogProps } from './_ShareDialog.types';
+import type { IShareDialog } from './_ShareDialog.types';
 
 export function ShareContent({
 	onShareSelect,
@@ -105,7 +105,7 @@ export function ShareContent({
 	);
 }
 
-export function ShareDialog({ isOpen, onClose, roomId }: ShareDialogProps) {
+export function ShareDialog({ isOpen, onClose, roomId }: IShareDialog) {
 	const { t } = useTranslation();
 
 	return (

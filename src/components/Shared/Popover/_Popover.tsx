@@ -14,9 +14,9 @@ import {
 	useFloatingPosition,
 } from '../../../hooks/useFloatingPosition';
 import * as S from './_Popover.styles';
-import type { PopoverProps } from './_Popover.types';
+import type { IPopover } from './_Popover.types';
 
-export function Popover({ align = 'bottom', children }: PopoverProps) {
+export function Popover({ align = 'bottom', children }: IPopover) {
 	const rawId = useId();
 	const id = `popover-${rawId.replace(/:/g, '')}`; // Safe DOM string
 	const triggerRef = useRef<HTMLElement>(null);

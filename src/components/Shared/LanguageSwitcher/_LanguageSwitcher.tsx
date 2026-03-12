@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { type ISelectOption, Select } from '../Select';
-import type { LanguageSwitcherProps } from './_LanguageSwitcher.types';
+import type { ILanguageSwitcher } from './_LanguageSwitcher.types';
 
 type LanguageCode = 'en' | 'de' | 'pt' | 'fr';
 
@@ -13,7 +13,7 @@ const SUPPORTED_LANGUAGES: ISelectOption<LanguageCode>[] = [
 	{ icon: '🇫🇷', id: 'fr', label: 'Français', title: 'Français' },
 ];
 
-export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
+export function LanguageSwitcher({ className }: ILanguageSwitcher) {
 	const { i18n } = useTranslation();
 
 	const handleLanguageChange = (lang: LanguageCode) => {

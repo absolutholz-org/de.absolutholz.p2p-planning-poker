@@ -1,8 +1,8 @@
 import { StyledDivider } from './_Divider.styles';
-import type { DividerProps } from './_Divider.types';
+import type { IDivider } from './_Divider.types';
 
-export const Divider = ({ children, hideOnDesktop = false }: DividerProps) => {
+export function Divider({ children, hideOnDesktop = false }: IDivider) {
 	return (
 		<StyledDivider hideOnDesktop={hideOnDesktop}>{children}</StyledDivider>
 	);
-};
+}

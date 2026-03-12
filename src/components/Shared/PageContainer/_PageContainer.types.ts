@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-export interface PageContainerProps {
+export interface IPageContainer {
 	/**
 	 * The content to be wrapped within the container.
 	 */

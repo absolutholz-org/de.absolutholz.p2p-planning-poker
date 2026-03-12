@@ -1,13 +1,12 @@
-import type { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
-export interface DividerProps {
+export interface IDivider {
 	/**
-	 * Optional text to display in the middle of the divider
+	 * The content to display inside the divider.
 	 */
 	children?: ReactNode;
 	/**
-	 * If true, the divider will be hidden on desktop screens (>= 45rem)
-	 * @default false
+	 * Whether the divider should be hidden on desktop screens.
 	 */
 	hideOnDesktop?: boolean;
 }

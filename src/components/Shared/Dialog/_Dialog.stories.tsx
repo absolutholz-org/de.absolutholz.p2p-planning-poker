@@ -12,13 +12,9 @@ const meta = {
 		onConfirm: () => {},
 		title: 'Reset Board',
 	},
-	argTypes: {
-		onCancel: { action: 'cancelled' },
-		onConfirm: { action: 'confirmed' },
-	},
 	component: Dialog,
 	parameters: {
-		layout: 'fullscreen', // Dialog uses fixed positioning
+		layout: 'centered',
 	},
 	tags: ['autodocs'],
 	title: 'Shared/Dialog',

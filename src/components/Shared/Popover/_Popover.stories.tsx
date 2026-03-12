@@ -1,23 +1,28 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { Button } from '../Button';
 import { Popover } from './_Popover';
 
 const meta = {
+	component: Popover,
+	parameters: {
+		layout: 'centered',
+	},
+	tags: ['autodocs'],
+	title: 'Shared/Popover',
+} satisfies Meta<typeof Popover>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+// Base Story showing standard configuration
+export const Default: Story = {
 	args: {
 		align: 'end',
 		children: [
-			<button
-				key="trigger"
-				style={{
-					background: 'var(--sys-color-bg)',
-					border: '1px solid var(--sys-color-border)',
-					borderRadius: 'var(--sys-radius-pill)',
-					cursor: 'pointer',
-					padding: '8px 16px',
-				}}
-			>
+			<Button key="trigger" variant="secondary">
 				Open Menu
-			</button>,
+			</Button>,
 			<div key="content" style={{ minWidth: '150px', padding: '16px' }}>
 				<p style={{ fontWeight: 500, margin: 0 }}>Menu Content</p>
 				<p
@@ -32,19 +37,7 @@ const meta = {
 			</div>,
 		],
 	},
-	component: Popover,
-	parameters: {
-		layout: 'centered',
-	},
-	tags: ['autodocs'],
-	title: 'Shared/Popover',
-} satisfies Meta<typeof Popover>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-// Base Story showing standard configuration
-export const Default: Story = {};
+};
 
 // Variant Story: Forcing the alignment to "start"
 export const AlignedStart: Story = {

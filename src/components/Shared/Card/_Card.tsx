@@ -1,12 +1,12 @@
 import * as S from './_Card.styles';
-import type { CardProps } from './_Card.types';
+import type { ICard } from './_Card.types';
 
 export function Card({
 	isHidden = false,
 	isSelected = false,
 	value,
 	...props
-}: CardProps) {
+}: ICard) {
 	return (
 		<S.Card
 			data-hidden={isHidden}

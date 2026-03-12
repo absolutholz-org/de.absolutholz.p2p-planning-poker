@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-export interface CardProps extends Omit<
+export interface ICard extends Omit<
 	ButtonHTMLAttributes<HTMLButtonElement>,
 	'value'
 > {
