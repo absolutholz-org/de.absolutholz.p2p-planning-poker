@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 const lightTheme = {
-	bg: 'oklch(0.985 0 0)',
+	bg: 'oklch(0.984 0.003 247.858)',
 	border: 'oklch(0.92 0 0)',
 	danger: 'oklch(0.637 0.237 25.33)',
 	focus: 'oklch(0.205 0 0 / 0.3)',
