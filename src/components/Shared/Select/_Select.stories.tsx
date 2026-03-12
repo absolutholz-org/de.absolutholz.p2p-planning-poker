@@ -1,6 +1,4 @@
 import { useArgs } from '@storybook/preview-api';
-import { useArgs } from '@storybook/preview-api';
-import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { type ISelectOption, Select } from '../Select';
