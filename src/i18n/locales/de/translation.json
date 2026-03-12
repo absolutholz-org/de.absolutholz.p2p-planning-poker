@@ -6,13 +6,13 @@
       "reveal": "Votes aufdecken"
     },
     "poker": "P2P Planning Poker",
-    "skipToMainContent": "Passer au contenu principal",
+    "skipToMainContent": "Zum Hauptinhalt springen",
     "switchers": {
       "language": {
-        "ariaLabel": "Changer de langue"
+        "ariaLabel": "Sprache wählen"
       },
       "scheme": {
-        "ariaLabel": "Changer le thème",
+        "ariaLabel": "Farbschema wählen",
         "options": {
           "light": "Hell",
           "dark": "Dunkel",
