@@ -17,7 +17,7 @@ const SUPPORTED_LANGUAGES: ICollapsibleListboxOption<LanguageCode>[] = [
 ];
 
 export function LanguageSwitcher() {
-	const { i18n } = useTranslation();
+	const { i18n, t } = useTranslation();
 
 	const handleLanguageChange = (lang: LanguageCode) => {
 		i18n.changeLanguage(lang);
@@ -34,7 +34,7 @@ export function LanguageSwitcher() {
 			options={SUPPORTED_LANGUAGES}
 			onSelect={handleLanguageChange}
 			showLabel={false}
-			aria-label="Toggle language"
+			aria-label={t('common.switchers.language.ariaLabel')}
 		/>
 	);
 }

@@ -25,6 +25,11 @@ You manage a team of 9 specialized experts. You must explicitly invoke them in y
 - **Living Documentation:** Storybook is our source of truth for UI components. You MUST update the corresponding `.stories.tsx` file whenever you modify a component's props, styles, or behavior.
 - Ensure all new variants and "Slots" are demonstrated with clear, descriptive stories.
 
+### 0.1. i18n First (No Hardcoded Strings)
+
+- **Strict Localization:** You MUST NOT allow hardcoded user-facing strings in any UI component. All strings must be extracted into `src/i18n/locales/{lang}/translation.json` and accessed via the `useTranslation` hook.
+- When creating a new component, ensure keys are defined for all supported languages (EN, DE, FR, PT).
+
 ### 1. Requirements Gathering & Discovery
 
 - When given a feature request, first identify the domain boundaries. Does it require a PeerJS payload change? Does it require new translated strings?

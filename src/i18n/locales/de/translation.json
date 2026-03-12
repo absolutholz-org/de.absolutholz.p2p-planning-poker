@@ -6,7 +6,20 @@
       "reveal": "Votes aufdecken"
     },
     "poker": "P2P Planning Poker",
-    "skipToMainContent": "Zum Hauptinhalt springen"
+    "skipToMainContent": "Passer au contenu principal",
+    "switchers": {
+      "language": {
+        "ariaLabel": "Changer de langue"
+      },
+      "scheme": {
+        "ariaLabel": "Changer le thème",
+        "options": {
+          "light": "Hell",
+          "dark": "Dunkel",
+          "system": "System"
+        }
+      }
+    }
   },
   "lobby": {
     "title": "Session beitreten",

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { STORAGE_KEYS } from '../../../constants/storage';
 import {
@@ -8,18 +9,34 @@ import {
 
 type Scheme = 'light' | 'dark' | 'system';
 
-const SCHEMES: ICollapsibleListboxOption<Scheme>[] = [
-	{ icon: '☀️', id: 'light', label: 'Light', title: 'Light' },
-	{ icon: '🌙', id: 'dark', label: 'Dark', title: 'Dark' },
-	{ icon: '💻', id: 'system', label: 'System', title: 'System' },
-] as const;
-
 export function SchemeSwitcher() {
+	const { t } = useTranslation();
 	const [scheme, setScheme] = useState<Scheme>(() => {
 		return (
 			(localStorage.getItem(STORAGE_KEYS.SCHEME) as Scheme) || 'system'
 		);
 	});
+
+	const SCHEMES: ICollapsibleListboxOption<Scheme>[] = [
+		{
+			icon: '☀️',
+			id: 'light',
+			label: t('common.switchers.scheme.options.light'),
+			title: t('common.switchers.scheme.options.light'),
+		},
+		{
+			icon: '🌙',
+			id: 'dark',
+			label: t('common.switchers.scheme.options.dark'),
+			title: t('common.switchers.scheme.options.dark'),
+		},
+		{
+			icon: '💻',
+			id: 'system',
+			label: t('common.switchers.scheme.options.system'),
+			title: t('common.switchers.scheme.options.system'),
+		},
+	];
 
 	useEffect(() => {
 		const root = document.documentElement;
@@ -38,7 +55,7 @@ export function SchemeSwitcher() {
 			options={SCHEMES}
 			onSelect={setScheme}
 			showLabel={false}
-			aria-label="Toggle scheme"
+			aria-label={t('common.switchers.scheme.ariaLabel')}
 		/>
 	);
 }
