@@ -1,3 +1,4 @@
+import { useArgs } from '@storybook/preview-api';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Select } from './_Select';
@@ -32,6 +33,22 @@ export const Default: Story = {
 		onSelect: (id: string) => console.log('Selected:', id),
 		options: mockOptions,
 	},
+	render: function Render(args) {
+		const [, updateArgs] = useArgs();
+
+		const handleSelect = (id: string) => {
+			args.onSelect(id);
+			updateArgs({ activeId: id });
+		};
+
+		return (
+			<Select
+				{...args}
+				activeId={args.activeId}
+				onSelect={handleSelect}
+			/>
+		);
+	},
 };
 
 export const WithIcon: Story = {
@@ -39,4 +56,5 @@ export const WithIcon: Story = {
 		...Default.args,
 		activeId: '3',
 	},
+	render: Default.render,
 };
