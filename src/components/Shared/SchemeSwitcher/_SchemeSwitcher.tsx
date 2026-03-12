@@ -33,6 +33,7 @@ export function SchemeSwitcher() {
 			activeId={scheme}
 			options={SCHEMES}
 			onSelect={setScheme}
+			showLabel={false}
 			aria-label="Toggle scheme"
 		/>
 	);

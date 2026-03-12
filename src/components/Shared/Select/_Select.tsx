@@ -2,6 +2,7 @@ import { useRef } from 'react';
 
 import { useMenuNavigation } from '../../../hooks/useMenuNavigation';
 import { Button } from '../Button';
+import { IconButton } from '../IconButton';
 import { Popover } from '../Popover';
 import * as S from './_Select.styles';
 import type { SelectProps } from './_Select.types';
@@ -12,6 +13,7 @@ export function Select<T extends string>({
 	className,
 	onSelect,
 	options,
+	showLabel = true,
 	variant = 'secondary',
 }: SelectProps<T>) {
 	const menuRef = useRef<HTMLDivElement>(null);
@@ -22,15 +24,25 @@ export function Select<T extends string>({
 
 	return (
 		<Popover align="end">
-			<Button
-				variant={variant}
-				className={className}
-				aria-label={ariaLabel}
-				aria-haspopup="listbox"
-				icon={activeOption.icon}
-			>
-				{activeOption.label}
-			</Button>
+			{showLabel ? (
+				<Button
+					variant={variant}
+					className={className}
+					aria-label={ariaLabel}
+					aria-haspopup="listbox"
+					icon={activeOption.icon}
+				>
+					{activeOption.label}
+				</Button>
+			) : (
+				<IconButton
+					variant={variant}
+					className={className}
+					aria-label={ariaLabel}
+					aria-haspopup="listbox"
+					icon={activeOption.icon}
+				/>
+			)}
 			<S.MenuContainer
 				ref={menuRef}
 				role="listbox"

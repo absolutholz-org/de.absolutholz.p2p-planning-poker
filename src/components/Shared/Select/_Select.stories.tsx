@@ -58,3 +58,11 @@ export const WithIcon: Story = {
 	},
 	render: Default.render,
 };
+
+export const IconOnly: Story = {
+	args: {
+		...Default.args,
+		showLabel: false,
+	},
+	render: Default.render,
+};

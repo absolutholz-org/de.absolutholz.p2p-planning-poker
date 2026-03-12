@@ -44,4 +44,9 @@ export interface SelectProps<T extends string> {
 	 * The visual variant of the trigger button.
 	 */
 	variant?: 'primary' | 'secondary' | 'danger';
+	/**
+	 * Whether to show the text label in the trigger button.
+	 * If false, IconButton is used.
+	 */
+	showLabel?: boolean;
 }
