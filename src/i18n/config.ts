@@ -1,6 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
+import { STORAGE_KEYS } from '../constants/storage';
 import translationDE from './locales/de/translation.json';
 import translationEN from './locales/en/translation.json';
 import translationFR from './locales/fr/translation.json';
@@ -21,7 +22,7 @@ const resources = {
 	},
 };
 
-const initialLanguage = localStorage.getItem('language-preference') || 'en';
+const initialLanguage = localStorage.getItem(STORAGE_KEYS.LANGUAGE) || 'en';
 
 i18n.use(initReactI18next).init({
 	fallbackLng: 'en',

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { STORAGE_KEYS } from '../../../constants/storage';
 import { type ISelectOption, Select } from '../Select';
 
 type Scheme = 'light' | 'dark' | 'system';
@@ -13,7 +14,7 @@ const SCHEMES: ISelectOption<Scheme>[] = [
 export function SchemeSwitcher() {
 	const [scheme, setScheme] = useState<Scheme>(() => {
 		return (
-			(localStorage.getItem('scheme-preference') as Scheme) || 'system'
+			(localStorage.getItem(STORAGE_KEYS.SCHEME) as Scheme) || 'system'
 		);
 	});
 
@@ -21,10 +22,10 @@ export function SchemeSwitcher() {
 		const root = document.documentElement;
 		if (scheme === 'system') {
 			root.removeAttribute('data-color-scheme');
-			localStorage.removeItem('scheme-preference');
+			localStorage.removeItem(STORAGE_KEYS.SCHEME);
 		} else {
 			root.setAttribute('data-color-scheme', scheme);
-			localStorage.setItem('scheme-preference', scheme);
+			localStorage.setItem(STORAGE_KEYS.SCHEME, scheme);
 		}
 	}, [scheme]);
 

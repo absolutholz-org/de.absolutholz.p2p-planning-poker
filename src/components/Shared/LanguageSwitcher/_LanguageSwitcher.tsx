@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { STORAGE_KEYS } from '../../../constants/storage';
 import { type ISelectOption, Select } from '../Select';
 import type { ILanguageSwitcher } from './_LanguageSwitcher.types';
 
@@ -18,6 +19,7 @@ export function LanguageSwitcher({ className }: ILanguageSwitcher) {
 
 	const handleLanguageChange = (lang: LanguageCode) => {
 		i18n.changeLanguage(lang);
+		localStorage.setItem(STORAGE_KEYS.LANGUAGE, lang);
 	};
 
 	useEffect(() => {

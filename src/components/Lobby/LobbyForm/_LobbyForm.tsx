@@ -2,6 +2,7 @@ import { type FormEvent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
+import { SESSION_KEYS, STORAGE_KEYS } from '../../../constants/storage';
 import { usePeer } from '../../../context/PeerContext';
 import { useRoom } from '../../../context/RoomContext';
 import { AppFooter } from '../../Shared/AppFooter';
@@ -20,17 +21,17 @@ export function LobbyForm() {
 
 	// Load previously saved name on initial mount
 	useEffect(() => {
-		const savedName = localStorage.getItem('user-name');
+		const savedName = localStorage.getItem(STORAGE_KEYS.USER_NAME);
 		if (savedName) setName(savedName);
 	}, []);
 
 	// Check for ungraceful page reloads and try to restore session
 	useEffect(() => {
-		const role = sessionStorage.getItem('p2p_role');
-		const savedRoomId = sessionStorage.getItem('p2p_room_id');
-		const savedName = sessionStorage.getItem('p2p_name');
-		const savedPeerId = sessionStorage.getItem('p2p_peer_id');
-		const savedStateStr = sessionStorage.getItem('p2p_room_state');
+		const role = sessionStorage.getItem(SESSION_KEYS.ROLE);
+		const savedRoomId = sessionStorage.getItem(SESSION_KEYS.ROOM_ID);
+		const savedName = sessionStorage.getItem(SESSION_KEYS.NAME);
+		const savedPeerId = sessionStorage.getItem(SESSION_KEYS.PEER_ID);
+		const savedStateStr = sessionStorage.getItem(SESSION_KEYS.ROOM_STATE);
 
 		if (role && savedRoomId && savedName) {
 			console.log(
@@ -61,7 +62,7 @@ export function LobbyForm() {
 		const trimmedName = name.trim();
 		if (!trimmedName || connectionStatus === 'connecting') return;
 
-		localStorage.setItem('user-name', trimmedName);
+		localStorage.setItem(STORAGE_KEYS.USER_NAME, trimmedName);
 
 		// If no room code is provided, they are creating a new room as Host.
 		if (!roomCode.trim()) {
