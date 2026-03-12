@@ -9,7 +9,7 @@ export function Button({
 }: ButtonProps) {
 	return (
 		<S.Button data-variant={variant} {...props}>
-			{icon && <span className="button-icon">{icon}</span>}
+			{icon && <S.Button_Icon>{icon}</S.Button_Icon>}
 			{children}
 		</S.Button>
 	);

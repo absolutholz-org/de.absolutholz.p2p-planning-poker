@@ -22,13 +22,6 @@ export const Button = styled.button<{ 'data-variant': ButtonVariant }>`
 	transition: all 0.2s ease-in-out;
 	gap: var(--sys-spacing-sm);
 
-	.button-icon {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 1.25em;
-	}
-
 	/* Focus ring for accessibility */
 	&:focus-visible {
 		outline: none;
@@ -69,4 +62,11 @@ export const Button = styled.button<{ 'data-variant': ButtonVariant }>`
 			border-color: var(--sys-color-danger);
 		}
 	}
+`;
+
+export const Button_Icon = styled.span`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.25em;
 `;

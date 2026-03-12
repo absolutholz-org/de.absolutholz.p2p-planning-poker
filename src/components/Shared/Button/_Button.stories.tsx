@@ -40,3 +40,18 @@ export const Disabled: Story = {
 		disabled: true,
 	},
 };
+
+export const WithIcon: Story = {
+	args: {
+		...Default.args,
+		icon: <span aria-hidden="true">🚀</span>,
+	},
+};
+
+export const IconOnly: Story = {
+	args: {
+		children: undefined,
+		icon: <span aria-hidden="true">⚙️</span>,
+		variant: 'secondary',
+	},
+};

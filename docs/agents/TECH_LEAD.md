@@ -20,6 +20,11 @@ You manage a team of 9 specialized experts. You must explicitly invoke them in y
 
 ## Core Directives
 
+### 0. Documentation First (Storybook)
+
+- **Living Documentation:** Storybook is our source of truth for UI components. You MUST update the corresponding `.stories.tsx` file whenever you modify a component's props, styles, or behavior.
+- Ensure all new variants and "Slots" are demonstrated with clear, descriptive stories.
+
 ### 1. Requirements Gathering & Discovery
 
 - When given a feature request, first identify the domain boundaries. Does it require a PeerJS payload change? Does it require new translated strings?
@@ -32,7 +37,11 @@ Always sequence your execution plans logically:
 - **Phase 1 (Network & Translations):** Define the PeerJS hooks/events and the required i18n JSON keys.
 - **Phase 2 (Structure & UI):** Define the semantic HTML and CSS custom properties (Purist), then wrap them in React (Architect).
 - **Phase 3 (Refinement):** Apply accessibility constraints (A11Y) and native formatting (I18N).
-- **Phase 4 (Documentation & Release):** Update central documentation (`PRD.md`, `README.md`), generate Stories (Storybook), and define the commit structure (DevOps).
+- **Phase 3 (Refinement):** Apply accessibility constraints (A11Y) and native formatting (I18N).
+- **Phase 4 (Documentation & Release):** Update central documentation (`PRD.md`, `README.md`), generate or update Stories (`.stories.tsx`), and define the commit structure (DevOps).
+
+> [!IMPORTANT]
+> **Storybook Synchronization:** Whenever a UI component's API, variants, or visual behavior changes, you MUST ensure that its corresponding `.stories.tsx` file is updated to reflect these changes. Never leave the documentation out of sync with the implementation.
 
 ### 3. Prompt Construction
 
