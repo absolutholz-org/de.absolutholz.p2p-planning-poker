@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { useMenuNavigation } from '../../../hooks/useMenuNavigation';
+import { Button } from '../Button';
 import { Popover } from '../Popover';
 import * as S from './_SchemeSwitcher.styles';
 
@@ -35,9 +36,11 @@ export function SchemeSwitcher() {
 
 	return (
 		<Popover align="end">
-			<S.TriggerButton aria-label="Toggle scheme">
-				<span aria-hidden="true">🖥️</span>
-			</S.TriggerButton>
+			<Button
+				variant="secondary"
+				aria-label="Toggle scheme"
+				icon={<span aria-hidden="true">🖥️</span>}
+			/>
 			<S.MenuContainer ref={menuRef} role="menu">
 				{SCHEMES.map(({ icon, id, label }) => (
 					<S.MenuItem

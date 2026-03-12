@@ -20,6 +20,14 @@ export const Button = styled.button<{ 'data-variant': ButtonVariant }>`
 	border: 1px solid transparent;
 	cursor: pointer;
 	transition: all 0.2s ease-in-out;
+	gap: var(--sys-spacing-sm);
+
+	.button-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.25em;
+	}
 
 	/* Focus ring for accessibility */
 	&:focus-visible {

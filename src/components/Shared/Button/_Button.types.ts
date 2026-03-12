@@ -9,7 +9,11 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	/**
 	 * The content to display inside the button.
 	 */
-	children: ReactNode;
+	children?: ReactNode;
+	/**
+	 * An optional icon to display before the children.
+	 */
+	icon?: ReactNode;
 	/**
 	 * The visual variant of the button.
 	 */

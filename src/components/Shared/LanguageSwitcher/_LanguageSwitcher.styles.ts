@@ -1,29 +1,5 @@
 import styled from '@emotion/styled';
 
-export const TriggerButton = styled.button`
-	display: flex;
-	align-items: center;
-	gap: var(--sys-spacing-sm);
-	height: 2.75rem; /* Match SchemeSwitcher height */
-	background: transparent;
-	border: 1px solid var(--sys-color-border);
-	padding: 0 var(--sys-spacing-md);
-	border-radius: var(--sys-radius-pill);
-	color: var(--sys-color-text-primary);
-	font-weight: 500;
-	font-size: var(--sys-font-size-sm);
-	cursor: pointer;
-	transition: all 0.2s ease;
-
-	&:hover {
-		background: var(--sys-color-bg);
-	}
-
-	&:focus-visible {
-		outline: 2px solid var(--sys-color-focus);
-	}
-`;
-
 export const MenuContainer = styled.div`
 	display: flex;
 	flex-direction: column;
