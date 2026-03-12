@@ -1,23 +1,19 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useMenuNavigation } from '../../../hooks/useMenuNavigation';
-import { Button } from '../Button';
-import { Popover } from '../Popover';
-import * as S from './_LanguageSwitcher.styles';
+import { Select, type SelectOption } from '../Select';
 import type { LanguageSwitcherProps } from './_LanguageSwitcher.types';
 
-const SUPPORTED_LANGUAGES = [
-	{ code: 'en', icon: '🇺🇸', label: 'EN', title: 'English' },
-	{ code: 'de', icon: '🇩🇪', label: 'DE', title: 'Deutsch' },
-	{ code: 'pt', icon: '🇧🇷', label: 'PT', title: 'Português' },
-	{ code: 'fr', icon: '🇫🇷', label: 'FR', title: 'Français' },
-];
+type LanguageCode = 'en' | 'de' | 'pt' | 'fr';
+
+const SUPPORTED_LANGUAGES: SelectOption<LanguageCode>[] = [
+	{ icon: '🇺🇸', id: 'en', label: 'EN', title: 'English' },
+	{ icon: '🇩🇪', id: 'de', label: 'DE', title: 'Deutsch' },
+	{ icon: '🇧🇷', id: 'pt', label: 'PT', title: 'Português' },
+	{ icon: '🇫🇷', id: 'fr', label: 'FR', title: 'Français' },
+] as const;
 
 export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
-	const menuRef = useRef<HTMLDivElement>(null);
-	useMenuNavigation(menuRef);
-
 	const { i18n } = useTranslation();
 
 	useEffect(() => {
@@ -27,59 +23,22 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
 		}
 	}, [i18n.language]);
 
-	const handleLanguageChange = (code: string) => {
+	const handleLanguageChange = (code: LanguageCode) => {
 		i18n.changeLanguage(code);
 		localStorage.setItem('language-preference', code);
 	};
 
-	const currentLang =
-		SUPPORTED_LANGUAGES.find((l) => i18n.language?.startsWith(l.code)) ||
-		SUPPORTED_LANGUAGES[0];
+	const activeId =
+		(SUPPORTED_LANGUAGES.find((l) => i18n.language?.startsWith(l.id))
+			?.id as LanguageCode) || 'en';
 
 	return (
-		<Popover align="end">
-			<Button
-				variant="secondary"
-				className={className}
-				aria-label="Select language"
-				icon={<span aria-hidden="true">{currentLang.icon}</span>}
-			>
-				{currentLang.label}
-			</Button>
-			<S.MenuContainer ref={menuRef} role="menu">
-				{SUPPORTED_LANGUAGES.map(({ code, title }) => {
-					const isActive = i18n.language?.startsWith(code) ?? false;
-					return (
-						<S.MenuItem
-							key={code}
-							role="menuitem"
-							tabIndex={-1}
-							title={title}
-							aria-label={`Change language to ${title}`}
-							data-active={isActive}
-							onClick={() => handleLanguageChange(code)}
-						>
-							<span>
-								<span
-									aria-hidden="true"
-									style={{
-										display: 'inline-block',
-										width: '24px',
-									}}
-								>
-									{
-										SUPPORTED_LANGUAGES.find(
-											(l) => l.code === code,
-										)?.icon
-									}
-								</span>{' '}
-								{title}
-							</span>
-							{isActive && <span className="check">✓</span>}
-						</S.MenuItem>
-					);
-				})}
-			</S.MenuContainer>
-		</Popover>
+		<Select
+			className={className}
+			activeId={activeId}
+			options={SUPPORTED_LANGUAGES}
+			onSelect={handleLanguageChange}
+			aria-label="Select language"
+		/>
 	);
 }

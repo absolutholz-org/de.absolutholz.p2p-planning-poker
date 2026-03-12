@@ -1,22 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { useMenuNavigation } from '../../../hooks/useMenuNavigation';
-import { Button } from '../Button';
-import { Popover } from '../Popover';
-import * as S from './_SchemeSwitcher.styles';
+import { Select, type SelectOption } from '../Select';
 
 type Scheme = 'light' | 'dark' | 'system';
 
-const SCHEMES: { id: Scheme; label: string; icon: string }[] = [
+const SCHEMES: SelectOption<Scheme>[] = [
 	{ icon: '☀️', id: 'light', label: 'Light' },
 	{ icon: '🌙', id: 'dark', label: 'Dark' },
 	{ icon: '🖥️', id: 'system', label: 'System' },
-];
+] as const;
 
 export function SchemeSwitcher() {
-	const menuRef = useRef<HTMLDivElement>(null);
-	useMenuNavigation(menuRef);
-
 	const [scheme, setScheme] = useState<Scheme>(() => {
 		return (
 			(localStorage.getItem('scheme-preference') as Scheme) || 'system'
@@ -35,37 +29,11 @@ export function SchemeSwitcher() {
 	}, [scheme]);
 
 	return (
-		<Popover align="end">
-			<Button
-				variant="secondary"
-				aria-label="Toggle scheme"
-				icon={<span aria-hidden="true">🖥️</span>}
-			/>
-			<S.MenuContainer ref={menuRef} role="menu">
-				{SCHEMES.map(({ icon, id, label }) => (
-					<S.MenuItem
-						key={id}
-						role="menuitem"
-						tabIndex={-1}
-						data-active={scheme === id}
-						onClick={() => setScheme(id)}
-					>
-						<span>
-							<span
-								aria-hidden="true"
-								style={{
-									display: 'inline-block',
-									width: '24px',
-								}}
-							>
-								{icon}
-							</span>{' '}
-							{label}
-						</span>
-						{scheme === id && <span className="check">✓</span>}
-					</S.MenuItem>
-				))}
-			</S.MenuContainer>
-		</Popover>
+		<Select
+			activeId={scheme}
+			options={SCHEMES}
+			onSelect={setScheme}
+			aria-label="Toggle scheme"
+		/>
 	);
 }
