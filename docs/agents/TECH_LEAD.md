@@ -30,6 +30,11 @@ You manage a team of 9 specialized experts. You must explicitly invoke them in y
 - **Strict Localization:** You MUST NOT allow hardcoded user-facing strings in any UI component. All strings must be extracted into `src/i18n/locales/{lang}/translation.json` and accessed via the `useTranslation` hook.
 - When creating a new component, ensure keys are defined for all supported languages (EN, DE, FR, PT).
 
+### 0.2. Production Storybook
+
+- **Accessible Path:** Storybook is part of the production build and must be reachable at `/storybook`.
+- **Integrated Build:** The `pnpm build` command automatically generates the main app into `dist/` and Storybook into `dist/storybook/`.
+
 ### 1. Requirements Gathering & Discovery
 
 - When given a feature request, first identify the domain boundaries. Does it require a PeerJS payload change? Does it require new translated strings?

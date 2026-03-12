@@ -1,4 +1,3 @@
-import { useArgs } from '@storybook/preview-api';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { CollapsibleListbox } from './_CollapsibleListbox';
@@ -33,22 +32,6 @@ export const Default: Story = {
 		'aria-label': 'Select an option',
 		onSelect: (id: string) => console.log('Selected:', id),
 		options: mockOptions,
-	},
-	render: function Render(args) {
-		const [, updateArgs] = useArgs();
-
-		const handleSelect = (id: string) => {
-			args.onSelect(id);
-			updateArgs({ activeId: id });
-		};
-
-		return (
-			<CollapsibleListbox
-				{...args}
-				activeId={args.activeId}
-				onSelect={handleSelect}
-			/>
-		);
 	},
 };
 

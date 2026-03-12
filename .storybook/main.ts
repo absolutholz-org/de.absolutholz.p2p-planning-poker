@@ -10,5 +10,11 @@ const config: StorybookConfig = {
 	],
 	framework: '@storybook/react-vite',
 	stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+	async viteFinal(config, { configType }) {
+		if (configType === 'PRODUCTION') {
+			config.base = '/storybook/';
+		}
+		return config;
+	},
 };
 export default config;
