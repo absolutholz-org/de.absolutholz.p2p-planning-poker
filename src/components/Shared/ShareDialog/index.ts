@@ -1,2 +1,1 @@
-export { ShareContent, ShareDialog } from './_ShareDialog';
-export type { ShareDialogProps } from './_ShareDialog.types';
+export { ShareDialog } from './_ShareDialog';

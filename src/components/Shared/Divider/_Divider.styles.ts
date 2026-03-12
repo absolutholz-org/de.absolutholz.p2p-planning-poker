@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 
-import type { DividerProps } from './_Divider.types';
+import type { IDivider } from './_Divider.types';
 
 const LAYOUT_BREAKPOINT = '45rem';
 
-export const StyledDivider = styled.div<DividerProps>`
+export const StyledDivider = styled.div<IDivider>`
 	display: flex;
 	align-items: center;
 	gap: var(--sys-spacing-md);
