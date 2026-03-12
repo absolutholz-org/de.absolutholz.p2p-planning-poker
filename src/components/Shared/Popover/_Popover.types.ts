@@ -5,4 +5,6 @@ export interface IPopover {
 	children: [ReactElement, ...ReactNode[]];
 	/** Preferred position of the popover */
 	align?: 'start' | 'end' | 'top' | 'right' | 'bottom' | 'left';
+	/** Callback fired when the popover opens or closes */
+	onOpenChange?: (isOpen: boolean) => void;
 }

@@ -2,19 +2,21 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { STORAGE_KEYS } from '../../../constants/storage';
-import { type ISelectOption, Select } from '../Select';
-import type { ILanguageSwitcher } from './_LanguageSwitcher.types';
+import {
+	CollapsibleListbox,
+	type ICollapsibleListboxOption,
+} from '../CollapsibleListbox';
 
 type LanguageCode = 'en' | 'de' | 'pt' | 'fr';
 
-const SUPPORTED_LANGUAGES: ISelectOption<LanguageCode>[] = [
+const SUPPORTED_LANGUAGES: ICollapsibleListboxOption<LanguageCode>[] = [
 	{ icon: '🇺🇸', id: 'en', label: 'English', title: 'English' },
 	{ icon: '🇩🇪', id: 'de', label: 'Deutsch', title: 'Deutsch' },
 	{ icon: '🇧🇷', id: 'pt', label: 'Português', title: 'Português' },
 	{ icon: '🇫🇷', id: 'fr', label: 'Français', title: 'Français' },
 ];
 
-export function LanguageSwitcher({ className }: ILanguageSwitcher) {
+export function LanguageSwitcher() {
 	const { i18n } = useTranslation();
 
 	const handleLanguageChange = (lang: LanguageCode) => {
@@ -27,11 +29,11 @@ export function LanguageSwitcher({ className }: ILanguageSwitcher) {
 	}, [i18n.language]);
 
 	return (
-		<Select
-			className={className}
+		<CollapsibleListbox
 			activeId={i18n.language as LanguageCode}
 			options={SUPPORTED_LANGUAGES}
 			onSelect={handleLanguageChange}
+			showLabel={false}
 			aria-label="Toggle language"
 		/>
 	);

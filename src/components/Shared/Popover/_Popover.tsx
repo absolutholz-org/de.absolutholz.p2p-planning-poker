@@ -16,7 +16,11 @@ import {
 import * as S from './_Popover.styles';
 import type { IPopover } from './_Popover.types';
 
-export function Popover({ align = 'bottom', children }: IPopover) {
+export function Popover({
+	align = 'bottom',
+	children,
+	onOpenChange,
+}: IPopover) {
 	const rawId = useId();
 	const id = `popover-${rawId.replace(/:/g, '')}`; // Safe DOM string
 	const triggerRef = useRef<HTMLElement>(null);
@@ -58,14 +62,16 @@ export function Popover({ align = 'bottom', children }: IPopover) {
 		const handleToggle = (e: Event) => {
 			// Cast event to standard toggle payload without triggering any-type lints
 			const toggleEvent = e as Event & { newState: string };
-			if (toggleEvent.newState === 'open') {
+			const isOpen = toggleEvent.newState === 'open';
+			if (isOpen) {
 				requestAnimationFrame(() => updatePosition());
 			}
+			onOpenChange?.(isOpen);
 		};
 
 		popover.addEventListener('toggle', handleToggle);
 		return () => popover.removeEventListener('toggle', handleToggle);
-	}, [updatePosition]);
+	}, [updatePosition, onOpenChange]);
 
 	const mergedRef = (node: HTMLElement) => {
 		triggerRef.current = node;

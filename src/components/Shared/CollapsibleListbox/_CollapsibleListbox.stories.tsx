@@ -1,21 +1,22 @@
 import { useArgs } from '@storybook/preview-api';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { type ISelectOption, Select } from '../Select';
+import { CollapsibleListbox } from './_CollapsibleListbox';
+import { type ICollapsibleListboxOption } from './_CollapsibleListbox.types';
 
 const meta = {
-	component: Select,
+	component: CollapsibleListbox,
 	parameters: {
 		layout: 'centered',
 	},
 	tags: ['autodocs'],
-	title: 'Shared/Select',
-} satisfies Meta<typeof Select>;
+	title: 'Shared/CollapsibleListbox',
+} satisfies Meta<typeof CollapsibleListbox>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const mockOptions: ISelectOption[] = [
+const mockOptions: ICollapsibleListboxOption[] = [
 	{ id: '1', label: 'Option 1', title: 'First Option' },
 	{ id: '2', label: 'Option 2', title: 'Second Option' },
 	{
@@ -42,7 +43,7 @@ export const Default: Story = {
 		};
 
 		return (
-			<Select
+			<CollapsibleListbox
 				{...args}
 				activeId={args.activeId}
 				onSelect={handleSelect}

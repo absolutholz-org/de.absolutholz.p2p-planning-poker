@@ -1,13 +1,13 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import { useMenuNavigation } from '../../../hooks/useMenuNavigation';
 import { Button } from '../Button';
 import { IconButton } from '../IconButton';
 import { Popover } from '../Popover';
-import * as S from './_Select.styles';
-import type { ISelect } from './_Select.types';
+import * as S from './_CollapsibleListbox.styles';
+import type { ICollapsibleListbox } from './_CollapsibleListbox.types';
 
-export function Select<T extends string>({
+export function CollapsibleListbox<T extends string>({
 	activeId,
 	'aria-label': ariaLabel,
 	className,
@@ -15,7 +15,8 @@ export function Select<T extends string>({
 	options,
 	showLabel = true,
 	variant = 'secondary',
-}: ISelect<T>) {
+}: ICollapsibleListbox<T>) {
+	const [isOpen, setIsOpen] = useState(false);
 	const menuRef = useRef<HTMLDivElement>(null);
 	useMenuNavigation(menuRef);
 
@@ -23,13 +24,14 @@ export function Select<T extends string>({
 		options.find((opt) => opt.id === activeId) || options[0];
 
 	return (
-		<Popover align="end">
+		<Popover align="end" onOpenChange={setIsOpen}>
 			{showLabel ? (
 				<Button
 					variant={variant}
 					className={className}
 					aria-label={ariaLabel}
 					aria-haspopup="listbox"
+					aria-expanded={isOpen}
 					icon={activeOption.icon}
 				>
 					{activeOption.label}
@@ -40,6 +42,7 @@ export function Select<T extends string>({
 					className={className}
 					aria-label={ariaLabel}
 					aria-haspopup="listbox"
+					aria-expanded={isOpen}
 					icon={activeOption.icon}
 				/>
 			)}
@@ -71,7 +74,11 @@ export function Select<T extends string>({
 								)}
 								{option.label}
 							</span>
-							{isActive && <span className="check">✓</span>}
+							{isActive && (
+								<span className="check" aria-hidden="true">
+									✓
+								</span>
+							)}
 						</S.MenuItem>
 					);
 				})}

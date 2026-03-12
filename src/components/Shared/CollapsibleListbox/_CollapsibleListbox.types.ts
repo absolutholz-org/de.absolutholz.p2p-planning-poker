@@ -1,9 +1,9 @@
 import { type ReactNode } from 'react';
 
 /**
- * Represents a single option in the select component.
+ * Represents a single option in the CollapsibleListbox component.
  */
-export interface ISelectOption<T extends string = string> {
+export interface ICollapsibleListboxOption<T extends string = string> {
 	/**
 	 * Unique identifier for the option.
 	 */
@@ -23,9 +23,9 @@ export interface ISelectOption<T extends string = string> {
 }
 
 /**
- * Props for the Select component.
+ * Props for the CollapsibleListbox component.
  */
-export interface ISelect<T extends string = string> {
+export interface ICollapsibleListbox<T extends string = string> {
 	/**
 	 * The current active (selected) option ID.
 	 */
@@ -37,9 +37,9 @@ export interface ISelect<T extends string = string> {
 	/**
 	 * Array of available options.
 	 */
-	options: ISelectOption<T>[];
+	options: ICollapsibleListboxOption<T>[];
 	/**
-	 * Accessible label for the select component.
+	 * Accessible label for the listbox component.
 	 */
 	'aria-label': string;
 	/**

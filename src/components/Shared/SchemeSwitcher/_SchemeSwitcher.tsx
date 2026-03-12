@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 
 import { STORAGE_KEYS } from '../../../constants/storage';
-import { type ISelectOption, Select } from '../Select';
+import {
+	CollapsibleListbox,
+	type ICollapsibleListboxOption,
+} from '../CollapsibleListbox';
 
 type Scheme = 'light' | 'dark' | 'system';
 
-const SCHEMES: ISelectOption<Scheme>[] = [
+const SCHEMES: ICollapsibleListboxOption<Scheme>[] = [
 	{ icon: '☀️', id: 'light', label: 'Light', title: 'Light' },
 	{ icon: '🌙', id: 'dark', label: 'Dark', title: 'Dark' },
 	{ icon: '💻', id: 'system', label: 'System', title: 'System' },
@@ -30,7 +33,7 @@ export function SchemeSwitcher() {
 	}, [scheme]);
 
 	return (
-		<Select
+		<CollapsibleListbox
 			activeId={scheme}
 			options={SCHEMES}
 			onSelect={setScheme}

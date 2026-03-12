@@ -18,15 +18,19 @@ export function useMenuNavigation(containerRef: RefObject<HTMLElement | null>) {
 				// Focus the first menu item or the currently checked item when opened
 				const items = Array.from(
 					container.querySelectorAll<HTMLElement>(
-						'[role="menuitem"]',
+						'[role="menuitem"], [role="option"]',
 					),
 				);
 				if (items.length > 0) {
 					const selectedItem =
 						items.find(
 							(item) =>
-								item.hasAttribute('data-active') &&
-								item.getAttribute('data-active') !== 'false',
+								(item.hasAttribute('data-active') &&
+									item.getAttribute('data-active') !==
+										'false') ||
+								(item.hasAttribute('aria-selected') &&
+									item.getAttribute('aria-selected') ===
+										'true'),
 						) || items[0];
 
 					// Slight delay to ensure popover is fully visible before focusing
@@ -40,7 +44,9 @@ export function useMenuNavigation(containerRef: RefObject<HTMLElement | null>) {
 		const handleKeyDown = (e: KeyboardEvent) => {
 			const currentFocus = document.activeElement as HTMLElement;
 			const menuItems = Array.from(
-				container.querySelectorAll<HTMLElement>('[role="menuitem"]'),
+				container.querySelectorAll<HTMLElement>(
+					'[role="menuitem"], [role="option"]',
+				),
 			);
 
 			if (!menuItems.includes(currentFocus)) return;
