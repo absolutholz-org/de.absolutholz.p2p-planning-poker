@@ -5,7 +5,7 @@ import { Button } from '../Button';
 import { IconButton } from '../IconButton';
 import { Popover } from '../Popover';
 import * as S from './_Select.styles';
-import type { SelectProps } from './_Select.types';
+import type { ISelect } from './_Select.types';
 
 export function Select<T extends string>({
 	activeId,
@@ -15,7 +15,7 @@ export function Select<T extends string>({
 	options,
 	showLabel = true,
 	variant = 'secondary',
-}: SelectProps<T>) {
+}: ISelect<T>) {
 	const menuRef = useRef<HTMLDivElement>(null);
 	useMenuNavigation(menuRef);
 

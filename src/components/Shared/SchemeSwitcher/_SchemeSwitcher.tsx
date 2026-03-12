@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 
-import { Select, type SelectOption } from '../Select';
+import { type ISelectOption, Select } from '../Select';
 
 type Scheme = 'light' | 'dark' | 'system';
 
-const SCHEMES: SelectOption<Scheme>[] = [
-	{ icon: '☀️', id: 'light', label: 'Light' },
-	{ icon: '🌙', id: 'dark', label: 'Dark' },
-	{ icon: '🖥️', id: 'system', label: 'System' },
+const SCHEMES: ISelectOption<Scheme>[] = [
+	{ icon: '☀️', id: 'light', label: 'Light', title: 'Light' },
+	{ icon: '🌙', id: 'dark', label: 'Dark', title: 'Dark' },
+	{ icon: '💻', id: 'system', label: 'System', title: 'System' },
 ] as const;
 
 export function SchemeSwitcher() {

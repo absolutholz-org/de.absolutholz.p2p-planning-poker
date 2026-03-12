@@ -1,6 +1,9 @@
 import { type ReactNode } from 'react';
 
-export interface SelectOption<T extends string> {
+/**
+ * Represents a single option in the select component.
+ */
+export interface ISelectOption<T extends string = string> {
 	/**
 	 * Unique identifier for the option.
 	 */
@@ -19,25 +22,28 @@ export interface SelectOption<T extends string> {
 	icon?: ReactNode;
 }
 
-export interface SelectProps<T extends string> {
+/**
+ * Props for the Select component.
+ */
+export interface ISelect<T extends string = string> {
 	/**
-	 * The currently active option ID.
+	 * The current active (selected) option ID.
 	 */
 	activeId: T;
 	/**
-	 * Callback when an option is selected.
+	 * Callback fired when an option is selected.
 	 */
 	onSelect: (id: T) => void;
 	/**
-	 * List of available options.
+	 * Array of available options.
 	 */
-	options: SelectOption<T>[];
+	options: ISelectOption<T>[];
 	/**
-	 * Accessible label for the select trigger.
+	 * Accessible label for the select component.
 	 */
 	'aria-label': string;
 	/**
-	 * Custom class name for the trigger button.
+	 * Optional CSS class name for the trigger button.
 	 */
 	className?: string;
 	/**

@@ -40,6 +40,11 @@ Always sequence your execution plans logically:
 - **Phase 3 (Refinement):** Apply accessibility constraints (A11Y) and native formatting (I18N).
 - **Phase 4 (Documentation & Release):** Update central documentation (`PRD.md`, `README.md`), generate or update Stories (`.stories.tsx`), and define the commit structure (DevOps).
 
+### 4. TypeScript Naming Conventions
+
+- **Prop Interfaces:** Always name prop interfaces strictly as `I[ComponentName]` (e.g., `IBadge`, `IButton`). This ensures consistency and makes it easy to identify component APIs across the codebase.
+- Avoid suffixes like `Props` or `Options` when they represent the core configuration of a component.
+
 > [!IMPORTANT]
 > **Storybook Synchronization:** Whenever a UI component's API, variants, or visual behavior changes, you MUST ensure that its corresponding `.stories.tsx` file is updated to reflect these changes. Never leave the documentation out of sync with the implementation.
 

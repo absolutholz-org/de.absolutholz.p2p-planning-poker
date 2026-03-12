@@ -1,7 +1,9 @@
 import { useArgs } from '@storybook/preview-api';
+import { useArgs } from '@storybook/preview-api';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { Select } from './_Select';
+import { type ISelectOption, Select } from '../Select';
 
 const meta = {
 	component: Select,
@@ -15,7 +17,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const mockOptions = [
+const mockOptions: ISelectOption[] = [
 	{ id: '1', label: 'Option 1', title: 'First Option' },
 	{ id: '2', label: 'Option 2', title: 'Second Option' },
 	{

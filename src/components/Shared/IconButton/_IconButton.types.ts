@@ -2,7 +2,7 @@ import { type ButtonHTMLAttributes, type ReactNode } from 'react';
 
 import { type ButtonVariant } from '../Button';
 
-export interface IconButtonProps extends Omit<
+export interface IIconButton extends Omit<
 	ButtonHTMLAttributes<HTMLButtonElement>,
 	'children'
 > {
