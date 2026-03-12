@@ -16,6 +16,7 @@ export function LobbyForm() {
 	const { roomId } = useParams<{ roomId?: string }>();
 	const [name, setName] = useState('');
 	const [roomCode, setRoomCode] = useState(roomId || '');
+	const [showLogs, setShowLogs] = useState(false);
 
 	// Load previously saved name on initial mount
 	useEffect(() => {
@@ -149,15 +150,31 @@ export function LobbyForm() {
 					<p>{t('lobby.extra_text')}</p>
 				</S.ExtraText>
 			</S.ContentWrapper>
-			{logs.length > 0 && (
+			{logs.length > 0 && showLogs && (
 				<S.DebugSection>
-					<h3>Connectivity Diagnostics</h3>
+					<S.DebugHeader>
+						<h3>Connectivity Diagnostics</h3>
+						<S.DebugCloseButton
+							onClick={() => setShowLogs(false)}
+							title="Hide diagnostics"
+						>
+							✕
+						</S.DebugCloseButton>
+					</S.DebugHeader>
 					<S.DebugList>
 						{logs.map((log: string, i: number) => (
 							<li key={i}>{log}</li>
 						))}
 					</S.DebugList>
 				</S.DebugSection>
+			)}
+			{logs.length > 0 && !showLogs && (
+				<S.DebugToggle
+					onClick={() => setShowLogs(true)}
+					title="Show connectivity diagnostics"
+				>
+					⚡
+				</S.DebugToggle>
 			)}
 			<AppFooter />
 		</PageContainer>

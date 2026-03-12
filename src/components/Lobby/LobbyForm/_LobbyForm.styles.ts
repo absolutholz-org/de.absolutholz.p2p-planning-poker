@@ -90,6 +90,52 @@ export const DebugSection = styled.section`
 		color: #991b1b;
 		margin-bottom: var(--space-xs);
 		text-transform: uppercase;
+		font-size: var(--font-size-xs);
+	}
+`;
+
+export const DebugHeader = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: var(--space-xs);
+`;
+
+export const DebugCloseButton = styled.button`
+	color: #991b1b;
+	font-size: 1.2rem;
+	line-height: 1;
+	opacity: 0.6;
+	transition: opacity 0.2s;
+
+	&:hover {
+		opacity: 1;
+	}
+`;
+
+export const DebugToggle = styled.button`
+	position: fixed;
+	bottom: var(--space-md);
+	right: var(--space-md);
+	width: 2rem;
+	height: 2rem;
+	background: var(--sys-color-bg);
+	border: 1px solid var(--sys-color-border);
+	border-radius: var(--sys-radius-pill);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1rem;
+	opacity: 0.3;
+	transition: all 0.2s;
+	z-index: 100;
+	filter: grayscale(1);
+
+	&:hover {
+		opacity: 1;
+		transform: scale(1.1);
+		filter: grayscale(0);
+		box-shadow: var(--sys-shadow-sm);
 	}
 `;
 
