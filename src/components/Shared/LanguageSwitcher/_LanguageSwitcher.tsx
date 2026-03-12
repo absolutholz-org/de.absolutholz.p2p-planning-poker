@@ -8,10 +8,10 @@ import * as S from './_LanguageSwitcher.styles';
 import type { LanguageSwitcherProps } from './_LanguageSwitcher.types';
 
 const SUPPORTED_LANGUAGES = [
-	{ code: 'en', label: 'EN', title: 'English' },
-	{ code: 'de', label: 'DE', title: 'Deutsch' },
-	{ code: 'pt', label: 'PT', title: 'Português' },
-	{ code: 'fr', label: 'FR', title: 'Français' },
+	{ code: 'en', icon: '🇺🇸', label: 'EN', title: 'English' },
+	{ code: 'de', icon: '🇩🇪', label: 'DE', title: 'Deutsch' },
+	{ code: 'pt', icon: '🇧🇷', label: 'PT', title: 'Português' },
+	{ code: 'fr', icon: '🇫🇷', label: 'FR', title: 'Français' },
 ];
 
 export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
@@ -42,7 +42,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
 				variant="secondary"
 				className={className}
 				aria-label="Select language"
-				icon={<span aria-hidden="true">🌐</span>}
+				icon={<span aria-hidden="true">{currentLang.icon}</span>}
 			>
 				{currentLang.label}
 			</Button>
@@ -59,7 +59,22 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
 							data-active={isActive}
 							onClick={() => handleLanguageChange(code)}
 						>
-							{title}{' '}
+							<span>
+								<span
+									aria-hidden="true"
+									style={{
+										display: 'inline-block',
+										width: '24px',
+									}}
+								>
+									{
+										SUPPORTED_LANGUAGES.find(
+											(l) => l.code === code,
+										)?.icon
+									}
+								</span>{' '}
+								{title}
+							</span>
 							{isActive && <span className="check">✓</span>}
 						</S.MenuItem>
 					);
