@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { useRoom } from '../../../context/RoomContext';
 import { LanguageSwitcher } from '../LanguageSwitcher';
 import { SchemeSwitcher } from '../SchemeSwitcher';
-import { Timer } from '../Timer';
+// import { Timer } from '../Timer';
 import * as S from './_Header.styles';
 
 export function Header() {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
-	const { leaveRoom, roomState } = useRoom();
+	const { leaveRoom /*, roomState */ } = useRoom();
 
 	const handleHomeClick = () => {
 		leaveRoom();
@@ -39,7 +39,7 @@ export function Header() {
 			</S.Brand>
 
 			<S.Actions>
-				{roomState && <Timer />}
+				{/* {roomState && <Timer />} */}
 				<LanguageSwitcher />
 				<SchemeSwitcher />
 			</S.Actions>
