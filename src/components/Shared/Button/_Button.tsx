@@ -13,7 +13,7 @@ export function Button({
 		<S.Button data-size={size} data-variant={variant} {...props}>
 			{icon && (
 				<S.Button_Icon>
-					<Icon name={icon} size="1.25em" />
+					<Icon name={icon} size={20} />
 				</S.Button_Icon>
 			)}
 			{children}

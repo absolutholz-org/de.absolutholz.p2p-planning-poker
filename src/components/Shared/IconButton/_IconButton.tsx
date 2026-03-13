@@ -10,7 +10,7 @@ export function IconButton({
 }: IIconButton) {
 	return (
 		<S.IconButton data-size={size} data-variant={variant} {...props}>
-			<Icon name={icon} size="1.25em" />
+			<Icon name={icon} size={20} />
 		</S.IconButton>
 	);
 }
