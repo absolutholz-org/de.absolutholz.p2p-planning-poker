@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 
+import { Icon } from '../../../../Shared/Icon';
 import { Participant_Base } from '../_Participant.styles';
 
 export const Participant_Connected = styled(Participant_Base)`
@@ -13,10 +14,9 @@ export const Participant_Connected = styled(Participant_Base)`
 	grid-template-columns: 1fr auto;
 `;
 
-export const Participant_HostBadge = styled.span`
+export const Participant_HostBadge = styled(Icon)`
 	margin-right: 0.5em;
-	font-size: 1.125em;
-	line-height: 1;
+	vertical-align: text-bottom;
 `;
 
 export const Participant_MeBadge = styled.span``;

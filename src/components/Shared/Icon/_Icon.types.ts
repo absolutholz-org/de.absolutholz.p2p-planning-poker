@@ -1,6 +1,21 @@
 import type { HTMLAttributes } from 'react';
 
-export type IconName = string;
+export type IconName =
+	| 'add'
+	| 'arrow_right'
+	| 'check_circle'
+	| 'contrast'
+	| 'crown'
+	| 'dark_mode'
+	| 'key'
+	| 'language'
+	| 'light_mode'
+	| 'pause'
+	| 'play_arrow'
+	| 'refresh'
+	| 'remove'
+	| 'user'
+	| (string & {});
 
 export interface IIcon extends HTMLAttributes<HTMLElement> {
 	/**
@@ -10,7 +25,7 @@ export interface IIcon extends HTMLAttributes<HTMLElement> {
 	/**
 	 * Size of the icon (default: 24)
 	 */
-	size?: number | string;
+	size?: 16 | 20 | 24;
 	/**
 	 * Optional accessible label for the icon
 	 */

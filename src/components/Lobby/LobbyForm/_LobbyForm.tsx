@@ -7,6 +7,7 @@ import { usePeer } from '../../../context/PeerContext';
 import { useRoom } from '../../../context/RoomContext';
 import { AppFooter } from '../../Shared/AppFooter';
 import { Button } from '../../Shared/Button';
+import { Icon } from '../../Shared/Icon';
 import { PageContainer } from '../../Shared/PageContainer';
 import * as S from './_LobbyForm.styles';
 
@@ -93,7 +94,7 @@ export function LobbyForm() {
 					<S.FieldLine>
 						<S.LabelRow>
 							<S.Label htmlFor="playerName">
-								<span aria-hidden="true">👤</span>{' '}
+								<Icon name="user" size={16} />
 								{t('lobby.name.label')}
 							</S.Label>
 						</S.LabelRow>
@@ -113,7 +114,7 @@ export function LobbyForm() {
 						<S.FieldLine>
 							<S.LabelRow>
 								<S.Label htmlFor="roomCode">
-									<span aria-hidden="true">🔑</span>{' '}
+									<Icon name="key" size={16} />
 									{t('lobby.roomCode.label')}
 								</S.Label>
 								<S.OptionalLabel>Optional</S.OptionalLabel>
@@ -139,8 +140,9 @@ export function LobbyForm() {
 							{connectionStatus === 'connecting'
 								? 'Connecting...'
 								: roomCode.trim()
-									? `${t('lobby.submit.join')} ➔`
-									: `${t('lobby.submit.create')} ➔`}
+									? `${t('lobby.submit.join')}`
+									: `${t('lobby.submit.create')}`}
+							<Icon name="arrow_right" size={16} />
 						</Button>
 						<S.DisclaimerText>
 							{t('lobby.privacy_disclaimer')}

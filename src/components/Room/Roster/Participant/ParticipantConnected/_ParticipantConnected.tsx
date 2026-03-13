@@ -1,3 +1,4 @@
+import { Icon } from '../../../../Shared/Icon';
 import * as S from './_ParticipantConnected.styles';
 import type { IParticipantConnected } from './_ParticipantConnected.types';
 
@@ -18,7 +19,7 @@ export function ParticipantConnected({
 			<div>
 				<>
 					{isHost && (
-						<S.Participant_HostBadge>👑</S.Participant_HostBadge>
+						<S.Participant_HostBadge name="crown" size={16} />
 					)}
 					{name}{' '}
 					{isMe && (
@@ -39,21 +40,7 @@ export function ParticipantConnected({
 					)
 				)}
 			</div>
-			{/* <S.ParticipantInfo>
-				<S.Name title={name}>
-					{name} {isHost && '👑'} {isMe && '(You)'}
-				</S.Name>
-				<S.StatusText>
-					{vote
-						? t('room.roster.status.ready', 'Ready')
-						: t('room.roster.status.thinking', 'Thinking...')}
-				</S.StatusText>
-				{status === 'disconnected' && (
-					<S.DisconnectedBadge>
-						{t('room.roster.disconnected', 'Disconnected')}
-					</S.DisconnectedBadge>
-				)}
-			</S.ParticipantInfo> */}
+			{/* ... legacy comments ... */}
 			<div>
 				<S.Participant_Status>
 					{vote ? (
@@ -61,33 +48,13 @@ export function ParticipantConnected({
 							<>{vote}</>
 						) : (
 							<S.Participant_Status_Voted>
-								<svg
-									width="20"
-									height="20"
-									viewBox="0 0 24 24"
-									stroke="currentColor"
-									fill="none"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								>
-									<circle cx="12" cy="12" r="10"></circle>
-									<path d="m9 12 2 2 4-4"></path>
-								</svg>
+								<Icon name="check_circle" size={16} />
 							</S.Participant_Status_Voted>
 						)
 					) : (
 						<S.Participant_Status_Thinking />
 					)}
-					{/* {vote ? (
-					<Card
-					value={vote}
-					isHidden={!isRevealed}
-					tabIndex={-1} // Not interactive
-					/>
-					) : (
-						<S.EmptyStatusCircle />
-						)} */}
+					{/* ... legacy comments ... */}
 				</S.Participant_Status>
 			</div>
 		</S.Participant_Connected>

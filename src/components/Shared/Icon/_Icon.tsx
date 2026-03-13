@@ -1,33 +1,26 @@
 import * as S from './_Icon.styles';
 import { type IIcon } from './_Icon.types';
+import { ICON_PATHS } from './IconLibrary';
 
-export function Icon({
-	fill = false,
-	grade = 0,
-	label,
-	name,
-	opticalSize = 24,
-	size = 24,
-	weight = 400,
-	...props
-}: IIcon) {
-	// Simple heuristic to detect emojis or non-ligature text
-	const isSymbol = /^[a-z0-9_]+$/.test(name);
+export function Icon({ label, name, size = 24, ...props }: IIcon) {
+	const svgPath = ICON_PATHS[name];
+	const isSymbol = !!svgPath;
 
 	return (
 		<S.IconContainer
-			className={isSymbol ? 'material-symbols-rounded' : undefined}
 			$size={size}
-			$fill={fill}
-			$weight={weight}
-			$grade={grade}
-			$opticalSize={opticalSize}
 			role={label ? 'img' : 'presentation'}
 			aria-label={label || (isSymbol ? undefined : name)}
 			aria-hidden={!label && isSymbol}
 			{...props}
 		>
-			{name}
+			{svgPath ? (
+				<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+					<path d={svgPath} />
+				</svg>
+			) : (
+				name
+			)}
 		</S.IconContainer>
 	);
 }
