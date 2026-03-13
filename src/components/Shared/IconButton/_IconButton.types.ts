@@ -1,15 +1,16 @@
-import { type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { type ButtonHTMLAttributes } from 'react';
 
-import { type ButtonVariant } from '../Button';
+import { type ButtonSize, type ButtonVariant } from '../Button';
+import type { IconName } from '../Icon';
 
 export interface IIconButton extends Omit<
 	ButtonHTMLAttributes<HTMLButtonElement>,
 	'children'
 > {
 	/**
-	 * The icon to display inside the button. Required for IconButton.
+	 * The name of the icon to display inside the button.
 	 */
-	icon: ReactNode;
+	icon: IconName;
 	/**
 	 * Accessible label for the button. Crucial for icon-only buttons.
 	 */
@@ -18,4 +19,8 @@ export interface IIconButton extends Omit<
 	 * The visual variant of the button.
 	 */
 	variant?: ButtonVariant;
+	/**
+	 * The size of the button.
+	 */
+	size?: ButtonSize;
 }

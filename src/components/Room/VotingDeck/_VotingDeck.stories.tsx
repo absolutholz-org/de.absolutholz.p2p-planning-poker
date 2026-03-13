@@ -30,11 +30,18 @@ const meta = {
 						initHost: () => {},
 						leaveRoom: () => {},
 						localUserId: '1',
+						pauseTimer: () => {},
 						resetBoard: () => {},
+						resetTimer: () => {},
 						revealVotes: () => {},
-						roomState: context.args.mockRevealed
-							? { ...MOCK_ROOM_STATE, isRevealed: true }
-							: MOCK_ROOM_STATE,
+						roomState: {
+							isRevealed: !!context.args.mockRevealed,
+							roomId: '1234-abcd',
+							timer: null,
+							users: MOCK_ROOM_STATE.users,
+						},
+						setTimer: () => {},
+						startTimer: () => {},
 					}}
 				>
 					<Story />

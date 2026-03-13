@@ -69,7 +69,24 @@
         "code_copied": "Code in die Zwischenablage kopiert!",
         "fallback_error": "Teilen wird von diesem Browser nicht unterstützt.",
         "aria_open": "Teilen-Menü öffnen",
-        "aria_close": "Teilen-Menü schließen"
+        "aria_close": "Teilen-Menü schließen",
+        "timer": {
+          "title": "Timer",
+          "minutes_label": "Minuten",
+          "start": "Start",
+          "pause": "Pause",
+          "resume": "Fortsetzen",
+          "reset": "Zurücksetzen",
+          "aria": {
+            "input": "Timer-Dauer in Minuten festlegen",
+            "decrement": "Timer-Dauer um 1 Minute verringern",
+            "increment": "Timer-Dauer um 1 Minute erhöhen",
+            "start": "Timer starten",
+            "pause": "Timer pausieren",
+            "resume": "Timer fortsetzen",
+            "reset": "Timer auf ursprüngliche Dauer zurücksetzen"
+          }
+        }
       }
     },
     "deck": {

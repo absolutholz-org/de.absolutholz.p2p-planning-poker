@@ -69,7 +69,24 @@
         "code_copied": "Código copiado para a área de transferência!",
         "fallback_error": "Compartilhamento não suportado neste navegador.",
         "aria_open": "Abrir menu de compartilhamento",
-        "aria_close": "Fechar menu de compartilhamento"
+        "aria_close": "Fechar menu de compartilhamento",
+        "timer": {
+          "title": "Cronômetro",
+          "minutes_label": "Minutos",
+          "start": "Iniciar",
+          "pause": "Pausar",
+          "resume": "Retomar",
+          "reset": "Redefinir",
+          "aria": {
+            "input": "Definir duração do cronômetro em minutos",
+            "decrement": "Diminuir a duração do cronômetro em 1 minuto",
+            "increment": "Aumentar a duração do cronômetro em 1 minuto",
+            "start": "Iniciar o cronômetro",
+            "pause": "Pausar o cronômetro",
+            "resume": "Retomar o cronômetro",
+            "reset": "Redefinir o cronômetro para a duração inicial"
+          }
+        }
       }
     },
     "deck": {

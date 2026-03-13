@@ -20,9 +20,13 @@ const meta = {
 						initHost: () => {},
 						leaveRoom: () => {},
 						localUserId: null,
+						pauseTimer: () => {},
 						resetBoard: () => {},
+						resetTimer: () => {},
 						revealVotes: () => {},
 						roomState: null,
+						setTimer: () => {},
+						startTimer: () => {},
 					}}
 				>
 					<Story />

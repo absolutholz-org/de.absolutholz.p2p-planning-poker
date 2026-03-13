@@ -1,17 +1,24 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import type { ButtonHTMLAttributes } from 'react';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'danger';
+import type { IconName } from '../Icon';
+
+export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'ghost';
+export type ButtonSize = 'sm' | 'md' | 'lg';
 
 /**
  * Props for the Button component.
  */
 export interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
 	/**
-	 * Variant of the button (primary, secondary, danger, ghost).
+	 * The visual variant of the button.
 	 */
 	variant?: ButtonVariant;
 	/**
+	 * The size of the button.
+	 */
+	size?: ButtonSize;
+	/**
 	 * Optional icon to display before the label.
 	 */
-	icon?: ReactNode;
+	icon?: IconName;
 }

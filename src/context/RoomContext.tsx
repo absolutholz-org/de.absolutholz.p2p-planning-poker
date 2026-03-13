@@ -3,7 +3,7 @@ import { createContext, type ReactNode, useContext } from 'react';
 import { type ConnectionStatus, usePeerSession } from '../hooks/usePeerSession';
 import type { RoomState, VoteValue } from '../types/domain';
 
-interface RoomContextValue {
+export interface RoomContextValue {
 	castVote: (vote: VoteValue) => void;
 	connectionStatus: ConnectionStatus;
 	error: null | string;
@@ -15,9 +15,13 @@ interface RoomContextValue {
 	) => void;
 	leaveRoom: (clearStorage?: boolean) => void;
 	localUserId: null | string;
+	pauseTimer: () => void;
 	resetBoard: () => void;
+	resetTimer: () => void;
 	revealVotes: () => void;
 	roomState: RoomState | null;
+	setTimer: (duration: number) => void;
+	startTimer: () => void;
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -34,9 +38,13 @@ export function RoomProvider({ children }: { children: ReactNode }) {
 		initHost,
 		leaveRoom,
 		localUserId,
+		pauseTimer,
 		resetBoard,
+		resetTimer,
 		revealVotes,
 		roomState,
+		setTimer,
+		startTimer,
 	} = usePeerSession();
 
 	return (
@@ -49,9 +57,13 @@ export function RoomProvider({ children }: { children: ReactNode }) {
 				initHost,
 				leaveRoom,
 				localUserId,
+				pauseTimer,
 				resetBoard,
+				resetTimer,
 				revealVotes,
 				roomState,
+				setTimer,
+				startTimer,
 			}}
 		>
 			{children}

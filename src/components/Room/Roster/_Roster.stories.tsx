@@ -54,11 +54,18 @@ const meta = {
 						initHost: () => {},
 						leaveRoom: () => {},
 						localUserId: '2', // Let's pretend we are Bob
+						pauseTimer: () => {},
 						resetBoard: () => {},
+						resetTimer: () => {},
 						revealVotes: () => {},
-						roomState: context.args.mockRevealed
-							? { ...MOCK_ROOM_STATE, isRevealed: true }
-							: MOCK_ROOM_STATE,
+						roomState: {
+							isRevealed: !!context.args.mockRevealed,
+							roomId: '1234-abcd',
+							timer: null,
+							users: MOCK_USERS,
+						},
+						setTimer: () => {},
+						startTimer: () => {},
 					}}
 				>
 					<Story />
@@ -106,9 +113,17 @@ export const FullRoom: Story = {
 						initHost: () => {},
 						leaveRoom: () => {},
 						localUserId: '2',
+						pauseTimer: () => {},
 						resetBoard: () => {},
+						resetTimer: () => {},
 						revealVotes: () => {},
-						roomState: { ...MOCK_ROOM_STATE, users: fullUsers },
+						roomState: {
+							...MOCK_ROOM_STATE,
+							timer: null,
+							users: fullUsers,
+						},
+						setTimer: () => {},
+						startTimer: () => {},
 					}}
 				>
 					<Story />
@@ -141,9 +156,17 @@ export const JustHost: Story = {
 						initHost: () => {},
 						leaveRoom: () => {},
 						localUserId: '1',
+						pauseTimer: () => {},
 						resetBoard: () => {},
+						resetTimer: () => {},
 						revealVotes: () => {},
-						roomState: { ...MOCK_ROOM_STATE, users: hostUser },
+						roomState: {
+							...MOCK_ROOM_STATE,
+							timer: null,
+							users: hostUser,
+						},
+						setTimer: () => {},
+						startTimer: () => {},
 					}}
 				>
 					<Story />

@@ -19,7 +19,7 @@ const mockOptions: ICollapsibleListboxOption[] = [
 	{ id: '1', label: 'Option 1', title: 'First Option' },
 	{ id: '2', label: 'Option 2', title: 'Second Option' },
 	{
-		icon: '🚀',
+		icon: 'play_arrow',
 		id: '3',
 		label: 'Option with Icon',
 		title: 'Third Option with Icon',
@@ -40,7 +40,6 @@ export const WithIcon: Story = {
 		...Default.args,
 		activeId: '3',
 	},
-	render: Default.render,
 };
 
 export const IconOnly: Story = {
@@ -48,5 +47,4 @@ export const IconOnly: Story = {
 		...Default.args,
 		showLabel: false,
 	},
-	render: Default.render,
 };

@@ -44,14 +44,14 @@ export const Disabled: Story = {
 export const WithIcon: Story = {
 	args: {
 		...Default.args,
-		icon: <span aria-hidden="true">🚀</span>,
+		icon: 'play_arrow',
 	},
 };
 
 export const IconOnly: Story = {
 	args: {
 		children: undefined,
-		icon: <span aria-hidden="true">⚙️</span>,
+		icon: 'settings',
 		variant: 'secondary',
 	},
 };

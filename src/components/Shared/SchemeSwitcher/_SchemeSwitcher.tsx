@@ -19,19 +19,19 @@ export function SchemeSwitcher() {
 
 	const SCHEMES: ICollapsibleListboxOption<Scheme>[] = [
 		{
-			icon: '☀️',
+			icon: 'light_mode',
 			id: 'light',
 			label: t('common.switchers.scheme.options.light'),
 			title: t('common.switchers.scheme.options.light'),
 		},
 		{
-			icon: '🌙',
+			icon: 'dark_mode',
 			id: 'dark',
 			label: t('common.switchers.scheme.options.dark'),
 			title: t('common.switchers.scheme.options.dark'),
 		},
 		{
-			icon: '💻',
+			icon: 'contrast',
 			id: 'system',
 			label: t('common.switchers.scheme.options.system'),
 			title: t('common.switchers.scheme.options.system'),

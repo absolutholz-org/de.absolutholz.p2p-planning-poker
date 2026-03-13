@@ -1,15 +1,16 @@
-import { Button_Icon } from '../Button/_Button.styles';
+import { Icon } from '../Icon';
 import * as S from './_IconButton.styles';
 import type { IIconButton } from './_IconButton.types';
 
 export function IconButton({
 	icon,
+	size = 'md',
 	variant = 'primary',
 	...props
 }: IIconButton) {
 	return (
-		<S.IconButton data-variant={variant} {...props}>
-			<Button_Icon>{icon}</Button_Icon>
+		<S.IconButton data-size={size} data-variant={variant} {...props}>
+			<Icon name={icon} size="1.25em" />
 		</S.IconButton>
 	);
 }

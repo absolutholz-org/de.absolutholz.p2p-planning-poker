@@ -30,6 +30,7 @@ export function RoomHeader() {
 						onClick={() => setIsShareOpen(true)}
 						aria-expanded={isShareOpen}
 						aria-label={t('room.header.share.aria_open')}
+						icon="share"
 					>
 						{t('room.header.share.button')}
 					</Button>
@@ -39,6 +40,7 @@ export function RoomHeader() {
 							variant="secondary"
 							onClick={() => setIsResetDialogOpen(true)}
 							aria-label={t('room.header.aria.reset')}
+							icon="refresh"
 							disabled={roomState.users.every(
 								(u) => u.vote === null,
 							)}
@@ -51,9 +53,10 @@ export function RoomHeader() {
 							onClick={revealVotes}
 							aria-label={t('room.header.aria.reveal')}
 							disabled={roomState.isRevealed}
+							icon="visibility"
 							style={{ color: 'var(--sys-color-primary-text)' }}
 						>
-							👁️ {t('common.actions.reveal')}
+							{t('common.actions.reveal')}
 						</Button>
 					</S.Actions>
 				</S.SubHeaderContainer>

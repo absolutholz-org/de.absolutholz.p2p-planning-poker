@@ -1,5 +1,7 @@
 import { type ReactNode } from 'react';
 
+import type { IconName } from '../Icon';
+
 /**
  * Represents a single option in the CollapsibleListbox component.
  */
@@ -19,7 +21,7 @@ export interface ICollapsibleListboxOption<T extends string = string> {
 	/**
 	 * Optional icon for the option.
 	 */
-	icon?: ReactNode;
+	icon?: IconName;
 }
 
 /**

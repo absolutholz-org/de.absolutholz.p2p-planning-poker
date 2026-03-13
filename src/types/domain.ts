@@ -11,9 +11,17 @@ export interface User {
 	vote: VoteValue; // Their current selected card (null if pending)
 }
 
+export interface TimerState {
+	duration: number; // Duration in seconds
+	isRunning: boolean;
+	remainingTime: number; // Remaining time in seconds
+	startedAt: null | number; // timestamp when timer started/resumed
+}
+
 export interface RoomState {
 	isRevealed: boolean; // Controls whether Guests can see other people's votes
 	roomId: string;
+	timer: null | TimerState;
 	users: User[];
 }
 
@@ -26,4 +34,8 @@ export type PeerMessage =
 	| { payload: { vote: VoteValue }; type: 'SUBMIT_VOTE' }
 	| { payload: undefined; type: 'TOGGLE_REVEAL' }
 	| { payload: undefined; type: 'RESET_SESSION' }
-	| { payload: { state: RoomState }; type: 'SYNC_STATE' };
+	| { payload: { state: RoomState }; type: 'SYNC_STATE' }
+	| { payload: { duration: number }; type: 'TIMER_SET' }
+	| { payload: undefined; type: 'TIMER_START' }
+	| { payload: undefined; type: 'TIMER_PAUSE' }
+	| { payload: undefined; type: 'TIMER_RESET' };

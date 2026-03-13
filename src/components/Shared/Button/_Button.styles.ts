@@ -62,6 +62,36 @@ export const Button = styled.button<{ 'data-variant': ButtonVariant }>`
 			border-color: var(--sys-color-danger);
 		}
 	}
+
+	&[data-variant='ghost'] {
+		background-color: transparent;
+		color: var(--sys-color-text-primary);
+		border: none;
+
+		&:hover:not(:disabled) {
+			background-color: var(--sys-color-border-subtle);
+		}
+	}
+
+	/* Sizes */
+	&[data-size='sm'] {
+		min-height: 2.25rem;
+		min-width: 2.25rem;
+		padding: var(--sys-spacing-xs) var(--sys-spacing-sm);
+		font-size: var(--sys-font-size-sm);
+	}
+
+	&[data-size='md'] {
+		min-height: 3rem;
+		min-width: 3rem;
+	}
+
+	&[data-size='lg'] {
+		min-height: 3.5rem;
+		min-width: 3.5rem;
+		padding: var(--sys-spacing-md) var(--sys-spacing-xl);
+		font-size: var(--sys-font-size-lg);
+	}
 `;
 
 export const Button_Icon = styled.span`

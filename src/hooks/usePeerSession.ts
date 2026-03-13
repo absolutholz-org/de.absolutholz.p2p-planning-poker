@@ -24,6 +24,10 @@ interface UsePeerSessionReturn {
 	resetBoard: () => void;
 	revealVotes: () => void;
 	roomState: RoomState | null;
+	setTimer: (duration: number) => void;
+	startTimer: () => void;
+	pauseTimer: () => void;
+	resetTimer: () => void;
 }
 
 export function usePeerSession(): UsePeerSessionReturn {
@@ -170,6 +174,57 @@ export function usePeerSession(): UsePeerSessionReturn {
 								vote: null,
 							}));
 							break;
+
+						case 'TIMER_SET':
+							newState.timer = {
+								duration: msg.payload.duration,
+								isRunning: false,
+								remainingTime: msg.payload.duration,
+								startedAt: null,
+							};
+							break;
+
+						case 'TIMER_START':
+							if (newState.timer) {
+								newState.timer = {
+									...newState.timer,
+									isRunning: true,
+									startedAt: Date.now(),
+								};
+							}
+							break;
+
+						case 'TIMER_PAUSE':
+							if (newState.timer && newState.timer.isRunning) {
+								const elapsed = newState.timer.startedAt
+									? Math.floor(
+											(Date.now() -
+												newState.timer.startedAt) /
+												1000,
+										)
+									: 0;
+								newState.timer = {
+									...newState.timer,
+									isRunning: false,
+									remainingTime: Math.max(
+										0,
+										newState.timer.remainingTime - elapsed,
+									),
+									startedAt: null,
+								};
+							}
+							break;
+
+						case 'TIMER_RESET':
+							if (newState.timer) {
+								newState.timer = {
+									...newState.timer,
+									isRunning: false,
+									remainingTime: newState.timer.duration,
+									startedAt: null,
+								};
+							}
+							break;
 					}
 
 					// Push active sync purely outside the React evaluation cycle to prevent StrictMode side-effect locking
@@ -303,6 +358,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 			const initialState: RoomState = restoredState || {
 				isRevealed: false,
 				roomId: peerId,
+				timer: null,
 				users: [
 					{
 						id: peerId,
@@ -482,6 +538,98 @@ export function usePeerSession(): UsePeerSessionReturn {
 		}
 	}, [sendToHost, broadcastState]);
 
+	const setTimer = useCallback(
+		(duration: number) => {
+			if (isHostRef.current) {
+				setRoomState((prev) => {
+					if (!prev) return prev;
+					const newState: RoomState = {
+						...prev,
+						timer: {
+							duration,
+							isRunning: false,
+							remainingTime: duration,
+							startedAt: null,
+						},
+					};
+					broadcastState(newState);
+					return newState;
+				});
+			} else {
+				sendToHost({ payload: { duration }, type: 'TIMER_SET' });
+			}
+		},
+		[sendToHost, broadcastState],
+	);
+
+	const startTimer = useCallback(() => {
+		if (isHostRef.current) {
+			setRoomState((prev) => {
+				if (!prev || !prev.timer) return prev;
+				const newState: RoomState = {
+					...prev,
+					timer: {
+						...prev.timer,
+						isRunning: true,
+						startedAt: Date.now(),
+					},
+				};
+				broadcastState(newState);
+				return newState;
+			});
+		} else {
+			sendToHost({ payload: undefined, type: 'TIMER_START' });
+		}
+	}, [sendToHost, broadcastState]);
+
+	const pauseTimer = useCallback(() => {
+		if (isHostRef.current) {
+			setRoomState((prev) => {
+				if (!prev || !prev.timer || !prev.timer.isRunning) return prev;
+				const elapsed = prev.timer.startedAt
+					? Math.floor((Date.now() - prev.timer.startedAt) / 1000)
+					: 0;
+				const newState: RoomState = {
+					...prev,
+					timer: {
+						...prev.timer,
+						isRunning: false,
+						remainingTime: Math.max(
+							0,
+							prev.timer.remainingTime - elapsed,
+						),
+						startedAt: null,
+					},
+				};
+				broadcastState(newState);
+				return newState;
+			});
+		} else {
+			sendToHost({ payload: undefined, type: 'TIMER_PAUSE' });
+		}
+	}, [sendToHost, broadcastState]);
+
+	const resetTimer = useCallback(() => {
+		if (isHostRef.current) {
+			setRoomState((prev) => {
+				if (!prev || !prev.timer) return prev;
+				const newState: RoomState = {
+					...prev,
+					timer: {
+						...prev.timer,
+						isRunning: false,
+						remainingTime: prev.timer.duration,
+						startedAt: null,
+					},
+				};
+				broadcastState(newState);
+				return newState;
+			});
+		} else {
+			sendToHost({ payload: undefined, type: 'TIMER_RESET' });
+		}
+	}, [sendToHost, broadcastState]);
+
 	const leaveRoom = useCallback((clearStorage: boolean = true) => {
 		clearTimeout(connectionTimeoutRef.current);
 		connectionsRef.current.forEach((conn) => conn.close());
@@ -517,8 +665,12 @@ export function usePeerSession(): UsePeerSessionReturn {
 		initHost,
 		leaveRoom,
 		localUserId: peerId,
+		pauseTimer,
 		resetBoard,
+		resetTimer,
 		revealVotes,
 		roomState,
+		setTimer,
+		startTimer,
 	};
 }

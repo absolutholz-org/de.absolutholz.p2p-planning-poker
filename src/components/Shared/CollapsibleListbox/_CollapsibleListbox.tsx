@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 
 import { useMenuNavigation } from '../../../hooks/useMenuNavigation';
 import { Button } from '../Button';
+import { Icon } from '../Icon';
 import { IconButton } from '../IconButton';
 import { Popover } from '../Popover';
 import * as S from './_CollapsibleListbox.styles';
@@ -43,7 +44,7 @@ export function CollapsibleListbox<T extends string>({
 					aria-label={ariaLabel}
 					aria-haspopup="listbox"
 					aria-expanded={isOpen}
-					icon={activeOption.icon}
+					icon={activeOption.icon || 'language'}
 				/>
 			)}
 			<S.MenuContainer
@@ -69,7 +70,10 @@ export function CollapsibleListbox<T extends string>({
 										className="option-icon"
 										aria-hidden="true"
 									>
-										{option.icon}
+										<Icon
+											name={option.icon}
+											size="1.25em"
+										/>
 									</span>
 								)}
 								{option.label}

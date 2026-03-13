@@ -11,7 +11,7 @@ export const IconButton = styled(Button)`
 	min-width: 3rem;
 
 	/* Ensure icon is perfectly centered */
-	& > span {
+	& > svg {
 		margin: 0;
 	}
 `;

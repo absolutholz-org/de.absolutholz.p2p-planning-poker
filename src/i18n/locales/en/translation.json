@@ -72,6 +72,23 @@
         "aria_close": "Close share menu",
         "dialog_title": "Share Room",
         "dialog_desc": "Invite your team to this session."
+      },
+      "timer": {
+        "title": "Timer",
+        "minutes_label": "Minutes",
+        "start": "Start",
+        "pause": "Pause",
+        "resume": "Resume",
+        "reset": "Reset",
+        "aria": {
+          "input": "Set timer duration in minutes",
+          "decrement": "Decrease timer duration by 1 minute",
+          "increment": "Increase timer duration by 1 minute",
+          "start": "Start the timer",
+          "pause": "Pause the timer",
+          "resume": "Resume the timer",
+          "reset": "Reset the timer to initial duration"
+        }
       }
     },
     "deck": {

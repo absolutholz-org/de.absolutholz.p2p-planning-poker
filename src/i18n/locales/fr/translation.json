@@ -69,7 +69,22 @@
         "code_copied": "Code copié dans le presse-papiers !",
         "fallback_error": "Le partage n'est pas pris en charge sur ce navigateur.",
         "aria_open": "Ouvrir le menu de partage",
-        "aria_close": "Fermer le menu de partage"
+        "aria_close": "Fermer le menu de partage",
+        "timer": {
+          "title": "Minuteur",
+          "minutes_label": "Minutes",
+          "start": "Démarrer",
+          "pause": "Pause",
+          "resume": "Reprendre",
+          "reset": "Réinitialiser",
+          "aria": {
+            "input": "Définir la durée du minuteur en minutes",
+            "start": "Démarrer le minuteur",
+            "pause": "Mettre le minuteur en pause",
+            "resume": "Reprendre le minuteur",
+            "reset": "Réinitialiser le minuteur à sa durée initiale"
+          }
+        }
       }
     },
     "deck": {
