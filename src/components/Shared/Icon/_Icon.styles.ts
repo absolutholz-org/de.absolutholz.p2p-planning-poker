@@ -21,4 +21,3 @@ export const IconContainer = styled.span<{
 		fill: currentColor;
 	}
 `;
-

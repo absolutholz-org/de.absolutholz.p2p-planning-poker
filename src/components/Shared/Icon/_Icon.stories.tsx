@@ -67,7 +67,6 @@ export const Various: Story = {
 			<Icon name="check_circle" color="green" />
 			<Icon name="key" size={24} />
 			<Icon name="❤️" />
-
 		</div>
 	),
 };
