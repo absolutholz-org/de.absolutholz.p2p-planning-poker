@@ -1,5 +1,6 @@
 import type { Preview } from '@storybook/react-vite';
 
+import { SUPPORTED_LANGUAGES } from '../src/constants/languages';
 import { CustomDocsContainer, GlobalDecorator } from './StorybookWrappers';
 
 const preview: Preview = {
@@ -10,14 +11,14 @@ const preview: Preview = {
 			description: 'Internationalization locale',
 			toolbar: {
 				icon: 'globe',
-				items: [
-					{ right: '🇺🇸', title: 'English', value: 'en' },
-					{ right: '🇩🇪', title: 'Deutsch', value: 'de' },
-					{ right: '🇫🇷', title: 'Français', value: 'fr' },
-					{ right: '🇵🇹', title: 'Português', value: 'pt' },
-				],
+				items: SUPPORTED_LANGUAGES.map((lang) => ({
+					right: lang.flag,
+					title: lang.label,
+					value: lang.code,
+				})),
 			},
 		},
+
 		scheme: {
 			defaultValue: 'system',
 			description: 'Color scheme',
