@@ -7,9 +7,16 @@ const meta: Meta<typeof Icon> = {
 	argTypes: {
 		color: { control: 'color' },
 		label: { control: 'text' },
-		name: { control: 'text' },
-		size: { control: 'text' },
+		name: {
+			control: { type: 'select' },
+			options: Object.keys(ICON_PATHS),
+		},
+		size: {
+			control: { type: 'radio' },
+			options: [16, 20, 24],
+		},
 	},
+
 	component: Icon,
 	parameters: {
 		layout: 'centered',
@@ -60,13 +67,10 @@ export const Gallery: Story = {
 		</div>
 	),
 };
-export const Various: Story = {
-	render: () => (
-		<div style={{ alignItems: 'center', display: 'flex', gap: '1rem' }}>
-			<Icon name="add" />
-			<Icon name="check_circle" color="green" />
-			<Icon name="key" size={24} />
-			<Icon name="❤️" />
-		</div>
-	),
+export const Emoji: Story = {
+	args: {
+		label: 'Rocket Emoji',
+		name: '🚀',
+		size: 24,
+	},
 };

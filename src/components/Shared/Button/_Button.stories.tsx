@@ -1,11 +1,26 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { ICON_PATHS } from '../Icon/IconLibrary';
 import { Button } from './_Button';
 
 const meta = {
 	args: {
 		children: 'Button Label',
 		variant: 'primary',
+	},
+	argTypes: {
+		icon: {
+			control: { type: 'select' },
+			options: [undefined, ...Object.keys(ICON_PATHS)],
+		},
+		size: {
+			control: { type: 'radio' },
+			options: ['sm', 'md', 'lg'],
+		},
+		variant: {
+			control: { type: 'select' },
+			options: ['primary', 'secondary', 'danger', 'ghost'],
+		},
 	},
 	component: Button,
 	parameters: {
@@ -45,13 +60,5 @@ export const WithIcon: Story = {
 	args: {
 		...Default.args,
 		icon: 'play_arrow',
-	},
-};
-
-export const IconOnly: Story = {
-	args: {
-		children: undefined,
-		icon: 'settings',
-		variant: 'secondary',
 	},
 };

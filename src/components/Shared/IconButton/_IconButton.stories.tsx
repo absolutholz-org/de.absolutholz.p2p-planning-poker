@@ -1,8 +1,23 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { ICON_PATHS } from '../Icon/IconLibrary';
 import { IconButton } from './_IconButton';
 
 const meta = {
+	argTypes: {
+		icon: {
+			control: { type: 'select' },
+			options: Object.keys(ICON_PATHS),
+		},
+		size: {
+			control: { type: 'radio' },
+			options: ['sm', 'md', 'lg'],
+		},
+		variant: {
+			control: { type: 'select' },
+			options: ['primary', 'secondary', 'danger', 'ghost'],
+		},
+	},
 	component: IconButton,
 	parameters: {
 		layout: 'centered',
@@ -25,7 +40,7 @@ export const Primary: Story = {
 export const Secondary: Story = {
 	args: {
 		'aria-label': 'Open settings',
-		icon: 'settings',
+		icon: 'crown',
 		variant: 'secondary',
 	},
 };
@@ -33,7 +48,7 @@ export const Secondary: Story = {
 export const Danger: Story = {
 	args: {
 		'aria-label': 'Delete item',
-		icon: 'delete',
+		icon: 'remove',
 		variant: 'danger',
 	},
 };

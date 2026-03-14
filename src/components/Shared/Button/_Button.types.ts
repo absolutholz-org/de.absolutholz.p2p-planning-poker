@@ -10,6 +10,10 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
  */
 export interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
 	/**
+	 * The label of the button.
+	 */
+	children: React.ReactNode;
+	/**
 	 * The visual variant of the button.
 	 */
 	variant?: ButtonVariant;
