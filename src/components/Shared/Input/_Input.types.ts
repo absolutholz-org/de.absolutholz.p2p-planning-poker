@@ -1,12 +1,6 @@
 import type { InputHTMLAttributes } from 'react';
 
-import type { IconName } from '../Icon';
-
 export interface IInput extends InputHTMLAttributes<HTMLInputElement> {
-	/**
-	 * Name of the icon to display (Material Symbol name or emoji)
-	 */
-	icon?: IconName;
 	/**
 	 * Error message to display below the input
 	 */

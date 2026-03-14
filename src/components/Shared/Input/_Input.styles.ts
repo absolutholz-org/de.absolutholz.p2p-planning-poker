@@ -15,40 +15,17 @@ export const Label = styled.label`
 	text-transform: uppercase;
 `;
 
-export const InputContainer = styled.div<{
-	$hasIcon: boolean;
-	$hasError: boolean;
-}>`
+export const InputContainer = styled.div<{ $hasError: boolean }>`
 	position: relative;
 	display: flex;
 	align-items: center;
 	width: 100%;
-
-	svg,
-	.icon-emoji {
-		position: absolute;
-		left: var(--sys-spacing-md);
-		color: var(--sys-color-text-secondary);
-		pointer-events: none;
-		transition: color 0.2s ease-in-out;
-	}
-
-	&:focus-within svg {
-		color: var(--sys-color-primary);
-	}
 `;
 
-export const StyledInput = styled.input<{
-	$hasIcon: boolean;
-	$hasError: boolean;
-}>`
+export const StyledInput = styled.input<{ $hasError: boolean }>`
 	width: 100%;
 	min-height: 3.5rem;
 	padding: 0 var(--sys-spacing-md);
-	padding-left: ${(props) =>
-		props.$hasIcon
-			? 'calc(var(--sys-spacing-md) * 2 + 24px)'
-			: 'var(--sys-spacing-md)'};
 
 	background: var(--sys-color-surface-subtle);
 	backdrop-filter: blur(8px);

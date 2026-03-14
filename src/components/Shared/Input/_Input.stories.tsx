@@ -1,15 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { ICON_PATHS } from '../Icon/IconLibrary';
 import { Input } from './_Input';
 
 const meta = {
 	argTypes: {
 		error: { control: 'text' },
-		icon: {
-			control: { type: 'select' },
-			options: [undefined, ...Object.keys(ICON_PATHS)],
-		},
 		label: { control: 'text' },
 		placeholder: { control: 'text' },
 		type: {
@@ -33,15 +28,6 @@ export const Default: Story = {
 		id: 'input-default',
 		label: 'User Name',
 		placeholder: 'Enter your name...',
-	},
-};
-
-export const WithIcon: Story = {
-	args: {
-		icon: 'user',
-		id: 'input-with-icon',
-		label: 'Player Name',
-		placeholder: 'Type something...',
 	},
 };
 
