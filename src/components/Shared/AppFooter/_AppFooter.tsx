@@ -30,9 +30,9 @@ export function AppFooter() {
 						? 'Privacy Policy'
 						: `${t('lobby.footer.privacy')} (English)`}
 			</S.FooterLink>
-			<S.FooterLink to="/storybook/">
+			<S.StaticFooterLink href="/storybook/">
 				{t('lobby.footer.storybook')}
-			</S.FooterLink>
+			</S.StaticFooterLink>
 		</S.FixedFooter>
 	);
 }

@@ -19,7 +19,7 @@ export const FixedFooter = styled.footer`
 	}
 `;
 
-export const FooterLink = styled(Link)`
+const commonLinkStyles = `
 	color: var(--sys-color-text-secondary);
 	font-size: var(--sys-font-size-sm);
 	text-decoration: none;
@@ -29,4 +29,12 @@ export const FooterLink = styled(Link)`
 		text-decoration: underline;
 		color: var(--sys-color-text-primary);
 	}
+`;
+
+export const FooterLink = styled(Link)`
+	${commonLinkStyles}
+`;
+
+export const StaticFooterLink = styled.a`
+	${commonLinkStyles}
 `;
