@@ -1,5 +1,6 @@
 import createCache from '@emotion/cache';
 import { CacheProvider, Global } from '@emotion/react';
+import { DocsContainer } from '@storybook/blocks';
 import type { Preview } from '@storybook/react-vite';
 import React from 'react';
 
@@ -29,7 +30,16 @@ const preview: Preview = {
 				date: /Date$/i,
 			},
 		},
+		docs: {
+			container: ({ children, context }: any) => (
+				<CacheProvider value={emotionCache}>
+					<Global styles={globalStyles} />
+					<DocsContainer context={context}>{children}</DocsContainer>
+				</CacheProvider>
+			),
+		},
 	},
 };
 
 export default preview;
+
