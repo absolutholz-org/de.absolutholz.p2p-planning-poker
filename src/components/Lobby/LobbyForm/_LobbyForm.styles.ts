@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 
 export const ContentWrapper = styled.div`
 	margin-inline: auto;
-	margin-top: var(--sys-spacing-xl);
 	max-width: 30rem;
 `;
 
@@ -91,11 +90,7 @@ export const DebugToggle = styled.button`
 	}
 `;
 
-export const ToggleContainer = styled.div`
-	display: flex;
-	justify-content: center;
-	margin-top: var(--sys-spacing-md);
-`;
+// ToggleContainer removed, using Stack instead
 
 export const JoinCodeToggle = styled.button`
 	background: transparent;
@@ -138,7 +133,6 @@ export const HelperText = styled.p`
 export const ExtraText = styled.div`
 	color: var(--sys-color-text-secondary);
 	font-size: var(--sys-font-size-xs);
-	margin-top: var(--sys-spacing-xl);
 	padding-inline: var(--sys-spacing-xl);
 	text-align: center;
 `;
@@ -147,5 +141,4 @@ export const DisclaimerText = styled.p`
 	color: var(--sys-color-text-secondary);
 	font-size: var(--sys-font-size-xs);
 	text-align: center;
-	margin-top: var(--sys-spacing-sm);
 `;

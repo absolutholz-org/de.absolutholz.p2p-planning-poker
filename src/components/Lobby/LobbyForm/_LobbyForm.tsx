@@ -86,7 +86,7 @@ export function LobbyForm() {
 
 	return (
 		<PageContainer>
-			<S.ContentWrapper>
+			<Stack spacing="xl">
 				<S.CardContainer>
 					<Form
 						onSubmit={handleSubmit}
@@ -128,7 +128,7 @@ export function LobbyForm() {
 											autoFocus
 										/>
 									) : (
-										<S.ToggleContainer>
+										<Stack align="center">
 											<S.JoinCodeToggle
 												type="button"
 												onClick={() =>
@@ -137,7 +137,7 @@ export function LobbyForm() {
 											>
 												{t('lobby.roomCode.toggle')}
 											</S.JoinCodeToggle>
-										</S.ToggleContainer>
+										</Stack>
 									)}
 								</>
 							)}
@@ -164,10 +164,11 @@ export function LobbyForm() {
 						</Stack>
 					</Form>
 				</S.CardContainer>
+
 				<S.ExtraText>
 					<p>{t('lobby.extra_text')}</p>
 				</S.ExtraText>
-			</S.ContentWrapper>
+			</Stack>
 			{logs.length > 0 && showLogs && (
 				<S.DebugSection>
 					<S.DebugHeader>
