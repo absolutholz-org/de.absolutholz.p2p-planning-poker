@@ -45,6 +45,17 @@ const preview: Preview = {
 		docs: {
 			container: CustomDocsContainer,
 		},
+		options: {
+			storySort: {
+				order: [
+					'General',
+					'Foundations',
+					'Primitives',
+					'Contextual',
+					'*',
+				],
+			},
+		},
 	},
 };
 
