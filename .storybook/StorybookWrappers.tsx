@@ -1,6 +1,9 @@
 import createCache from '@emotion/cache';
 import { CacheProvider, Global } from '@emotion/react';
-import { DocsContainer, type DocsContainerProps } from '@storybook/blocks';
+import {
+	DocsContainer,
+	type DocsContainerProps,
+} from '@storybook/addon-docs/blocks';
 import type { StoryContext } from '@storybook/react-vite';
 import React, { type ReactNode, useEffect, useMemo } from 'react';
 import { I18nextProvider } from 'react-i18next';

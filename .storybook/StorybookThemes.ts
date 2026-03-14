@@ -1,27 +1,27 @@
 import { create } from 'storybook/theming/create';
 
 export const lightTheme = create({
-	appBg: 'oklch(0.984 0.003 247.858)',
-	appBorderColor: 'oklch(0.92 0 0)',
-	appContentBg: 'oklch(1 0 0)',
+	appBg: '#f8f9fa',
+	appBorderColor: '#e9ecef',
+	appContentBg: '#ffffff',
 	base: 'light',
 	brandTitle: 'P2P Planning Poker',
 	brandUrl: '/',
-	colorPrimary: 'oklch(0.205 0 0)',
-	colorSecondary: 'oklch(0.205 0 0)',
-	textColor: 'oklch(0.205 0 0)',
-	textInverseColor: 'oklch(1 0 0)',
+	colorPrimary: '#212529',
+	colorSecondary: '#495057',
+	textColor: '#212529',
+	textInverseColor: '#ffffff',
 });
 
 export const darkTheme = create({
-	appBg: 'oklch(0.145 0 0)',
-	appBorderColor: 'oklch(0.269 0 0)',
-	appContentBg: 'oklch(0.205 0 0)',
+	appBg: '#1a1a1a',
+	appBorderColor: '#2e2e2e',
+	appContentBg: '#242424',
 	base: 'dark',
 	brandTitle: 'P2P Planning Poker',
 	brandUrl: '/',
-	colorPrimary: 'oklch(0.985 0 0)',
-	colorSecondary: 'oklch(0.985 0 0)',
-	textColor: 'oklch(0.985 0 0)',
-	textInverseColor: 'oklch(0.205 0 0)',
+	colorPrimary: '#f8f9fa',
+	colorSecondary: '#dee2e6',
+	textColor: '#f8f9fa',
+	textInverseColor: '#212529',
 });
