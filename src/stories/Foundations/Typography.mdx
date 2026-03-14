@@ -6,7 +6,7 @@ import { Meta, Typeset } from '@storybook/blocks';
 
 Our typography system is built on the **Inter** font family, prioritizing legibility and a modern aesthetic.
 
-**Font Family:** `Inter, system-ui, Avenir, Helvetica, Arial, sans-serif`
+**Font Family:** `var(--sys-font-family, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif)`
 
 ## 📏 Font Sizes
 
@@ -14,17 +14,17 @@ Available as `--sys-font-size-*` CSS variables.
 
 <Typeset
   fontSizes={[
-    '0.75rem',
-    '0.875rem',
-    '1rem',
-    '1.125rem',
-    '1.25rem',
-    '1.5rem',
-    '2.25rem'
+    'var(--sys-font-size-xs)',
+    'var(--sys-font-size-sm)',
+    'var(--sys-font-size-md)',
+    'var(--sys-font-size-lg)',
+    'var(--sys-font-size-xl)',
+    'var(--sys-font-size-2xl)',
+    'var(--sys-font-size-3xl)'
   ]}
   fontWeight={400}
   sampleText="The quick brown fox jumps over the lazy dog"
-  fontFamily="Inter"
+  fontFamily="var(--sys-font-family, Inter)"
 />
 
 ## 📝 Usage
