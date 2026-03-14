@@ -8,6 +8,7 @@ import { useRoom } from '../../../context/RoomContext';
 import { AppFooter } from '../../Shared/AppFooter';
 import { Button } from '../../Shared/Button';
 import { Icon } from '../../Shared/Icon';
+import { Input } from '../../Shared/Input';
 import { PageContainer } from '../../Shared/PageContainer';
 import * as S from './_LobbyForm.styles';
 
@@ -91,42 +92,27 @@ export function LobbyForm() {
 						<S.ErrorMessage role="alert">{error}</S.ErrorMessage>
 					)}
 
-					<S.FieldLine>
-						<S.LabelRow>
-							<S.Label htmlFor="playerName">
-								<Icon name="user" size={16} />
-								{t('lobby.name.label')}
-							</S.Label>
-						</S.LabelRow>
-						<S.Input
-							id="playerName"
-							type="text"
-							required
-							autoFocus
-							maxLength={16}
-							placeholder={t('lobby.name.placeholder')}
-							value={name}
-							onChange={(e) => setName(e.target.value)}
-						/>
-					</S.FieldLine>
+					<Input
+						id="playerName"
+						label={t('lobby.name.label')}
+						type="text"
+						required
+						autoFocus
+						maxLength={16}
+						placeholder={t('lobby.name.placeholder')}
+						value={name}
+						onChange={(e) => setName(e.target.value)}
+					/>
 
 					{!roomId && (
-						<S.FieldLine>
-							<S.LabelRow>
-								<S.Label htmlFor="roomCode">
-									<Icon name="key" size={16} />
-									{t('lobby.roomCode.label')}
-								</S.Label>
-								<S.OptionalLabel>Optional</S.OptionalLabel>
-							</S.LabelRow>
-							<S.Input
-								id="roomCode"
-								type="text"
-								placeholder={t('lobby.roomCode.placeholder')}
-								value={roomCode}
-								onChange={(e) => setRoomCode(e.target.value)}
-							/>
-						</S.FieldLine>
+						<Input
+							id="roomCode"
+							label={t('lobby.roomCode.label')}
+							type="text"
+							placeholder={t('lobby.roomCode.placeholder')}
+							value={roomCode}
+							onChange={(e) => setRoomCode(e.target.value)}
+						/>
 					)}
 
 					<S.Footer>
