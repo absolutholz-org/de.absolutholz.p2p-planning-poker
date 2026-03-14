@@ -93,6 +93,31 @@ export const DebugToggle = styled.button`
 	}
 `;
 
+export const ToggleContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	margin-top: var(--sys-spacing-md);
+`;
+
+export const JoinCodeToggle = styled.button`
+	background: transparent;
+	border: none;
+	color: var(--sys-color-primary);
+	cursor: pointer;
+	font-size: var(--sys-font-size-sm);
+	font-weight: 600;
+	padding: var(--sys-spacing-sm) var(--sys-spacing-md);
+	border-radius: var(--sys-radius-sm);
+	transition: all 0.2s ease-in-out;
+	opacity: 0.8;
+
+	&:hover {
+		opacity: 1;
+		background: var(--sys-color-surface-subtle);
+		color: var(--sys-color-primary-hover);
+	}
+`;
+
 export const DebugList = styled.ul`
 	list-style: none;
 	max-height: 200px;

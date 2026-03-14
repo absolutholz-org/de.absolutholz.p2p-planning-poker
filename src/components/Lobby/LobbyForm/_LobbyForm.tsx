@@ -19,6 +19,7 @@ export function LobbyForm() {
 	const { roomId } = useParams<{ roomId?: string }>();
 	const [name, setName] = useState('');
 	const [roomCode, setRoomCode] = useState(roomId || '');
+	const [showRoomCode, setShowRoomCode] = useState(false);
 	const [showLogs, setShowLogs] = useState(false);
 
 	// Load previously saved name on initial mount
@@ -105,14 +106,32 @@ export function LobbyForm() {
 					/>
 
 					{!roomId && (
-						<Input
-							id="roomCode"
-							label={t('lobby.roomCode.label')}
-							type="text"
-							placeholder={t('lobby.roomCode.placeholder')}
-							value={roomCode}
-							onChange={(e) => setRoomCode(e.target.value)}
-						/>
+						<>
+							{showRoomCode ? (
+								<Input
+									id="roomCode"
+									label={t('lobby.roomCode.label')}
+									type="text"
+									placeholder={t(
+										'lobby.roomCode.placeholder',
+									)}
+									value={roomCode}
+									onChange={(e) =>
+										setRoomCode(e.target.value)
+									}
+									autoFocus
+								/>
+							) : (
+								<S.ToggleContainer>
+									<S.JoinCodeToggle
+										type="button"
+										onClick={() => setShowRoomCode(true)}
+									>
+										{t('lobby.roomCode.toggle')}
+									</S.JoinCodeToggle>
+								</S.ToggleContainer>
+							)}
+						</>
 					)}
 
 					<S.Footer>

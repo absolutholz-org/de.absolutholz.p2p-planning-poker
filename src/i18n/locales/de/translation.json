@@ -29,8 +29,9 @@
       "placeholder": "Gib deinen Anzeigenamen ein (z.B. Alice)"
     },
     "roomCode": {
-      "label": "Raumcode (Optional)",
-      "placeholder": "Code eingeben oder leer lassen um Host zu sein"
+      "label": "Raum-Code (Optional)",
+      "placeholder": "Code eingeben oder leer lassen für neuen Raum",
+      "toggle": "Über Raum-Code beitreten?"
     },
     "submit": {
       "join": "Raum beitreten",

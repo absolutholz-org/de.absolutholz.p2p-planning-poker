@@ -30,7 +30,8 @@
     },
     "roomCode": {
       "label": "Room Code (Optional)",
-      "placeholder": "Enter code or leave blank to host"
+      "placeholder": "Enter code or leave blank to host",
+      "toggle": "Join via room code?"
     },
     "submit": {
       "join": "Join Room",
