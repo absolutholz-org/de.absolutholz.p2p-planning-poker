@@ -1,25 +1,36 @@
-import createCache from '@emotion/cache';
-import { CacheProvider, Global } from '@emotion/react';
-import { DocsContainer } from '@storybook/blocks';
 import type { Preview } from '@storybook/react-vite';
-import React from 'react';
 
-import { globalStyles } from '../src/theme/GlobalStyles';
-
-const emotionCache = createCache({
-	key: 'css',
-	stylisPlugins: [],
-});
+import { CustomDocsContainer, GlobalDecorator } from './StorybookWrappers';
 
 const preview: Preview = {
-	decorators: [
-		(Story) => (
-			<CacheProvider value={emotionCache}>
-				<Global styles={globalStyles} />
-				<Story />
-			</CacheProvider>
-		),
-	],
+	decorators: [GlobalDecorator],
+	globalTypes: {
+		locale: {
+			defaultValue: 'en',
+			description: 'Internationalization locale',
+			toolbar: {
+				icon: 'globe',
+				items: [
+					{ right: '🇺🇸', title: 'English', value: 'en' },
+					{ right: '🇩🇪', title: 'Deutsch', value: 'de' },
+					{ right: '🇫🇷', title: 'Français', value: 'fr' },
+					{ right: '🇵🇹', title: 'Português', value: 'pt' },
+				],
+			},
+		},
+		scheme: {
+			defaultValue: 'system',
+			description: 'Color scheme',
+			toolbar: {
+				icon: 'circlehollow',
+				items: [
+					{ icon: 'sun', title: 'Light', value: 'light' },
+					{ icon: 'moon', title: 'Dark', value: 'dark' },
+					{ icon: 'browser', title: 'System', value: 'system' },
+				],
+			},
+		},
+	},
 	parameters: {
 		a11y: {
 			test: 'todo',
@@ -31,15 +42,9 @@ const preview: Preview = {
 			},
 		},
 		docs: {
-			container: ({ children, context }: any) => (
-				<CacheProvider value={emotionCache}>
-					<Global styles={globalStyles} />
-					<DocsContainer context={context}>{children}</DocsContainer>
-				</CacheProvider>
-			),
+			container: CustomDocsContainer,
 		},
 	},
 };
 
 export default preview;
-

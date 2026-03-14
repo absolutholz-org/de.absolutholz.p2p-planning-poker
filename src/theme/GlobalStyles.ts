@@ -77,7 +77,8 @@ export const globalStyles = css`
 		--page-content-padding: var(--sys-spacing-md);
 		--page-content-max-width: 52rem;
 
-		--sys-font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+		--sys-font-family:
+			Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 		--sys-font-weight-normal: 400;
 		--sys-font-weight-medium: 500;
 		--sys-font-weight-bold: 700;
