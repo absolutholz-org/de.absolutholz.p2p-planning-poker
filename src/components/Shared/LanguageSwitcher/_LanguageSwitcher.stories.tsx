@@ -18,9 +18,3 @@ type Story = StoryObj<typeof meta>;
 
 // Base Story rendering the localized language map
 export const Default: Story = {};
-
-export const WithCustomClass: Story = {
-	args: {
-		className: 'custom-language-class',
-	},
-};
