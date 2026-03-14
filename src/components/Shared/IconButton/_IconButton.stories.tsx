@@ -8,7 +8,7 @@ const meta = {
 		layout: 'centered',
 	},
 	tags: ['autodocs'],
-	title: 'Shared/IconButton',
+	title: 'Primitives/Actions/IconButton',
 } satisfies Meta<typeof IconButton>;
 
 export default meta;

@@ -13,7 +13,7 @@ const meta = {
 		layout: 'centered',
 	},
 	tags: ['autodocs'],
-	title: 'Shared/Card',
+	title: 'Primitives/Layout/Card',
 } satisfies Meta<typeof Card>;
 
 export default meta;

@@ -15,7 +15,7 @@ const meta: Meta<typeof Icon> = {
 		layout: 'centered',
 	},
 	tags: ['autodocs'],
-	title: 'Shared/Icon',
+	title: 'Primitives/Display/Icon',
 };
 
 export default meta;

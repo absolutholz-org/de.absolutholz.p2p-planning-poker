@@ -8,7 +8,7 @@ const meta = {
 		layout: 'fullscreen',
 	},
 	tags: ['autodocs'],
-	title: 'Shared/PageContainer',
+	title: 'Primitives/Layout/PageContainer',
 } satisfies Meta<typeof PageContainer>;
 
 export default meta;

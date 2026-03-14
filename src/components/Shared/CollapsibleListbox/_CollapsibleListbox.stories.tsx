@@ -9,7 +9,7 @@ const meta = {
 		layout: 'centered',
 	},
 	tags: ['autodocs'],
-	title: 'Shared/CollapsibleListbox',
+	title: 'Primitives/Inputs/CollapsibleListbox',
 } satisfies Meta<typeof CollapsibleListbox>;
 
 export default meta;

@@ -1,0 +1,43 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Foundations/Spacing & Shape" />
+
+# Spacing & Shape
+
+Consistency in spacing and border-radii is key to our system's "premium" feel.
+
+## 📏 Spacing
+
+We use a 4px-based grid system. Root variable: `--sys-spacing-*`.
+
+| Token | Value | PX | Usage |
+| :--- | :--- | :--- | :--- |
+| `xs` | `0.25rem` | 4px | Micro-spacing, tight gaps |
+| `sm` | `0.5rem` | 8px | Low-level grouping, padding |
+| `sm-md` | `0.75rem` | 12px | List items, medium gaps |
+| `md` | `1rem` | 16px | Default padding, component gaps |
+| `lg` | `1.5rem` | 24px | Large section spacing |
+| `xl` | `2rem` | 32px | Modal/Card padding |
+| `xxl` | `3rem` | 48px | Significant page sections |
+
+## 📐 Radius
+
+Border radius tokens for consistent rounding. Root variable: `--sys-radius-*`.
+
+| Token | Value | PX | Usage |
+| :--- | :--- | :--- | :--- |
+| `sm` | `4px` | 4px | Small inputs, nested items |
+| `md` | `8px` | 8px | Buttons, small cards |
+| `lg` | `12px` | 12px | Default cards, modals |
+| `xl` | `16px` | 16px | Large containers |
+| `xxl` | `24px` | 24px | Featured sections |
+| `pill` | `9999px` | - | Fully rounded buttons/badges |
+
+## 🌫️ Shadows
+
+Shadow tokens for elevation. Root variable: `--sys-shadow-*`.
+
+- `sm`: Subtle elevation for hover states.
+- `md`: Default elevation for floating elements (Tooltips).
+- `lg`: High elevation for primary overlays (Popovers).
+- `xl`: Maximum elevation for modal dialogs.

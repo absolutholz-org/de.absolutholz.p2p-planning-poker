@@ -17,7 +17,7 @@ const meta = {
 		layout: 'centered',
 	},
 	tags: ['autodocs'],
-	title: 'Shared/Dialog',
+	title: 'Primitives/Overlays/Dialog',
 } satisfies Meta<typeof Dialog>;
 
 export default meta;

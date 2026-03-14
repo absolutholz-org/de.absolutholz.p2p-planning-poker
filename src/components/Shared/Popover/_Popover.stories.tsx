@@ -9,7 +9,7 @@ const meta = {
 		layout: 'centered',
 	},
 	tags: ['autodocs'],
-	title: 'Shared/Popover',
+	title: 'Primitives/Overlays/Popover',
 } satisfies Meta<typeof Popover>;
 
 export default meta;

@@ -15,7 +15,7 @@ const meta = {
 	},
 	render: (args) => <Tooltip {...args} />,
 	tags: ['autodocs'],
-	title: 'Shared/Tooltip',
+	title: 'Primitives/Overlays/Tooltip',
 } satisfies Meta<typeof Tooltip>;
 
 export default meta;

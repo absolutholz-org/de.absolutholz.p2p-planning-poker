@@ -1,0 +1,26 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+# P2P Planning Poker Design System
+
+Welcome to the component library for **P2P Planning Poker**. This Storybook serves as our source of truth for UI components, design tokens, and architectural patterns.
+
+## 🧭 Navigation
+
+The library is organized to build from the most basic elements to specialized application components:
+
+- **Foundations**: Core design tokens (Colors, Typography, Spacing). These are the DNA of our system.
+- **Primitives**: Agnostic UI building blocks. These are visually-driven and don't contain domain logic.
+- **Contextual**: Components that combine primitives with application-specific context or logic (e.g., Switchers, Footer).
+
+## 🛠️ Principles
+
+### 1. Simple but Premium
+We prioritize a clean, focused user experience with high-quality micro-interactions and a refined OKLCH-based color palette.
+
+### 2. Context-Agnostic Primitives
+Our primitives are built to be reused anywhere. They use CSS variables for styling and React composition for flexibility.
+
+### 3. Progressive Enhancement
+We use native browser APIs and semantic HTML wherever possible, layered with Emotion for styling and PeerJS for networking.

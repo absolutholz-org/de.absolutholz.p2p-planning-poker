@@ -8,7 +8,7 @@ const meta: Meta<typeof Divider> = {
 		layout: 'padded',
 	},
 	tags: ['autodocs'],
-	title: 'Shared/Divider',
+	title: 'Primitives/Layout/Divider',
 };
 
 export default meta;

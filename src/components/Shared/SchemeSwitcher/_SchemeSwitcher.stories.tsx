@@ -11,7 +11,7 @@ const meta = {
 		layout: 'centered',
 	},
 	tags: ['autodocs'],
-	title: 'Shared/SchemeSwitcher',
+	title: 'Contextual/SchemeSwitcher',
 } satisfies Meta<typeof SchemeSwitcher>;
 
 export default meta;

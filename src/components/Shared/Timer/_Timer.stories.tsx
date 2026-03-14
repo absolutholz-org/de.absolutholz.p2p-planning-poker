@@ -105,7 +105,7 @@ const meta: Meta<ITimerProps & TimerArgs> = {
 		layout: 'centered',
 	},
 	tags: ['autodocs'],
-	title: 'Shared/Timer',
+	title: 'Contextual/Timer',
 } satisfies Meta<typeof Timer & TimerArgs>;
 
 export default meta;

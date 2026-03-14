@@ -12,7 +12,7 @@ const meta = {
 		layout: 'centered',
 	},
 	tags: ['autodocs'],
-	title: 'Shared/Button',
+	title: 'Primitives/Actions/Button',
 } satisfies Meta<typeof Button>;
 
 export default meta;

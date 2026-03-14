@@ -18,7 +18,7 @@ const meta = {
 		layout: 'fullscreen',
 	},
 	tags: ['autodocs'],
-	title: 'Shared/AppFooter',
+	title: 'Contextual/AppFooter',
 } satisfies Meta<typeof AppFooter>;
 
 export default meta;

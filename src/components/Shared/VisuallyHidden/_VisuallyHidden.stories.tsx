@@ -11,7 +11,7 @@ const meta = {
 		layout: 'centered',
 	},
 	tags: ['autodocs'],
-	title: 'Shared/VisuallyHidden',
+	title: 'Primitives/Layout/VisuallyHidden',
 } satisfies Meta<typeof VisuallyHidden>;
 
 export default meta;

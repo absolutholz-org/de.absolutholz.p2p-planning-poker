@@ -10,7 +10,7 @@ const meta = {
 		layout: 'centered',
 	},
 	tags: ['autodocs'],
-	title: 'Shared/LanguageSwitcher',
+	title: 'Contextual/LanguageSwitcher',
 } satisfies Meta<typeof LanguageSwitcher>;
 
 export default meta;

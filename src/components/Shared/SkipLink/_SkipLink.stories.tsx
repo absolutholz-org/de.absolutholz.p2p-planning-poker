@@ -8,7 +8,7 @@ const meta = {
 		layout: 'fullscreen',
 	},
 	tags: ['autodocs'],
-	title: 'Shared/SkipLink',
+	title: 'Primitives/Actions/SkipLink',
 } satisfies Meta<typeof SkipLink>;
 
 export default meta;

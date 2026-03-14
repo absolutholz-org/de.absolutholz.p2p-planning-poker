@@ -1,0 +1,38 @@
+import { Meta, Typeset } from '@storybook/blocks';
+
+<Meta title="Foundations/Typography" />
+
+# Typography
+
+Our typography system is built on the **Inter** font family, prioritizing legibility and a modern aesthetic.
+
+**Font Family:** `Inter, system-ui, Avenir, Helvetica, Arial, sans-serif`
+
+## 📏 Font Sizes
+
+Available as `--sys-font-size-*` CSS variables.
+
+<Typeset
+  fontSizes={[
+    '0.75rem',
+    '0.875rem',
+    '1rem',
+    '1.125rem',
+    '1.25rem',
+    '1.5rem',
+    '2.25rem'
+  ]}
+  fontWeight={400}
+  sampleText="The quick brown fox jumps over the lazy dog"
+  fontFamily="Inter"
+/>
+
+## 📝 Usage
+
+- **XS (12px):** Labels, captions, micro-copy.
+- **SM (14px):** Secondary text, small buttons.
+- **MD (16px):** Body text, default inputs.
+- **LG (18px):** Navigation elements, tooltips.
+- **XL (20px):** Sub-headings, active labels.
+- **2XL (24px):** Page titles, primary headings.
+- **3XL (36px):** Large display titles.
