@@ -40,7 +40,8 @@
     "extra_text": "Sem necessidade de registro. Gratuito para sempre. O P2P Poker é uma ferramenta de estimativa em tempo real e sem servidor, impulsionada pelo WebRTC.",
     "footer": {
       "impressum": "Aviso Legal",
-      "privacy": "Política de Privacidade"
+      "privacy": "Política de Privacidade",
+      "storybook": "Storybook"
     },
     "privacy_disclaimer": "Ao participar, você concorda com nossa Política de Privacidade em relação a conexões peer-to-peer."
   },

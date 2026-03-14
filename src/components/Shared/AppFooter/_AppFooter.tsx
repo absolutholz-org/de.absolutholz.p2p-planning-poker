@@ -18,7 +18,7 @@ export function AppFooter() {
 					? 'Impressum'
 					: isEnglish
 						? 'Legal Notice'
-						: `${t('footer.impressum')} (English)`}
+						: `${t('lobby.footer.impressum')} (English)`}
 			</S.FooterLink>
 			<S.FooterLink
 				to="/privacy"
@@ -28,7 +28,10 @@ export function AppFooter() {
 					? 'Datenschutzerklärung'
 					: isEnglish
 						? 'Privacy Policy'
-						: `${t('footer.privacy')} (English)`}
+						: `${t('lobby.footer.privacy')} (English)`}
+			</S.FooterLink>
+			<S.FooterLink to="/storybook/">
+				{t('lobby.footer.storybook')}
 			</S.FooterLink>
 		</S.FixedFooter>
 	);

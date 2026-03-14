@@ -40,7 +40,8 @@
     "extra_text": "Keine Anmeldung erforderlich. Für immer kostenlos. P2P Poker ist ein serverloses Echtzeit-Schätzungstool, basierend auf WebRTC.",
     "footer": {
       "impressum": "Impressum",
-      "privacy": "Datenschutzerklärung"
+      "privacy": "Datenschutzerklärung",
+      "storybook": "Storybook"
     },
     "privacy_disclaimer": "Mit dem Beitritt erklärst du dich mit unserer Datenschutzerklärung bezüglich Peer-to-Peer-Verbindungen einverstanden."
   },

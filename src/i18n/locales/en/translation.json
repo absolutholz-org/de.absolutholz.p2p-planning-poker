@@ -40,7 +40,8 @@
     "extra_text": "No sign-up required. Free forever. P2P Poker is a serverless real-time estimation tool powered by WebRTC.",
     "footer": {
       "impressum": "Legal Notice",
-      "privacy": "Privacy Policy"
+      "privacy": "Privacy Policy",
+      "storybook": "Storybook"
     },
     "privacy_disclaimer": "By joining, you agree to our Privacy Policy regarding peer-to-peer connections."
   },
