@@ -6,7 +6,7 @@ export const ContentWrapper = styled.div`
 	max-width: 30rem;
 `;
 
-export const FormCard = styled.form`
+export const CardContainer = styled.div`
 	background-color: var(--sys-color-surface);
 	border: 1px solid var(--sys-color-border);
 	border-radius: var(--sys-radius-xl);
@@ -19,14 +19,12 @@ export const Title = styled.h1`
 	color: var(--sys-color-text-primary);
 	font-size: var(--sys-font-size-2xl);
 	font-weight: 600;
-	margin-bottom: var(--sys-spacing-sm);
 `;
 
 export const SubTitle = styled.p`
 	color: var(--sys-color-text-secondary);
 	font-size: var(--sys-font-size-sm);
 	line-height: 1.5;
-	margin-bottom: var(--sys-spacing-xl);
 `;
 
 export const DebugSection = styled.section`
@@ -135,21 +133,6 @@ export const HelperText = styled.p`
 	color: var(--sys-color-text-secondary);
 	font-size: var(--sys-font-size-sm);
 	margin-top: 0.125rem;
-`;
-
-export const ErrorMessage = styled.div`
-	background-color: rgba(239, 68, 68, 0.1);
-	border-radius: var(--radius-md);
-	color: var(--sys-color-danger);
-	font-weight: 500;
-	padding: var(--sys-spacing-sm);
-	text-align: center;
-`;
-
-export const Footer = styled.div`
-	display: flex;
-	flex-direction: column;
-	margin-top: var(--sys-spacing-lg);
 `;
 
 export const ExtraText = styled.div`

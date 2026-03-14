@@ -7,9 +7,11 @@ import { usePeer } from '../../../context/PeerContext';
 import { useRoom } from '../../../context/RoomContext';
 import { AppFooter } from '../../Shared/AppFooter';
 import { Button } from '../../Shared/Button';
+import { Form } from '../../Shared/Form';
 import { Icon } from '../../Shared/Icon';
 import { Input } from '../../Shared/Input';
 import { PageContainer } from '../../Shared/PageContainer';
+import { Stack } from '../../Shared/Stack';
 import * as S from './_LobbyForm.styles';
 
 export function LobbyForm() {
@@ -85,75 +87,83 @@ export function LobbyForm() {
 	return (
 		<PageContainer>
 			<S.ContentWrapper>
-				<S.FormCard onSubmit={handleSubmit}>
-					<S.Title>{t('lobby.title')}</S.Title>
-					<S.SubTitle>{t('lobby.subtitle')}</S.SubTitle>
+				<S.CardContainer>
+					<Form
+						onSubmit={handleSubmit}
+						error={error || undefined}
+						spacing="xl"
+					>
+						<Stack spacing="xs">
+							<S.Title>{t('lobby.title')}</S.Title>
+							<S.SubTitle>{t('lobby.subtitle')}</S.SubTitle>
+						</Stack>
 
-					{error && (
-						<S.ErrorMessage role="alert">{error}</S.ErrorMessage>
-					)}
+						<Stack spacing="md">
+							<Input
+								id="playerName"
+								label={t('lobby.name.label')}
+								type="text"
+								required
+								autoFocus
+								maxLength={16}
+								placeholder={t('lobby.name.placeholder')}
+								value={name}
+								onChange={(e) => setName(e.target.value)}
+							/>
 
-					<Input
-						id="playerName"
-						label={t('lobby.name.label')}
-						type="text"
-						required
-						autoFocus
-						maxLength={16}
-						placeholder={t('lobby.name.placeholder')}
-						value={name}
-						onChange={(e) => setName(e.target.value)}
-					/>
-
-					{!roomId && (
-						<>
-							{showRoomCode ? (
-								<Input
-									id="roomCode"
-									label={t('lobby.roomCode.label')}
-									type="text"
-									placeholder={t(
-										'lobby.roomCode.placeholder',
+							{!roomId && (
+								<>
+									{showRoomCode ? (
+										<Input
+											id="roomCode"
+											label={t('lobby.roomCode.label')}
+											type="text"
+											placeholder={t(
+												'lobby.roomCode.placeholder',
+											)}
+											value={roomCode}
+											onChange={(e) =>
+												setRoomCode(e.target.value)
+											}
+											autoFocus
+										/>
+									) : (
+										<S.ToggleContainer>
+											<S.JoinCodeToggle
+												type="button"
+												onClick={() =>
+													setShowRoomCode(true)
+												}
+											>
+												{t('lobby.roomCode.toggle')}
+											</S.JoinCodeToggle>
+										</S.ToggleContainer>
 									)}
-									value={roomCode}
-									onChange={(e) =>
-										setRoomCode(e.target.value)
-									}
-									autoFocus
-								/>
-							) : (
-								<S.ToggleContainer>
-									<S.JoinCodeToggle
-										type="button"
-										onClick={() => setShowRoomCode(true)}
-									>
-										{t('lobby.roomCode.toggle')}
-									</S.JoinCodeToggle>
-								</S.ToggleContainer>
+								</>
 							)}
-						</>
-					)}
+						</Stack>
 
-					<S.Footer>
-						<Button
-							type="submit"
-							disabled={
-								!name.trim() ||
-								connectionStatus === 'connecting'
-							}
-						>
-							{connectionStatus === 'connecting'
-								? 'Connecting...'
-								: roomCode.trim()
-									? `${t('lobby.submit.join')}`
-									: `${t('lobby.submit.create')}`}
-							<Icon name="arrow_right" size={16} />
-						</Button>
-						<S.DisclaimerText>
-							{t('lobby.privacy_disclaimer')}
-						</S.DisclaimerText>
-					</S.Footer>
-				</S.FormCard>
+						<Stack spacing="sm">
+							<Button
+								type="submit"
+								disabled={
+									!name.trim() ||
+									connectionStatus === 'connecting'
+								}
+							>
+								{connectionStatus === 'connecting'
+									? 'Connecting...'
+									: roomCode.trim()
+										? `${t('lobby.submit.join')}`
+										: `${t('lobby.submit.create')}`}
+								<Icon name="arrow_right" size={16} />
+							</Button>
+							<S.DisclaimerText>
+								{t('lobby.privacy_disclaimer')}
+							</S.DisclaimerText>
+						</Stack>
+					</Form>
+				</S.CardContainer>
 				<S.ExtraText>
 					<p>{t('lobby.extra_text')}</p>
 				</S.ExtraText>
