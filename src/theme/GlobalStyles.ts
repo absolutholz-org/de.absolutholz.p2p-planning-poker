@@ -63,7 +63,7 @@ export const globalStyles = css`
 		--sys-radius-lg: 12px;
 		--sys-radius-xl: 16px;
 		--sys-radius-xxl: 24px;
-		--sys-radius-pill: 9999px;
+		--sys-radius-pill: calc(infinity * 1px);
 
 		/* System Font Sizes */
 		--sys-font-size-xs: 0.75rem; /* 12px */
