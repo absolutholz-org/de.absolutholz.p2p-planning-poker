@@ -11,34 +11,30 @@ We use a modern **OKLCH** color system for better perceptual uniformity and acce
 <ColorPalette>
   <ColorItem
     title="Primary"
-    subtitle="--sys-color-primary"
+    subtitle="Main brand color"
     colors={{ 
-      Light: 'oklch(0.205 0 0)', 
-      Dark: 'oklch(0.985 0 0)' 
+      Variable: 'var(--sys-color-primary)'
     }}
   />
   <ColorItem
     title="Background"
-    subtitle="--sys-color-bg"
+    subtitle="App background"
     colors={{ 
-      Light: 'oklch(0.984 0.003 247.858)', 
-      Dark: 'oklch(0.145 0 0)' 
+      Variable: 'var(--sys-color-bg)'
     }}
   />
   <ColorItem
     title="Surface"
-    subtitle="--sys-color-surface"
+    subtitle="Cards and elevated layers"
     colors={{ 
-      Light: 'oklch(1 0 0)', 
-      Dark: 'oklch(0.205 0 0)' 
+      Variable: 'var(--sys-color-surface)'
     }}
   />
   <ColorItem
     title="Border"
-    subtitle="--sys-color-border"
+    subtitle="Dividers and outlines"
     colors={{ 
-      Light: 'oklch(0.92 0 0)', 
-      Dark: 'oklch(0.269 0 0)' 
+      Variable: 'var(--sys-color-border)'
     }}
   />
 </ColorPalette>
@@ -48,18 +44,18 @@ We use a modern **OKLCH** color system for better perceptual uniformity and acce
 <ColorPalette>
   <ColorItem
     title="Success"
-    subtitle="--sys-color-success"
-    colors={{ Default: 'oklch(0.696 0.17 162.48)' }}
+    subtitle="Positive actions and status"
+    colors={{ Default: 'var(--sys-color-success)' }}
   />
   <ColorItem
     title="Warning"
-    subtitle="--sys-color-warning"
-    colors={{ Default: 'oklch(0.76 0.177 75.32)' }}
+    subtitle="Cautionary alerts"
+    colors={{ Default: 'var(--sys-color-warning)' }}
   />
   <ColorItem
     title="Danger"
-    subtitle="--sys-color-danger"
-    colors={{ Default: 'oklch(0.637 0.237 25.33)' }}
+    subtitle="Destructive actions or errors"
+    colors={{ Default: 'var(--sys-color-danger)' }}
   />
 </ColorPalette>
 
@@ -68,18 +64,16 @@ We use a modern **OKLCH** color system for better perceptual uniformity and acce
 <ColorPalette>
   <ColorItem
     title="Text Primary"
-    subtitle="--sys-color-text-primary"
+    subtitle="Main content"
     colors={{ 
-      Light: 'oklch(0.205 0 0)', 
-      Dark: 'oklch(0.985 0 0)' 
+      Variable: 'var(--sys-color-text-primary)'
     }}
   />
   <ColorItem
     title="Text Secondary"
-    subtitle="--sys-color-text-secondary"
+    subtitle="Supporting details"
     colors={{ 
-      Light: 'oklch(0.551 0 0)', 
-      Dark: 'oklch(0.705 0 0)' 
+      Variable: 'var(--sys-color-text-secondary)'
     }}
   />
 </ColorPalette>

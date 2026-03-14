@@ -91,7 +91,7 @@ Border radius tokens for consistent rounding. Root variable: `--sys-radius-*`.
       <td><code>sm</code></td>
       <td><code>4px</code></td>
       <td><div style={{ background: 'var(--sys-color-surface)', border: '1px solid var(--sys-color-border)', borderRadius: 'var(--sys-radius-sm)', height: '2rem', width: '4rem' }} /></td>
-      <td>Small inputs, nested items</td>
+      <td>Small items, nested elements</td>
     </tr>
     <tr>
       <td><code>md</code></td>
@@ -121,7 +121,7 @@ Border radius tokens for consistent rounding. Root variable: `--sys-radius-*`.
       <td><code>pill</code></td>
       <td><code>calc(infinity * 1px)</code></td>
       <td><div style={{ background: 'var(--sys-color-primary)', borderRadius: 'var(--sys-radius-pill)', color: 'var(--sys-color-primary-text)', fontSize: '0.75rem', padding: '0.25rem 0.75rem', width: 'fit-content' }}>Pill Label</div></td>
-      <td>Fully rounded buttons/badges</td>
+      <td>Fully rounded elements</td>
     </tr>
   </tbody>
 </table>
@@ -130,7 +130,25 @@ Border radius tokens for consistent rounding. Root variable: `--sys-radius-*`.
 
 Shadow tokens for elevation. Root variable: `--sys-shadow-*`.
 
-- `sm`: Subtle elevation for hover states.
-- `md`: Default elevation for floating elements (Tooltips).
-- `lg`: High elevation for primary overlays (Popovers).
-- `xl`: Maximum elevation for modal dialogs.
+<div style={{ display: 'flex', gap: '2rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
+  <div style={{ display: 'grid', placeItems: 'center', gap: '0.5rem' }}>
+    <div style={{ background: 'var(--sys-color-surface)', boxShadow: 'var(--sys-shadow-sm)', borderRadius: 'var(--sys-radius-md)', height: '4rem', width: '6rem' }} />
+    <code style={{ fontSize: '0.75rem' }}>sm</code>
+  </div>
+  <div style={{ display: 'grid', placeItems: 'center', gap: '0.5rem' }}>
+    <div style={{ background: 'var(--sys-color-surface)', boxShadow: 'var(--sys-shadow-md)', borderRadius: 'var(--sys-radius-md)', height: '4rem', width: '6rem' }} />
+    <code style={{ fontSize: '0.75rem' }}>md</code>
+  </div>
+  <div style={{ display: 'grid', placeItems: 'center', gap: '0.5rem' }}>
+    <div style={{ background: 'var(--sys-color-surface)', boxShadow: 'var(--sys-shadow-lg)', borderRadius: 'var(--sys-radius-md)', height: '4rem', width: '6rem' }} />
+    <code style={{ fontSize: '0.75rem' }}>lg</code>
+  </div>
+  <div style={{ display: 'grid', placeItems: 'center', gap: '0.5rem' }}>
+    <div style={{ background: 'var(--sys-color-surface)', boxShadow: 'var(--sys-shadow-xl)', borderRadius: 'var(--sys-radius-md)', height: '4rem', width: '6rem' }} />
+    <code style={{ fontSize: '0.75rem' }}>xl</code>
+  </div>
+</div>
+
+> [!NOTE]
+> Shadows are best viewed in Light Mode to appreciate the subtle depth. In Dark Mode, they act as very subtle elevation indicators.
+
