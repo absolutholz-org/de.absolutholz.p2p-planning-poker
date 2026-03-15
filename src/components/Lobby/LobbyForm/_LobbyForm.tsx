@@ -5,12 +5,10 @@ import { useParams } from 'react-router-dom';
 import { SESSION_KEYS, STORAGE_KEYS } from '../../../constants/storage';
 import { usePeer } from '../../../context/PeerContext';
 import { useRoom } from '../../../context/RoomContext';
-import { AppFooter } from '../../Shared/AppFooter';
 import { Button } from '../../Shared/Button';
 import { Form } from '../../Shared/Form';
 import { Icon } from '../../Shared/Icon';
 import { Input } from '../../Shared/Input';
-import { PageContainer } from '../../Shared/PageContainer';
 import { Stack } from '../../Shared/Stack';
 import * as S from './_LobbyForm.styles';
 
@@ -85,7 +83,7 @@ export function LobbyForm() {
 	}, [error]);
 
 	return (
-		<PageContainer>
+		<div>
 			<Stack spacing="xl">
 				<S.CardContainer>
 					<Form
@@ -195,7 +193,6 @@ export function LobbyForm() {
 					⚡
 				</S.DebugToggle>
 			)}
-			<AppFooter />
-		</PageContainer>
+		</div>
 	);
 }

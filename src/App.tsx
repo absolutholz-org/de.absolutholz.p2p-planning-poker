@@ -1,20 +1,13 @@
 import createCache from '@emotion/cache';
 import { CacheProvider, Global } from '@emotion/react';
-import styled from '@emotion/styled';
 import { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
-import { LegalView } from './components/Legal';
-import { LobbyForm } from './components/Lobby/LobbyForm';
-import { RoomHeader } from './components/Room/RoomHeader';
-import { Roster } from './components/Room/Roster';
-import { VotingDeck } from './components/Room/VotingDeck';
-import { Divider } from './components/Shared/Divider';
-import { Header } from './components/Shared/Header';
-import { PageContainer } from './components/Shared/PageContainer';
-import { SkipLink } from './components/Shared/SkipLink';
 import { PeerProvider } from './context/PeerContext';
 import { RoomProvider, useRoom } from './context/RoomContext';
+import { Lobby } from './screens/Lobby/Lobby';
+import { MarkdownScreen } from './screens/MarkdownScreen/MarkdownScreen';
+import { VotingRoom } from './screens/VotingRoom/VotingRoom';
 import { globalStyles } from './theme/GlobalStyles';
 
 // Disable standard Emotion vendor prefixes because modern browsers don't need them
@@ -22,37 +15,6 @@ const emotionCache = createCache({
 	key: 'css',
 	stylisPlugins: [],
 });
-
-const LAYOUT_BREAKPOINT = '45rem';
-
-const RoomLayout = styled.div``;
-
-const RoomContent = styled(PageContainer)`
-	@media (min-width: ${LAYOUT_BREAKPOINT}) {
-		display: grid;
-		gap: var(--sys-spacing-xxl);
-		grid-template-columns: 1fr auto;
-	}
-`;
-
-function RoomView() {
-	const { roomState } = useRoom();
-
-	if (!roomState) {
-		return <LobbyForm />;
-	}
-
-	return (
-		<RoomLayout>
-			<RoomHeader />
-			<RoomContent>
-				<VotingDeck />
-				<Divider hideOnDesktop />
-				<Roster />
-			</RoomContent>
-		</RoomLayout>
-	);
-}
 
 function AppContent() {
 	const { roomState } = useRoom();
@@ -66,24 +28,18 @@ function AppContent() {
 	}, [roomState?.roomId, navigate]);
 
 	return (
-		<div className="app-container">
-			<SkipLink />
-			<Header />
-			<main id="main-content" className="main-content" tabIndex={-1}>
-				<Routes>
-					<Route path="/" element={<LobbyForm />} />
-					<Route path="/room/:roomId" element={<RoomView />} />
-					<Route
-						path="/impressum"
-						element={<LegalView type="impressum" />}
-					/>
-					<Route
-						path="/privacy"
-						element={<LegalView type="privacy" />}
-					/>
-				</Routes>
-			</main>
-		</div>
+		<Routes>
+			<Route path="/" element={<Lobby />} />
+			<Route path="/room/:roomId" element={<VotingRoom />} />
+			<Route
+				path="/impressum"
+				element={<MarkdownScreen type="impressum" />}
+			/>
+			<Route
+				path="/privacy"
+				element={<MarkdownScreen type="privacy" />}
+			/>
+		</Routes>
 	);
 }
 
