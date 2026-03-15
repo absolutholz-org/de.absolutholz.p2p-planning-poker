@@ -1,22 +1,12 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
-export const FixedFooter = styled.footer`
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	width: 100%;
+export const FooterContainer = styled.footer`
 	padding: var(--sys-spacing-md);
 	display: flex;
 	justify-content: center;
 	gap: var(--sys-spacing-lg);
 	background-color: transparent;
-	pointer-events: none; /* Let clicks pass through empty space */
-
-	/* Re-enable pointer events for links */
-	& > * {
-		pointer-events: auto;
-	}
 `;
 
 const commonLinkStyles = `

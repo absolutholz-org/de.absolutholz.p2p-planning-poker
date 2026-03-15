@@ -9,7 +9,7 @@ export function AppFooter() {
 	const isEnglish = i18n.language.startsWith('en');
 
 	return (
-		<S.FixedFooter>
+		<S.FooterContainer>
 			<S.FooterLink
 				to="/impressum"
 				hrefLang={!isGerman && !isEnglish ? 'en' : undefined}
@@ -33,6 +33,6 @@ export function AppFooter() {
 			<S.StaticFooterLink href="/storybook/">
 				{t('lobby.footer.storybook')}
 			</S.StaticFooterLink>
-		</S.FixedFooter>
+		</S.FooterContainer>
 	);
 }
