@@ -4,8 +4,6 @@ export const SubHeaderContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: var(--sys-spacing-xl) 0;
-	width: 100%;
 
 	@media (max-width: 600px) {
 		flex-direction: column;

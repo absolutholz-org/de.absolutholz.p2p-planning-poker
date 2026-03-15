@@ -9,7 +9,8 @@ export const LayoutRoot = styled.div`
 
 export const MainContent = styled.main`
 	flex: 1;
-	width: 100%;
+	padding-block: var(--sys-spacing-xl);
+
 	/* Focus indicator for skip-link targets */
 	&:focus {
 		outline: none;

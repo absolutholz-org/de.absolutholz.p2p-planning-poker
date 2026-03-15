@@ -4,7 +4,6 @@ export const BackButtonContainer = styled.div`
 	display: flex;
 	justify-content: flex-start;
 	margin-bottom: var(--sys-spacing-lg);
-	margin-top: var(--sys-spacing-xl);
 `;
 
 export const MarkdownWrapper = styled.article`
