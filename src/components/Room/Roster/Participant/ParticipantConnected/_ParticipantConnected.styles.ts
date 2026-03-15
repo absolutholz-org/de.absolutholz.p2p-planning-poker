@@ -63,7 +63,12 @@ export const Participant_Status_Thinking = styled.span`
 `;
 
 export const Participant_Status_Voted = styled.span`
+	align-items: center;
+	border: 2px solid;
+	border-radius: var(--sys-radius-pill);
 	color: var(--sys-color-success);
+	display: inline-flex;
+	justify-content: center;
 	height: 1.25rem;
 	width: 1.25rem;
 `;

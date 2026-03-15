@@ -8,6 +8,7 @@ import { VotingDeck } from '../../components/Room/VotingDeck';
 import { AppLayout } from '../../components/Shared/AppLayout';
 import { Divider } from '../../components/Shared/Divider';
 import { PageContainer } from '../../components/Shared/PageContainer';
+import { Stack } from '../../components/Shared/Stack';
 import { useRoom } from '../../context/RoomContext';
 
 const LAYOUT_BREAKPOINT = '45rem';
@@ -37,12 +38,14 @@ export function VotingRoom() {
 
 	return (
 		<AppLayout>
-			<RoomHeader />
-			<RoomContent>
-				<VotingDeck />
-				<Divider hideOnDesktop />
-				<Roster />
-			</RoomContent>
+			<Stack spacing="xl">
+				<RoomHeader />
+				<RoomContent>
+					<VotingDeck />
+					<Divider hideOnDesktop />
+					<Roster />
+				</RoomContent>
+			</Stack>
 		</AppLayout>
 	);
 }

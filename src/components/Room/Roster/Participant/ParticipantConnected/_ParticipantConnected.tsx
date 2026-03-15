@@ -48,7 +48,7 @@ export function ParticipantConnected({
 							<>{vote}</>
 						) : (
 							<S.Participant_Status_Voted>
-								<Icon name="check_circle" size={16} />
+								<Icon name="check" size={12} />
 							</S.Participant_Status_Voted>
 						)
 					) : (

@@ -3,7 +3,7 @@ import type { HTMLAttributes } from 'react';
 export type IconName =
 	| 'add'
 	| 'arrow_right'
-	| 'check_circle'
+	| 'check'
 	| 'contrast'
 	| 'crown'
 	| 'dark_mode'
@@ -25,7 +25,7 @@ export interface IIcon extends HTMLAttributes<HTMLElement> {
 	/**
 	 * Size of the icon (default: 24)
 	 */
-	size?: 16 | 20 | 24;
+	size?: 12 | 16 | 20 | 24;
 	/**
 	 * Optional accessible label for the icon
 	 */

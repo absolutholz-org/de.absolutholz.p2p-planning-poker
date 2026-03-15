@@ -3,8 +3,8 @@ import styled from '@emotion/styled';
 export const IconContainer = styled.span<{
 	$size: number | string;
 }>`
-	display: inline-flex;
 	align-items: center;
+	display: inline-flex;
 	justify-content: center;
 	width: ${({ $size }) =>
 		typeof $size === 'number' ? `${$size}px` : $size || '24px'};

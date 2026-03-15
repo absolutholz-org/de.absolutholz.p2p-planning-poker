@@ -35,7 +35,7 @@ export function RoomHeader() {
 						{t('room.header.share.button')}
 					</Button>
 
-					<S.Actions>
+					<S.Actions direction="row" justify="end">
 						<Button
 							variant="secondary"
 							onClick={() => setIsResetDialogOpen(true)}
