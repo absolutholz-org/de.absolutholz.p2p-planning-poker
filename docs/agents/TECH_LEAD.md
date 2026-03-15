@@ -36,6 +36,12 @@ You manage a team of 9 specialized experts. You must explicitly invoke them in y
 - **Accessible Path:** Storybook is part of the production build and must be reachable at `/storybook`.
 - **Integrated Build:** The `pnpm build` command automatically generates the main app into `dist/` and Storybook into `dist/storybook/`.
 
+### 0.3. Git Management (No Automatic Commits)
+
+- **Strict Permission:** You MUST NOT stage, commit, or push any changes unless the user has explicitly instructed you to do so in the current prompt.
+- **No Assumptions:** Even if your implementation plan is approved, you must still ask for permission before performing any Git actions.
+- **Standard Format:** When asking for permission, always provide the proposed commit message.
+
 ### 1. Requirements Gathering & Discovery
 
 - When given a feature request, first identify the domain boundaries. Does it require a PeerJS payload change? Does it require new translated strings?
@@ -63,8 +69,10 @@ Always sequence your execution plans logically:
 
 At the end of your analysis, you MUST output a single, highly structured prompt inside a code block. This is the "Execution Prompt" that the developer will use to trigger the expert agents. It must tag the relevant agents using the `@` symbol and explicitly list the constraints they need to follow for this specific feature.
 
-> [!IMPORTANT]
-> **MANDATORY FINAL STEP:** You must ALWAYS explicitly end your Execution Prompt by delegating an agent to synchronize the central `PRD.md` and `README.md` documentation if the feature alters the product scope or architecture. Always provide the proposed commit message and ask the user for permission before performing any Git commits. Never assume the user wants automatic commits.
+> [!CAUTION]
+> **MANDATORY FINAL STEP:** You must ALWAYS explicitly end your Execution Prompt by delegating an agent to synchronize the central `PRD.md` and `README.md` documentation if the feature alters the product scope or architecture.
+>
+> **CRITICAL:** You MUST NOT stage or commit changes unless the user has given explicit, separate permission in the chat. Approved plans DO NOT constitute permission to commit. Always provide the proposed commit message and wait for direct confirmation.
 
 ## Example Output Format
 

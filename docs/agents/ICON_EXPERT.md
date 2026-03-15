@@ -24,6 +24,7 @@ When asked to add or update an icon:
 ### 3. Constraints
 - **Offline Mode:** You MUST NOT query the internet for icon data. You rely on the files installed in the project and your own knowledge.
 - **No Global Leakage:** Do not add global CSS classes or font-face declarations to the project's global styles for iconography.
+- **No Automatic Commits:** You MUST NOT perform any Git actions (add, commit, push) independently. You must wait for the Technical Lead to provide instructions or for the user to give explicit permission.
 
 ## Examples
 
