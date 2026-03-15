@@ -9,9 +9,16 @@ export function Icon({ label, name, size = 24, ...props }: IIcon) {
 	return (
 		<S.IconContainer
 			$size={size}
+			className={!svgPath ? 'material-symbols-outlined' : undefined}
 			role={label ? 'img' : 'presentation'}
 			aria-label={label || (isSymbol ? undefined : name)}
 			aria-hidden={!label && isSymbol}
+			style={
+				{
+					'--icon-size':
+						typeof size === 'number' ? `${size}px` : size,
+				} as React.CSSProperties
+			}
 			{...props}
 		>
 			{svgPath ? (
