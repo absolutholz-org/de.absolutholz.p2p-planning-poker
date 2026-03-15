@@ -1,14 +1,24 @@
 import createCache from '@emotion/cache';
 import { CacheProvider, Global } from '@emotion/react';
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import { PeerProvider } from './context/PeerContext';
 import { RoomProvider, useRoom } from './context/RoomContext';
 import { Lobby } from './screens/Lobby/Lobby';
-import { MarkdownScreen } from './screens/MarkdownScreen/MarkdownScreen';
-import { VotingRoom } from './screens/VotingRoom/VotingRoom';
 import { globalStyles } from './theme/GlobalStyles';
+
+// Lazy load non-critical screens
+const VotingRoom = lazy(() =>
+	import('./screens/VotingRoom/VotingRoom').then((module) => ({
+		default: module.VotingRoom,
+	})),
+);
+const MarkdownScreen = lazy(() =>
+	import('./screens/MarkdownScreen/MarkdownScreen').then((module) => ({
+		default: module.MarkdownScreen,
+	})),
+);
 
 // Disable standard Emotion vendor prefixes because modern browsers don't need them
 const emotionCache = createCache({
@@ -28,18 +38,20 @@ function AppContent() {
 	}, [roomState?.roomId, navigate]);
 
 	return (
-		<Routes>
-			<Route path="/" element={<Lobby />} />
-			<Route path="/room/:roomId" element={<VotingRoom />} />
-			<Route
-				path="/impressum"
-				element={<MarkdownScreen type="impressum" />}
-			/>
-			<Route
-				path="/privacy"
-				element={<MarkdownScreen type="privacy" />}
-			/>
-		</Routes>
+		<Suspense fallback={<div>Loading...</div>}>
+			<Routes>
+				<Route path="/" element={<Lobby />} />
+				<Route path="/room/:roomId" element={<VotingRoom />} />
+				<Route
+					path="/impressum"
+					element={<MarkdownScreen type="impressum" />}
+				/>
+				<Route
+					path="/privacy"
+					element={<MarkdownScreen type="privacy" />}
+				/>
+			</Routes>
+		</Suspense>
 	);
 }
 
