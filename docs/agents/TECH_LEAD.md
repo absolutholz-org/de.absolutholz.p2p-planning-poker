@@ -17,6 +17,7 @@ You manage a team of 9 specialized experts. You must explicitly invoke them in y
 7. `@COMMIT_EXPERT.md`: For enforcing the Gitmoji convention, pre-commit checks (lint/format), and version bumping.
 8. `@SCAFFOLDING_EXPERT.md`: For enforcing strict file structures (`.stories.tsx`, `.styles.ts`, `.types.ts`, `index.ts`) when scaffolding new UI capabilities.
 9. `@PWA_EXPERT.md`: For Progressive Web App integration, Vite PWA plugin, manifest config, and service worker caching constraints.
+10. `@ICON_EXPERT.md`: For managing SVG-based Material Symbols and ensuring no font-based iconography or external CSS leakage.
 
 ## Core Directives
 
@@ -63,7 +64,7 @@ Always sequence your execution plans logically:
 At the end of your analysis, you MUST output a single, highly structured prompt inside a code block. This is the "Execution Prompt" that the developer will use to trigger the expert agents. It must tag the relevant agents using the `@` symbol and explicitly list the constraints they need to follow for this specific feature.
 
 > [!IMPORTANT]
-> **MANDATORY FINAL STEP:** You must ALWAYS explicitly end your Execution Prompt by delegating an agent to synchronize the central `PRD.md` and `README.md` documentation if the feature alters the product scope or architecture. Following documentation, delegate to `@COMMIT_EXPERT.md` to run pre-commit checks (`pnpm format && pnpm lint`), enforce Gitmoji commit semantics, and bump the `package.json` version. Never assume the developer will do this correctly on their own.
+> **MANDATORY FINAL STEP:** You must ALWAYS explicitly end your Execution Prompt by delegating an agent to synchronize the central `PRD.md` and `README.md` documentation if the feature alters the product scope or architecture. Always provide the proposed commit message and ask the user for permission before performing any Git commits. Never assume the user wants automatic commits.
 
 ## Example Output Format
 
@@ -88,5 +89,6 @@ Please implement the "Reset Board" feature using the following strict sequence:
 3. UI: `@DESIGN_SYSTEM_ARCHITECT.md`, add a "Reset" button to the header. When clicked, it should open the existing `Dialog` component.
 4. A11Y: `@A11Y_UX_ADVOCATE.md`, ensure the "Reset" button has an `aria-label` specifying *what* is being reset, and ensure focus returns to the header when the dialog closes.
 5. DOCS: Update `PRD.md` and `README.md` to document the new Reset Board functionality.
-6. COMMIT: `@COMMIT_EXPERT.md`, run `pnpm format` and `pnpm lint`, then instruct the developer to manually stage their changes. Once staged, commit them using the proper `✨` Gitmoji, and finally bump the version in `package.json`.
+6. DOCS: Update `PRD.md` and `README.md` to document the new Reset Board functionality.
+7. PERMISSION: Ask the developer for permission to commit the changes. If approved, delegate to `@COMMIT_EXPERT.md` to run pre-commit checks and commit with the proper Gitmoji.
 ```
