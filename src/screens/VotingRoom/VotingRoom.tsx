@@ -1,6 +1,4 @@
 import styled from '@emotion/styled';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { RoomHeader } from '../../components/Room/RoomHeader';
 import { Roster } from '../../components/Room/Roster';
@@ -23,14 +21,6 @@ const RoomContent = styled(PageContainer)`
 
 export function VotingRoom() {
 	const { roomState } = useRoom();
-	const navigate = useNavigate();
-
-	useEffect(() => {
-		// If someone navigates to /room/:id directly without state, redirect to Lobby
-		if (!roomState) {
-			navigate('/', { replace: true });
-		}
-	}, [roomState, navigate]);
 
 	if (!roomState) {
 		return null;

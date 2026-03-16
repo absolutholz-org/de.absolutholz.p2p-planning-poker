@@ -41,7 +41,10 @@ function AppContent() {
 		<Suspense fallback={<div>Loading...</div>}>
 			<Routes>
 				<Route path="/" element={<Lobby />} />
-				<Route path="/room/:roomId" element={<VotingRoom />} />
+				<Route
+					path="/room/:roomId"
+					element={roomState ? <VotingRoom /> : <Lobby />}
+				/>
 				<Route
 					path="/impressum"
 					element={<MarkdownScreen type="impressum" />}
