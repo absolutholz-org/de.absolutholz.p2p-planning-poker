@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
+import packageJson from '../../../../package.json';
 import * as S from './_AppFooter.styles';
 
 export function AppFooter() {
@@ -33,6 +34,7 @@ export function AppFooter() {
 			<S.StaticFooterLink href="/storybook/">
 				{t('lobby.footer.storybook')}
 			</S.StaticFooterLink>
+			<S.VersionInfo>v{packageJson.version}</S.VersionInfo>
 		</S.FooterContainer>
 	);
 }

@@ -30,3 +30,16 @@ export const FooterLink = styled(Link)`
 export const StaticFooterLink = styled.a`
 	${commonLinkStyles}
 `;
+
+export const VersionInfo = styled.span`
+	${commonLinkStyles}
+	opacity: 0.5;
+	pointer-events: none;
+	margin-left: auto;
+
+	@media (max-width: 480px) {
+		margin-left: 0;
+		width: 100%;
+		text-align: center;
+	}
+`;

@@ -31,9 +31,13 @@ function AppContent() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		// When roomState initializes, redirect to the permanent room URL
-		if (roomState?.roomId) {
-			navigate(`/room/${roomState.roomId}`, { replace: true });
+		// Only redirect if we are on a room-like path but with a mismatched ID
+		// The Lobby handles its own navigation after joining/creating
+		const currentPath = window.location.pathname;
+		if (roomState?.roomId && currentPath.startsWith('/room/')) {
+			if (currentPath !== `/room/${roomState.roomId}`) {
+				navigate(`/room/${roomState.roomId}`, { replace: true });
+			}
 		}
 	}, [roomState?.roomId, navigate]);
 

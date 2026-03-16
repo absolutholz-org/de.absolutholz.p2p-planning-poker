@@ -1,6 +1,6 @@
 import { type FormEvent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { SESSION_KEYS, STORAGE_KEYS } from '../../../constants/storage';
 import { usePeer } from '../../../context/PeerContext';
@@ -16,6 +16,7 @@ export function LobbyForm() {
 	const { t } = useTranslation();
 	const { connectionStatus, error, initGuest, initHost } = useRoom();
 	const { logs } = usePeer();
+	const navigate = useNavigate();
 	const { roomId } = useParams<{ roomId?: string }>();
 	const [name, setName] = useState('');
 	const [roomCode, setRoomCode] = useState(roomId || '');
@@ -28,15 +29,25 @@ export function LobbyForm() {
 		if (savedName) setName(savedName);
 	}, []);
 
+	const { peerId } = usePeer();
+	const [hasAttemptedRestore, setHasAttemptedRestore] = useState(false);
+
 	// Check for ungraceful page reloads and try to restore session
 	useEffect(() => {
+		// Wait for PeerJS to be ready before attempting restoration
+		if (!peerId || hasAttemptedRestore) return;
+
 		const role = sessionStorage.getItem(SESSION_KEYS.ROLE);
 		const savedRoomId = sessionStorage.getItem(SESSION_KEYS.ROOM_ID);
 		const savedName = sessionStorage.getItem(SESSION_KEYS.NAME);
 		const savedPeerId = sessionStorage.getItem(SESSION_KEYS.PEER_ID);
 		const savedStateStr = sessionStorage.getItem(SESSION_KEYS.ROOM_STATE);
 
-		if (role && savedRoomId && savedName) {
+		// Only auto-restore if we are on the specific room URL that matches the saved session
+		// This prevents hijacking the home page or a different room's URL
+		const isAtCorrectRoom = roomId && roomId === savedRoomId;
+
+		if (role && savedRoomId && savedName && isAtCorrectRoom) {
 			console.log(
 				`Attempting to recover ${role} session for room ${savedRoomId}`,
 			);
@@ -57,8 +68,10 @@ export function LobbyForm() {
 				initGuest(savedRoomId, savedName, savedPeerId || undefined);
 			}
 		}
+
+		setHasAttemptedRestore(true);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [peerId, roomId]);
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
@@ -70,8 +83,13 @@ export function LobbyForm() {
 		// If no room code is provided, they are creating a new room as Host.
 		if (!roomCode.trim()) {
 			initHost(trimmedName);
+			if (peerId) {
+				navigate(`/room/${peerId}`);
+			}
 		} else {
-			initGuest(roomCode.trim(), trimmedName);
+			const targetRoom = roomCode.trim();
+			initGuest(targetRoom, trimmedName);
+			navigate(`/room/${targetRoom}`);
 		}
 	};
 
