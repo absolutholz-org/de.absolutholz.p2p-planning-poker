@@ -17,15 +17,18 @@ export type IconName =
 	| 'user'
 	| (string & {});
 
+export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'inherit';
+
 export interface IIcon extends HTMLAttributes<HTMLElement> {
 	/**
 	 * Name of the icon to display (Material Symbol name or emoji/text)
 	 */
 	name: IconName;
 	/**
-	 * Size of the icon (default: 24)
+	 * Size of the icon (default: inherit)
+	 * Supports global tokens (xs, sm, md, lg, xl, xxl) or 'inherit'
 	 */
-	size?: 12 | 16 | 20 | 24;
+	size?: IconSize;
 	/**
 	 * Optional accessible label for the icon
 	 */

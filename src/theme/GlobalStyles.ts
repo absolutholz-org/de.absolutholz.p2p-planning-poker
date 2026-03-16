@@ -65,6 +65,14 @@ export const globalStyles = css`
 		--sys-radius-xxl: 24px;
 		--sys-radius-pill: calc(infinity * 1px);
 
+		/* System Icon Sizes */
+		--sys-icon-size-xs: 0.75rem; /* 12px */
+		--sys-icon-size-sm: 1rem; /* 16px */
+		--sys-icon-size-md: 1.25rem; /* 20px */
+		--sys-icon-size-lg: 1.5rem; /* 24px */
+		--sys-icon-size-xl: 2rem; /* 32px */
+		--sys-icon-size-xxl: 3rem; /* 48px */
+
 		/* System Font Sizes */
 		--sys-font-size-xs: 0.75rem; /* 12px */
 		--sys-font-size-sm: 0.875rem; /* 14px */

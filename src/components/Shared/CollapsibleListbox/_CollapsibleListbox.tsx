@@ -70,7 +70,7 @@ export function CollapsibleListbox<T extends string>({
 										className="option-icon"
 										aria-hidden="true"
 									>
-										<Icon name={option.icon} size={20} />
+										<Icon name={option.icon} size="md" />
 									</span>
 								)}
 								{option.label}

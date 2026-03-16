@@ -1,6 +1,6 @@
 export const FIBONACCI_SCALE = [
 	'0',
-	'0.5',
+	'½',
 	'1',
 	'2',
 	'3',

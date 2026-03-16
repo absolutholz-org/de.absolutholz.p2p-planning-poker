@@ -22,7 +22,9 @@ export function Card({
 								? 'coffee break'
 								: value === '?'
 									? 'unsure'
-									: value
+									: value === '½'
+										? '0.5'
+										: value
 						}`
 			}
 		>

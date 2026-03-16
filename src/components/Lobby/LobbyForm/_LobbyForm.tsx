@@ -172,7 +172,7 @@ export function LobbyForm() {
 									: roomCode.trim()
 										? `${t('lobby.submit.join')}`
 										: `${t('lobby.submit.create')}`}
-								<Icon name="arrow_right" size={16} />
+								<Icon name="arrow_right" size="sm" />
 							</Button>
 							<S.DisclaimerText>
 								{t('lobby.privacy_disclaimer')}

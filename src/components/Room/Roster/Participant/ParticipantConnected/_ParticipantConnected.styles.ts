@@ -15,6 +15,7 @@ export const Participant_Connected = styled(Participant_Base)`
 `;
 
 export const Participant_HostBadge = styled(Icon)`
+	color: var(--sys-color-warning);
 	margin-right: 0.5em;
 	vertical-align: text-bottom;
 `;

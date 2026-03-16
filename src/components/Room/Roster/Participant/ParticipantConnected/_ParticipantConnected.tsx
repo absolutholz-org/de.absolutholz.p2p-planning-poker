@@ -19,7 +19,7 @@ export function ParticipantConnected({
 			<div>
 				<>
 					{isHost && (
-						<S.Participant_HostBadge name="crown" size={16} />
+						<S.Participant_HostBadge name="crown" size="sm" />
 					)}
 					{name}{' '}
 					{isMe && (
@@ -48,7 +48,7 @@ export function ParticipantConnected({
 							<>{vote}</>
 						) : (
 							<S.Participant_Status_Voted>
-								<Icon name="check" size={12} />
+								<Icon name="check" size="xs" />
 							</S.Participant_Status_Voted>
 						)
 					) : (

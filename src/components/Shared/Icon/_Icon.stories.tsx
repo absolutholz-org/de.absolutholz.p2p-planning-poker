@@ -31,7 +31,7 @@ type Story = StoryObj<typeof Icon>;
 export const Default: Story = {
 	args: {
 		name: 'user',
-		size: 24,
+		size: 'lg',
 	},
 };
 
@@ -57,7 +57,7 @@ export const Gallery: Story = {
 					}}
 				>
 					<div style={{ color: 'var(--sys-color-primary)' }}>
-						<Icon name={name} size={24} />
+						<Icon name={name} size="lg" />
 					</div>
 					<code style={{ fontSize: '0.8rem', opacity: 0.7 }}>
 						{name}
@@ -71,6 +71,6 @@ export const Emoji: Story = {
 	args: {
 		label: 'Rocket Emoji',
 		name: '🚀',
-		size: 24,
+		size: 'lg',
 	},
 };

@@ -2,21 +2,21 @@ import * as S from './_Icon.styles';
 import { type IIcon } from './_Icon.types';
 import { ICON_PATHS } from './IconLibrary';
 
-export function Icon({ label, name, size = 24, ...props }: IIcon) {
+export function Icon({ label, name, size = 'inherit', ...props }: IIcon) {
 	const svgPath = ICON_PATHS[name];
 	const isSymbol = !!svgPath;
 
 	return (
 		<S.IconContainer
-			$size={size}
-			className={!svgPath ? 'material-symbols-outlined' : undefined}
 			role={label ? 'img' : 'presentation'}
 			aria-label={label || (isSymbol ? undefined : name)}
 			aria-hidden={!label && isSymbol}
 			style={
 				{
 					'--icon-size':
-						typeof size === 'number' ? `${size}px` : size,
+						size === 'inherit'
+							? 'inherit'
+							: `var(--sys-icon-size-${size})`,
 				} as React.CSSProperties
 			}
 			{...props}
