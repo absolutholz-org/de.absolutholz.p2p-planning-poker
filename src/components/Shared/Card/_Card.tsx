@@ -1,3 +1,4 @@
+import { Icon } from '../Icon';
 import * as S from './_Card.styles';
 import type { ICard } from './_Card.types';
 
@@ -13,10 +14,26 @@ export function Card({
 			data-selected={isSelected}
 			{...props}
 			// Ensure screen readers handle the hidden state
-			aria-label={isHidden ? 'Vote submitted, hidden' : `Select ${value}`}
+			aria-label={
+				isHidden
+					? 'Vote submitted, hidden'
+					: `Select ${
+							value === 'coffee'
+								? 'coffee break'
+								: value === '?'
+									? 'unsure'
+									: value
+						}`
+			}
 		>
 			{/* If hidden, the CSS pseudo-element renders the checkmark. Text stays hidden. */}
-			{value}
+			{value === 'coffee' ? (
+				<Icon name="coffee" />
+			) : value === '?' ? (
+				<Icon name="question_mark" />
+			) : (
+				value
+			)}
 		</S.Card>
 	);
 }

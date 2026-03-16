@@ -8,6 +8,6 @@ export const FIBONACCI_SCALE = [
 	'8',
 	'13',
 	'21',
-	'☕️',
+	'coffee',
 	'?',
 ] as const;
