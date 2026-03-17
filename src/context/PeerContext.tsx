@@ -38,9 +38,11 @@ export function PeerProvider({ children }: { children: ReactNode }) {
 		const initPeer = (idToUse?: string) => {
 			addLog(`Initializing Peer (ID: ${idToUse || 'new'})`);
 
-			const stunUrls = [import.meta.env.VITE_METERED_PROJECT_URL].filter(
-				Boolean,
-			);
+			const stunUrls = [
+				'stun:stun.1und1.de:3478',
+				'stun:stun.hosteurope.de:3478',
+				import.meta.env.VITE_METERED_PROJECT_URL,
+			].filter(Boolean);
 			const turnUrls = [
 				import.meta.env.VITE_METERED_TURN_URL,
 				import.meta.env.VITE_METERED_TURN_URL_TLS,
