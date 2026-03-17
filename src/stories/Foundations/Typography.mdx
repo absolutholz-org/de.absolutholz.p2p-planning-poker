@@ -8,6 +8,8 @@ Our typography system is built on the **Inter** font family, prioritizing legibi
 
 **Font Family:** `var(--sys-font-family)`
 
+**Monospace Family:** `var(--sys-font-mono)`
+
 ## 🧱 Weights
 
 We use a few specific weights for visual hierarchy.
@@ -33,6 +35,20 @@ Available as `--sys-font-size-*` CSS variables.
   fontWeight={400}
   sampleText="The quick brown fox jumps over the lazy dog"
   fontFamily="var(--sys-font-family)"
+/>
+
+### Monospace
+
+<Typeset
+  fontSizes={[
+    'var(--sys-font-size-sm)',
+    'var(--sys-font-size-md)',
+    'var(--sys-font-size-lg)',
+    'var(--sys-font-size-xl)',
+  ]}
+  fontWeight={400}
+  sampleText="01:23:45"
+  fontFamily="var(--sys-font-mono)"
 />
 
 ## 📝 Usage

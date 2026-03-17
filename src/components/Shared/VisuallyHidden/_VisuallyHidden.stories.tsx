@@ -18,3 +18,40 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+
+export const AsLabel: Story = {
+	args: {
+		as: 'label',
+		children: 'Hidden Label',
+		htmlFor: 'some-input',
+	},
+	render: (args) => (
+		<div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+			<VisuallyHidden {...args} />
+			<input id="some-input" placeholder="Type here..." />
+		</div>
+	),
+};
+
+export const Focusable: Story = {
+	args: {
+		children: 'Tab to show me',
+		focusable: true,
+	},
+	render: (args) => (
+		<div
+			style={{
+				display: 'flex',
+				flexDirection: 'column',
+				gap: '8px',
+				padding: '20px',
+			}}
+		>
+			<p>Use Tab to navigate to the hidden link below:</p>
+			<VisuallyHidden as="a" href="#target" {...args} />
+			<div id="target" style={{ marginTop: '50px' }}>
+				Target Content
+			</div>
+		</div>
+	),
+};

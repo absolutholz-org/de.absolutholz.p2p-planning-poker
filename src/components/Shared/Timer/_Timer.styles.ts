@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { VisuallyHidden } from '../VisuallyHidden';
+
 export const TimerContainer = styled.div`
 	display: flex;
 	align-items: stretch;
@@ -7,65 +9,61 @@ export const TimerContainer = styled.div`
 	border-radius: var(--sys-radius-pill);
 	border: 1px solid var(--sys-color-border);
 	overflow: hidden;
-	height: 48px;
+	height: var(--sys-spacing-xxl);
 `;
 
-export const Segment = styled.div<{
-	$flex?: number;
-	$variant?: 'action' | 'input';
-}>`
+export const Segment = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0 12px;
-	flex: ${(props) => props.$flex || 'none'};
-	background: ${(props) =>
-		props.$variant === 'action' ? 'var(--sys-color-bg)' : 'transparent'};
+	padding-inline: var(--sys-spacing-sm-md);
+	flex: none;
 
 	&:not(:last-child) {
 		border-right: 1px solid var(--sys-color-border);
 	}
 `;
 
+export const ProgressSegment = styled(Segment)`
+	background: linear-gradient(
+		to right,
+		var(--sys-color-bg-subtle) var(--timer-progress, 100%),
+		transparent var(--timer-progress, 100%)
+	);
+	transition: background 0.3s ease;
+`;
+
+export const ActionSegment = styled(Segment)`
+	background: var(--sys-color-bg);
+`;
+
 export const TimeDisplay = styled.div`
-	font-family: 'JetBrains Mono', monospace;
-	font-size: 1.25rem;
-	font-weight: 700;
+	font-family: var(--sys-font-mono);
+	font-size: var(--sys-font-size-xl);
+	font-weight: var(--sys-font-weight-bold);
 	color: var(--sys-color-text-primary);
 	display: flex;
 	align-items: center;
-	gap: 8px;
+	gap: var(--sys-spacing-sm);
 	white-space: nowrap;
 
 	svg {
 		opacity: 0.3;
 	}
-
-	.sr-only {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		padding: 0;
-		margin: -1px;
-		overflow: hidden;
-		clip: rect(0, 0, 0, 0);
-		white-space: nowrap;
-		border-width: 0;
-	}
 `;
 
-export const Label = styled.label``;
+export const Label = styled(VisuallyHidden)``;
 
 export const TimerInput = styled.input`
-	width: 40px;
 	background: transparent;
 	border: none;
 	color: var(--sys-color-text-primary);
-	font-family: 'JetBrains Mono', monospace;
-	font-size: 1.25rem;
-	font-weight: 700;
-	text-align: center;
+	font-family: var(--sys-font-mono);
+	font-size: var(--sys-font-size-xl);
+	font-weight: var(--sys-font-weight-bold);
 	padding: 0;
+	text-align: right;
+	width: 2ch;
 
 	&:focus {
 		outline: none;
@@ -83,15 +81,15 @@ export const TimerInput = styled.input`
 	}
 `;
 
-export const ControlButton = styled.button<{ $color?: string }>`
-	display: flex;
+export const ControlButton = styled.button`
 	align-items: center;
-	gap: 8px;
-	padding: 0 16px;
+	color: var(--sys-color-text-primary);
+	display: flex;
+	font-size: var(--sys-font-size-lg);
+	font-weight: var(--sys-font-weight-bold);
+	gap: var(--sys-spacing-sm);
 	height: 100%;
-	font-weight: 700;
-	font-size: 1.125rem;
-	color: ${(props) => props.$color || 'var(--sys-color-text-primary)'};
+	padding-inline: var(--sys-spacing-md);
 	transition: background-color 0.2s;
 
 	&:hover:not(:disabled) {
@@ -99,16 +97,24 @@ export const ControlButton = styled.button<{ $color?: string }>`
 	}
 
 	&:disabled {
-		opacity: 0.5;
 		cursor: not-allowed;
+		opacity: 0.5;
 	}
+`;
+
+export const PauseButton = styled(ControlButton)`
+	color: var(--sys-color-warning);
+`;
+
+export const ResetButton = styled(ControlButton)`
+	color: var(--sys-color-danger);
 `;
 
 export const IconButton = styled.button`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 40px;
+	width: var(--sys-spacing-xxl);
 	height: 100%;
 	color: var(--sys-color-text-primary);
 	transition: background-color 0.2s;

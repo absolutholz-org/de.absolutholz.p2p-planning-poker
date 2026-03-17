@@ -1,50 +1,61 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useRoom } from '../../../context/RoomContext';
 import { Icon } from '../Icon';
+import { VisuallyHidden } from '../VisuallyHidden';
 import * as S from './_Timer.styles';
-import { type ITimerProps } from './_Timer.types';
 
-export const Timer = ({ className }: ITimerProps) => {
+export const Timer = () => {
 	const { t } = useTranslation();
-	const { pauseTimer, resetTimer, roomState, setTimer, startTimer } =
-		useRoom();
-	const timer = roomState?.timer;
 
+	// Timer state
+	const [duration, setDuration] = useState<number | null>(null);
+	const [remainingTime, setRemainingTime] = useState<number>(0);
+	const [isRunning, setIsRunning] = useState<boolean>(false);
+	const [startedAt, setStartedAt] = useState<number | null>(null);
+
+	// Ticking state
 	const [now, setNow] = useState(() => Date.now());
 	const [inputMinutes, setInputMinutes] = useState<string>('5');
 
 	useEffect(() => {
 		let interval: NodeJS.Timeout;
 
-		if (timer?.isRunning) {
+		if (isRunning) {
 			interval = setInterval(() => {
-				setNow(Date.now());
+				const currentTime = Date.now();
+				setNow(currentTime);
+
+				// Move the "time is up" check here to avoid cascading renders
+				if (startedAt) {
+					const elapsed = Math.floor(
+						(currentTime - startedAt) / 1000,
+					);
+					if (remainingTime - elapsed <= 0) {
+						setIsRunning(false);
+						setStartedAt(null);
+						setRemainingTime(0);
+					}
+				}
 			}, 1000);
 		}
 
 		return () => clearInterval(interval);
-	}, [timer?.isRunning]);
+	}, [isRunning, remainingTime, startedAt]);
 
 	const getDisplayTime = () => {
-		if (!timer) return 0;
-		if (!timer.isRunning || !timer.startedAt) return timer.remainingTime;
+		if (duration === null) return 0;
+		if (!isRunning || !startedAt) return remainingTime;
 
-		const startedAt = timer.startedAt || 0;
-		const elapsed = Math.floor((now - startedAt) / 1000);
-		const remaining = Math.max(0, timer.remainingTime - elapsed);
+		// Use Math.max(0, ...) to prevent jumps if now is slightly behind startedAt
+		const elapsed = Math.floor(Math.max(0, now - startedAt) / 1000);
+		const remaining = Math.max(0, remainingTime - elapsed);
 
 		return remaining;
 	};
 
 	const displayTime = getDisplayTime();
-
-	useEffect(() => {
-		if (timer?.isRunning && displayTime === 0) {
-			pauseTimer();
-		}
-	}, [displayTime, timer?.isRunning, pauseTimer]);
+	const progress = duration ? (displayTime / duration) * 100 : 100;
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setInputMinutes(e.target.value);
@@ -53,9 +64,41 @@ export const Timer = ({ className }: ITimerProps) => {
 	const handleSetTimer = useCallback(() => {
 		const mins = parseInt(inputMinutes, 10);
 		if (!isNaN(mins) && mins > 0) {
-			setTimer(mins * 60);
+			const seconds = mins * 60;
+			const currentTime = Date.now();
+			setDuration(seconds);
+			setRemainingTime(seconds);
+			setIsRunning(true);
+			setStartedAt(currentTime);
+			setNow(currentTime); // Sync immediately
 		}
-	}, [inputMinutes, setTimer]);
+	}, [inputMinutes]);
+
+	const startTimer = useCallback(() => {
+		if (duration !== null && !isRunning) {
+			const currentTime = Date.now();
+			setIsRunning(true);
+			setStartedAt(currentTime);
+			setNow(currentTime); // Sync immediately
+		}
+	}, [duration, isRunning]);
+
+	const pauseTimer = useCallback(() => {
+		if (isRunning && startedAt) {
+			const elapsed = Math.floor((Date.now() - startedAt) / 1000);
+			const remaining = Math.max(0, remainingTime - elapsed);
+			setRemainingTime(remaining);
+			setIsRunning(false);
+			setStartedAt(null);
+		}
+	}, [isRunning, remainingTime, startedAt]);
+
+	const resetTimer = useCallback(() => {
+		setDuration(null);
+		setRemainingTime(0);
+		setIsRunning(false);
+		setStartedAt(null);
+	}, []);
 
 	const incrementMinutes = () => {
 		const mins = parseInt(inputMinutes, 10) || 0;
@@ -69,8 +112,7 @@ export const Timer = ({ className }: ITimerProps) => {
 		}
 	};
 
-	const isSetup = !timer;
-	const isRunning = timer?.isRunning;
+	const isSetup = duration === null;
 	const inputId = 'timer-minutes-input';
 
 	const displayMins = isSetup
@@ -81,7 +123,7 @@ export const Timer = ({ className }: ITimerProps) => {
 		: (displayTime % 60).toString().padStart(2, '0');
 
 	return (
-		<S.TimerContainer className={className}>
+		<S.TimerContainer>
 			<S.Segment>
 				<S.IconButton
 					aria-label={t('room.header.timer.aria.decrement')}
@@ -93,15 +135,21 @@ export const Timer = ({ className }: ITimerProps) => {
 				</S.IconButton>
 			</S.Segment>
 
-			<S.Segment $variant="input">
+			<S.ProgressSegment
+				style={
+					{
+						'--timer-progress': `${progress}%`,
+					} as React.CSSProperties
+				}
+			>
 				<S.TimeDisplay
 					role="timer"
 					aria-live="polite"
 					aria-atomic="true"
 				>
-					<S.Label htmlFor={inputId} className="sr-only">
+					<VisuallyHidden as="label" htmlFor={inputId}>
 						{t('room.header.timer.aria.input')}
-					</S.Label>
+					</VisuallyHidden>
 					<S.TimerInput
 						id={inputId}
 						onChange={handleInputChange}
@@ -114,7 +162,7 @@ export const Timer = ({ className }: ITimerProps) => {
 					<span aria-hidden="true">:</span>
 					<span>{displaySecs}</span>
 				</S.TimeDisplay>
-			</S.Segment>
+			</S.ProgressSegment>
 
 			<S.Segment>
 				<S.IconButton
@@ -128,7 +176,7 @@ export const Timer = ({ className }: ITimerProps) => {
 			</S.Segment>
 
 			{isSetup ? (
-				<S.Segment $variant="action">
+				<S.ActionSegment>
 					<S.ControlButton
 						onClick={handleSetTimer}
 						aria-label={t('room.header.timer.start')}
@@ -136,19 +184,18 @@ export const Timer = ({ className }: ITimerProps) => {
 						<Icon name="play_arrow" />
 						{t('room.header.timer.start')}
 					</S.ControlButton>
-				</S.Segment>
+				</S.ActionSegment>
 			) : (
 				<>
-					<S.Segment $variant="action">
+					<S.ActionSegment>
 						{isRunning ? (
-							<S.ControlButton
-								$color="var(--sys-color-warning)"
+							<S.PauseButton
 								aria-label={t('room.header.timer.aria.pause')}
 								onClick={pauseTimer}
 							>
 								<Icon name="pause" />
 								{t('room.header.timer.pause')}
-							</S.ControlButton>
+							</S.PauseButton>
 						) : (
 							<S.ControlButton
 								aria-label={t('room.header.timer.aria.resume')}
@@ -158,17 +205,16 @@ export const Timer = ({ className }: ITimerProps) => {
 								{t('room.header.timer.resume')}
 							</S.ControlButton>
 						)}
-					</S.Segment>
-					<S.Segment $variant="action">
-						<S.ControlButton
-							$color="var(--sys-color-danger)"
+					</S.ActionSegment>
+					<S.ActionSegment>
+						<S.ResetButton
 							aria-label={t('room.header.timer.aria.reset')}
 							onClick={resetTimer}
 						>
 							<Icon name="refresh" />
 							{t('room.header.timer.reset')}
-						</S.ControlButton>
-					</S.Segment>
+						</S.ResetButton>
+					</S.ActionSegment>
 				</>
 			)}
 		</S.TimerContainer>

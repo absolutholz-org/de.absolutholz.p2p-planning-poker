@@ -87,6 +87,9 @@ export const globalStyles = css`
 
 		--sys-font-family:
 			Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+		--sys-font-mono:
+			ui-monospace, SFMono-Regular, SF Mono, Menlo, Monaco, Consolas,
+			'Liberation Mono', 'Courier New', monospace;
 		--sys-font-weight-normal: 400;
 		--sys-font-weight-medium: 500;
 		--sys-font-weight-bold: 700;

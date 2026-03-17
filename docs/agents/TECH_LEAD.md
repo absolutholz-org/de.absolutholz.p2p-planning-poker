@@ -60,6 +60,7 @@ Always sequence your execution plans logically:
 ### 4. TypeScript Naming Conventions
 
 - **Prop Interfaces:** Always name prop interfaces strictly as `I[ComponentName]` (e.g., `IBadge`, `IButton`). This ensures consistency and makes it easy to identify component APIs across the codebase.
+- **No className Props:** Do not add `className` props to components. Component styling should be self-contained or managed via defined variants/slots.
 - Avoid suffixes like `Props` or `Options` when they represent the core configuration of a component.
 
 > [!IMPORTANT]

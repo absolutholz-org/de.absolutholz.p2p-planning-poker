@@ -7,7 +7,7 @@ export function SkipLink({ targetId = 'main-content' }: ISkipLink) {
 	const { t } = useTranslation();
 
 	return (
-		<S.SkipLink href={`#${targetId}`}>
+		<S.SkipLink as="a" focusable={true} href={`#${targetId}`}>
 			{t('common.skipToMainContent')}
 		</S.SkipLink>
 	);
