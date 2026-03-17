@@ -22,6 +22,9 @@ src/components/
     └── index.ts
 ```
 
+> [!IMPORTANT]
+> Avoid creating redundant sub-folders (e.g., `ComponentName/ComponentNameSpecific/`) if a component is the only variant. Favor flattening the structure into a single unified component (e.g., `Participant` instead of `Participant/ParticipantConnected`) unless multiple distinct implementations are required.
+
 ## File Content Guidelines & Agent Handoffs
 
 ### 1. `_[ComponentName].types.ts` (TypeScript Types)

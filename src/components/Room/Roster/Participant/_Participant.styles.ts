@@ -2,20 +2,16 @@ import styled from '@emotion/styled';
 
 import { Icon } from '../../../Shared/Icon';
 
-export const Participant_Base = styled.div`
-	border-radius: var(--sys-radius-lg);
-	font-size: var(--sys-font-size-sm);
-	padding: var(--sys-spacing-sm-md);
-`;
-
-export const Participant = styled(Participant_Base)`
+export const Participant = styled.div`
 	align-items: center;
 	background-color: var(--sys-color-surface);
 	border: 1px solid var(--sys-color-border);
+	border-radius: var(--sys-radius-lg);
 	display: grid;
 	font-size: var(--sys-font-size-sm);
-	font-weight: 500;
+	font-weight: var(--sys-font-weight-medium);
 	grid-template-columns: 1fr auto;
+	padding: var(--sys-spacing-sm-md);
 `;
 
 export const Participant_HostBadge = styled(Icon)`
@@ -30,7 +26,7 @@ export const Participant_Status_Text = styled.span`
 	color: var(--sys-color-text-secondary);
 	display: block;
 	font-size: var(--sys-font-size-xs);
-	font-weight: 400;
+	font-weight: var(--sys-font-weight-normal);
 `;
 
 export const Participant_Status_Text_Disconnected = styled(
@@ -46,7 +42,7 @@ export const Participant_Status = styled.div`
 	border-radius: var(--sys-radius-md);
 	display: flex;
 	font-size: var(--sys-font-size-sm);
-	font-weight: 700;
+	font-weight: var(--sys-font-weight-bold);
 	height: 1.875rem;
 	justify-content: center;
 	width: 1.875rem;
