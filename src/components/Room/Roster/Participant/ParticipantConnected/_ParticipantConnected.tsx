@@ -45,7 +45,15 @@ export function ParticipantConnected({
 				<S.Participant_Status>
 					{vote ? (
 						isRevealed ? (
-							<>{vote}</>
+							<>
+								{vote === 'coffee' ? (
+									<Icon name="coffee" />
+								) : vote === '?' ? (
+									<Icon name="question_mark" />
+								) : (
+									<>{vote}</>
+								)}
+							</>
 						) : (
 							<S.Participant_Status_Voted>
 								<Icon name="check" size="xs" />
