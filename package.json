@@ -1,7 +1,7 @@
 {
   "name": "p2p-planning-poker",
   "private": true,
-  "version": "0.17.0",
+  "version": "0.17.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
