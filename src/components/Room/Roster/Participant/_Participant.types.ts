@@ -1,6 +1,6 @@
-import type { VoteValue } from '../../../../../types/domain';
+import type { VoteValue } from '../../../../types/domain';
 
-export interface IParticipantConnected {
+export interface IParticipant {
 	isHost?: boolean;
 	isMe?: boolean;
 	isRevealed: boolean;

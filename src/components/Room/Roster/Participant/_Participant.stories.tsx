@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { ParticipantConnected } from '.';
+import { Participant } from '.';
 
 const meta = {
-	component: ParticipantConnected,
+	component: Participant,
 	decorators: [
 		(Story) => (
 			<div style={{ width: '320px' }}>
@@ -15,8 +15,8 @@ const meta = {
 		layout: 'centered',
 	},
 	tags: ['autodocs'],
-	title: 'Room/Roster/Participant/ParticipantConnected',
-} satisfies Meta<typeof ParticipantConnected>;
+	title: 'Room/Roster/Participant',
+} satisfies Meta<typeof Participant>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

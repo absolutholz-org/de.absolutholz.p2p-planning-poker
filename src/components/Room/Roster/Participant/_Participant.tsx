@@ -1,8 +1,8 @@
-import { Icon } from '../../../../Shared/Icon';
-import * as S from './_ParticipantConnected.styles';
-import type { IParticipantConnected } from './_ParticipantConnected.types';
+import { Icon } from '../../../Shared/Icon';
+import * as S from './_Participant.styles';
+import type { IParticipant } from './_Participant.types';
 
-export function ParticipantConnected({
+export function Participant({
 	disconnectedText,
 	isConnected,
 	isHost,
@@ -13,9 +13,9 @@ export function ParticipantConnected({
 	thinkingText,
 	vote,
 	youText,
-}: IParticipantConnected) {
+}: IParticipant) {
 	return (
-		<S.Participant_Connected>
+		<S.Participant>
 			<div>
 				<>
 					{isHost && (
@@ -40,7 +40,6 @@ export function ParticipantConnected({
 					)
 				)}
 			</div>
-			{/* ... legacy comments ... */}
 			<div>
 				<S.Participant_Status>
 					{vote ? (
@@ -62,9 +61,8 @@ export function ParticipantConnected({
 					) : (
 						<S.Participant_Status_Thinking />
 					)}
-					{/* ... legacy comments ... */}
 				</S.Participant_Status>
 			</div>
-		</S.Participant_Connected>
+		</S.Participant>
 	);
 }

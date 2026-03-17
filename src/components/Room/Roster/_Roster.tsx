@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useRoom } from '../../../context/RoomContext';
 import * as S from './_Roster.styles';
-import { ParticipantConnected } from './Participant/ParticipantConnected';
+import { Participant } from './Participant';
 
 export function Roster() {
 	const { t } = useTranslation();
@@ -25,7 +25,7 @@ export function Roster() {
 
 			<S.ParticipantGrid>
 				{roomState.users.map((user) => (
-					<ParticipantConnected
+					<Participant
 						key={user.id}
 						isHost={user.isHost}
 						isMe={user.id === localUserId}
