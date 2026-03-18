@@ -13,6 +13,7 @@ interface UsePeerSessionReturn {
 	castVote: (vote: VoteValue) => void;
 	connectionStatus: ConnectionStatus;
 	error: null | string;
+	iceState: string | null;
 	initGuest: (roomId: string, name: string, requestedPeerId?: string) => void;
 	initHost: (
 		name: string,
@@ -36,6 +37,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 	const [error, setError] = useState<null | string>(null);
 	const [connectionStatus, setConnectionStatus] =
 		useState<ConnectionStatus>('idle');
+	const [iceState, setIceState] = useState<string | null>(null);
 	const statusRef = useRef<ConnectionStatus>('idle');
 
 	// Sync statusRef with state
@@ -429,9 +431,9 @@ export function usePeerSession(): UsePeerSessionReturn {
 				conn.peerConnection.addEventListener(
 					'iceconnectionstatechange',
 					() => {
-						addLog(
-							`[Guest] ICE State shifted to: ${conn.peerConnection.iceConnectionState}`,
-						);
+						const state = conn.peerConnection.iceConnectionState;
+						addLog(`[Guest] ICE State shifted to: ${state}`);
+						setIceState(state);
 					},
 				);
 			}
@@ -443,17 +445,19 @@ export function usePeerSession(): UsePeerSessionReturn {
 			// Timeout if WebRTC gets stuck connecting
 			connectionTimeoutRef.current = setTimeout(() => {
 				console.error(
-					'[Guest] Hard timeout hit after 15s waiting for STUN/TURN.',
+					'[Guest] Hard timeout hit after 40s waiting for STUN/TURN.',
 				);
 				// Determine if the ICE connection even made progress
-				const iceState =
+				const currentIceState =
 					conn.peerConnection?.iceConnectionState || 'unknown';
 
 				setError(
-					`Connection timeout (ICE state: ${iceState}). Strict firewall or symmetric NAT active.`,
+					`Connection timeout (ICE state: ${currentIceState}). Strict firewall or symmetric NAT active.`,
 				);
 				setConnectionStatus('error');
-			}, 15000);
+				setIceState('failed');
+				conn.close();
+			}, 40000);
 
 			conn.on('open', () => {
 				addLog(`[Guest] Connection OPEN with host ${roomId}!`);
@@ -661,6 +665,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 		castVote,
 		connectionStatus,
 		error,
+		iceState,
 		initGuest,
 		initHost,
 		leaveRoom,

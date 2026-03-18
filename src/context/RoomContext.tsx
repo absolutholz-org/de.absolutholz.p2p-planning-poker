@@ -7,6 +7,7 @@ export interface RoomContextValue {
 	castVote: (vote: VoteValue) => void;
 	connectionStatus: ConnectionStatus;
 	error: null | string;
+	iceState: string | null;
 	initGuest: (roomId: string, name: string, requestedPeerId?: string) => void;
 	initHost: (
 		name: string,
@@ -34,6 +35,7 @@ export function RoomProvider({ children }: { children: ReactNode }) {
 		castVote,
 		connectionStatus,
 		error,
+		iceState,
 		initGuest,
 		initHost,
 		leaveRoom,
@@ -53,6 +55,7 @@ export function RoomProvider({ children }: { children: ReactNode }) {
 				castVote,
 				connectionStatus,
 				error,
+				iceState,
 				initGuest,
 				initHost,
 				leaveRoom,

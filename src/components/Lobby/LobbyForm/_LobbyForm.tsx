@@ -14,7 +14,8 @@ import * as S from './_LobbyForm.styles';
 
 export function LobbyForm() {
 	const { t } = useTranslation();
-	const { connectionStatus, error, initGuest, initHost } = useRoom();
+	const { connectionStatus, error, iceState, initGuest, initHost } =
+		useRoom();
 	const { logs } = usePeer();
 	const navigate = useNavigate();
 	const { roomId } = useParams<{ roomId?: string }>();
@@ -174,9 +175,17 @@ export function LobbyForm() {
 										: `${t('lobby.submit.create')}`}
 								<Icon name="arrow_right" size="sm" />
 							</Button>
-							<S.DisclaimerText>
-								{t('lobby.privacy_disclaimer')}
-							</S.DisclaimerText>
+							{connectionStatus === 'connecting' ? (
+								<S.DisclaimerText>
+									{iceState === 'checking'
+										? 'Testing network paths (this may take up to 40s)...'
+										: 'Establishing secure peer connection...'}
+								</S.DisclaimerText>
+							) : (
+								<S.DisclaimerText>
+									{t('lobby.privacy_disclaimer')}
+								</S.DisclaimerText>
+							)}
 						</Stack>
 					</Form>
 				</S.CardContainer>
