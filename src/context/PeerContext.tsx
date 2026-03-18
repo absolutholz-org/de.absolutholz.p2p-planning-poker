@@ -55,10 +55,12 @@ export function PeerProvider({ children }: { children: ReactNode }) {
 			}
 
 			if (turnUrls.length > 0) {
-				iceServers.push({
-					credential: import.meta.env.VITE_METERED_CREDENTIAL,
-					urls: turnUrls,
-					username: import.meta.env.VITE_METERED_USERNAME,
+				turnUrls.forEach((url) => {
+					iceServers.push({
+						credential: import.meta.env.VITE_METERED_CREDENTIAL,
+						urls: [url],
+						username: import.meta.env.VITE_METERED_USERNAME,
+					});
 				});
 			}
 
