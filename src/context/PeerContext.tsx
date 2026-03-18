@@ -41,25 +41,37 @@ export function PeerProvider({ children }: { children: ReactNode }) {
 			const stunUrls = [
 				'stun:stun.1und1.de:3478',
 				'stun:stun.hosteurope.de:3478',
-				import.meta.env.VITE_METERED_PROJECT_URL,
-			].filter(Boolean);
-			const turnUrls = [
-				import.meta.env.VITE_METERED_TURN_URL,
-				import.meta.env.VITE_METERED_TURN_URL_TLS,
-			].filter(Boolean);
+				'stun:stun.relay.metered.ca:3478', // Standard port
+			];
 
-			const iceServers = [];
+			const iceServers: RTCIceServer[] = [];
 
 			if (stunUrls.length > 0) {
 				iceServers.push({ urls: stunUrls });
 			}
 
-			if (turnUrls.length > 0) {
-				turnUrls.forEach((url) => {
+			const meteredUser = import.meta.env.VITE_METERED_USERNAME;
+			const meteredCred = import.meta.env.VITE_METERED_CREDENTIAL;
+
+			if (meteredUser && meteredCred) {
+				// We add multiple variants of the Metered TURN server to maximize traversal
+				// 1. Standard UDP (Port 80 and 3478)
+				// 2. TCP Fallback (Port 80)
+				// 3. TLS Fallback (Port 443)
+				const turnBase = 'standard.relay.metered.ca';
+				const variants = [
+					`turn:${turnBase}:80`,
+					`turn:${turnBase}:3478`,
+					`turn:${turnBase}:80?transport=tcp`,
+					`turn:${turnBase}:443`,
+					`turns:${turnBase}:443?transport=tcp`,
+				];
+
+				variants.forEach((url) => {
 					iceServers.push({
-						credential: import.meta.env.VITE_METERED_CREDENTIAL,
+						credential: meteredCred,
 						urls: [url],
-						username: import.meta.env.VITE_METERED_USERNAME,
+						username: meteredUser,
 					});
 				});
 			}

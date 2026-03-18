@@ -423,7 +423,7 @@ export function usePeerSession(): UsePeerSessionReturn {
 
 			// Ensure reliable data channel for better cross-device connection
 			addLog(`[Guest] Dialing host ${roomId}...`);
-			const conn = peer.connect(roomId, { reliable: true });
+			const conn = peer.connect(roomId);
 			connectionsRef.current.set(roomId, conn);
 
 			// Probe the underlying WebRTC state if possible
