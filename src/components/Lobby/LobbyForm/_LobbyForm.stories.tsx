@@ -16,6 +16,7 @@ const meta = {
 						castVote: () => {},
 						connectionStatus: 'idle',
 						error: context.args.error || null,
+						iceState: null,
 						initGuest: () => {},
 						initHost: () => {},
 						leaveRoom: () => {},

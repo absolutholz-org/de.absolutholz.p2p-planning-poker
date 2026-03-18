@@ -33,6 +33,7 @@ const meta = {
 						castVote: () => {},
 						connectionStatus: 'connected',
 						error: null,
+						iceState: null,
 						initGuest: () => {},
 						initHost: () => {},
 						leaveRoom: () => {},
