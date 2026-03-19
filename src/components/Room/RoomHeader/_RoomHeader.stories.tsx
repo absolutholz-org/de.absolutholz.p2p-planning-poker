@@ -22,6 +22,7 @@ const MOCK_ROOM_STATE = {
 const meta = {
 	args: {
 		// Custom prop for dynamic context injection in Storybook
+		mockNoVotes: false,
 		mockRevealed: false,
 	},
 	component: RoomHeader,
@@ -39,7 +40,12 @@ const meta = {
 							isRevealed: !!context.args.mockRevealed,
 							roomId: 'room-123',
 							timer: null,
-							users: MOCK_ROOM_STATE.users,
+							users: context.args.mockNoVotes
+								? MOCK_ROOM_STATE.users.map((u) => ({
+										...u,
+										vote: null,
+									}))
+								: MOCK_ROOM_STATE.users,
 						},
 						sendAction: () => {},
 						updateName: () => {},
@@ -57,7 +63,10 @@ const meta = {
 	tags: ['autodocs'],
 	title: 'Room/RoomHeader',
 } satisfies Meta<
-	ComponentProps<typeof RoomHeader> & { mockRevealed?: boolean }
+	ComponentProps<typeof RoomHeader> & {
+		mockNoVotes?: boolean;
+		mockRevealed?: boolean;
+	}
 >;
 
 export default meta;
@@ -69,5 +78,11 @@ export const Revealed: Story = {
 	args: {
 		// Custom prop for dynamic context injection
 		mockRevealed: true,
+	},
+};
+
+export const NoVotes: Story = {
+	args: {
+		mockNoVotes: true,
 	},
 };

@@ -84,7 +84,12 @@ export function RoomHeader() {
 									variant="primary"
 									onClick={handleReveal}
 									aria-label={t('room.header.aria.reveal')}
-									disabled={roomState.isRevealed}
+									disabled={
+										roomState.isRevealed ||
+										roomState.users.every(
+											(u) => u.vote === null,
+										)
+									}
 									icon="visibility"
 									style={{
 										color: 'var(--sys-color-primary-text)',
