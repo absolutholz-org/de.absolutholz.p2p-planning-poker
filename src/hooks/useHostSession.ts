@@ -73,9 +73,29 @@ export function useHostSession(
 		console.log(
 			'[WebRTC] ICE Config initialized. TURN:',
 			!!import.meta.env.VITE_METERED_USERNAME,
+			'Servers:',
+			iceServers.map((s) => ({
+				...s,
+				credential: s.credential ? 'REDACTED' : undefined,
+			})),
 		);
 
-		const peer = new Peer(roomId, { config: { iceServers }, debug: 3 });
+		const peer = new Peer(roomId, {
+			config: {
+				iceServers,
+				iceTransportPolicy: 'relay',
+			},
+			debug: 3,
+		});
+
+		peer.on('error', (err) => {
+			if (err.type === 'network') {
+				console.error(
+					'[WebRTC] Network Error - Check TURN credentials/reachability',
+				);
+			}
+		});
+
 		peerRef.current = peer;
 
 		setTimeout(() => setConnectionStatus('connecting'), 0);
