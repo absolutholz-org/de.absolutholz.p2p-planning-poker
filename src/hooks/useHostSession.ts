@@ -49,13 +49,16 @@ export function useHostSession(
 	useEffect(() => {
 		if (!enabled || !roomId) return;
 
-		const iceServers = [
+		const iceServers: RTCIceServer[] = [
 			{
 				urls:
 					import.meta.env.VITE_METERED_PROJECT_URL ||
 					'stun:stun.relay.metered.ca:80',
 			},
-			{
+		];
+
+		if (import.meta.env.VITE_METERED_USERNAME) {
+			iceServers.push({
 				credential: import.meta.env.VITE_METERED_CREDENTIAL,
 				urls: [
 					import.meta.env.VITE_METERED_TURN_URL ||
@@ -64,8 +67,13 @@ export function useHostSession(
 						'turns:standard.relay.metered.ca:443?transport=tcp',
 				],
 				username: import.meta.env.VITE_METERED_USERNAME,
-			},
-		];
+			});
+		}
+
+		console.log(
+			'[WebRTC] ICE Config initialized. TURN:',
+			!!import.meta.env.VITE_METERED_USERNAME,
+		);
 
 		const peer = new Peer(roomId, { config: { iceServers }, debug: 3 });
 		peerRef.current = peer;

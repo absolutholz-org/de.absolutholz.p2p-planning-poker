@@ -122,6 +122,7 @@ export function LobbyForm() {
 						<Stack spacing="sm">
 							<Button
 								type="submit"
+								variant="primary"
 								disabled={
 									!name.trim() ||
 									connectionStatus === 'connecting'
