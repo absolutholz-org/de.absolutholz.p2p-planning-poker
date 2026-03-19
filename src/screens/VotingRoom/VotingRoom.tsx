@@ -4,6 +4,7 @@ import { RoomHeader } from '../../components/Room/RoomHeader';
 import { Roster } from '../../components/Room/Roster';
 import { VotingDeck } from '../../components/Room/VotingDeck';
 import { AppLayout } from '../../components/Shared/AppLayout';
+import { Button } from '../../components/Shared/Button';
 import { Divider } from '../../components/Shared/Divider';
 import { PageContainer } from '../../components/Shared/PageContainer';
 import { Stack } from '../../components/Shared/Stack';
@@ -26,7 +27,14 @@ export function VotingRoom() {
 		return (
 			<AppLayout>
 				<PageContainer>
-					<div style={{ display: 'flex', height: '40vh', alignItems: 'center', justifyContent: 'center' }}>
+					<div
+						style={{
+							alignItems: 'center',
+							display: 'flex',
+							height: '40vh',
+							justifyContent: 'center',
+						}}
+					>
 						<Stack align="center" justify="center">
 							<h2>Connecting to Peer Network...</h2>
 						</Stack>
@@ -48,9 +56,20 @@ export function VotingRoom() {
 							justifyContent: 'center',
 						}}
 					>
-						<Stack align="center" justify="center">
-							<h2>Connection Failed</h2>
-							<p>{error}</p>
+						<Stack align="center" justify="center" spacing="lg">
+							<Stack align="center" justify="center" spacing="sm">
+								<h2>Connection Failed</h2>
+								<p>{error}</p>
+							</Stack>
+							<Button
+								variant="primary"
+								onClick={() => {
+									sessionStorage.setItem('role', 'guest');
+									window.location.reload();
+								}}
+							>
+								Join as Guest
+							</Button>
 						</Stack>
 					</div>
 				</PageContainer>

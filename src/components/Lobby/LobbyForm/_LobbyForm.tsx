@@ -33,7 +33,7 @@ export function LobbyForm() {
 
 		// Cleanup old session data to prevent accidental state leak
 		localStorage.removeItem('userName');
-		localStorage.removeItem('role');
+		sessionStorage.removeItem('role');
 
 		if (!roomCode.trim()) {
 			// For CREATE
@@ -42,13 +42,13 @@ export function LobbyForm() {
 				.substring(2, 8)
 				.toLowerCase();
 			localStorage.setItem('userName', trimmedName);
-			localStorage.setItem('role', 'host');
+			sessionStorage.setItem('role', 'host');
 			navigate(`/room/${newId}`);
 		} else {
 			// For JOIN
 			const targetRoom = roomCode.trim();
 			localStorage.setItem('userName', trimmedName);
-			localStorage.setItem('role', 'guest');
+			sessionStorage.setItem('role', 'guest');
 			navigate(`/room/${targetRoom}`);
 		}
 	};

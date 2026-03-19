@@ -53,7 +53,7 @@ export function RoomProvider({
 			leaveRoom: () => {
 				// Clear the keys that the RoomGuard watches
 				localStorage.removeItem('userName');
-				localStorage.removeItem('role');
+				sessionStorage.removeItem('role');
 				// Navigate home to trigger the RoomGuard unmount
 				navigate('/');
 			},
