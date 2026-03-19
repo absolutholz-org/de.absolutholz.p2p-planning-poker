@@ -2,7 +2,6 @@ import { type FormEvent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { STORAGE_KEYS } from '../../../constants/storage';
 import { useRoom } from '../../../hooks/useRoom';
 import { Button } from '../../Shared/Button';
 import { Form } from '../../Shared/Form';
@@ -17,18 +16,14 @@ export function LobbyForm() {
 	const logs: string[] = []; // Logs feature is removed in the new hook architecture
 	const navigate = useNavigate();
 	const { roomId } = useParams<{ roomId?: string }>();
-	const [name, setName] = useState('');
+	const [name, setName] = useState(
+		() => localStorage.getItem('userName') || '',
+	);
 	const [roomCode, setRoomCode] = useState(roomId || '');
 	const [showRoomCode, setShowRoomCode] = useState(false);
 	const [showLogs, setShowLogs] = useState(false);
 
-	// Load previously saved name on initial mount
-	useEffect(() => {
-		const savedName = localStorage.getItem(STORAGE_KEYS.USER_NAME);
-		if (savedName) setName(savedName);
-	}, []);
-
-	// Auto-restore effect removed because the new RoomGuard architecture 
+	// Auto-restore effect removed because the new RoomGuard architecture
 	// handles initializing connections automatically based on the URL and localStorage.
 
 	const handleSubmit = (e: FormEvent) => {
@@ -36,15 +31,23 @@ export function LobbyForm() {
 		const trimmedName = name.trim();
 		if (!trimmedName || connectionStatus === 'connecting') return;
 
-		localStorage.setItem(STORAGE_KEYS.USER_NAME, trimmedName);
+		// Cleanup old session data to prevent accidental state leak
+		localStorage.removeItem('userName');
+		localStorage.removeItem('role');
 
-		// If no room code is provided, they are creating a new room as Host.
 		if (!roomCode.trim()) {
+			// For CREATE
+			const newId = Math.random()
+				.toString(36)
+				.substring(2, 8)
+				.toLowerCase();
+			localStorage.setItem('userName', trimmedName);
 			localStorage.setItem('role', 'host');
-			const newId = Math.random().toString(36).substring(2, 8).toLowerCase();
 			navigate(`/room/${newId}`);
 		} else {
+			// For JOIN
 			const targetRoom = roomCode.trim();
+			localStorage.setItem('userName', trimmedName);
 			localStorage.setItem('role', 'guest');
 			navigate(`/room/${targetRoom}`);
 		}
