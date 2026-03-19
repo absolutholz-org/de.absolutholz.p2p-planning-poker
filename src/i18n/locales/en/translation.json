@@ -63,6 +63,7 @@
         "confirm": "Reset Votes"
       },
       "rename_dialog": {
+        "button": "Rename",
         "title": "Change Name",
         "label": "New Name",
         "confirm": "Update Name",

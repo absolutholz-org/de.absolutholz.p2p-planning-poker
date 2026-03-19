@@ -62,15 +62,6 @@
         "message": "Bist du dir sicher, dass du alle aktuellen Votes löschen möchtest? Diese Aktion gilt für alle verbundenen Teilnehmer und kann nicht rückgängig gemacht werden.",
         "confirm": "Votes zurücksetzen"
       },
-      "rename_dialog": {
-        "title": "Name ändern",
-        "label": "Neuer Name",
-        "confirm": "Name aktualisieren",
-        "aria": {
-          "open": "Namensänderungs-Dialog öffnen",
-          "input": "Gib deinen neuen Anzeigenamen ein"
-        }
-      },
       "share": {
         "button": "Teilen",
         "native": "Teilen über...",
@@ -81,22 +72,34 @@
         "fallback_error": "Teilen wird von diesem Browser nicht unterstützt.",
         "aria_open": "Teilen-Menü öffnen",
         "aria_close": "Teilen-Menü schließen",
-        "timer": {
-          "title": "Timer",
-          "minutes_label": "Minuten",
-          "start": "Start",
-          "pause": "Pause",
-          "resume": "Fortsetzen",
-          "reset": "Zurücksetzen",
-          "aria": {
-            "input": "Timer-Dauer in Minuten festlegen",
-            "decrement": "Timer-Dauer um 1 Minute verringern",
-            "increment": "Timer-Dauer um 1 Minute erhöhen",
-            "start": "Timer starten",
-            "pause": "Timer pausieren",
-            "resume": "Timer fortsetzen",
-            "reset": "Timer auf ursprüngliche Dauer zurücksetzen"
-          }
+        "dialog_title": "Raum teilen",
+        "dialog_desc": "Lade dein Team zu dieser Sitzung ein."
+      },
+      "rename_dialog": {
+        "title": "Namensänderung",
+        "label": "Neuer Name",
+        "confirm": "Name aktualisieren",
+        "aria": {
+          "open": "Namensänderungsdialog öffnen",
+          "input": "Gib deinen neuen Anzeigenamen ein"
+        },
+        "button": "Umbenennen"
+      },
+      "timer": {
+        "title": "Timer",
+        "minutes_label": "Minuten",
+        "start": "Start",
+        "pause": "Pause",
+        "resume": "Fortsetzen",
+        "reset": "Zurücksetzen",
+        "aria": {
+          "input": "Timer-Dauer in Minuten festlegen",
+          "decrement": "Timer-Dauer um 1 Minute verringern",
+          "increment": "Timer-Dauer um 1 Minute erhöhen",
+          "start": "Timer starten",
+          "pause": "Timer pausieren",
+          "resume": "Timer fortsetzen",
+          "reset": "Timer auf ursprüngliche Dauer zurücksetzen"
         }
       }
     },

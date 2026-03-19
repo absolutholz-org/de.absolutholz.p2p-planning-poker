@@ -66,7 +66,7 @@ export function Dialog({
 						</Button>
 					)}
 					{onConfirm && confirmText && (
-						<Button variant="danger" onClick={onConfirm}>
+						<Button variant="primary" onClick={onConfirm}>
 							{confirmText}
 						</Button>
 					)}

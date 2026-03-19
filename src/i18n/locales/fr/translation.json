@@ -30,7 +30,8 @@
     },
     "roomCode": {
       "label": "Code de la Salle (Optionnel)",
-      "placeholder": "Entrez le code ou laissez vide pour héberger"
+      "placeholder": "Entrez le code ou laissez vide pour héberger",
+      "toggle": "Rejoindre via un code ?"
     },
     "submit": {
       "join": "Rejoindre la Salle",
@@ -43,7 +44,8 @@
       "privacy": "Politique de Confidentialité",
       "storybook": "Storybook"
     },
-    "privacy_disclaimer": "En rejoignant, vous acceptez notre politique de confidentialité concernant les connexions peer-to-peer."
+    "privacy_disclaimer": "En rejoignant, vous acceptez notre politique de confidentialité concernant les connexions peer-to-peer.",
+    "extra_text": "Aucune inscription requise. Gratuit pour toujours. P2P Poker est un outil d'estimation en temps réel sans serveur basé sur WebRTC."
   },
   "room": {
     "header": {
@@ -85,6 +87,35 @@
             "resume": "Reprendre le minuteur",
             "reset": "Réinitialiser le minuteur à sa durée initiale"
           }
+        },
+        "dialog_title": "Partager la Salle",
+        "dialog_desc": "Invitez votre équipe à cette session."
+      },
+      "rename_dialog": {
+        "title": "Changer de Nom",
+        "label": "Nouveau Nom",
+        "confirm": "Mettre à jour le Nom",
+        "aria": {
+          "open": "Ouvrir la boîte de dialogue de changement de nom",
+          "input": "Saisissez votre nouveau nom d'affichage"
+        },
+        "button": "Renommer"
+      },
+      "timer": {
+        "title": "Minuteur",
+        "minutes_label": "Minutes",
+        "start": "Démarrer",
+        "pause": "Pause",
+        "resume": "Reprendre",
+        "reset": "Réinitialiser",
+        "aria": {
+          "input": "Définir la durée du minuteur en minutes",
+          "decrement": "Diminuer la durée du minuteur de 1 minute",
+          "increment": "Augmenter la durée du minuteur de 1 minute",
+          "start": "Démarrer le minuteur",
+          "pause": "Mettre le minuteur en pause",
+          "resume": "Reprendre le minuteur",
+          "reset": "Réinitialiser le minuteur à sa durée initiale"
         }
       }
     },

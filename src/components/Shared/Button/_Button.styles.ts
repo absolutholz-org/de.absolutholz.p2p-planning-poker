@@ -7,8 +7,9 @@ export const Button = styled.button<{ 'data-variant': ButtonVariant }>`
 	min-height: 3rem;
 	min-width: 3rem;
 
-	display: inline-flex;
 	align-items: center;
+	display: inline-flex;
+	flex-shrink: 0; // tmp because of being within a flex box parent
 	justify-content: center;
 	padding: var(--sys-spacing-sm) var(--sys-spacing-lg);
 

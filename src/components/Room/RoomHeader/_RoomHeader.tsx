@@ -62,7 +62,7 @@ export function RoomHeader() {
 						aria-label={t('room.header.rename_dialog.aria.open')}
 						icon="edit"
 					>
-						Rename
+						{t('room.header.rename_dialog.button')}
 					</Button>
 
 					<S.Actions direction="row" justify="end">

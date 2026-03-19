@@ -30,7 +30,8 @@
     },
     "roomCode": {
       "label": "Código da Sala (Opcional)",
-      "placeholder": "Insira o código ou deixe em branco para ser o anfitrião"
+      "placeholder": "Insira o código ou deixe em branco para ser o anfitrião",
+      "toggle": "Entrar via código de sala?"
     },
     "submit": {
       "join": "Entrar na Sala",
@@ -87,6 +88,35 @@
             "resume": "Retomar o cronômetro",
             "reset": "Redefinir o cronômetro para a duração inicial"
           }
+        },
+        "dialog_title": "Compartilhar Sala",
+        "dialog_desc": "Convide sua equipe para esta sessão."
+      },
+      "rename_dialog": {
+        "title": "Alterar Nome",
+        "label": "Novo Nome",
+        "confirm": "Atualizar Nome",
+        "aria": {
+          "open": "Abrir diálogo de alteração de nome",
+          "input": "Insira seu novo nome de exibição"
+        },
+        "button": "Renomear"
+      },
+      "timer": {
+        "title": "Cronômetro",
+        "minutes_label": "Minutos",
+        "start": "Iniciar",
+        "pause": "Pausar",
+        "resume": "Retomar",
+        "reset": "Redefinir",
+        "aria": {
+          "input": "Definir duração do cronômetro em minutos",
+          "decrement": "Diminuir a duração do cronômetro em 1 minuto",
+          "increment": "Aumentar a duração do cronômetro em 1 minuto",
+          "start": "Iniciar o cronômetro",
+          "pause": "Pausar o cronômetro",
+          "resume": "Retomar o cronômetro",
+          "reset": "Redefinir o cronômetro para a duração inicial"
         }
       }
     },
