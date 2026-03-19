@@ -3,8 +3,8 @@ import { type IIcon } from './_Icon.types';
 import { ICON_PATHS } from './IconLibrary';
 
 export function Icon({ label, name, size = 'inherit', ...props }: IIcon) {
-	const svgPath = ICON_PATHS[name];
-	const isSymbol = !!svgPath;
+	const svgData = ICON_PATHS[name];
+	const isSymbol = !!svgData;
 
 	return (
 		<S.IconContainer
@@ -21,9 +21,19 @@ export function Icon({ label, name, size = 'inherit', ...props }: IIcon) {
 			}
 			{...props}
 		>
-			{svgPath ? (
-				<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-					<path d={svgPath} />
+			{svgData ? (
+				<svg
+					viewBox={
+						typeof svgData === 'string'
+							? '0 0 24 24'
+							: svgData.viewBox || '0 0 24 24'
+					}
+					aria-hidden="true"
+					focusable="false"
+				>
+					<path
+						d={typeof svgData === 'string' ? svgData : svgData.path}
+					/>
 				</svg>
 			) : (
 				name
