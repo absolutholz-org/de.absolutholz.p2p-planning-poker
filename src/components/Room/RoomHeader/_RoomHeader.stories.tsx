@@ -33,23 +33,15 @@ const meta = {
 						castVote: () => {},
 						connectionStatus: 'connected',
 						error: null,
-						iceState: null,
-						initGuest: () => {},
-						initHost: () => {},
+						isHost: true,
 						leaveRoom: () => {},
-						localUserId: 'user-1',
-						pauseTimer: () => {},
-						resetBoard: () => {},
-						resetTimer: () => {},
-						revealVotes: () => {},
 						roomState: {
 							isRevealed: !!context.args.mockRevealed,
 							roomId: 'room-123',
 							timer: null,
 							users: MOCK_ROOM_STATE.users,
 						},
-						setTimer: () => {},
-						startTimer: () => {},
+						sendAction: () => {},
 					}}
 				>
 					<Story />

@@ -2,9 +2,8 @@ import { type FormEvent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { SESSION_KEYS, STORAGE_KEYS } from '../../../constants/storage';
-import { usePeer } from '../../../context/PeerContext';
-import { useRoom } from '../../../context/RoomContext';
+import { STORAGE_KEYS } from '../../../constants/storage';
+import { useRoom } from '../../../hooks/useRoom';
 import { Button } from '../../Shared/Button';
 import { Form } from '../../Shared/Form';
 import { Icon } from '../../Shared/Icon';
@@ -14,9 +13,8 @@ import * as S from './_LobbyForm.styles';
 
 export function LobbyForm() {
 	const { t } = useTranslation();
-	const { connectionStatus, error, iceState, initGuest, initHost } =
-		useRoom();
-	const { logs } = usePeer();
+	const { connectionStatus, error } = useRoom(); // Replaced usePeer with useRoom per instructions
+	const logs: string[] = []; // Logs feature is removed in the new hook architecture
 	const navigate = useNavigate();
 	const { roomId } = useParams<{ roomId?: string }>();
 	const [name, setName] = useState('');
@@ -30,49 +28,8 @@ export function LobbyForm() {
 		if (savedName) setName(savedName);
 	}, []);
 
-	const { peerId } = usePeer();
-	const [hasAttemptedRestore, setHasAttemptedRestore] = useState(false);
-
-	// Check for ungraceful page reloads and try to restore session
-	useEffect(() => {
-		// Wait for PeerJS to be ready before attempting restoration
-		if (!peerId || hasAttemptedRestore) return;
-
-		const role = sessionStorage.getItem(SESSION_KEYS.ROLE);
-		const savedRoomId = sessionStorage.getItem(SESSION_KEYS.ROOM_ID);
-		const savedName = sessionStorage.getItem(SESSION_KEYS.NAME);
-		const savedPeerId = sessionStorage.getItem(SESSION_KEYS.PEER_ID);
-		const savedStateStr = sessionStorage.getItem(SESSION_KEYS.ROOM_STATE);
-
-		// Only auto-restore if we are on the specific room URL that matches the saved session
-		// This prevents hijacking the home page or a different room's URL
-		const isAtCorrectRoom = roomId && roomId === savedRoomId;
-
-		if (role && savedRoomId && savedName && isAtCorrectRoom) {
-			console.log(
-				`Attempting to recover ${role} session for room ${savedRoomId}`,
-			);
-
-			if (role === 'host' && savedStateStr) {
-				try {
-					const restoredState = JSON.parse(savedStateStr);
-					initHost(
-						savedName,
-						savedPeerId || undefined,
-						restoredState,
-					);
-				} catch (e) {
-					console.error('Failed to parse restored state', e);
-					sessionStorage.clear();
-				}
-			} else if (role === 'guest') {
-				initGuest(savedRoomId, savedName, savedPeerId || undefined);
-			}
-		}
-
-		setHasAttemptedRestore(true);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [peerId, roomId]);
+	// Auto-restore effect removed because the new RoomGuard architecture 
+	// handles initializing connections automatically based on the URL and localStorage.
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
@@ -83,13 +40,12 @@ export function LobbyForm() {
 
 		// If no room code is provided, they are creating a new room as Host.
 		if (!roomCode.trim()) {
-			initHost(trimmedName);
-			if (peerId) {
-				navigate(`/room/${peerId}`);
-			}
+			localStorage.setItem('role', 'host');
+			const newId = Math.random().toString(36).substring(2, 8).toLowerCase();
+			navigate(`/room/${newId}`);
 		} else {
 			const targetRoom = roomCode.trim();
-			initGuest(targetRoom, trimmedName);
+			localStorage.setItem('role', 'guest');
 			navigate(`/room/${targetRoom}`);
 		}
 	};
@@ -177,9 +133,7 @@ export function LobbyForm() {
 							</Button>
 							{connectionStatus === 'connecting' ? (
 								<S.DisclaimerText>
-									{iceState === 'checking'
-										? 'Testing network paths (this may take up to 40s)...'
-										: 'Establishing secure peer connection...'}
+									Establishing secure peer connection...
 								</S.DisclaimerText>
 							) : (
 								<S.DisclaimerText>

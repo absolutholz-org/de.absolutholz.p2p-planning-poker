@@ -1,18 +1,20 @@
 import { useTranslation } from 'react-i18next';
 
 import { FIBONACCI_SCALE } from '../../../constants/domain';
-import { useRoom } from '../../../context/RoomContext';
+import { STORAGE_KEYS } from '../../../constants/storage';
+import { useRoom } from '../../../hooks/useRoom';
 import { Card } from '../../Shared/Card';
 import * as S from './_VotingDeck.styles';
 
 export function VotingDeck() {
 	const { t } = useTranslation();
-	const { castVote, localUserId, roomState } = useRoom();
+	const { castVote, roomState } = useRoom();
 
 	if (!roomState) return null;
 
 	// Find the current user's vote
-	const myUser = roomState.users.find((u) => u.id === localUserId);
+	const userName = localStorage.getItem(STORAGE_KEYS.USER_NAME);
+	const myUser = roomState.users.find((u) => u.name === userName);
 	const myVote = myUser?.vote;
 
 	return (

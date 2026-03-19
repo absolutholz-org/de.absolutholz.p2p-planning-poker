@@ -1,14 +1,17 @@
 import { useTranslation } from 'react-i18next';
 
-import { useRoom } from '../../../context/RoomContext';
+import { STORAGE_KEYS } from '../../../constants/storage';
+import { useRoom } from '../../../hooks/useRoom';
 import * as S from './_Roster.styles';
 import { Participant } from './Participant';
 
 export function Roster() {
 	const { t } = useTranslation();
-	const { localUserId, roomState } = useRoom();
+	const { roomState } = useRoom();
 
 	if (!roomState) return null;
+
+	const userName = localStorage.getItem(STORAGE_KEYS.USER_NAME);
 
 	return (
 		<S.RosterContainer
@@ -28,7 +31,7 @@ export function Roster() {
 					<Participant
 						key={user.id}
 						isHost={user.isHost}
-						isMe={user.id === localUserId}
+						isMe={user.name === userName}
 						isRevealed={roomState.isRevealed}
 						isConnected={user.isConnected}
 						vote={user.vote}

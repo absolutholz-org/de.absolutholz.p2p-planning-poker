@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { useRoom } from '../../../context/RoomContext';
+import { useRoom } from '../../../hooks/useRoom';
 import { LanguageSwitcher } from '../LanguageSwitcher';
 import { SchemeSwitcher } from '../SchemeSwitcher';
 // import { Timer } from '../Timer';

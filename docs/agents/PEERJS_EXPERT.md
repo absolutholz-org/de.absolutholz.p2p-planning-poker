@@ -91,3 +91,6 @@ export function useGuestConnection(conn: DataConnection | null) {
   return { status };
 }
 ```
+
+## MANDATORY RULE
+Always prefer separate files for types, hooks, and components. Avoid multiple exports in a single file to maintain Fast Refresh compatibility and clear scope.

@@ -1,10 +1,9 @@
 import createCache from '@emotion/cache';
 import { CacheProvider, Global } from '@emotion/react';
-import { lazy, Suspense, useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import { Route, Routes, useParams } from 'react-router-dom';
 
-import { PeerProvider } from './context/PeerContext';
-import { RoomProvider, useRoom } from './context/RoomContext';
+import { RoomProvider } from './context/RoomProvider';
 import { Lobby } from './screens/Lobby/Lobby';
 import { globalStyles } from './theme/GlobalStyles';
 
@@ -26,29 +25,28 @@ const emotionCache = createCache({
 	stylisPlugins: [],
 });
 
+function RoomGuard() {
+	const { roomId } = useParams();
+	const userName = localStorage.getItem('userName');
+	const role = (localStorage.getItem('role') as 'host' | 'guest') || 'guest';
+
+	if (!userName) {
+		return <Lobby />;
+	}
+
+	return (
+		<RoomProvider roomId={roomId!} name={userName} role={role}>
+			<VotingRoom />
+		</RoomProvider>
+	);
+}
+
 function AppContent() {
-	const { roomState } = useRoom();
-	const navigate = useNavigate();
-
-	useEffect(() => {
-		// Only redirect if we are on a room-like path but with a mismatched ID
-		// The Lobby handles its own navigation after joining/creating
-		const currentPath = window.location.pathname;
-		if (roomState?.roomId && currentPath.startsWith('/room/')) {
-			if (currentPath !== `/room/${roomState.roomId}`) {
-				navigate(`/room/${roomState.roomId}`, { replace: true });
-			}
-		}
-	}, [roomState?.roomId, navigate]);
-
 	return (
 		<Suspense fallback={<div>Loading...</div>}>
 			<Routes>
 				<Route path="/" element={<Lobby />} />
-				<Route
-					path="/room/:roomId"
-					element={roomState ? <VotingRoom /> : <Lobby />}
-				/>
+				<Route path="/room/:roomId" element={<RoomGuard />} />
 				<Route
 					path="/impressum"
 					element={<MarkdownScreen type="impressum" />}
@@ -65,12 +63,8 @@ function AppContent() {
 function App() {
 	return (
 		<CacheProvider value={emotionCache}>
-			<PeerProvider>
-				<RoomProvider>
-					<Global styles={globalStyles} />
-					<AppContent />
-				</RoomProvider>
-			</PeerProvider>
+			<Global styles={globalStyles} />
+			<AppContent />
 		</CacheProvider>
 	);
 }

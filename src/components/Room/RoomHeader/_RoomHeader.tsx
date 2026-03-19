@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useRoom } from '../../../context/RoomContext';
+import { useRoom } from '../../../hooks/useRoom';
 import { Button } from '../../Shared/Button';
 import { Dialog } from '../../Shared/Dialog';
 import { PageContainer } from '../../Shared/PageContainer';
@@ -10,15 +10,19 @@ import * as S from './_RoomHeader.styles';
 
 export function RoomHeader() {
 	const { t } = useTranslation();
-	const { resetBoard, revealVotes, roomState } = useRoom();
+	const { isHost, roomState, sendAction } = useRoom();
 	const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
 	const [isShareOpen, setIsShareOpen] = useState(false);
 
 	if (!roomState) return null;
 
 	const handleReset = () => {
-		resetBoard();
+		sendAction({ payload: undefined, type: 'RESET_SESSION' });
 		setIsResetDialogOpen(false);
+	};
+
+	const handleReveal = () => {
+		sendAction({ payload: undefined, type: 'TOGGLE_REVEAL' });
 	};
 
 	return (
@@ -36,28 +40,32 @@ export function RoomHeader() {
 					</Button>
 
 					<S.Actions direction="row" justify="end">
-						<Button
-							variant="secondary"
-							onClick={() => setIsResetDialogOpen(true)}
-							aria-label={t('room.header.aria.reset')}
-							icon="refresh"
-							disabled={roomState.users.every(
-								(u) => u.vote === null,
-							)}
-						>
-							{t('common.actions.reset')}
-						</Button>
+						{isHost && (
+							<>
+								<Button
+									variant="secondary"
+									onClick={() => setIsResetDialogOpen(true)}
+									aria-label={t('room.header.aria.reset')}
+									icon="refresh"
+									disabled={roomState.users.every(
+										(u) => u.vote === null,
+									)}
+								>
+									{t('common.actions.reset')}
+								</Button>
 
-						<Button
-							variant="primary"
-							onClick={revealVotes}
-							aria-label={t('room.header.aria.reveal')}
-							disabled={roomState.isRevealed}
-							icon="visibility"
-							style={{ color: 'var(--sys-color-primary-text)' }}
-						>
-							{t('common.actions.reveal')}
-						</Button>
+								<Button
+									variant="primary"
+									onClick={handleReveal}
+									aria-label={t('room.header.aria.reveal')}
+									disabled={roomState.isRevealed}
+									icon="visibility"
+									style={{ color: 'var(--sys-color-primary-text)', }}
+								>
+									{t('common.actions.reveal')}
+								</Button>
+							</>
+						)}
 					</S.Actions>
 				</S.SubHeaderContainer>
 			</PageContainer>

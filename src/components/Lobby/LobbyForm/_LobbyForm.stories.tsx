@@ -16,18 +16,10 @@ const meta = {
 						castVote: () => {},
 						connectionStatus: 'idle',
 						error: context.args.error || null,
-						iceState: null,
-						initGuest: () => {},
-						initHost: () => {},
+						isHost: false,
 						leaveRoom: () => {},
-						localUserId: null,
-						pauseTimer: () => {},
-						resetBoard: () => {},
-						resetTimer: () => {},
-						revealVotes: () => {},
 						roomState: null,
-						setTimer: () => {},
-						startTimer: () => {},
+						sendAction: () => {},
 					}}
 				>
 					<Story />

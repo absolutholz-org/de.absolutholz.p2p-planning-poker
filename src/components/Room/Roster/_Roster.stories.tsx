@@ -50,23 +50,15 @@ const meta = {
 						castVote: () => {},
 						connectionStatus: 'connected',
 						error: null,
-						iceState: null,
-						initGuest: () => {},
-						initHost: () => {},
+						isHost: false,
 						leaveRoom: () => {},
-						localUserId: '2', // Let's pretend we are Bob
-						pauseTimer: () => {},
-						resetBoard: () => {},
-						resetTimer: () => {},
-						revealVotes: () => {},
 						roomState: {
 							isRevealed: !!context.args.mockRevealed,
 							roomId: '1234-abcd',
 							timer: null,
 							users: MOCK_USERS,
 						},
-						setTimer: () => {},
-						startTimer: () => {},
+						sendAction: () => {},
 					}}
 				>
 					<Story />
@@ -110,22 +102,14 @@ export const FullRoom: Story = {
 						castVote: () => {},
 						connectionStatus: 'connected',
 						error: null,
-						iceState: null,
-						initGuest: () => {},
-						initHost: () => {},
+						isHost: false,
 						leaveRoom: () => {},
-						localUserId: '2',
-						pauseTimer: () => {},
-						resetBoard: () => {},
-						resetTimer: () => {},
-						revealVotes: () => {},
 						roomState: {
 							...MOCK_ROOM_STATE,
 							timer: null,
 							users: fullUsers,
 						},
-						setTimer: () => {},
-						startTimer: () => {},
+						sendAction: () => {},
 					}}
 				>
 					<Story />
@@ -154,22 +138,14 @@ export const JustHost: Story = {
 						castVote: () => {},
 						connectionStatus: 'connected',
 						error: null,
-						iceState: null,
-						initGuest: () => {},
-						initHost: () => {},
+						isHost: true,
 						leaveRoom: () => {},
-						localUserId: '1',
-						pauseTimer: () => {},
-						resetBoard: () => {},
-						resetTimer: () => {},
-						revealVotes: () => {},
 						roomState: {
 							...MOCK_ROOM_STATE,
 							timer: null,
 							users: hostUser,
 						},
-						setTimer: () => {},
-						startTimer: () => {},
+						sendAction: () => {},
 					}}
 				>
 					<Story />

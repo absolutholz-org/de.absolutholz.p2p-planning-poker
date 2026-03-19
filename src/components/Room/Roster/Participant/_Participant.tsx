@@ -15,7 +15,7 @@ export function Participant({
 	youText,
 }: IParticipant) {
 	return (
-		<S.Participant>
+		<S.Participant style={{ opacity: isConnected ? 1 : 0.5 }}>
 			<div>
 				<>
 					{isHost && (
