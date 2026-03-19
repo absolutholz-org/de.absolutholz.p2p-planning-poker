@@ -73,17 +73,12 @@ export function useHostSession(
 		console.log(
 			'[WebRTC] ICE Config initialized. TURN:',
 			!!import.meta.env.VITE_METERED_USERNAME,
-			'Servers:',
-			iceServers.map((s) => ({
-				...s,
-				credential: s.credential ? 'REDACTED' : undefined,
-			})),
 		);
 
 		const peer = new Peer(roomId, {
 			config: {
 				iceServers,
-				iceTransportPolicy: 'relay',
+				iceTransportPolicy: 'all',
 			},
 			debug: 3,
 		});
