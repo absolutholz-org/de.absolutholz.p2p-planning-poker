@@ -38,4 +38,5 @@ export type PeerMessage =
 	| { payload: { duration: number }; type: 'TIMER_SET' }
 	| { payload: undefined; type: 'TIMER_START' }
 	| { payload: undefined; type: 'TIMER_PAUSE' }
-	| { payload: undefined; type: 'TIMER_RESET' };
+	| { payload: undefined; type: 'TIMER_RESET' }
+	| { payload: { name: string }; type: 'CHANGE_NAME' };

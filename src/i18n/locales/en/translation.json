@@ -62,6 +62,15 @@
         "message": "Are you sure you want to clear all current votes? This action will apply to all connected peers and cannot be undone.",
         "confirm": "Reset Votes"
       },
+      "rename_dialog": {
+        "title": "Change Name",
+        "label": "New Name",
+        "confirm": "Update Name",
+        "aria": {
+          "open": "Open rename dialog",
+          "input": "Enter your new display name"
+        }
+      },
       "share": {
         "button": "Share",
         "native": "Share via...",

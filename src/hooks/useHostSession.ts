@@ -194,6 +194,13 @@ export function useHostSession(
 								};
 							}
 							break;
+						case 'CHANGE_NAME':
+							newState.users = newState.users.map((u) =>
+								u.id === conn.peer
+									? { ...u, name: msg.payload.name }
+									: u,
+							);
+							break;
 						case 'TIMER_RESET':
 							if (newState.timer) {
 								newState.timer = {

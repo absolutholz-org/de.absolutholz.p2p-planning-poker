@@ -62,6 +62,15 @@
         "message": "Bist du dir sicher, dass du alle aktuellen Votes löschen möchtest? Diese Aktion gilt für alle verbundenen Teilnehmer und kann nicht rückgängig gemacht werden.",
         "confirm": "Votes zurücksetzen"
       },
+      "rename_dialog": {
+        "title": "Name ändern",
+        "label": "Neuer Name",
+        "confirm": "Name aktualisieren",
+        "aria": {
+          "open": "Namensänderungs-Dialog öffnen",
+          "input": "Gib deinen neuen Anzeigenamen ein"
+        }
+      },
       "share": {
         "button": "Teilen",
         "native": "Teilen über...",

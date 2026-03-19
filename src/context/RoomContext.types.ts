@@ -10,6 +10,8 @@ export interface RoomContextValue {
 	isHost: boolean;
 	castVote: (vote: VoteValue) => void;
 	sendAction: (message: PeerMessage) => void;
+	updateName: (name: string) => void;
+	userName: string;
 }
 
 export interface RoomProviderProps {

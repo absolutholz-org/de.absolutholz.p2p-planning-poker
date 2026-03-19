@@ -132,8 +132,25 @@ export function RoomProvider({
 					guest.sendMessage(message);
 				}
 			},
+			updateName: (newName: string) => {
+				localStorage.setItem('userName', newName);
+				if (role === 'host') {
+					host.updateState((prev) => ({
+						...prev,
+						users: prev.users.map((u) =>
+							u.isHost ? { ...u, name: newName } : u,
+						),
+					}));
+				} else {
+					guest.sendMessage({
+						payload: { name: newName },
+						type: 'CHANGE_NAME',
+					});
+				}
+			},
+			userName: name,
 		}),
-		[activeSession, host, guest, navigate, role],
+		[activeSession, host, guest, navigate, role, name],
 	);
 
 	return (

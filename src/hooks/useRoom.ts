@@ -14,6 +14,8 @@ export function useRoom() {
 			leaveRoom: () => {},
 			roomState: null,
 			sendAction: () => {},
+			updateName: () => {},
+			userName: '',
 		} as RoomContextValue;
 	}
 	return context;
