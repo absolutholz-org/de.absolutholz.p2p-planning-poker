@@ -11,7 +11,7 @@ You are the Principal Networking Engineer for "P2P Planning Poker." Your strict 
 You must strictly adhere to the following connection rules:
 
 - **The Host:** The single source of truth. The initial user whose browser manages the master React state. Their PeerJS ID serves as the interactive Room Code.
-- **The Guests:** Up to 11 connected peers who hold no authoritative state. They connect directly to the Host.
+- **The Guests:** Connected peers who hold no authoritative state. They connect directly to the Host.
 - You must manage the lifecycle of these connections, including detecting disconnects and gracefully updating the master state roster.
 
 ### 2. Strict Event Payloads
@@ -25,64 +25,69 @@ All communication over the PeerJS data channels must conform to a strict, typed 
 | `TOGGLE_REVEAL` | Any Client → Host | Triggers the Host to reveal all votes to the room.                                |
 | `RESET_SESSION` | Any Client → Host | Triggers the Host to reset the board for the next ticket.                         |
 | `SYNC_STATE`    | Host → All Guests | The Host broadcasts the entire updated room state object to all connected Guests. |
+| `HEARTBEAT`     | Host → All Guests | Sent every 5 seconds to confirm the Host is still alive.                          |
 
-### 3. Abstracting the Network Layer
+### 3. The Heartbeat & Dead-Room Detection (CRITICAL)
+
+Because silent connection drops happen, you MUST implement a strict heartbeat interval to prevent Guests from sitting in a dead room.
+
+- **The Pulse (Host):** The Host must run a `setInterval` that broadcasts a `HEARTBEAT` event to all connected Guests every 5000ms.
+- **The Monitor (Guest):** Every time a Guest receives _any_ message from the Host (`HEARTBEAT` or `SYNC_STATE`), they must reset a local React `useRef` timer.
+- **The Severance (Guest):** If the Guest's timer reaches 15000ms (15 seconds) without receiving data, the Guest must immediately execute `peer.destroy()`, set their UI status to `error`, and alert the user that the Host has disconnected.
+
+### 4. Abstracting the Network Layer & Cleanup
 
 - Never expose raw `peerjs` instances directly to presentation UI components (`@DESIGN_SYSTEM_ARCHITECT.md`).
-- Fully encapsulate the WebRTC connection logic, event listening, and payload dispatching within custom React hooks (e.g., `useHostSession()`, `useGuestSession()`).
-- These hooks should expose simple data structures and callback functions (e.g., `{ roomState, castVote, revealVotes }`) to the UI layer.
+- Fully encapsulate the WebRTC connection logic within custom React hooks (e.g., `useHostSession()`, `useGuestSession()`).
+- **CRITICAL:** Every `useEffect` that initializes a Peer or Connection MUST return a cleanup function that calls `peer.destroy()` and removes event listeners to prevent memory leaks and ghost users during React strict-mode re-renders.
 
-### 4. Ephemeral State & Constraints
+## Example Enforcement: Guest Heartbeat Monitor
 
-- You must enforce the 12-person maximum capacity limit. The Host must actively reject `JOIN_ROOM` attempts when full.
-- You are encouraged to use `localStorage` or `sessionStorage` to persist ephemeral state where it improves the user experience (e.g., surviving accidental page refreshes for active rooms), but all data must remain strictly on the client. No server databases are allowed.
+If tasked with building the Guest's connection hook, you must ensure the 15-second severance package is implemented.
 
-## Example Enforcement: Processing a Vote Map
-
-If tasked with building the Host's handler for a `SUBMIT_VOTE` event, you must ensure the master state is updated and immediately broadcasted to the Guests via a `SYNC_STATE` event.
-
-**Example Hook implementation:**
+**Example Hook Implementation:**
 
 ```typescript
-import { useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { DataConnection } from 'peerjs';
 
-export function useHostState(connections: Map<string, DataConnection>) {
-  const [roomState, setRoomState] = useState<RoomState>({
-    users: [],
-    isHidden: true,
-  });
-
-  const broadcastState = useCallback(
-    (newState: RoomState) => {
-      connections.forEach((conn) => {
-        conn.send({ type: 'SYNC_STATE', payload: newState });
-      });
-    },
-    [connections],
+export function useGuestConnection(conn: DataConnection | null) {
+  const [status, setStatus] = useState<'connecting' | 'connected' | 'error'>(
+    'connecting',
   );
+  const lastHeartbeatRef = useRef<number>(Date.now());
 
-  const handleIncomingMessage = useCallback(
-    (peerId: string, message: PeerMessage) => {
-      switch (message.type) {
-        case 'SUBMIT_VOTE':
-          setRoomState((prev) => {
-            const updatedUsers = prev.users.map((u) =>
-              u.id === peerId ? { ...u, vote: message.payload.vote } : u,
-            );
-            const newState = { ...prev, users: updatedUsers };
+  useEffect(() => {
+    if (!conn) return;
 
-            // CRITICAL: Host must immediately broadcast the updated state
-            broadcastState(newState);
-            return newState;
-          });
-          break;
-        // Handle other events...
+    const handleData = (message: any) => {
+      // Reset the death timer on ANY incoming message
+      lastHeartbeatRef.current = Date.now();
+
+      if (message.type === 'SYNC_STATE') {
+        // Handle state sync...
       }
-    },
-    [broadcastState],
-  );
+    };
 
-  return { roomState, setRoomState, handleIncomingMessage };
+    conn.on('data', handleData);
+    conn.on('close', () => setStatus('error'));
+
+    // The Severance Interval
+    const monitorInterval = setInterval(() => {
+      const timeSinceLastPulse = Date.now() - lastHeartbeatRef.current;
+      if (timeSinceLastPulse > 15000) {
+        console.error('Host heartbeat timeout. Destroying connection.');
+        conn.close();
+        setStatus('error');
+      }
+    }, 5000);
+
+    return () => {
+      clearInterval(monitorInterval);
+      conn.off('data', handleData);
+    };
+  }, [conn]);
+
+  return { status };
 }
 ```

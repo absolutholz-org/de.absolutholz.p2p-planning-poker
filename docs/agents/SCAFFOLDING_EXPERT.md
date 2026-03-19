@@ -22,12 +22,20 @@ src/components/
     └── index.ts
 ```
 
-> [!IMPORTANT]
-> Avoid creating redundant sub-folders (e.g., `ComponentName/ComponentNameSpecific/`) if a component is the only variant. Favor flattening the structure into a single unified component (e.g., `Participant` instead of `Participant/ParticipantConnected`) unless multiple distinct implementations are required.
+> **IMPORTANT:** Avoid creating redundant sub-folders (e.g., `ComponentName/ComponentNameSpecific/`) if a component is the only variant. Favor flattening the structure into a single unified component (e.g., `Participant` instead of `Participant/ParticipantConnected`) unless multiple distinct implementations are required.
 
-## File Content Guidelines & Agent Handoffs
+## Core Directives & Agent Handoffs
 
-### 1. `_[ComponentName].types.ts` (TypeScript Types)
+### 1. SPA Routing & Deep Linking (CRITICAL)
+
+Because this app uses a strictly ephemeral, serverless architecture, **the URL is the single source of truth for room identity**.
+
+- When scaffolding page-level views or components that require room context, you MUST utilize `react-router-dom`.
+- Use the `useParams()` hook to extract the `:roomId` from the URL (e.g., `/room/XYZ`).
+- Use the `useNavigate()` hook for programmatic navigation (e.g., returning a user to the Lobby if a connection times out).
+- **NEVER** use `window.location` or attempt to read/write room IDs to `sessionStorage`.
+
+### 2. `_[ComponentName].types.ts` (TypeScript Types)
 
 - Define and export a single interface exactly named `I[ComponentName]` (never `[ComponentName]Props`).
 - This interface should contain all the props for the component.
@@ -35,7 +43,7 @@ src/components/
 - Clearly distinguish between required and optional props.
 - Always use explicit imports for React properties and types (e.g., `import { RefObject, ReactNode } from 'react'` instead of `React.RefObject`).
 
-### 2. `_[ComponentName].styles.ts` (Styled Components & Theming)
+### 3. `_[ComponentName].styles.ts` (Styled Components & Theming)
 
 - **AGENT HANDOFF:** You MUST follow the CSS custom property, mobile-first, and touch-target rules defined by `@DESIGN_SYSTEM_ARCHITECT.md`.
 - Use `@emotion/styled` strictly as a structural scoping mechanism.
@@ -60,24 +68,25 @@ export const Label = styled.span`
 `;
 ```
 
-### 3. `_[ComponentName].tsx` (The Component)
+### 4. `_[ComponentName].tsx` (The Component)
 
 This is the main component file (function component).
 
 - Import types from `./_[ComponentName].types` and styled components from `./_[ComponentName].styles` (using `import * as S from '...'`).
-
 - **AGENT HANDOFF (A11Y):** You MUST implement all ARIA attributes, keyboard navigation, and focus management according to `@A11Y_UX_ADVOCATE.md`.
 - **AGENT HANDOFF (DATA):** If WebRTC or peer data is needed, use custom hooks compliant with `@PEERJS_EXPERT.md`, such as `useRoom()` from `src/context/RoomContext.tsx`.
 
-**Example Scaffold:**
+**Example Scaffold (Route-Aware):**
 
 ```typescript
 import { useId } from "react";
+import { useParams } from "react-router-dom";
 import * as S from "./_[ComponentName].styles";
 import type { IMyComponent } from "./_[ComponentName].types";
 
 export function MyComponent({ label, disabled = false, onClick }: IMyComponent) {
 	const id = useId();
+    const { roomId } = useParams<{ roomId: string }>(); // URL is the source of truth
 
 	return (
 		<S.Container
@@ -88,13 +97,13 @@ export function MyComponent({ label, disabled = false, onClick }: IMyComponent) 
 			role="button"
 			tabIndex={disabled ? -1 : 0}
 		>
-			<S.Label>{label}</S.Label>
+			<S.Label>{label} - Room: {roomId}</S.Label>
 		</S.Container>
 	);
 }
 ```
 
-### 4. `index.ts` (Barrel File)
+### 5. `index.ts` (Barrel File)
 
 Create a single `index.ts` file to export the component for cleaner imports.
 
@@ -104,7 +113,7 @@ Create a single `index.ts` file to export the component for cleaner imports.
 export { MyComponent } from './_[ComponentName]';
 ```
 
-### 5. `_[ComponentName].stories.tsx` (Storybook Stories)
+### 6. `_[ComponentName].stories.tsx` (Storybook Stories)
 
 - **AGENT HANDOFF (STORYBOOK):** Follow the CSF 3.0 conventions outlined by `@STORYBOOK_EXPERT.md`.
 - Import `Meta` and `StoryObj` from `@storybook/react-vite`.

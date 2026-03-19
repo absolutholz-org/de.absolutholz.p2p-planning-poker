@@ -1,0 +1,36 @@
+# Global Project Directives: P2P Planning Poker
+
+These rules serve as the absolute baseline for all agents operating in this workspace. You must cross-reference these rules before generating code, proposing architecture, or executing commands.
+
+## 1. Absolute Architectural Boundaries
+
+- **Strictly Serverless:** This application relies entirely on WebRTC (`peerjs`) for peer-to-peer communication.
+- **NO Backend:** You must NEVER suggest, import, or write code for a database (SQL/NoSQL), REST API, Node.js backend, or Server-Side Rendering (SSR) framework (e.g., Next.js).
+- **Ephemeral State:** All room data exists only in memory and dies with the browser session.
+
+## 2. Routing & State Single Source of Truth
+
+- **The URL Path:** The URL (`/room/:roomId`) is the absolute single source of truth for identifying an active session.
+- **Routing:** `react-router-dom` is the strictly enforced library for extracting or manipulating the room ID.
+- **BANNED Storage:** You must NEVER write room state, WebRTC connection objects, or Host/Guest identities to `sessionStorage` or `localStorage`.
+
+## 3. UI & Styling Constraints
+
+- **BANNED Methods:** Tailwind CSS, SCSS, generic CSS modules, and inline `style={{}}` attributes are strictly forbidden.
+- **REQUIRED Methods:** You must exclusively use Emotion (`@emotion/react`, `@emotion/styled`) for component styling.
+- **Design Tokens:** All colors, spacing, and typography must reference CSS Custom Properties defined in the global stylesheet (e.g., `var(--sys-color-primary)`). Do not invent or hardcode hex codes in React components.
+
+## 4. Environment & Tooling
+
+- **Package Manager:** Strictly use `pnpm`. Never suggest or execute `npm` or `yarn` commands.
+- **Build Tool:** The project is built on Vite. All environment variables must be prefixed with `VITE_` and accessed via `import.meta.env`. Standard `process.env` will crash the application.
+
+## 5. CRITICAL: Git & Terminal Execution Guardrail
+
+- **NO AUTONOMOUS COMMITS:** You have ZERO authority to execute `git commit`, `git push`, or `git add` in the terminal autonomously.
+- **Protocol:** If a commit is required, you must output the proposed executable terminal sequence in a markdown code block (e.g., `pnpm run format && pnpm run lint && git add . && git commit -m "..."`) and wait for the user to explicitly approve it.
+
+## 6. Documentation & Localization Baseline
+
+- **No Hardcoded Strings:** User-facing text must use `react-i18next` translation keys.
+- **Living Docs:** UI components must always have a corresponding `.stories.tsx` file updated in tandem with code changes.
