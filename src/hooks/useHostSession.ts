@@ -48,7 +48,25 @@ export function useHostSession(
 	useEffect(() => {
 		if (!enabled) return;
 
-		const peer = new Peer();
+		const iceServers = [
+			{
+				urls:
+					import.meta.env.VITE_METERED_PROJECT_URL ||
+					'stun:stun.relay.metered.ca:80',
+			},
+			{
+				credential: import.meta.env.VITE_METERED_CREDENTIAL,
+				urls: [
+					import.meta.env.VITE_METERED_TURN_URL ||
+						'turn:standard.relay.metered.ca:80?transport=tcp',
+					import.meta.env.VITE_METERED_TURN_URL_TLS ||
+						'turns:standard.relay.metered.ca:443?transport=tcp',
+				],
+				username: import.meta.env.VITE_METERED_USERNAME,
+			},
+		];
+
+		const peer = new Peer({ config: { iceServers }, debug: 3 });
 		peerRef.current = peer;
 
 		setTimeout(() => setConnectionStatus('connecting'), 0);
@@ -253,7 +271,7 @@ export function useHostSession(
 		}, 5000);
 
 		return () => clearInterval(interval);
-	}, []);
+	}, [enabled]);
 
 	return { connectionStatus, error, roomState, updateState };
 }
