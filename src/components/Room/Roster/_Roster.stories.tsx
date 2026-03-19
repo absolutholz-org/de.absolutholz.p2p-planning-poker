@@ -59,6 +59,8 @@ const meta = {
 							users: MOCK_USERS,
 						},
 						sendAction: () => {},
+						updateName: () => {},
+						userName: 'Alice',
 					}}
 				>
 					<Story />
@@ -110,6 +112,8 @@ export const FullRoom: Story = {
 							users: fullUsers,
 						},
 						sendAction: () => {},
+						updateName: () => {},
+						userName: 'Player 1',
 					}}
 				>
 					<Story />
@@ -146,6 +150,8 @@ export const JustHost: Story = {
 							users: hostUser,
 						},
 						sendAction: () => {},
+						updateName: () => {},
+						userName: 'Alice (Host)',
 					}}
 				>
 					<Story />

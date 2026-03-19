@@ -20,6 +20,8 @@ const meta = {
 						leaveRoom: () => {},
 						roomState: null,
 						sendAction: () => {},
+						updateName: () => {},
+						userName: '',
 					}}
 				>
 					<Story />

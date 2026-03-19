@@ -35,6 +35,8 @@ const meta = {
 							users: MOCK_ROOM_STATE.users,
 						},
 						sendAction: () => {},
+						updateName: () => {},
+						userName: 'Alice',
 					}}
 				>
 					<Story />
