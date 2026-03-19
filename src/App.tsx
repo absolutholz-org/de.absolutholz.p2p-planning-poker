@@ -28,7 +28,8 @@ const emotionCache = createCache({
 function RoomGuard() {
 	const { roomId } = useParams();
 	const userName = localStorage.getItem('userName');
-	const role = (sessionStorage.getItem('role') as 'host' | 'guest') || 'guest';
+	const role =
+		(sessionStorage.getItem('role') as 'host' | 'guest') || 'guest';
 
 	if (!userName) {
 		return <Lobby />;
