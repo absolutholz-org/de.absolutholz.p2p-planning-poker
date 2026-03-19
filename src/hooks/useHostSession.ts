@@ -14,6 +14,7 @@ export interface UseHostSessionReturn {
 
 export function useHostSession(
 	name: string,
+	roomId: string,
 	enabled: boolean = true,
 ): UseHostSessionReturn {
 	const [roomState, setRoomState] = useState<RoomState | null>(null);
@@ -46,7 +47,7 @@ export function useHostSession(
 	);
 
 	useEffect(() => {
-		if (!enabled) return;
+		if (!enabled || !roomId) return;
 
 		const iceServers = [
 			{
@@ -66,7 +67,7 @@ export function useHostSession(
 			},
 		];
 
-		const peer = new Peer({ config: { iceServers }, debug: 3 });
+		const peer = new Peer(roomId, { config: { iceServers }, debug: 3 });
 		peerRef.current = peer;
 
 		setTimeout(() => setConnectionStatus('connecting'), 0);
@@ -247,9 +248,13 @@ export function useHostSession(
 			});
 		});
 
-		peer.on('error', (err: Error) => {
+		peer.on('error', (err: Error & { type?: string }) => {
 			console.error('[Host] Peer interaction error:', err);
-			setError(err.message);
+			if (err.type === 'unavailable-id') {
+				setError('Room already has an active host.');
+			} else {
+				setError(err.message);
+			}
 			setConnectionStatus('error');
 		});
 
@@ -257,7 +262,7 @@ export function useHostSession(
 			console.log('[Host] Destroying peer instance on unmount');
 			peer.destroy();
 		};
-	}, [name, enabled]);
+	}, [name, enabled, roomId]);
 
 	useEffect(() => {
 		if (!enabled) return;

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
 import { useRoom } from '../../../hooks/useRoom';
 import { Button } from '../../Shared/Button';
@@ -11,6 +12,7 @@ import * as S from './_RoomHeader.styles';
 export function RoomHeader() {
 	const { t } = useTranslation();
 	const { isHost, roomState, sendAction } = useRoom();
+	const { roomId } = useParams<{ roomId?: string }>();
 	const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
 	const [isShareOpen, setIsShareOpen] = useState(false);
 
@@ -60,7 +62,9 @@ export function RoomHeader() {
 									aria-label={t('room.header.aria.reveal')}
 									disabled={roomState.isRevealed}
 									icon="visibility"
-									style={{ color: 'var(--sys-color-primary-text)', }}
+									style={{
+										color: 'var(--sys-color-primary-text)',
+									}}
 								>
 									{t('common.actions.reveal')}
 								</Button>
@@ -73,7 +77,7 @@ export function RoomHeader() {
 			<ShareDialog
 				isOpen={isShareOpen}
 				onClose={() => setIsShareOpen(false)}
-				roomId={roomState.roomId}
+				roomId={roomId || roomState.roomId}
 			/>
 
 			<Dialog

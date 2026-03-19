@@ -15,7 +15,11 @@ export function RoomProvider({
 }: RoomProviderProps) {
 	// Initialize both hooks, but the hooks handle their own internal "idle" state
 	// based on whether the roomId/name provided is valid/empty.
-	const host = useHostSession(role === 'host' ? name : '', role === 'host');
+	const host = useHostSession(
+		role === 'host' ? name : '',
+		roomId,
+		role === 'host',
+	);
 	const guest = useGuestSession(
 		role === 'guest' ? roomId : '',
 		role === 'guest' ? name : '',
