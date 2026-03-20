@@ -4,6 +4,7 @@ import { type BannerVariant, type IBanner } from './Banner.types';
 
 export function Banner({ action, message, variant = 'info' }: IBanner) {
 	const iconMap: Record<BannerVariant, string> = {
+		danger: 'report',
 		info: 'info',
 		success: 'check_circle',
 		warning: 'warning',

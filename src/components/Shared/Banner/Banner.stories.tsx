@@ -37,3 +37,10 @@ export const Warning: Story = {
 		variant: 'warning',
 	},
 };
+
+export const Danger: Story = {
+	args: {
+		message: 'Connection failed. Please try again later.',
+		variant: 'danger',
+	},
+};
