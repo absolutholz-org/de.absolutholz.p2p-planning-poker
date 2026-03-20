@@ -1,8 +1,6 @@
 import styled from '@emotion/styled';
 
-import { type BannerVariant } from './Banner.types';
-
-export const BannerContainer = styled.div<{ variant: BannerVariant }>`
+export const BannerContainer = styled.div`
 	align-items: center;
 	background-color: var(--sys-color-surface);
 	border: 1px solid var(--sys-color-border);
@@ -16,7 +14,7 @@ export const BannerContainer = styled.div<{ variant: BannerVariant }>`
 	width: 100%;
 
 	&::before {
-		background-color: var(--sys-color-${({ variant }) => variant});
+		background-color: var(--banner-accent-color);
 		bottom: 0;
 		content: '';
 		left: 0;
@@ -30,9 +28,9 @@ export const BannerContainer = styled.div<{ variant: BannerVariant }>`
 	}
 `;
 
-export const IconContainer = styled.div<{ variant: BannerVariant }>`
+export const IconContainer = styled.div`
 	align-items: center;
-	color: var(--sys-color-${({ variant }) => variant});
+	color: var(--banner-accent-color);
 	display: flex;
 	flex-shrink: 0;
 `;

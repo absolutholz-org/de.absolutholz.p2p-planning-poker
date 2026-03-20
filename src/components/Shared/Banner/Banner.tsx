@@ -13,12 +13,16 @@ export function Banner({ action, message, variant = 'info' }: IBanner) {
 
 	return (
 		<S.BannerContainer
-			variant={variant}
+			style={
+				{
+					'--banner-accent-color': `var(--sys-color-${variant})`,
+				} as React.CSSProperties
+			}
 			role="status"
 			aria-live="polite"
 			aria-atomic="true"
 		>
-			<S.IconContainer variant={variant}>
+			<S.IconContainer>
 				<Icon name={iconName} size="lg" aria-hidden="true" />
 			</S.IconContainer>
 			<S.Message>{message}</S.Message>
