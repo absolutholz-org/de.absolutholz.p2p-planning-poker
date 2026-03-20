@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import { useRoom } from '../../../hooks/useRoom';
+import { Banner } from '../../Shared/Banner';
 import { Button } from '../../Shared/Button';
 import { Dialog } from '../../Shared/Dialog';
 import { Input } from '../../Shared/Input';
@@ -20,6 +21,10 @@ export function RoomHeader() {
 	const [isShareOpen, setIsShareOpen] = useState(false);
 
 	if (!roomState) return null;
+
+	const allVoted =
+		roomState.users.length > 0 &&
+		roomState.users.every((u) => u.vote !== null);
 
 	const handleReset = () => {
 		sendAction({ payload: undefined, type: 'RESET_SESSION' });
@@ -80,27 +85,57 @@ export function RoomHeader() {
 									{t('common.actions.reset')}
 								</Button>
 
+								{(!allVoted || roomState.isRevealed) && (
+									<Button
+										variant="primary"
+										onClick={handleReveal}
+										aria-label={t(
+											'room.header.aria.reveal',
+										)}
+										disabled={
+											roomState.isRevealed ||
+											roomState.users.every(
+												(u) => u.vote === null,
+											)
+										}
+										icon="visibility"
+										style={{
+											color: 'var(--sys-color-primary-text)',
+										}}
+									>
+										{t('common.actions.reveal')}
+									</Button>
+								)}
+							</>
+						)}
+					</S.Actions>
+				</S.SubHeaderContainer>
+				{isHost && allVoted && !roomState.isRevealed && (
+					<div
+						style={{
+							marginTop: 'var(--sys-spacing-md)',
+						}}
+					>
+						<Banner
+							message={t('room.header.banner.everyone_ready')}
+							variant="success"
+							action={
 								<Button
 									variant="primary"
 									onClick={handleReveal}
 									aria-label={t('room.header.aria.reveal')}
-									disabled={
-										roomState.isRevealed ||
-										roomState.users.every(
-											(u) => u.vote === null,
-										)
-									}
 									icon="visibility"
+									size="sm"
 									style={{
 										color: 'var(--sys-color-primary-text)',
 									}}
 								>
 									{t('common.actions.reveal')}
 								</Button>
-							</>
-						)}
-					</S.Actions>
-				</S.SubHeaderContainer>
+							}
+						/>
+					</div>
+				)}
 			</PageContainer>
 
 			<ShareDialog

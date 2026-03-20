@@ -46,7 +46,12 @@ const meta = {
 										...u,
 										vote: null,
 									}))
-								: MOCK_ROOM_STATE.users,
+								: context.args.mockAllVoted
+									? MOCK_ROOM_STATE.users.map((u) => ({
+											...u,
+											vote: '1' as const,
+										}))
+									: MOCK_ROOM_STATE.users,
 						},
 						sendAction: () => {},
 						updateName: () => {},
@@ -67,6 +72,7 @@ const meta = {
 	ComponentProps<typeof RoomHeader> & {
 		mockNoVotes?: boolean;
 		mockRevealed?: boolean;
+		mockAllVoted?: boolean;
 	}
 >;
 
@@ -85,5 +91,11 @@ export const Revealed: Story = {
 export const NoVotes: Story = {
 	args: {
 		mockNoVotes: true,
+	},
+};
+
+export const AllVoted: Story = {
+	args: {
+		mockAllVoted: true,
 	},
 };

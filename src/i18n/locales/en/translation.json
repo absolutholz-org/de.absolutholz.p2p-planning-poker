@@ -101,6 +101,9 @@
           "resume": "Resume the timer",
           "reset": "Reset the timer to initial duration"
         }
+      },
+      "banner": {
+        "everyone_ready": "Everyone is ready!"
       }
     },
     "deck": {
