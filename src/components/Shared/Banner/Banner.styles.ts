@@ -16,10 +16,7 @@ export const BannerContainer = styled.div<{ variant: BannerVariant }>`
 	width: 100%;
 
 	&::before {
-		background-color: ${({ variant }) =>
-			variant === 'success'
-				? 'var(--sys-color-success)'
-				: 'var(--sys-color-primary)'};
+		background-color: var(--sys-color-${({ variant }) => variant});
 		bottom: 0;
 		content: '';
 		left: 0;
@@ -27,14 +24,15 @@ export const BannerContainer = styled.div<{ variant: BannerVariant }>`
 		top: 0;
 		width: 4px;
 	}
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+	}
 `;
 
 export const IconContainer = styled.div<{ variant: BannerVariant }>`
 	align-items: center;
-	color: ${({ variant }) =>
-		variant === 'success'
-			? 'var(--sys-color-success)'
-			: 'var(--sys-color-primary)'};
+	color: var(--sys-color-${({ variant }) => variant});
 	display: flex;
 	flex-shrink: 0;
 `;

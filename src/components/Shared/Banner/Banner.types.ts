@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-export type BannerVariant = 'success' | 'info';
+export type BannerVariant = 'success' | 'info' | 'warning';
 
 export interface IBanner {
 	/**

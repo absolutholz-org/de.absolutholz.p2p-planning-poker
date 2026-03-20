@@ -1,14 +1,24 @@
 import { Icon } from '../../Shared/Icon';
 import * as S from './Banner.styles';
-import { type IBanner } from './Banner.types';
+import { type BannerVariant, type IBanner } from './Banner.types';
 
 export function Banner({ action, message, variant = 'info' }: IBanner) {
-	const iconName = variant === 'success' ? 'check_circle' : 'info';
+	const iconMap: Record<BannerVariant, string> = {
+		info: 'info',
+		success: 'check_circle',
+		warning: 'warning',
+	};
+	const iconName = iconMap[variant];
 
 	return (
-		<S.BannerContainer variant={variant}>
+		<S.BannerContainer
+			variant={variant}
+			role="status"
+			aria-live="polite"
+			aria-atomic="true"
+		>
 			<S.IconContainer variant={variant}>
-				<Icon name={iconName} size="lg" />
+				<Icon name={iconName} size="lg" aria-hidden="true" />
 			</S.IconContainer>
 			<S.Message>{message}</S.Message>
 			{action && <S.ActionContainer>{action}</S.ActionContainer>}

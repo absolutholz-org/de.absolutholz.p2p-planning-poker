@@ -4,17 +4,13 @@ import { Button } from '../Button';
 import { Banner } from './Banner';
 
 const meta: Meta<typeof Banner> = {
-	args: {
-		message: 'Everyone is ready!',
-		variant: 'success',
-	},
 	component: Banner,
 	tags: ['autodocs'],
-	title: 'Shared/Banner',
+	title: 'PRIMITIVES/Display/Banner',
 };
 
 export default meta;
-type Story = StoryObj<typeof Banner>;
+type Story = StoryObj<typeof meta>;
 
 export const Success: Story = {
 	args: {
@@ -32,5 +28,12 @@ export const Info: Story = {
 	args: {
 		message: 'Waiting for others to vote...',
 		variant: 'info',
+	},
+};
+
+export const Warning: Story = {
+	args: {
+		message: 'Connection lost. Trying to reconnect...',
+		variant: 'warning',
 	},
 };
