@@ -12,6 +12,7 @@ export function useRoom() {
 			error: null,
 			isHost: false,
 			leaveRoom: () => {},
+			myPeerId: null,
 			roomState: null,
 			sendAction: () => {},
 			updateName: () => {},

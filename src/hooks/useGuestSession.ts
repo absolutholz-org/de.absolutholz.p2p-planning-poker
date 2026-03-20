@@ -1,5 +1,5 @@
 import { type DataConnection, Peer } from 'peerjs';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import type { PeerMessage, RoomState } from '../types/domain';
 
@@ -8,6 +8,7 @@ export type ConnectionStatus = 'idle' | 'connecting' | 'connected' | 'error';
 export interface UseGuestSessionReturn {
 	connectionStatus: ConnectionStatus;
 	error: string | null;
+	myPeerId: string | null;
 	roomState: RoomState | null;
 	sendMessage: (message: PeerMessage) => void;
 }
@@ -31,6 +32,20 @@ export function useGuestSession(
 			connRef.current.send(message);
 		}
 	}, []);
+
+	const getOrCreatePersistentId = useCallback(() => {
+		const key = 'p2p-poker-persistent-peer-id';
+		const existing = localStorage.getItem(key);
+		if (existing) return existing;
+		const newId = crypto.randomUUID();
+		localStorage.setItem(key, newId);
+		return newId;
+	}, []);
+
+	const persistentId = useMemo(
+		() => getOrCreatePersistentId(),
+		[getOrCreatePersistentId],
+	);
 
 	const resetSeveranceTimer = () => {
 		if (severanceTimerRef.current) {
@@ -76,17 +91,6 @@ export function useGuestSession(
 			'[WebRTC] ICE Config initialized. TURN:',
 			!!import.meta.env.VITE_METERED_USERNAME,
 		);
-
-		const getOrCreatePersistentId = () => {
-			const key = 'p2p-poker-persistent-peer-id';
-			const existing = localStorage.getItem(key);
-			if (existing) return existing;
-			const newId = crypto.randomUUID();
-			localStorage.setItem(key, newId);
-			return newId;
-		};
-
-		const persistentId = getOrCreatePersistentId();
 
 		const peer = new Peer(persistentId, {
 			config: {
@@ -175,7 +179,13 @@ export function useGuestSession(
 				clearTimeout(severanceTimerRef.current);
 			peer.destroy();
 		};
-	}, [roomId, name, enabled]);
+	}, [roomId, name, enabled, persistentId]);
 
-	return { connectionStatus, error, roomState, sendMessage };
+	return {
+		connectionStatus,
+		error,
+		myPeerId: persistentId,
+		roomState,
+		sendMessage,
+	};
 }

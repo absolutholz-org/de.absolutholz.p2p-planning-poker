@@ -3,12 +3,13 @@ import type { ReactNode } from 'react';
 import type { PeerMessage, RoomState, VoteValue } from '../types/domain';
 
 export interface RoomContextValue {
+	castVote: (vote: VoteValue) => void;
 	connectionStatus: 'idle' | 'connecting' | 'connected' | 'error';
 	error: string | null;
-	roomState: RoomState | null;
-	leaveRoom: () => void;
 	isHost: boolean;
-	castVote: (vote: VoteValue) => void;
+	leaveRoom: () => void;
+	myPeerId: string | null;
+	roomState: RoomState | null;
 	sendAction: (message: PeerMessage) => void;
 	updateName: (name: string) => void;
 	userName: string;

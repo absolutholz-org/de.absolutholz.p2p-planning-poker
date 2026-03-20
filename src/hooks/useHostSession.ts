@@ -8,6 +8,7 @@ export type ConnectionStatus = 'idle' | 'connecting' | 'connected' | 'error';
 export interface UseHostSessionReturn {
 	connectionStatus: ConnectionStatus;
 	error: string | null;
+	myPeerId: string | null;
 	roomState: RoomState | null;
 	updateState: (updater: (prev: RoomState) => RoomState) => void;
 }
@@ -306,5 +307,11 @@ export function useHostSession(
 		return () => clearInterval(interval);
 	}, [enabled]);
 
-	return { connectionStatus, error, roomState, updateState };
+	return {
+		connectionStatus,
+		error,
+		myPeerId: roomId,
+		roomState,
+		updateState,
+	};
 }

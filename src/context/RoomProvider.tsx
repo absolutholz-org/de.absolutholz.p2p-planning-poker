@@ -58,6 +58,7 @@ export function RoomProvider({
 				navigate('/');
 			},
 
+			myPeerId: activeSession.myPeerId,
 			roomState: activeSession.roomState,
 			sendAction: (message: PeerMessage) => {
 				if (role === 'host') {

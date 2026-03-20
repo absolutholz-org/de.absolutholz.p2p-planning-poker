@@ -52,6 +52,7 @@ const meta = {
 						error: null,
 						isHost: false,
 						leaveRoom: () => {},
+						myPeerId: '1',
 						roomState: {
 							isRevealed: !!context.args.mockRevealed,
 							roomId: '1234-abcd',
@@ -106,6 +107,7 @@ export const FullRoom: Story = {
 						error: null,
 						isHost: false,
 						leaveRoom: () => {},
+						myPeerId: '1',
 						roomState: {
 							...MOCK_ROOM_STATE,
 							timer: null,
@@ -144,6 +146,7 @@ export const JustHost: Story = {
 						error: null,
 						isHost: true,
 						leaveRoom: () => {},
+						myPeerId: '1',
 						roomState: {
 							...MOCK_ROOM_STATE,
 							timer: null,

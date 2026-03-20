@@ -36,6 +36,7 @@ const meta = {
 						error: null,
 						isHost: true,
 						leaveRoom: () => {},
+						myPeerId: '1',
 						roomState: {
 							isRevealed: !!context.args.mockRevealed,
 							roomId: 'room-123',

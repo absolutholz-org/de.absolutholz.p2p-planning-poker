@@ -18,6 +18,7 @@ const meta = {
 						error: context.args.error || null,
 						isHost: false,
 						leaveRoom: () => {},
+						myPeerId: 'guest-1',
 						roomState: null,
 						sendAction: () => {},
 						updateName: () => {},
