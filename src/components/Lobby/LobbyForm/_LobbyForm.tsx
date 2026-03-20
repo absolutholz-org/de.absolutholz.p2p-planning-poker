@@ -10,6 +10,49 @@ import { Input } from '../../Shared/Input';
 import { Stack } from '../../Shared/Stack';
 import * as S from './_LobbyForm.styles';
 
+/**
+ * Intelligently extracts a room code from a potentially full URL or path.
+ * If the input doesn't look like a URL, it's returned as-is (trimmed).
+ */
+function extractRoomCode(input: string): string {
+	const trimmed = input.trim();
+	if (!trimmed) return '';
+
+	// Remove potential trailing slash for consistent parsing
+	const cleanInput = trimmed.endsWith('/') ? trimmed.slice(0, -1) : trimmed;
+
+	// Pattern 1: Look for /room/ID (handles both full URLs and absolute/relative paths)
+	const roomMatch = cleanInput.match(/\/room\/([^/?#]+)/i);
+	if (roomMatch && roomMatch[1]) {
+		return roomMatch[1];
+	}
+
+	// Pattern 2: If it looks like a URL (has protocol or domain-like structure)
+	// but didn't match /room/, take the last path segment
+	if (
+		cleanInput.includes('://') ||
+		(cleanInput.includes('.') && cleanInput.includes('/'))
+	) {
+		try {
+			const url = new URL(
+				cleanInput.includes('://')
+					? cleanInput
+					: `https://${cleanInput}`,
+			);
+			const pathParts = url.pathname.split('/').filter(Boolean);
+			if (pathParts.length > 0) {
+				return pathParts[pathParts.length - 1];
+			}
+		} catch {
+			// Manual fallback if URL constructor fails
+			const simpleParts = cleanInput.split('/').filter(Boolean);
+			return simpleParts[simpleParts.length - 1] || cleanInput;
+		}
+	}
+
+	return cleanInput;
+}
+
 export function LobbyForm() {
 	const { t } = useTranslation();
 	const { connectionStatus, error } = useRoom(); // Replaced usePeer with useRoom per instructions
@@ -46,7 +89,7 @@ export function LobbyForm() {
 			navigate(`/room/${newId}`);
 		} else {
 			// For JOIN
-			const targetRoom = roomCode.trim();
+			const targetRoom = extractRoomCode(roomCode);
 			localStorage.setItem('userName', trimmedName);
 			sessionStorage.setItem('role', 'guest');
 			navigate(`/room/${targetRoom}`);
@@ -98,9 +141,17 @@ export function LobbyForm() {
 												'lobby.roomCode.placeholder',
 											)}
 											value={roomCode}
-											onChange={(e) =>
-												setRoomCode(e.target.value)
-											}
+											onChange={(e) => {
+												const val = e.target.value;
+												// If they paste a URL, clean it up immediately for better UX
+												if (val.includes('://')) {
+													setRoomCode(
+														extractRoomCode(val),
+													);
+												} else {
+													setRoomCode(val);
+												}
+											}}
 											autoFocus
 										/>
 									) : (
