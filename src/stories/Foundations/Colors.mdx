@@ -4,76 +4,92 @@ import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs/blocks';
 
 # Colors
 
-We use a modern **OKLCH** color system for better perceptual uniformity and accessibility. Colors are defined as CSS variables in `GlobalStyles.ts`.
+We use a modern **OKLCH** color system for better perceptual uniformity and accessibility. Colors are defined as CSS variables in `GlobalStyles.ts` and automatically update when switching between Light and Dark modes.
 
-## 🎨 System Palette
+## 🎨 Brand & Semantic
+Brand foundation and status indicators.
 
 <ColorPalette>
   <ColorItem
     title="Primary"
     subtitle="Main brand color"
     colors={{
-      Variable: 'var(--sys-color-primary)',
+      '--sys-color-primary': 'oklch(0.205 0 0)',
     }}
   />
+  <ColorItem
+    title="Success"
+    subtitle="Positive actions and status"
+    colors={{
+      '--sys-color-success': 'oklch(0.696 0.17 162.48)',
+    }}
+  />
+  <ColorItem
+    title="Warning"
+    subtitle="Cautionary alerts"
+    colors={{
+      '--sys-color-warning': 'oklch(0.76 0.177 75.32)',
+    }}
+  />
+  <ColorItem
+    title="Danger"
+    subtitle="Destructive actions or errors"
+    colors={{
+      '--sys-color-danger': 'oklch(0.637 0.237 25.33)',
+    }}
+  />
+  <ColorItem
+    title="Info"
+    subtitle="Informational messages"
+    colors={{
+      '--sys-color-info': 'oklch(0.61 0.145 250.93)',
+    }}
+  />
+</ColorPalette>
+
+## ☁️ Neutral & Surface
+Layout and background tokens.
+
+<ColorPalette>
   <ColorItem
     title="Background"
     subtitle="App background"
     colors={{
-      Variable: 'var(--sys-color-bg)',
+      '--sys-color-bg': 'oklch(0.984 0.003 247.858)',
     }}
   />
   <ColorItem
     title="Surface"
     subtitle="Cards and elevated layers"
     colors={{
-      Variable: 'var(--sys-color-surface)',
+      '--sys-color-surface': 'oklch(1 0 0)',
     }}
   />
   <ColorItem
     title="Border"
     subtitle="Dividers and outlines"
     colors={{
-      Variable: 'var(--sys-color-border)',
+      '--sys-color-border': 'oklch(0.92 0 0)',
     }}
   />
 </ColorPalette>
 
-## 🚦 Status Colors
-
-<ColorPalette>
-  <ColorItem
-    title="Success"
-    subtitle="Positive actions and status"
-    colors={{ Default: 'var(--sys-color-success)' }}
-  />
-  <ColorItem
-    title="Warning"
-    subtitle="Cautionary alerts"
-    colors={{ Default: 'var(--sys-color-warning)' }}
-  />
-  <ColorItem
-    title="Danger"
-    subtitle="Destructive actions or errors"
-    colors={{ Default: 'var(--sys-color-danger)' }}
-  />
-</ColorPalette>
-
-## 📝 Text Colors
+## 📝 Typography
+Primary and secondary text tokens.
 
 <ColorPalette>
   <ColorItem
     title="Text Primary"
     subtitle="Main content"
     colors={{
-      Variable: 'var(--sys-color-text-primary)',
+      '--sys-color-text-primary': 'oklch(0.205 0 0)',
     }}
   />
   <ColorItem
     title="Text Secondary"
     subtitle="Supporting details"
     colors={{
-      Variable: 'var(--sys-color-text-secondary)',
+      '--sys-color-text-secondary': 'oklch(0.551 0 0)',
     }}
   />
 </ColorPalette>
