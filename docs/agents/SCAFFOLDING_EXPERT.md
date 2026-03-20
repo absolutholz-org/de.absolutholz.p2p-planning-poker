@@ -125,4 +125,5 @@ export { MyComponent } from './_[ComponentName]';
 When asked to build or refactor a component, do not generate the code in a vacuum. Actively synthesize the structure defined in this document with the design rules in `@DESIGN_SYSTEM_ARCHITECT.md`, the compliance rules in `@A11Y_UX_ADVOCATE.md`, and the data rules via the room context.
 
 ## MANDATORY RULE
+
 Always prefer separate files for types, hooks, and components. Avoid multiple exports in a single file to maintain Fast Refresh compatibility and clear scope.

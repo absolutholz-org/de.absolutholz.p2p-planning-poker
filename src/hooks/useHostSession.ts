@@ -129,14 +129,12 @@ export function useHostSession(
 					switch (msg.type) {
 						case 'JOIN_ROOM':
 							if (
-								!newState.users.some(
-									(u) => u.id === msg.payload.peerId,
-								)
+								!newState.users.some((u) => u.id === conn.peer)
 							) {
 								newState.users = [
 									...newState.users,
 									{
-										id: msg.payload.peerId,
+										id: conn.peer,
 										isConnected: true,
 										isHost: false,
 										name: msg.payload.name,
@@ -145,7 +143,7 @@ export function useHostSession(
 								];
 							} else {
 								newState.users = newState.users.map((u) =>
-									u.id === msg.payload.peerId
+									u.id === conn.peer
 										? {
 												...u,
 												isConnected: true,

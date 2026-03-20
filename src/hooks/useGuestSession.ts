@@ -77,7 +77,18 @@ export function useGuestSession(
 			!!import.meta.env.VITE_METERED_USERNAME,
 		);
 
-		const peer = new Peer({
+		const getOrCreatePersistentId = () => {
+			const key = 'p2p-poker-persistent-peer-id';
+			const existing = localStorage.getItem(key);
+			if (existing) return existing;
+			const newId = crypto.randomUUID();
+			localStorage.setItem(key, newId);
+			return newId;
+		};
+
+		const persistentId = getOrCreatePersistentId();
+
+		const peer = new Peer(persistentId, {
 			config: {
 				iceServers,
 				iceTransportPolicy: 'all',
