@@ -121,7 +121,7 @@ export function RoomHeader() {
 							variant="success"
 							action={
 								<Button
-									variant="primary"
+									variant="success"
 									onClick={handleReveal}
 									aria-label={t('room.header.aria.reveal')}
 									icon="visibility"

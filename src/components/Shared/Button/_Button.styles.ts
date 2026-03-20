@@ -44,6 +44,42 @@ export const Button = styled.button<{ 'data-variant': ButtonVariant }>`
 		}
 	}
 
+	&[data-variant='success'] {
+		background-color: var(--sys-color-success);
+		color: var(--sys-color-primary-text);
+
+		&:hover:not(:disabled) {
+			background-color: var(--sys-color-success-hover);
+		}
+	}
+
+	&[data-variant='info'] {
+		background-color: var(--sys-color-info);
+		color: var(--sys-color-primary-text);
+
+		&:hover:not(:disabled) {
+			background-color: var(--sys-color-info-hover);
+		}
+	}
+
+	&[data-variant='warning'] {
+		background-color: var(--sys-color-warning);
+		color: var(--sys-color-primary-text);
+
+		&:hover:not(:disabled) {
+			background-color: var(--sys-color-warning-hover);
+		}
+	}
+
+	&[data-variant='danger'] {
+		background-color: var(--sys-color-danger);
+		color: var(--sys-color-primary-text);
+
+		&:hover:not(:disabled) {
+			background-color: var(--sys-color-danger-hover);
+		}
+	}
+
 	&[data-variant='secondary'] {
 		background-color: transparent;
 		color: var(--sys-color-text-primary);
@@ -51,16 +87,6 @@ export const Button = styled.button<{ 'data-variant': ButtonVariant }>`
 
 		&:hover:not(:disabled) {
 			background-color: var(--sys-color-border);
-		}
-	}
-
-	&[data-variant='danger'] {
-		background-color: transparent;
-		color: var(--sys-color-danger);
-		border-color: var(--sys-color-border);
-
-		&:hover:not(:disabled) {
-			border-color: var(--sys-color-danger);
 		}
 	}
 

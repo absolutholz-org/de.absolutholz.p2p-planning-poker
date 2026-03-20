@@ -19,7 +19,15 @@ const meta = {
 		},
 		variant: {
 			control: { type: 'select' },
-			options: ['primary', 'secondary', 'danger', 'ghost'],
+			options: [
+				'primary',
+				'secondary',
+				'success',
+				'info',
+				'warning',
+				'danger',
+				'ghost',
+			],
 		},
 	},
 	component: Button,
@@ -39,6 +47,27 @@ export const Secondary: Story = {
 	args: {
 		...Default.args,
 		variant: 'secondary',
+	},
+};
+
+export const Success: Story = {
+	args: {
+		...Default.args,
+		variant: 'success',
+	},
+};
+
+export const Info: Story = {
+	args: {
+		...Default.args,
+		variant: 'info',
+	},
+};
+
+export const Warning: Story = {
+	args: {
+		...Default.args,
+		variant: 'warning',
 	},
 };
 

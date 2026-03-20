@@ -2,7 +2,14 @@ import type { ButtonHTMLAttributes } from 'react';
 
 import type { IconName } from '../Icon';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'ghost';
+export type ButtonVariant =
+	| 'primary'
+	| 'secondary'
+	| 'success'
+	| 'info'
+	| 'warning'
+	| 'danger'
+	| 'ghost';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 /**
