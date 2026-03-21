@@ -22,29 +22,41 @@ export const KitchenSink: Story = {
 		'aria-label': 'Editor Toolbar',
 	},
 	render: (args) => (
-		<Toolbar {...args} style={{ width: '600px' }}>
-			{/* Management Island */}
-			<ToolbarGroup>
-				<ToolbarItem icon="settings" label="Settings" />
-				<ToolbarItem icon="share" label="Share" variant="secondary" />
-			</ToolbarGroup>
+		<div
+			style={{
+				display: 'flex',
+				justifyContent: 'space-between',
+				width: '100%',
+			}}
+		>
+			{/* Management Toolbar */}
+			<Toolbar {...args} aria-label="Room management">
+				<ToolbarGroup>
+					<ToolbarItem icon="settings" label="Settings" />
+					<ToolbarItem
+						icon="share"
+						label="Share"
+						variant="secondary"
+					/>
+				</ToolbarGroup>
+			</Toolbar>
 
-			{/* Voting Island */}
-			<ToolbarGroup>
-				<ToolbarItem icon="refresh" label="Reset" variant="danger" />
-				<ToolbarItem
-					icon="visibility"
-					label="Reveal"
-					variant="primary"
-				/>
-			</ToolbarGroup>
-
-			{/* Feedback Island */}
-			<ToolbarGroup>
-				<ToolbarItem icon="report" label="Report" variant="danger" />
-				<ToolbarItem icon="info" label="Info" />
-			</ToolbarGroup>
-		</Toolbar>
+			{/* Voting Controls Toolbar */}
+			<Toolbar {...args} aria-label="Voting controls">
+				<ToolbarGroup>
+					<ToolbarItem
+						icon="refresh"
+						label="Reset"
+						variant="danger"
+					/>
+					<ToolbarItem
+						icon="visibility"
+						label="Reveal"
+						variant="primary"
+					/>
+				</ToolbarGroup>
+			</Toolbar>
+		</div>
 	),
 };
 

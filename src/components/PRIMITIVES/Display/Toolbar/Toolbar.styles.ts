@@ -7,17 +7,18 @@ export const ToolbarRoot = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	gap: var(--sys-spacing-md);
+	width: fit-content;
+	padding: var(--sys-spacing-xs) var(--sys-spacing-sm);
+	background-color: var(--sys-color-surface);
+	border: 1px solid var(--sys-color-border);
+	border-radius: var(--sys-radius-md);
+	box-shadow: var(--sys-shadow-sm);
 `;
 
 export const Group = styled.div`
 	display: flex;
 	align-items: center;
 	gap: var(--sys-spacing-md);
-	padding: var(--sys-spacing-xs) var(--sys-spacing-sm);
-	background-color: var(--sys-color-surface);
-	border: 1px solid var(--sys-color-border);
-	border-radius: var(--sys-radius-md);
-	box-shadow: var(--sys-shadow-sm);
 `;
 
 interface ItemButtonProps {
