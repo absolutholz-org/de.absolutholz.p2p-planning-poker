@@ -10,31 +10,47 @@ export function AppFooter() {
 	const isEnglish = i18n.language.startsWith('en');
 
 	return (
-		<S.FooterContainer>
-			<S.FooterLink
-				to="/impressum"
-				hrefLang={!isGerman && !isEnglish ? 'en' : undefined}
-			>
-				{isGerman
-					? 'Impressum'
-					: isEnglish
-						? 'Legal Notice'
-						: `${t('lobby.footer.impressum')} (English)`}
-			</S.FooterLink>
-			<S.FooterLink
-				to="/privacy"
-				hrefLang={!isGerman && !isEnglish ? 'en' : undefined}
-			>
-				{isGerman
-					? 'Datenschutzerklärung'
-					: isEnglish
-						? 'Privacy Policy'
-						: `${t('lobby.footer.privacy')} (English)`}
-			</S.FooterLink>
-			<S.StaticFooterLink href="/storybook/">
-				{t('lobby.footer.storybook')}
-			</S.StaticFooterLink>
-			<S.VersionInfo>v{packageJson.version}</S.VersionInfo>
+		<S.FooterContainer aria-label="Site Information">
+			<S.Nav aria-label="Legal">
+				<S.NavList role="list">
+					<S.NavListItem>
+						<S.FooterLink
+							to="/impressum"
+							hrefLang={
+								!isGerman && !isEnglish ? 'en' : undefined
+							}
+						>
+							{isGerman
+								? 'Impressum'
+								: isEnglish
+									? 'Legal Notice'
+									: `${t('lobby.footer.impressum')} (English)`}
+						</S.FooterLink>
+					</S.NavListItem>
+					<S.NavListItem>
+						<S.FooterLink
+							to="/privacy"
+							hrefLang={
+								!isGerman && !isEnglish ? 'en' : undefined
+							}
+						>
+							{isGerman
+								? 'Datenschutzerklärung'
+								: isEnglish
+									? 'Privacy Policy'
+									: `${t('lobby.footer.privacy')} (English)`}
+						</S.FooterLink>
+					</S.NavListItem>
+					<S.NavListItem>
+						<S.StaticFooterLink href="/storybook/">
+							{t('lobby.footer.storybook')}
+						</S.StaticFooterLink>
+					</S.NavListItem>
+				</S.NavList>
+			</S.Nav>
+			<S.VersionInfo aria-label={`Version ${packageJson.version}`}>
+				v{packageJson.version}
+			</S.VersionInfo>
 		</S.FooterContainer>
 	);
 }
