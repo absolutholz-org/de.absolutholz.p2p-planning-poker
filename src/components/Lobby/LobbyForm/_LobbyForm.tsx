@@ -104,7 +104,7 @@ export function LobbyForm() {
 	}, [error]);
 
 	return (
-		<div>
+		<section aria-labelledby="lobby-title">
 			<Stack spacing="xl">
 				<S.CardContainer>
 					<Form
@@ -113,7 +113,9 @@ export function LobbyForm() {
 						spacing="xl"
 					>
 						<Stack spacing="xs">
-							<S.Title>{t('lobby.title')}</S.Title>
+							<S.Title id="lobby-title">
+								{t('lobby.title')}
+							</S.Title>
 							<S.SubTitle>{t('lobby.subtitle')}</S.SubTitle>
 						</Stack>
 
@@ -229,6 +231,6 @@ export function LobbyForm() {
 					⚡
 				</S.DebugToggle>
 			)}
-		</div>
+		</section>
 	);
 }

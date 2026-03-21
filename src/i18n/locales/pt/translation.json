@@ -22,7 +22,7 @@
     }
   },
   "lobby": {
-    "title": "Entrar na Sessão",
+    "title": "Entrar",
     "subtitle": "Insira seus dados para entrar em uma sala de planning poker ou crie uma nova sessão se nenhum código for fornecido.",
     "name": {
       "label": "Seu Nome",
@@ -121,11 +121,11 @@
       }
     },
     "deck": {
-      "title": "Dê o Seu Voto",
+      "title": "Votos",
       "aria_label": "Baralho de votação"
     },
     "roster": {
-      "title": "Lista da Equipe",
+      "title": "Equipe",
       "revealed_badge": "Votos Revelados!",
       "disconnected": "Desconectado",
       "ready": "Pronto",

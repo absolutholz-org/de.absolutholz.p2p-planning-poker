@@ -22,7 +22,7 @@
     }
   },
   "lobby": {
-    "title": "Join Session",
+    "title": "Join",
     "subtitle": "Enter your details to join a planning poker room or create a new session if no code is provided.",
     "name": {
       "label": "Your Name",
@@ -107,11 +107,11 @@
       }
     },
     "deck": {
-      "title": "Cast Your Vote",
+      "title": "Votes",
       "aria_label": "Voting deck"
     },
     "roster": {
-      "title": "Team Roster",
+      "title": "Team",
       "revealed_badge": "Votes Revealed!",
       "ready": "Ready",
       "thinking": "Thinking...",

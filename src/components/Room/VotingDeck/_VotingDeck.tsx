@@ -18,8 +18,10 @@ export function VotingDeck() {
 	const myVote = myUser?.vote;
 
 	return (
-		<S.DeckContainer aria-label={t('room.deck.aria_label')}>
-			<S.SectionTitle>{t('room.deck.title')}</S.SectionTitle>
+		<S.DeckContainer aria-labelledby="voting-deck-title">
+			<S.SectionTitle id="voting-deck-title">
+				{t('room.deck.title')}
+			</S.SectionTitle>
 			<S.Grid>
 				{FIBONACCI_SCALE.map((value) => (
 					<Card

@@ -22,7 +22,7 @@
     }
   },
   "lobby": {
-    "title": "Session beitreten",
+    "title": "Beitreten",
     "subtitle": "Gib deine Daten ein, um einem Planning-Poker-Raum beizutreten, oder erstelle eine neue Session, falls kein Code angegeben wird.",
     "name": {
       "label": "Dein Name",
@@ -104,11 +104,11 @@
       }
     },
     "deck": {
-      "title": "Gib deinen Vote ab",
+      "title": "Votes",
       "aria_label": "Voting-Deck"
     },
     "roster": {
-      "title": "Team-Liste",
+      "title": "Team",
       "revealed_badge": "Votes aufgedeckt!",
       "disconnected": "Getrennt",
       "ready": "Bereit",

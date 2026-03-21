@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 
-export const DeckContainer = styled.section``;
+export const DeckContainer = styled.section`
+	min-width: max-content;
+`;
 
 export const SectionTitle = styled.h2`
 	color: var(--sys-color-text-secondary);
