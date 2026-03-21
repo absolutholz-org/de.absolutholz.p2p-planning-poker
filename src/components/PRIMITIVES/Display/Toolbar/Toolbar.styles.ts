@@ -6,18 +6,18 @@ export const ToolbarRoot = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: var(--sys-spacing-sm) var(--sys-spacing-md);
-	background-color: var(--sys-color-surface);
-	border: 1px solid var(--sys-color-border);
-	border-radius: var(--sys-radius-md);
-	box-shadow: var(--sys-shadow-sm);
-	gap: var(--sys-spacing-lg);
+	gap: var(--sys-spacing-md);
 `;
 
 export const Group = styled.div`
 	display: flex;
 	align-items: center;
 	gap: var(--sys-spacing-md);
+	padding: var(--sys-spacing-xs) var(--sys-spacing-sm);
+	background-color: var(--sys-color-surface);
+	border: 1px solid var(--sys-color-border);
+	border-radius: var(--sys-radius-md);
+	box-shadow: var(--sys-shadow-sm);
 `;
 
 interface ItemButtonProps {
@@ -32,7 +32,10 @@ export const ItemButton = styled.button<ItemButtonProps>`
 	border-radius: var(--sys-radius-sm);
 	font-size: var(--sys-font-size-sm);
 	font-weight: var(--sys-font-weight-medium);
-	transition: all 0.2s ease-in-out;
+	transition:
+		background-color 0.2s ease-in-out,
+		color 0.2s ease-in-out,
+		outline 0.2s ease-in-out;
 	border: 1px solid transparent;
 
 	${({ variant }) => {
