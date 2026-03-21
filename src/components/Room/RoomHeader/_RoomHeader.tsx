@@ -3,6 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import { useRoom } from '../../../hooks/useRoom';
+import { Toolbar } from '../../PRIMITIVES/Display/Toolbar/Toolbar';
+import { ToolbarGroup } from '../../PRIMITIVES/Display/Toolbar/ToolbarGroup';
+import { ToolbarItem } from '../../PRIMITIVES/Display/Toolbar/ToolbarItem';
 import { Banner } from '../../Shared/Banner';
 import { Button } from '../../Shared/Button';
 import { Dialog } from '../../Shared/Dialog';
@@ -51,64 +54,56 @@ export function RoomHeader() {
 		<>
 			<PageContainer>
 				<S.SubHeaderContainer>
-					<Button
-						variant="secondary"
-						onClick={() => setIsShareOpen(true)}
-						aria-expanded={isShareOpen}
-						aria-label={t('room.header.share.aria_open')}
-						icon="share"
-					>
-						{t('room.header.share.button')}
-					</Button>
+					{/* Management Toolbar */}
+					<Toolbar aria-label={t('room.header.aria.management')}>
+						<ToolbarGroup>
+							<ToolbarItem
+								icon="share"
+								label={t('room.header.share.button')}
+								onClick={() => setIsShareOpen(true)}
+								variant="secondary"
+							/>
+							<ToolbarItem
+								icon="edit"
+								label={t('room.header.rename_dialog.button')}
+								onClick={openRenameDialog}
+								variant="secondary"
+							/>
+						</ToolbarGroup>
+					</Toolbar>
 
-					<Button
-						variant="secondary"
-						onClick={openRenameDialog}
-						aria-label={t('room.header.rename_dialog.aria.open')}
-						icon="edit"
-					>
-						{t('room.header.rename_dialog.button')}
-					</Button>
-
-					<S.Actions direction="row" justify="end">
-						{isHost && (
-							<>
-								<Button
-									variant="secondary"
-									onClick={() => setIsResetDialogOpen(true)}
-									aria-label={t('room.header.aria.reset')}
+					{/* Voting Controls Toolbar */}
+					{isHost && (
+						<Toolbar
+							aria-label={t('room.header.aria.voting_controls')}
+						>
+							<ToolbarGroup>
+								<ToolbarItem
 									icon="refresh"
+									label={t('common.actions.reset')}
+									onClick={() => setIsResetDialogOpen(true)}
 									disabled={roomState.users.every(
 										(u) => u.vote === null,
 									)}
-								>
-									{t('common.actions.reset')}
-								</Button>
-
+									variant="secondary"
+								/>
 								{(!allVoted || roomState.isRevealed) && (
-									<Button
-										variant="primary"
+									<ToolbarItem
+										icon="visibility"
+										label={t('common.actions.reveal')}
 										onClick={handleReveal}
-										aria-label={t(
-											'room.header.aria.reveal',
-										)}
 										disabled={
 											roomState.isRevealed ||
 											roomState.users.every(
 												(u) => u.vote === null,
 											)
 										}
-										icon="visibility"
-										style={{
-											color: 'var(--sys-color-primary-text)',
-										}}
-									>
-										{t('common.actions.reveal')}
-									</Button>
+										variant="primary"
+									/>
 								)}
-							</>
-						)}
-					</S.Actions>
+							</ToolbarGroup>
+						</Toolbar>
+					)}
 				</S.SubHeaderContainer>
 				{isHost && allVoted && !roomState.isRevealed && (
 					<div

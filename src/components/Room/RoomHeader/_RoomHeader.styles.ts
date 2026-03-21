@@ -1,17 +1,15 @@
 import styled from '@emotion/styled';
 
-import { Stack } from '../../Shared/Stack';
-
 export const SubHeaderContainer = styled.div`
-	align-items: stretch; /* Stretch children (Actions) to full width */
 	display: flex;
 	flex-direction: column;
 	gap: var(--sys-spacing-md);
 	justify-content: space-between;
+	align-items: stretch;
 
 	@media (min-width: 600px) {
-		align-items: center;
 		flex-direction: row;
+		align-items: center;
 	}
 `;
 
@@ -50,17 +48,6 @@ export const Toast = styled.div`
 		to {
 			opacity: 0;
 			transform: translate(-50%, 1.25rem);
-		}
-	}
-`;
-
-export const Actions = styled(Stack)`
-	@media (max-width: 600px) {
-		/* Ensure buttons stretch perfectly inside the grid cells */
-		button {
-			width: 100%;
-			font-size: var(--sys-font-size-sm);
-			padding: var(--sys-spacing-sm);
 		}
 	}
 `;
