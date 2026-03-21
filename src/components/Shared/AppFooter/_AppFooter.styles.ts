@@ -8,7 +8,7 @@ export const FooterContainer = styled.footer`
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
-	gap: var(--sys-spacing-lg);
+	gap: var(--sys-spacing-md) var(--sys-spacing-lg);
 	background-color: transparent;
 `;
 export const Nav = styled.nav`
@@ -19,10 +19,7 @@ export const NavList = styled.ul`
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	gap: var(--sys-spacing-lg);
-	list-style: none;
-	padding: 0;
-	margin: 0;
+	gap: var(--sys-spacing-sm) var(--sys-spacing-lg);
 `;
 
 export const NavListItem = styled.li`

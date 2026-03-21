@@ -1,7 +1,11 @@
 import styled from '@emotion/styled';
 
+const LAYOUT_BREAKPOINT = '45rem';
+
 export const DeckContainer = styled.section`
-	min-width: max-content;
+	@media (min-width: ${LAYOUT_BREAKPOINT}) {
+		min-width: max-content;
+	}
 `;
 
 export const SectionTitle = styled.h2`
