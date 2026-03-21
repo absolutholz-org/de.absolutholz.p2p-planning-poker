@@ -23,13 +23,15 @@ export const KitchenSink: Story = {
 	},
 	render: (args) => (
 		<Toolbar {...args} style={{ width: '600px' }}>
+			{/* Management Island */}
 			<ToolbarGroup>
-				<ToolbarItem icon="refresh" label="Reset" variant="danger" />
+				<ToolbarItem icon="settings" label="Settings" />
 				<ToolbarItem icon="share" label="Share" variant="secondary" />
 			</ToolbarGroup>
 
+			{/* Voting Island */}
 			<ToolbarGroup>
-				<ToolbarItem icon="edit" label="Rename" />
+				<ToolbarItem icon="refresh" label="Reset" variant="danger" />
 				<ToolbarItem
 					icon="visibility"
 					label="Reveal"
@@ -37,6 +39,7 @@ export const KitchenSink: Story = {
 				/>
 			</ToolbarGroup>
 
+			{/* Feedback Island */}
 			<ToolbarGroup>
 				<ToolbarItem icon="report" label="Report" variant="danger" />
 				<ToolbarItem icon="info" label="Info" />
