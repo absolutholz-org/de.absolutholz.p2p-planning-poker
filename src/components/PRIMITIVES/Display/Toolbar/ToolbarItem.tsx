@@ -1,3 +1,5 @@
+import { useEffect, useId } from 'react';
+
 import { Icon } from '../../../Shared/Icon';
 import { useToolbar } from './Toolbar';
 import * as S from './Toolbar.styles';
@@ -8,7 +10,7 @@ interface ToolbarItemProps {
 	className?: string;
 	disabled?: boolean;
 	icon: string;
-	index: number; // Required for roving tabindex mapping
+	id?: string;
 	label: string;
 	onClick?: () => void;
 	variant?: ToolbarItemVariant;
@@ -22,23 +24,35 @@ export function ToolbarItem({
 	className,
 	disabled,
 	icon,
-	index,
+	id: providedId,
 	label,
 	onClick,
 	variant = 'ghost',
 }: ToolbarItemProps) {
-	const { focusedIndex, setFocusedIndex } = useToolbar();
-	const isFocused = focusedIndex === index;
+	const generatedId = useId();
+	const id = providedId || generatedId;
+
+	const { registerItem, setTabStopId, tabStopId, unregisterItem } =
+		useToolbar();
+
+	useEffect(() => {
+		if (!disabled) {
+			registerItem(id);
+		}
+		return () => unregisterItem(id);
+	}, [id, disabled, registerItem, unregisterItem]);
+
+	const isActive = tabStopId === id;
 
 	return (
 		<S.ItemButton
 			data-toolbar-item="true"
-			tabIndex={isFocused ? 0 : -1}
+			tabIndex={isActive ? 0 : -1}
 			onClick={() => {
-				setFocusedIndex(index);
+				setTabStopId(id);
 				onClick?.();
 			}}
-			onFocus={() => setFocusedIndex(index)}
+			onFocus={() => setTabStopId(id)}
 			disabled={disabled}
 			variant={variant}
 			title={label} // Tooltip fallback for icon-only state

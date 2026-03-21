@@ -24,38 +24,22 @@ export const KitchenSink: Story = {
 	render: (args) => (
 		<Toolbar {...args} style={{ width: '600px' }}>
 			<ToolbarGroup>
-				<ToolbarItem
-					icon="refresh"
-					index={0}
-					label="Reset"
-					variant="danger"
-				/>
-				<ToolbarItem
-					icon="share"
-					index={1}
-					label="Share"
-					variant="secondary"
-				/>
+				<ToolbarItem icon="refresh" label="Reset" variant="danger" />
+				<ToolbarItem icon="share" label="Share" variant="secondary" />
 			</ToolbarGroup>
 
 			<ToolbarGroup>
-				<ToolbarItem icon="edit" index={2} label="Rename" />
+				<ToolbarItem icon="edit" label="Rename" />
 				<ToolbarItem
 					icon="visibility"
-					index={3}
 					label="Reveal"
 					variant="primary"
 				/>
 			</ToolbarGroup>
 
 			<ToolbarGroup>
-				<ToolbarItem
-					icon="report"
-					index={4}
-					label="Report"
-					variant="danger"
-				/>
-				<ToolbarItem icon="info" index={5} label="Info" />
+				<ToolbarItem icon="report" label="Report" variant="danger" />
+				<ToolbarItem icon="info" label="Info" />
 			</ToolbarGroup>
 		</Toolbar>
 	),
@@ -73,19 +57,13 @@ export const MobileSimulation: Story = {
 	render: (args) => (
 		<Toolbar {...args} style={{ width: '320px' }}>
 			<ToolbarGroup>
-				<ToolbarItem
-					icon="refresh"
-					index={0}
-					label="Reset"
-					variant="danger"
-				/>
+				<ToolbarItem icon="refresh" label="Reset" variant="danger" />
 				<ToolbarItem
 					icon="visibility"
-					index={1}
 					label="Reveal"
 					variant="primary"
 				/>
-				<ToolbarItem icon="language" index={2} label="Settings" />
+				<ToolbarItem icon="language" label="Settings" />
 			</ToolbarGroup>
 		</Toolbar>
 	),

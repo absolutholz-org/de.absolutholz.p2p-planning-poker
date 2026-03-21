@@ -1,11 +1,19 @@
-import { createContext, useContext, type ReactNode } from 'react';
+import React, {
+	createContext,
+	useCallback,
+	useContext,
+	useState,
+	type ReactNode,
+} from 'react';
 
 import * as S from './Toolbar.styles';
 import { useToolbarNavigation } from './useToolbarNavigation';
 
 interface ToolbarContextValue {
-	focusedIndex: number;
-	setFocusedIndex: (index: number) => void;
+	registerItem: (id: string) => void;
+	setTabStopId: (id: string) => void;
+	tabStopId: string | null;
+	unregisterItem: (id: string) => void;
 }
 
 const ToolbarContext = createContext<ToolbarContextValue | undefined>(
@@ -37,11 +45,24 @@ export function Toolbar({
 	className,
 	style,
 }: ToolbarProps) {
-	const { containerRef, focusedIndex, handleKeyDown, setFocusedIndex } =
-		useToolbarNavigation();
+	const { containerRef, handleKeyDown } = useToolbarNavigation();
+	const [tabStopId, setTabStopId] = useState<string | null>(null);
+
+	const registerItem = useCallback((id: string) => {
+		setTabStopId((current) => (current === null ? id : current));
+	}, []);
+
+	const unregisterItem = useCallback(
+		(id: string) => {
+			setTabStopId((current) => (current === id ? null : current));
+		},
+		[setTabStopId],
+	);
 
 	return (
-		<ToolbarContext.Provider value={{ focusedIndex, setFocusedIndex }}>
+		<ToolbarContext.Provider
+			value={{ registerItem, setTabStopId, tabStopId, unregisterItem }}
+		>
 			<S.ToolbarRoot
 				ref={containerRef}
 				role="toolbar"
