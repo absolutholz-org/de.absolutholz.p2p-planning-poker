@@ -1,8 +1,8 @@
-import { type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
-import * as S from './Toolbar.styles';
+import * as S from './_Toolbar.styles';
 
-interface ToolbarGroupProps {
+export interface IToolbarGroup {
 	children: ReactNode;
 	className?: string;
 }
@@ -11,6 +11,6 @@ interface ToolbarGroupProps {
  * ToolbarGroup provides flex-based layout grouping for related toolbar items.
  * Uses system spacing tokens for consistent gaps.
  */
-export function ToolbarGroup({ children, className }: ToolbarGroupProps) {
+export function ToolbarGroup({ children, className }: IToolbarGroup) {
 	return <S.Group className={className}>{children}</S.Group>;
 }

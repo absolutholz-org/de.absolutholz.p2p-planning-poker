@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { Toolbar } from './Toolbar';
-import { ToolbarGroup } from './ToolbarGroup';
-import { ToolbarItem } from './ToolbarItem';
+import { Toolbar, ToolbarGroup, ToolbarItem } from '.';
 
 const meta: Meta<typeof Toolbar> = {
 	component: Toolbar,

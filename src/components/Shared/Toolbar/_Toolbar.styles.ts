@@ -1,18 +1,15 @@
 import styled from '@emotion/styled';
 
-import type { ToolbarItemVariant } from './ToolbarItem';
+import { Stack } from '../Stack';
+import type { ToolbarItemVariant } from './_ToolbarItem.types';
 
-export const ToolbarRoot = styled.div`
+export const ToolbarRoot = styled(Stack)`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	gap: var(--sys-spacing-md);
 	width: fit-content;
 	padding: var(--sys-spacing-xs) var(--sys-spacing-sm);
-	background-color: var(--sys-color-surface);
-	border: 1px solid var(--sys-color-border);
-	border-radius: var(--sys-radius-md);
-	box-shadow: var(--sys-shadow-sm);
 `;
 
 export const Group = styled.div`

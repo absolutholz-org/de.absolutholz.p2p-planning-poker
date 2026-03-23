@@ -1,20 +1,9 @@
 import { useEffect, useId } from 'react';
 
-import { Icon } from '../../../Shared/Icon';
-import { useToolbar } from './Toolbar';
-import * as S from './Toolbar.styles';
-
-export type ToolbarItemVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
-
-interface ToolbarItemProps {
-	className?: string;
-	disabled?: boolean;
-	icon: string;
-	id?: string;
-	label: string;
-	onClick?: () => void;
-	variant?: ToolbarItemVariant;
-}
+import { Icon } from '../Icon';
+import * as S from './_Toolbar.styles';
+import type { IToolbarItem } from './_ToolbarItem.types';
+import { useToolbar } from './_useToolbar';
 
 /**
  * Adaptive Toolbar Item that collapses to icon-only on mobile (< 768px).
@@ -28,7 +17,7 @@ export function ToolbarItem({
 	label,
 	onClick,
 	variant = 'ghost',
-}: ToolbarItemProps) {
+}: IToolbarItem) {
 	const generatedId = useId();
 	const id = providedId || generatedId;
 

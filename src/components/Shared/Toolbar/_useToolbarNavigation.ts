@@ -1,5 +1,5 @@
 import type React from 'react';
-import { useCallback, useRef } from 'react';
+import { useCallback } from 'react';
 
 /**
  * Hook to manage a roving tabindex for a toolbar.
@@ -8,14 +8,12 @@ import { useCallback, useRef } from 'react';
  * Items in the toolbar must have the data-toolbar-item="true" attribute.
  */
 export function useToolbarNavigation() {
-	const containerRef = useRef<HTMLDivElement>(null);
-
 	const handleKeyDown = useCallback((event: React.KeyboardEvent) => {
-		if (!containerRef.current) return;
+		const container = event.currentTarget as HTMLElement;
 
 		// Find all focusable toolbar items
 		const items = Array.from(
-			containerRef.current.querySelectorAll(
+			container.querySelectorAll(
 				'[data-toolbar-item="true"]:not([disabled])',
 			),
 		) as HTMLElement[];
@@ -53,7 +51,6 @@ export function useToolbarNavigation() {
 	}, []);
 
 	return {
-		containerRef,
 		handleKeyDown,
 	};
 }

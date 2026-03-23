@@ -1,15 +1,11 @@
-import type { ElementType, ReactNode } from 'react';
+import type { ElementType } from 'react';
 
 /**
  * Valid spacing values based on the system design tokens.
  */
 export type StackSpacing = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
-export interface IStack {
-	/**
-	 * Elements to be laid out
-	 */
-	children: ReactNode;
+export interface IStack extends React.HTMLAttributes<HTMLDivElement> {
 	/**
 	 * Direction of the stack
 	 * @default 'column'
@@ -40,8 +36,4 @@ export interface IStack {
 	 * @default 'div'
 	 */
 	component?: ElementType;
-	/**
-	 * Optional CSS class
-	 */
-	className?: string;
 }
