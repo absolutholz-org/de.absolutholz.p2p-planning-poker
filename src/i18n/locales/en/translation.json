@@ -53,6 +53,9 @@
         "default": "Code: {{code}}"
       },
       "aria": {
+        "app_header": "App Header",
+        "management": "Room management",
+        "voting": "Voting controls",
         "copy": "Room Code is {{code}}. Click to copy.",
         "reset": "Reset the voting board for all peers",
         "reveal": "Reveal votes to all peers"

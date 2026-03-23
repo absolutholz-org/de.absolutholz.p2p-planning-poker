@@ -72,9 +72,7 @@ export function RoomHeader() {
 
 					{/* Voting Controls Toolbar */}
 					{isHost && (
-						<Toolbar
-							aria-label={t('room.header.aria.voting_controls')}
-						>
+						<Toolbar aria-label={t('room.header.aria.voting')}>
 							<ToolbarGroup>
 								<ToolbarItem
 									icon="refresh"

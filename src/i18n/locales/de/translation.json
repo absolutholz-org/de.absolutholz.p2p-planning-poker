@@ -53,6 +53,9 @@
         "default": "Code: {{code}}"
       },
       "aria": {
+        "app_header": "App-Header",
+        "management": "Raumverwaltung",
+        "voting": "Voting-Steuerung",
         "copy": "Der Raumcode ist {{code}}. Zum Kopieren klicken.",
         "reset": "Voting-Board für alle Teilnehmer zurücksetzen",
         "reveal": "Votes für alle Teilnehmer aufdecken"

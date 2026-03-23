@@ -53,6 +53,9 @@
         "default": "Código: {{code}}"
       },
       "aria": {
+        "app_header": "Cabeçalho do Aplicativo",
+        "management": "Gestão da sala",
+        "voting": "Controles de votação",
         "copy": "O código da sala é {{code}}. Clique para copiar.",
         "reset": "Redefinir o quadro de votação para todos",
         "reveal": "Revelar votos para todos"

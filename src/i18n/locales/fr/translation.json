@@ -54,6 +54,9 @@
         "default": "Code : {{code}}"
       },
       "aria": {
+        "app_header": "En-tête de l'application",
+        "management": "Gestion de la salle",
+        "voting": "Contrôles de vote",
         "copy": "Le code de la salle est {{code}}. Cliquez pour copier.",
         "reset": "Réinitialiser le tableau de vote pour tous les participants",
         "reveal": "Révéler les votes à tous les participants"
