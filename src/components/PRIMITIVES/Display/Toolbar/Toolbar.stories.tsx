@@ -17,68 +17,33 @@ export default meta;
 
 type Story = StoryObj<typeof Toolbar>;
 
-export const KitchenSink: Story = {
+export const Management: Story = {
 	args: {
-		'aria-label': 'Editor Toolbar',
+		'aria-label': 'Room management',
 	},
 	render: (args) => (
-		<div
-			style={{
-				display: 'flex',
-				justifyContent: 'space-between',
-				width: '100%',
-			}}
-		>
-			{/* Management Toolbar */}
-			<Toolbar {...args} aria-label="Room management">
-				<ToolbarGroup>
-					<ToolbarItem icon="settings" label="Settings" />
-					<ToolbarItem
-						icon="share"
-						label="Share"
-						variant="secondary"
-					/>
-				</ToolbarGroup>
-			</Toolbar>
-
-			{/* Voting Controls Toolbar */}
-			<Toolbar {...args} aria-label="Voting controls">
-				<ToolbarGroup>
-					<ToolbarItem
-						icon="refresh"
-						label="Reset"
-						variant="danger"
-					/>
-					<ToolbarItem
-						icon="visibility"
-						label="Reveal"
-						variant="primary"
-					/>
-				</ToolbarGroup>
-			</Toolbar>
-		</div>
+		<Toolbar {...args}>
+			<ToolbarGroup>
+				<ToolbarItem icon="share" label="Share" variant="secondary" />
+				<ToolbarItem icon="edit" label="Rename" variant="secondary" />
+			</ToolbarGroup>
+		</Toolbar>
 	),
 };
 
-export const MobileSimulation: Story = {
+export const Voting: Story = {
 	args: {
-		'aria-label': 'Mobile Toolbar',
-	},
-	parameters: {
-		viewport: {
-			defaultViewport: 'mobile1',
-		},
+		'aria-label': 'Voting controls',
 	},
 	render: (args) => (
-		<Toolbar {...args} style={{ width: '320px' }}>
+		<Toolbar {...args}>
 			<ToolbarGroup>
-				<ToolbarItem icon="refresh" label="Reset" variant="danger" />
+				<ToolbarItem icon="refresh" label="Reset" variant="secondary" />
 				<ToolbarItem
 					icon="visibility"
 					label="Reveal"
 					variant="primary"
 				/>
-				<ToolbarItem icon="language" label="Settings" />
 			</ToolbarGroup>
 		</Toolbar>
 	),
