@@ -18,7 +18,7 @@ export function Header() {
 	};
 
 	return (
-		<S.HeaderContainer>
+		<S.HeaderContainer aria-label={t('room.header.aria.app_header')}>
 			<S.Brand
 				onClick={handleHomeClick}
 				role="button"

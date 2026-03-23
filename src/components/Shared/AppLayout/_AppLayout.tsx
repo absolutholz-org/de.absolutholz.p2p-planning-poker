@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { AppFooter } from '../AppFooter';
 import { Header } from '../Header';
@@ -14,8 +15,9 @@ interface AppLayoutProps {
  * Provides the SkipLink, Header, Main content area, and AppFooter.
  */
 export function AppLayout({ children }: AppLayoutProps) {
+	const { t } = useTranslation();
 	return (
-		<S.LayoutRoot>
+		<S.LayoutRoot aria-label={t('common.poker')}>
 			<SkipLink />
 			<Header />
 			<S.MainContent id="main-content" tabIndex={-1}>
