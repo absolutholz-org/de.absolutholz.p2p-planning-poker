@@ -3,15 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import { useRoom } from '../../../hooks/useRoom';
-import { Toolbar } from '../../PRIMITIVES/Display/Toolbar/Toolbar';
-import { ToolbarGroup } from '../../PRIMITIVES/Display/Toolbar/ToolbarGroup';
-import { ToolbarItem } from '../../PRIMITIVES/Display/Toolbar/ToolbarItem';
 import { Banner } from '../../Shared/Banner';
 import { Button } from '../../Shared/Button';
 import { Dialog } from '../../Shared/Dialog';
 import { Input } from '../../Shared/Input';
 import { PageContainer } from '../../Shared/PageContainer';
 import { ShareDialog } from '../../Shared/ShareDialog';
+import { Toolbar, ToolbarGroup, ToolbarItem } from '../../Shared/Toolbar';
 import * as S from './_RoomHeader.styles';
 
 export function RoomHeader() {
