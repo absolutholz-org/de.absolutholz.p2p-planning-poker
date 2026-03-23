@@ -104,6 +104,9 @@
           "resume": "Timer fortsetzen",
           "reset": "Timer auf ursprüngliche Dauer zurücksetzen"
         }
+      },
+      "banner": {
+        "everyone_ready": "Alle sind bereit!"
       }
     },
     "deck": {
@@ -122,6 +125,18 @@
         "label": "Team-Liste",
         "not_voted": "{{name}} hat noch nicht abgestimmt"
       }
+    }
+  },
+  "card": {
+    "action": {
+      "select": "Stimme für {{value}} Punkte abgeben"
+    },
+    "special": {
+      "coffee": "Kaffeepause",
+      "unsure": "unsicher"
+    },
+    "status": {
+      "hidden": "Stimme abgegeben, verborgen"
     }
   }
 }

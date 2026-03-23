@@ -120,6 +120,9 @@
           "resume": "Reprendre le minuteur",
           "reset": "Réinitialiser le minuteur à sa durée initiale"
         }
+      },
+      "banner": {
+        "everyone_ready": "[TODO: fr] Everyone is ready!"
       }
     },
     "deck": {
@@ -138,6 +141,18 @@
         "label": "Liste de l'équipe",
         "not_voted": "{{name}} n'a pas encore voté"
       }
+    }
+  },
+  "card": {
+    "action": {
+      "select": "Voter {{value}} points"
+    },
+    "special": {
+      "coffee": "pause café",
+      "unsure": "incertain"
+    },
+    "status": {
+      "hidden": "Vote soumis, caché"
     }
   }
 }

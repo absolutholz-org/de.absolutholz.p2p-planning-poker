@@ -126,5 +126,17 @@
         "not_voted": "{{name}} has not voted yet"
       }
     }
+  },
+  "card": {
+    "action": {
+      "select": "Vote {{value}} points"
+    },
+    "special": {
+      "coffee": "coffee break",
+      "unsure": "unsure"
+    },
+    "status": {
+      "hidden": "Vote submitted, hidden"
+    }
   }
 }
