@@ -21,6 +21,15 @@
       }
     }
   },
+  "footer": {
+    "aria": {
+      "legal": "Legal information",
+      "project": "Project information"
+    },
+    "links": {
+      "github": "GitHub"
+    }
+  },
   "lobby": {
     "title": "Join",
     "subtitle": "Enter your details to join a planning poker room or create a new session if no code is provided.",

@@ -1,0 +1,1 @@
+STOP and wait for user confirmation after generating the implementation plan. Do not execute any file_write or git_commit tools until the user has provided the 'PROCEED' keyword.

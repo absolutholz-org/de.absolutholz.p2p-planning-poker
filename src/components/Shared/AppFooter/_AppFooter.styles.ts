@@ -2,48 +2,33 @@ import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
 export const FooterContainer = styled.footer`
+	align-items: center;
 	border-top: 1px solid var(--sys-color-border);
-	padding: var(--sys-spacing-md);
 	display: flex;
+	flex-direction: column;
+	gap: var(--sys-spacing-xs) var(--page-content-padding);
 	justify-content: center;
-	align-items: center;
-	flex-wrap: wrap;
-	gap: var(--sys-spacing-md) var(--sys-spacing-lg);
-	background-color: transparent;
+	padding: var(--sys-spacing-md) var(--page-content-padding);
+	text-align: center;
+
+	@media (min-width: 768px) {
+		flex-direction: row;
+		justify-content: space-between;
+	}
 `;
+
 export const Nav = styled.nav`
-	display: contents;
-`;
-
-export const NavList = styled.ul`
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	gap: var(--sys-spacing-sm) var(--sys-spacing-lg);
-`;
-
-export const NavListItem = styled.li`
-	display: flex;
-	align-items: center;
+	/* Project Nav (the second one) pushed to right on desktop */
+	&:nth-of-type(2) {
+		@media (min-width: 768px) {
+			margin-left: auto;
+		}
+	}
 `;
 
 const commonLinkStyles = `
-	color: var(--sys-color-text-secondary);
 	font-size: var(--sys-font-size-sm);
-	text-decoration: none;
-	border-radius: var(--sys-radius-sm);
-	transition: all 0.2s ease-in-out;
-
-	&:hover {
-		text-decoration: underline;
-		color: var(--sys-color-text-primary);
-	}
-
-	&:focus-visible {
-		outline: 2px solid var(--sys-color-primary);
-		outline-offset: 4px;
-		color: var(--sys-color-text-primary);
-	}
+	padding: var(--sys-spacing-xs) var(--sys-spacing-sm);
 `;
 
 export const FooterLink = styled(Link)`
@@ -55,15 +40,11 @@ export const StaticFooterLink = styled.a`
 `;
 
 export const VersionInfo = styled.span`
-	color: var(--sys-color-text-secondary);
+	// color: var(--sys-color-text-secondary);
 	font-size: var(--sys-font-size-xs);
-	pointer-events: none;
-	margin-left: auto;
+	opacity: 0.6;
 
-	@media (max-width: 480px) {
-		margin-left: 0;
-		width: 100%;
-		text-align: center;
-		margin-top: var(--sys-spacing-sm);
+	@media (max-width: 767px) {
+		margin-top: var(--sys-spacing-xs);
 	}
 `;

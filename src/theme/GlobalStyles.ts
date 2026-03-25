@@ -180,4 +180,25 @@ export const globalStyles = css`
 	[role='list'] {
 		list-style: none;
 	}
+
+	a {
+		color: var(--sys-color-text-secondary);
+		text-decoration: none;
+		transition: all 0.2s ease-in-out;
+
+		&:hover,
+		&:focus-visible {
+			color: var(--sys-color-primary);
+		}
+
+		&:hover {
+			text-decoration: underline;
+		}
+
+		&:focus-visible {
+			border-radius: var(--sys-radius-sm);
+			outline: 2px solid var(--sys-color-primary);
+			outline-offset: -2px;
+		}
+	}
 `;

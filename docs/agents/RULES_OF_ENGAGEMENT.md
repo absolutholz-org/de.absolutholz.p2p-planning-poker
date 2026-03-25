@@ -45,3 +45,14 @@ The `@COMMIT_EXPERT.md` is the final authority on the git history. Every commit 
 
 - **Verify Before Push**: Before performing a `git push`, the `@TECH_LEAD.md` must verify that the Storybook build is successful and that the file system structure matches the request.
 - **Atomic Commits**: Group related changes (e.g., a new component and its stories) into a single semantic commit rather than multiple fragmented pushes.
+
+## 🚫 6. Local-First Knowledge & Tool Restriction
+
+To ensure speed and architectural consistency:
+
+- **Internal Knowledge First**: Do not use the `browser` or `search` tool for standard Web APIs (Flexbox, Grid, React Hooks, etc.). Assume you have expert-level knowledge of these.
+- **Project Context Over Internet**: Your primary source of truth for styling is `GlobalStyles.ts` and the existing components in `PRIMITIVES`.
+- **Forbidden Browsing**: Do not "check" implementation details that are already defined in this project's context.
+- **Permission Required**: If you feel a search is absolutely necessary for a non-standard third-party library, you must state the reason and wait for user confirmation before executing.
+- **Semantic Verification**: "VERIFICATION" requirements in prompts are instructions for CODE LOGIC and STATIC ANALYSIS only.
+- **No Manual Inspection**: Do not use the browser tool to "confirm" UI states in an inspector. Instead, verify that the code logic (e.g., conditional templates, string concatenation) correctly generates the expected attributes.

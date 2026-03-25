@@ -21,6 +21,15 @@
       }
     }
   },
+  "footer": {
+    "aria": {
+      "legal": "Rechtliche Informationen",
+      "project": "Projektinformationen"
+    },
+    "links": {
+      "github": "GitHub"
+    }
+  },
   "lobby": {
     "title": "Beitreten",
     "subtitle": "Gib deine Daten ein, um einem Planning-Poker-Raum beizutreten, oder erstelle eine neue Session, falls kein Code angegeben wird.",

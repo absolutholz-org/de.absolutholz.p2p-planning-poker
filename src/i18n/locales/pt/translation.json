@@ -21,6 +21,15 @@
       }
     }
   },
+  "footer": {
+    "aria": {
+      "legal": "Informações legais",
+      "project": "Informações do projeto"
+    },
+    "links": {
+      "github": "GitHub"
+    }
+  },
   "lobby": {
     "title": "Entrar",
     "subtitle": "Insira seus dados para entrar em uma sala de planning poker ou crie uma nova sessão se nenhum código for fornecido.",

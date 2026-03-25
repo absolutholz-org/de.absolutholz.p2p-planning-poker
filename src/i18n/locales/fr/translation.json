@@ -21,6 +21,15 @@
       }
     }
   },
+  "footer": {
+    "aria": {
+      "legal": "Informations légales",
+      "project": "Informations sur le projet"
+    },
+    "links": {
+      "github": "GitHub"
+    }
+  },
   "lobby": {
     "title": "Rejoindre",
     "subtitle": "Saisissez vos informations pour rejoindre une salle de planning poker ou créez une nouvelle session si aucun code n'est fourni.",
