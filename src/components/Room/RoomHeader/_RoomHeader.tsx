@@ -56,12 +56,18 @@ export function RoomHeader() {
 					<Toolbar aria-label={t('room.header.aria.management')}>
 						<ToolbarGroup>
 							<ToolbarItem
+								ariaControls="share-dialog"
+								ariaExpanded={isShareOpen}
+								ariaHasPopup="dialog"
 								icon="share"
 								label={t('room.header.share.button')}
 								onClick={() => setIsShareOpen(true)}
 								variant="secondary"
 							/>
 							<ToolbarItem
+								ariaControls="rename-dialog"
+								ariaExpanded={isRenameDialogOpen}
+								ariaHasPopup="dialog"
 								icon="edit"
 								label={t('room.header.rename_dialog.button')}
 								onClick={openRenameDialog}
@@ -75,6 +81,9 @@ export function RoomHeader() {
 						<Toolbar aria-label={t('room.header.aria.voting')}>
 							<ToolbarGroup>
 								<ToolbarItem
+									ariaControls="reset-dialog"
+									ariaExpanded={isResetDialogOpen}
+									ariaHasPopup="dialog"
 									icon="refresh"
 									label={t('common.actions.reset')}
 									onClick={() => setIsResetDialogOpen(true)}
@@ -130,12 +139,14 @@ export function RoomHeader() {
 			</PageContainer>
 
 			<ShareDialog
+				id="share-dialog"
 				isOpen={isShareOpen}
 				onClose={() => setIsShareOpen(false)}
 				roomId={roomId || roomState.roomId}
 			/>
 
 			<Dialog
+				id="reset-dialog"
 				isOpen={isResetDialogOpen}
 				title={t('room.header.reset_dialog.title')}
 				message={t('room.header.reset_dialog.message')}
@@ -146,6 +157,7 @@ export function RoomHeader() {
 			/>
 
 			<Dialog
+				id="rename-dialog"
 				isOpen={isRenameDialogOpen}
 				title={t('room.header.rename_dialog.title')}
 				confirmText={t('room.header.rename_dialog.confirm')}

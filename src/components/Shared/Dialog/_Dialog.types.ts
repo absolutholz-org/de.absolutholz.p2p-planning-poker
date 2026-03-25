@@ -10,6 +10,10 @@ export interface IDialog {
 	 */
 	confirmText?: string;
 	/**
+	 * The identifier for the dialog element.
+	 */
+	id?: string;
+	/**
 	 * Whether the dialog is currently visible.
 	 */
 	isOpen: boolean;

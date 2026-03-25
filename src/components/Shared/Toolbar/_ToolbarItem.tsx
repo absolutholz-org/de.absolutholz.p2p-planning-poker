@@ -10,6 +10,9 @@ import { useToolbar } from './_useToolbar';
  * Uses roving tabindex to ensure focus is managed correctly within the toolbar.
  */
 export function ToolbarItem({
+	ariaControls,
+	ariaExpanded,
+	ariaHasPopup,
 	className,
 	disabled,
 	icon,
@@ -46,6 +49,9 @@ export function ToolbarItem({
 			variant={variant}
 			title={label} // Tooltip fallback for icon-only state
 			aria-label={label}
+			aria-haspopup={ariaHasPopup}
+			aria-controls={ariaControls}
+			aria-expanded={ariaExpanded}
 			className={className}
 		>
 			<Icon name={icon} size="sm" aria-hidden="true" />

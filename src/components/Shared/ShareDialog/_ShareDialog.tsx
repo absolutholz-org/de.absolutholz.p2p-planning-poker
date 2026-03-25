@@ -105,11 +105,12 @@ export function ShareContent({
 	);
 }
 
-export function ShareDialog({ isOpen, onClose, roomId }: IShareDialog) {
+export function ShareDialog({ id, isOpen, onClose, roomId }: IShareDialog) {
 	const { t } = useTranslation();
 
 	return (
 		<Dialog
+			id={id}
 			isOpen={isOpen}
 			onCancel={onClose}
 			title={t('room.header.share.dialog_title')}

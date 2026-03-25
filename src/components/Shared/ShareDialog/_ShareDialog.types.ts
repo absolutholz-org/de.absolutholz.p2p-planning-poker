@@ -8,6 +8,10 @@ export interface IShareDialog {
 	 */
 	onClose: () => void;
 	/**
+	 * The identifier for the dialog element.
+	 */
+	id?: string;
+	/**
 	 * The identifier for the current room to share.
 	 */
 	roomId: string;

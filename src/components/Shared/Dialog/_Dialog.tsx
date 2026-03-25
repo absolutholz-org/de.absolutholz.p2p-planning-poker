@@ -9,6 +9,7 @@ export function Dialog({
 	cancelText,
 	children,
 	confirmText,
+	id,
 	isOpen,
 	message,
 	onCancel,
@@ -37,6 +38,7 @@ export function Dialog({
 
 	return (
 		<S.DialogBase
+			id={id}
 			ref={dialogRef}
 			onCancel={onCancel} // Natively handles Escape key
 			onClick={handleBackdropClick}
