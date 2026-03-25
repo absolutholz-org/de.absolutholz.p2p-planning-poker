@@ -24,7 +24,13 @@
   "footer": {
     "aria": {
       "legal": "Informations légales",
-      "project": "Informations sur le projet"
+      "project": "Informations sur le projet",
+      "copyright_range": "Droit d'auteur {{start}} à {{end}} absolutholz",
+      "copyright_single": "Droit d'auteur {{year}} absolutholz"
+    },
+    "text": {
+      "copyright_single": "© {{year}} absolutholz",
+      "copyright_range": "© {{start}}–{{end}} absolutholz"
     },
     "links": {
       "github": "GitHub"

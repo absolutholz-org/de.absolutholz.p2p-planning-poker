@@ -23,8 +23,14 @@
   },
   "footer": {
     "aria": {
+      "copyright_range": "Copyright {{start}} to {{end}} absolutholz",
+      "copyright_single": "Copyright {{year}} absolutholz",
       "legal": "Legal information",
       "project": "Project information"
+    },
+    "text": {
+      "copyright_single": "© {{year}} absolutholz",
+      "copyright_range": "© {{start}}–{{end}} absolutholz"
     },
     "links": {
       "github": "GitHub"

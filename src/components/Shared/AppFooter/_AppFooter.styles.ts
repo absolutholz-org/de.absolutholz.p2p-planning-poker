@@ -26,6 +26,12 @@ export const Nav = styled.nav`
 	}
 `;
 
+export const Copyright = styled.span`
+	color: var(--sys-color-text-secondary);
+	font-size: var(--sys-font-size-sm);
+	user-select: none;
+`;
+
 const commonLinkStyles = `
 	font-size: var(--sys-font-size-sm);
 	padding: var(--sys-spacing-xs) var(--sys-spacing-sm);
