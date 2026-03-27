@@ -21,7 +21,22 @@
       }
     }
   },
+  "header": {
+    "brand": {
+      "aria_home": "Zur Startseite zurückkehren"
+    }
+  },
+  "legal": {
+    "back_to_app": "← Zurück zur App"
+  },
   "footer": {
+    "legal": {
+      "impressum_native": "Impressum",
+      "privacy_native": "Datenschutzerklärung",
+      "impressum_en": "Legal Notice",
+      "privacy_en": "Privacy Policy",
+      "english_suffix": "(Englisch)"
+    },
     "aria": {
       "legal": "Rechtliche Informationen",
       "project": "Projektinformationen",
@@ -71,6 +86,13 @@
     }
   },
   "room": {
+    "status": {
+      "connecting_network": "Verbindung zum Peer-Netzwerk wird hergestellt...",
+      "connection_failed": "Verbindung fehlgeschlagen"
+    },
+    "action": {
+      "join_as_guest": "Als Gast beitreten"
+    },
     "header": {
       "code_badge": {
         "copied": "Kopiert!",

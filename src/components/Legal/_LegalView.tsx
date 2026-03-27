@@ -17,7 +17,7 @@ export interface LegalViewProps {
 }
 export function LegalView({ type }: LegalViewProps) {
 	const navigate = useNavigate();
-	const { i18n } = useTranslation();
+	const { i18n, t } = useTranslation();
 	const isGerman = i18n.language.startsWith('de');
 
 	const content = useMemo(() => {
@@ -31,7 +31,7 @@ export function LegalView({ type }: LegalViewProps) {
 		<PageContainer>
 			<S.BackButtonContainer>
 				<Button variant="secondary" onClick={() => navigate('/')}>
-					← Back to App
+					{t('legal.back_to_app')}
 				</Button>
 			</S.BackButtonContainer>
 

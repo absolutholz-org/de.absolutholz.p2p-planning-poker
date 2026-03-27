@@ -23,7 +23,7 @@ export function Header() {
 				onClick={handleHomeClick}
 				role="button"
 				tabIndex={0}
-				aria-label="Return to Home"
+				aria-label={t('header.brand.aria_home')}
 				onKeyDown={(e) => {
 					if (e.key === 'Enter' || e.key === ' ') {
 						e.preventDefault();

@@ -21,7 +21,22 @@
       }
     }
   },
+  "header": {
+    "brand": {
+      "aria_home": "Voltar ao Início"
+    }
+  },
+  "legal": {
+    "back_to_app": "← Voltar ao App"
+  },
   "footer": {
+    "legal": {
+      "impressum_native": "Impressum",
+      "privacy_native": "Datenschutzerklärung",
+      "impressum_en": "Legal Notice",
+      "privacy_en": "Privacy Policy",
+      "english_suffix": "(Inglês)"
+    },
     "aria": {
       "legal": "Informações legais",
       "project": "Informações do projeto",
@@ -71,6 +86,13 @@
     }
   },
   "room": {
+    "status": {
+      "connecting_network": "Conectando à rede peer-to-peer...",
+      "connection_failed": "Falha na conexão"
+    },
+    "action": {
+      "join_as_guest": "Entrar como Convidado"
+    },
     "header": {
       "code_badge": {
         "copied": "Copiado!",

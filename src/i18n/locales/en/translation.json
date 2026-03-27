@@ -21,7 +21,22 @@
       }
     }
   },
+  "header": {
+    "brand": {
+      "aria_home": "Return to Home"
+    }
+  },
+  "legal": {
+    "back_to_app": "← Back to App"
+  },
   "footer": {
+    "legal": {
+      "impressum_native": "Impressum",
+      "privacy_native": "Datenschutzerklärung",
+      "impressum_en": "Legal Notice",
+      "privacy_en": "Privacy Policy",
+      "english_suffix": "(English)"
+    },
     "aria": {
       "copyright_range": "Copyright {{start}} to {{end}} absolutholz",
       "copyright_single": "Copyright {{year}} absolutholz",
@@ -71,6 +86,13 @@
     "privacy_disclaimer": "By joining, you agree to our Privacy Policy regarding peer-to-peer connections."
   },
   "room": {
+    "status": {
+      "connecting_network": "Connecting to Peer Network...",
+      "connection_failed": "Connection Failed"
+    },
+    "action": {
+      "join_as_guest": "Join as Guest"
+    },
     "header": {
       "code_badge": {
         "copied": "Copied!",

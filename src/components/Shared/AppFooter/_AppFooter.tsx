@@ -29,20 +29,20 @@ export function AppFooter() {
 						hrefLang={!isGerman && !isEnglish ? 'en' : undefined}
 					>
 						{isGerman
-							? 'Impressum'
+							? t('footer.legal.impressum_native')
 							: isEnglish
-								? 'Legal Notice'
-								: `${t('lobby.footer.impressum')} (English)`}
+								? t('footer.legal.impressum_en')
+								: `${t('lobby.footer.impressum')} ${t('footer.legal.english_suffix')}`}
 					</S.FooterLink>
 					<S.FooterLink
 						to="/privacy"
 						hrefLang={!isGerman && !isEnglish ? 'en' : undefined}
 					>
 						{isGerman
-							? 'Datenschutzerklärung'
+							? t('footer.legal.privacy_native')
 							: isEnglish
-								? 'Privacy Policy'
-								: `${t('lobby.footer.privacy')} (English)`}
+								? t('footer.legal.privacy_en')
+								: `${t('lobby.footer.privacy')} ${t('footer.legal.english_suffix')}`}
 					</S.FooterLink>
 				</Stack>
 			</S.Nav>

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useTranslation } from 'react-i18next';
 
 import { RoomHeader } from '../../components/Room/RoomHeader';
 import { Roster } from '../../components/Room/Roster';
@@ -21,6 +22,7 @@ const RoomContent = styled(PageContainer)`
 `;
 
 export function VotingRoom() {
+	const { t } = useTranslation();
 	const { connectionStatus, error, roomState } = useRoom();
 
 	if (connectionStatus === 'connecting') {
@@ -36,7 +38,7 @@ export function VotingRoom() {
 						}}
 					>
 						<Stack align="center" justify="center">
-							<h2>Connecting to Peer Network...</h2>
+							<h2>{t('room.status.connecting_network')}</h2>
 						</Stack>
 					</div>
 				</PageContainer>
@@ -58,7 +60,7 @@ export function VotingRoom() {
 					>
 						<Stack align="center" justify="center" spacing="lg">
 							<Stack align="center" justify="center" spacing="sm">
-								<h2>Connection Failed</h2>
+								<h2>{t('room.status.connection_failed')}</h2>
 								<p>{error}</p>
 							</Stack>
 							<Button
@@ -68,7 +70,7 @@ export function VotingRoom() {
 									window.location.reload();
 								}}
 							>
-								Join as Guest
+								{t('room.action.join_as_guest')}
 							</Button>
 						</Stack>
 					</div>

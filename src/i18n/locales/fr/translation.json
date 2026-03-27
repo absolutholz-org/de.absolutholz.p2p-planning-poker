@@ -21,7 +21,22 @@
       }
     }
   },
+  "header": {
+    "brand": {
+      "aria_home": "Retour à l'accueil"
+    }
+  },
+  "legal": {
+    "back_to_app": "← Retour à l'application"
+  },
   "footer": {
+    "legal": {
+      "impressum_native": "Impressum",
+      "privacy_native": "Datenschutzerklärung",
+      "impressum_en": "Legal Notice",
+      "privacy_en": "Privacy Policy",
+      "english_suffix": "(Anglais)"
+    },
     "aria": {
       "legal": "Informations légales",
       "project": "Informations sur le projet",
@@ -72,6 +87,13 @@
     }
   },
   "room": {
+    "status": {
+      "connecting_network": "Connexion au réseau pair à pair en cours...",
+      "connection_failed": "Échec de la connexion"
+    },
+    "action": {
+      "join_as_guest": "Rejoindre en tant qu'invité"
+    },
     "header": {
       "code_badge": {
         "copied": "Copié !",
