@@ -51,7 +51,16 @@
     "submit": {
       "join": "Join Room",
       "create": "Create Room",
-      "error": "Error joining room"
+      "error": "Error joining room",
+      "connecting": "Connecting..."
+    },
+    "status": {
+      "establishing": "Establishing secure peer connection..."
+    },
+    "debug": {
+      "title": "Connectivity Diagnostics",
+      "hide": "Hide diagnostics",
+      "show": "Show connectivity diagnostics"
     },
     "extra_text": "No sign-up required. Free forever. P2P Poker is a serverless real-time estimation tool powered by WebRTC.",
     "footer": {

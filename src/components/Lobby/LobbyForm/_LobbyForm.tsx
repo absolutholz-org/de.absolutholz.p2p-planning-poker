@@ -182,7 +182,7 @@ export function LobbyForm() {
 								}
 							>
 								{connectionStatus === 'connecting'
-									? 'Connecting...'
+									? t('lobby.submit.connecting')
 									: roomCode.trim()
 										? `${t('lobby.submit.join')}`
 										: `${t('lobby.submit.create')}`}
@@ -190,7 +190,7 @@ export function LobbyForm() {
 							</Button>
 							{connectionStatus === 'connecting' ? (
 								<S.DisclaimerText>
-									Establishing secure peer connection...
+									{t('lobby.status.establishing')}
 								</S.DisclaimerText>
 							) : (
 								<S.DisclaimerText>
@@ -208,10 +208,10 @@ export function LobbyForm() {
 			{logs.length > 0 && showLogs && (
 				<S.DebugSection>
 					<S.DebugHeader>
-						<h3>Connectivity Diagnostics</h3>
+						<h3>{t('lobby.debug.title')}</h3>
 						<S.DebugCloseButton
 							onClick={() => setShowLogs(false)}
-							title="Hide diagnostics"
+							title={t('lobby.debug.hide')}
 						>
 							✕
 						</S.DebugCloseButton>
@@ -226,7 +226,7 @@ export function LobbyForm() {
 			{logs.length > 0 && !showLogs && (
 				<S.DebugToggle
 					onClick={() => setShowLogs(true)}
-					title="Show connectivity diagnostics"
+					title={t('lobby.debug.show')}
 				>
 					⚡
 				</S.DebugToggle>
