@@ -14,6 +14,7 @@ The team will adhere to the following tools to maintain a small, consistent foot
 - **Networking:** WebRTC via the `peerjs` library. Augmented with dynamic TURN/STUN relay credentials from Metered.ca for robust NAT traversal across corporate networks.
 - **Routing:** Client-side SPA semantic routing via `react-router-dom`.
 - **Localization:** Multi-language support (EN, DE, FR, PT) via `react-i18next`.
+- **A11y Auditing:** Automated WCAG 2.2 auditing using `axe-core` and Playwright, with a dedicated dashboard for visualizing results.
 
 ## 3. Architecture: The Host/Guest Model
 

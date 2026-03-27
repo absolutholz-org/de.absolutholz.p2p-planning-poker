@@ -28,3 +28,8 @@ storybook-static
 
 # Environment variables
 .env
+
+# Test artifacts
+/coverage
+/playwright-report
+/test-results

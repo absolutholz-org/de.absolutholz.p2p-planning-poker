@@ -1,0 +1,460 @@
+{
+  "components": [
+    {
+      "checkpoints": [
+        {
+          "category": "WCAG 4.1.2 / BITV 9.4.1.2",
+          "description": "Ensure an element's role supports its ARIA attributes",
+          "fix": "Use only ARIA attributes that are allowed for the element’s role.",
+          "help": "Elements must only use supported ARIA attributes",
+          "nodes": [
+            {
+              "html": "<nav aria-label=\"footer.aria.legal\" class=\"css-k25wck\"><div class=\"css-pizleu\"><a class=\"css-w04rme\" href=\"/impressum\" data-discover=\"true\">Legal Notice</a><a class=\"css-w04rme\" href=\"/privacy\" data-discover=\"true\">Privacy Policy</a></div></nav>",
+              "summary": "",
+              "target": ["nav[aria-label=\"footer.aria.legal\"]"]
+            },
+            {
+              "html": "<span aria-label=\"footer.aria.copyright_single\" class=\"css-1eo5jab\">© <time datetime=\"2026\">2026</time> absolutholz</span>",
+              "summary": "",
+              "target": [".css-1eo5jab"]
+            },
+            {
+              "html": "<nav aria-label=\"footer.aria.project\" class=\"css-k25wck\">",
+              "summary": "",
+              "target": ["nav[aria-label=\"footer.aria.project\"]"]
+            },
+            {
+              "html": "<span aria-label=\"Version 0.20.0\" class=\"css-68and0\">v0.20.0</span>",
+              "summary": "",
+              "target": [".css-68and0"]
+            }
+          ],
+          "ruleId": "aria-allowed-attr",
+          "source": "Unit",
+          "status": "PASS",
+          "why": "Ensures assistive technologies can correctly identify and interact with elements."
+        },
+        {
+          "category": "WCAG N/A / BITV N/A",
+          "description": "Ensure ARIA attributes are used as described in the specification of the element's role",
+          "fix": "Review the rule documentation for repair steps.",
+          "help": "ARIA attributes must be used as specified for the element's role",
+          "nodes": [
+            {
+              "html": "<nav aria-label=\"footer.aria.legal\" class=\"css-k25wck\"><div class=\"css-pizleu\"><a class=\"css-w04rme\" href=\"/impressum\" data-discover=\"true\">Legal Notice</a><a class=\"css-w04rme\" href=\"/privacy\" data-discover=\"true\">Privacy Policy</a></div></nav>",
+              "summary": "",
+              "target": ["nav[aria-label=\"footer.aria.legal\"]"]
+            },
+            {
+              "html": "<span aria-label=\"footer.aria.copyright_single\" class=\"css-1eo5jab\">© <time datetime=\"2026\">2026</time> absolutholz</span>",
+              "summary": "",
+              "target": [".css-1eo5jab"]
+            },
+            {
+              "html": "<nav aria-label=\"footer.aria.project\" class=\"css-k25wck\">",
+              "summary": "",
+              "target": ["nav[aria-label=\"footer.aria.project\"]"]
+            },
+            {
+              "html": "<span aria-label=\"Version 0.20.0\" class=\"css-68and0\">v0.20.0</span>",
+              "summary": "",
+              "target": [".css-68and0"]
+            }
+          ],
+          "ruleId": "aria-conditional-attr",
+          "source": "Unit",
+          "status": "PASS",
+          "why": "This rule ensures compliance with general accessibility best practices."
+        },
+        {
+          "category": "WCAG 4.1.2 / BITV 9.4.1.2",
+          "description": "Ensure ARIA attributes are not prohibited for an element's role",
+          "fix": "Remove ARIA attributes that are not supported on the specific element or role.",
+          "help": "Elements must only use permitted ARIA attributes",
+          "nodes": [
+            {
+              "html": "<nav aria-label=\"footer.aria.legal\" class=\"css-k25wck\"><div class=\"css-pizleu\"><a class=\"css-w04rme\" href=\"/impressum\" data-discover=\"true\">Legal Notice</a><a class=\"css-w04rme\" href=\"/privacy\" data-discover=\"true\">Privacy Policy</a></div></nav>",
+              "summary": "",
+              "target": ["nav[aria-label=\"footer.aria.legal\"]"]
+            },
+            {
+              "html": "<nav aria-label=\"footer.aria.project\" class=\"css-k25wck\">",
+              "summary": "",
+              "target": ["nav[aria-label=\"footer.aria.project\"]"]
+            }
+          ],
+          "ruleId": "aria-prohibited-attr",
+          "source": "Unit",
+          "status": "PASS",
+          "why": "Avoids confusing assistive technology with invalid or conflicting ARIA metadata."
+        },
+        {
+          "category": "WCAG 4.1.2 / BITV 9.4.1.2",
+          "description": "Ensure all ARIA attributes have valid values",
+          "fix": "Use only allowed values (e.g., true/false) for this ARIA attribute.",
+          "help": "ARIA attributes must conform to valid values",
+          "nodes": [
+            {
+              "html": "<nav aria-label=\"footer.aria.legal\" class=\"css-k25wck\"><div class=\"css-pizleu\"><a class=\"css-w04rme\" href=\"/impressum\" data-discover=\"true\">Legal Notice</a><a class=\"css-w04rme\" href=\"/privacy\" data-discover=\"true\">Privacy Policy</a></div></nav>",
+              "summary": "",
+              "target": ["nav[aria-label=\"footer.aria.legal\"]"]
+            },
+            {
+              "html": "<span aria-label=\"footer.aria.copyright_single\" class=\"css-1eo5jab\">© <time datetime=\"2026\">2026</time> absolutholz</span>",
+              "summary": "",
+              "target": [".css-1eo5jab"]
+            },
+            {
+              "html": "<nav aria-label=\"footer.aria.project\" class=\"css-k25wck\">",
+              "summary": "",
+              "target": ["nav[aria-label=\"footer.aria.project\"]"]
+            },
+            {
+              "html": "<span aria-label=\"Version 0.20.0\" class=\"css-68and0\">v0.20.0</span>",
+              "summary": "",
+              "target": [".css-68and0"]
+            }
+          ],
+          "ruleId": "aria-valid-attr-value",
+          "source": "Unit",
+          "status": "PASS",
+          "why": "Incorrect values can cause screen readers to skip or misread the element state."
+        },
+        {
+          "category": "WCAG 4.1.2 / BITV 9.4.1.2",
+          "description": "Ensure attributes that begin with aria- are valid ARIA attributes",
+          "fix": "Correct the spelling or usage of the ARIA attribute.",
+          "help": "ARIA attributes must conform to valid names",
+          "nodes": [
+            {
+              "html": "<nav aria-label=\"footer.aria.legal\" class=\"css-k25wck\"><div class=\"css-pizleu\"><a class=\"css-w04rme\" href=\"/impressum\" data-discover=\"true\">Legal Notice</a><a class=\"css-w04rme\" href=\"/privacy\" data-discover=\"true\">Privacy Policy</a></div></nav>",
+              "summary": "",
+              "target": ["nav[aria-label=\"footer.aria.legal\"]"]
+            },
+            {
+              "html": "<span aria-label=\"footer.aria.copyright_single\" class=\"css-1eo5jab\">© <time datetime=\"2026\">2026</time> absolutholz</span>",
+              "summary": "",
+              "target": [".css-1eo5jab"]
+            },
+            {
+              "html": "<nav aria-label=\"footer.aria.project\" class=\"css-k25wck\">",
+              "summary": "",
+              "target": ["nav[aria-label=\"footer.aria.project\"]"]
+            },
+            {
+              "html": "<span aria-label=\"Version 0.20.0\" class=\"css-68and0\">v0.20.0</span>",
+              "summary": "",
+              "target": [".css-68and0"]
+            }
+          ],
+          "ruleId": "aria-valid-attr",
+          "source": "Unit",
+          "status": "PASS",
+          "why": "Invalid ARIA attributes are ignored by screen readers, potentially breaking functionality."
+        },
+        {
+          "category": "WCAG N/A / BITV N/A",
+          "description": "Ensure the contentinfo landmark is at top level",
+          "fix": "Review the rule documentation for repair steps.",
+          "help": "Contentinfo landmark should not be contained in another landmark",
+          "nodes": [
+            {
+              "html": "<footer class=\"css-1ksxbl9\">",
+              "summary": "",
+              "target": ["footer"]
+            }
+          ],
+          "ruleId": "landmark-contentinfo-is-top-level",
+          "source": "Unit",
+          "status": "PASS",
+          "why": "This rule ensures compliance with general accessibility best practices."
+        },
+        {
+          "category": "WCAG N/A / BITV N/A",
+          "description": "Ensure the document has at most one contentinfo landmark",
+          "fix": "Review the rule documentation for repair steps.",
+          "help": "Document should not have more than one contentinfo landmark",
+          "nodes": [
+            {
+              "html": "<footer class=\"css-1ksxbl9\">",
+              "summary": "",
+              "target": ["footer"]
+            }
+          ],
+          "ruleId": "landmark-no-duplicate-contentinfo",
+          "source": "Unit",
+          "status": "PASS",
+          "why": "This rule ensures compliance with general accessibility best practices."
+        },
+        {
+          "category": "WCAG 4.1.2 / BITV 9.4.1.2",
+          "description": "Ensure landmarks are unique",
+          "fix": "Add unique aria-labels to distinguish multiple landmarks of the same type (e.g., <nav>).",
+          "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+          "nodes": [
+            {
+              "html": "<footer class=\"css-1ksxbl9\">",
+              "summary": "",
+              "target": ["footer"]
+            },
+            {
+              "html": "<nav aria-label=\"footer.aria.legal\" class=\"css-k25wck\"><div class=\"css-pizleu\"><a class=\"css-w04rme\" href=\"/impressum\" data-discover=\"true\">Legal Notice</a><a class=\"css-w04rme\" href=\"/privacy\" data-discover=\"true\">Privacy Policy</a></div></nav>",
+              "summary": "",
+              "target": ["nav[aria-label=\"footer.aria.legal\"]"]
+            },
+            {
+              "html": "<nav aria-label=\"footer.aria.project\" class=\"css-k25wck\">",
+              "summary": "",
+              "target": ["nav[aria-label=\"footer.aria.project\"]"]
+            }
+          ],
+          "ruleId": "landmark-unique",
+          "source": "Unit",
+          "status": "PASS",
+          "why": "Prevents confusion when multiple sections have the same role (e.g., \"Main Nav\" vs \"Legal Nav\")."
+        },
+        {
+          "category": "WCAG 4.1.2 / BITV 9.4.1.2",
+          "description": "Ensure links have discernible text",
+          "fix": "Add descriptive text or an aria-label to the link.",
+          "help": "Links must have discernible text",
+          "nodes": [
+            {
+              "html": "<a class=\"css-w04rme\" href=\"/impressum\" data-discover=\"true\">Legal Notice</a>",
+              "summary": "",
+              "target": ["a[href$=\"impressum\"]"]
+            },
+            {
+              "html": "<a class=\"css-w04rme\" href=\"/privacy\" data-discover=\"true\">Privacy Policy</a>",
+              "summary": "",
+              "target": ["a[href$=\"privacy\"]"]
+            },
+            {
+              "html": "<a href=\"https://github.com/absolutholz/p2p-planning-poker\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"css-w04rme\">footer.links.github</a>",
+              "summary": "",
+              "target": ["a[target=\"_blank\"]"]
+            },
+            {
+              "html": "<a href=\"/storybook/\" class=\"css-w04rme\">lobby.footer.storybook</a>",
+              "summary": "",
+              "target": ["a[href$=\"storybook/\"]"]
+            }
+          ],
+          "ruleId": "link-name",
+          "source": "Unit",
+          "status": "PASS",
+          "why": "Users should understand where a link leads before navigating away."
+        },
+        {
+          "category": "WCAG N/A / BITV N/A",
+          "description": "Ensure touch targets have sufficient size and space",
+          "fix": "Review the rule documentation for repair steps.",
+          "help": "All touch targets must be 24px large, or leave sufficient space",
+          "nodes": [
+            {
+              "html": "<a class=\"css-w04rme\" href=\"/impressum\" data-discover=\"true\">Legal Notice</a>",
+              "summary": "",
+              "target": ["a[href$=\"impressum\"]"]
+            },
+            {
+              "html": "<a class=\"css-w04rme\" href=\"/privacy\" data-discover=\"true\">Privacy Policy</a>",
+              "summary": "",
+              "target": ["a[href$=\"privacy\"]"]
+            },
+            {
+              "html": "<a href=\"https://github.com/absolutholz/p2p-planning-poker\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"css-w04rme\">footer.links.github</a>",
+              "summary": "",
+              "target": ["a[target=\"_blank\"]"]
+            },
+            {
+              "html": "<a href=\"/storybook/\" class=\"css-w04rme\">lobby.footer.storybook</a>",
+              "summary": "",
+              "target": ["a[href$=\"storybook/\"]"]
+            }
+          ],
+          "ruleId": "target-size",
+          "source": "Unit",
+          "status": "PASS",
+          "why": "This rule ensures compliance with general accessibility best practices."
+        },
+        {
+          "category": "WCAG 4.1.2 / BITV 9.4.1.2",
+          "description": "Ensure ARIA attributes are not prohibited for an element's role",
+          "fix": "Remove ARIA attributes that are not supported on the specific element or role.",
+          "help": "Elements must only use permitted ARIA attributes",
+          "impact": "serious",
+          "nodes": [
+            {
+              "html": "<span aria-label=\"footer.aria.copyright_single\" class=\"css-1eo5jab\">© <time datetime=\"2026\">2026</time> absolutholz</span>",
+              "summary": "aria-label attribute is not well supported on a span with no valid role attribute.",
+              "target": [".css-1eo5jab"]
+            },
+            {
+              "html": "<span aria-label=\"Version 0.20.0\" class=\"css-68and0\">v0.20.0</span>",
+              "summary": "aria-label attribute is not well supported on a span with no valid role attribute.",
+              "target": [".css-68and0"]
+            }
+          ],
+          "ruleId": "aria-prohibited-attr",
+          "source": "Unit",
+          "status": "INCOMPLETE",
+          "why": "Avoids confusing assistive technology with invalid or conflicting ARIA metadata."
+        },
+        {
+          "category": "WCAG 1.4.3 / BITV 9.1.4.3",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "fix": "Increase the contrast ratio to at least 4.5:1 for normal text.",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "impact": null,
+          "nodes": [],
+          "ruleId": "color-contrast",
+          "source": "Unit",
+          "status": "INCOMPLETE",
+          "why": "Ensures readability for users with low vision or when using devices in bright light."
+        },
+        {
+          "category": "WCAG 4.1.2 / BITV 9.4.1.2",
+          "description": "Ensure aria-hidden elements are not focusable nor contain focusable elements",
+          "fix": "Ensure focusable elements are not hidden from assistive technologies.",
+          "help": "ARIA hidden element must not be focusable or contain focusable elements",
+          "nodes": [],
+          "ruleId": "aria-hidden-focus",
+          "source": "Unit",
+          "status": "INAPPLICABLE",
+          "why": "Prevents \"ghost\" focusable elements that screen reader users cannot see."
+        },
+        {
+          "category": "WCAG 4.1.1 / BITV 9.4.1.1",
+          "description": "Ensure all elements with a role attribute use a valid value",
+          "fix": "Use valid ARIA roles that match the element’s purpose.",
+          "help": "ARIA roles used must conform to valid values",
+          "nodes": [],
+          "ruleId": "aria-roles",
+          "source": "Unit",
+          "status": "INAPPLICABLE",
+          "why": "Correct roles help users understand what an element does (e.g., button vs. link)."
+        },
+        {
+          "category": "WCAG 4.1.2 / BITV 9.4.1.2",
+          "description": "Ensure buttons have discernible text",
+          "fix": "Add an aria-label or visible text to the button.",
+          "help": "Buttons must have discernible text",
+          "nodes": [],
+          "ruleId": "button-name",
+          "source": "Unit",
+          "status": "INAPPLICABLE",
+          "why": "Users need to know what a button does before they click it."
+        },
+        {
+          "category": "WCAG 4.1.1 / BITV 9.4.1.1",
+          "description": "Ensure every id attribute value used in ARIA and in labels is unique",
+          "fix": "Remove duplicate IDs used in ARIA attributes like aria-labelledby.",
+          "help": "IDs used in ARIA and labels must be unique",
+          "nodes": [],
+          "ruleId": "duplicate-id-aria",
+          "source": "Unit",
+          "status": "INAPPLICABLE",
+          "why": "Ensures ARIA relationships remain predictable and unique."
+        },
+        {
+          "category": "WCAG 1.3.1 / BITV 9.1.3.1",
+          "description": "Ensure the order of headings is semantically correct",
+          "fix": "Ensure heading levels (h1-h6) follow a logical hierarchy.",
+          "help": "Heading levels should only increase by one",
+          "nodes": [],
+          "ruleId": "heading-order",
+          "source": "Unit",
+          "status": "INAPPLICABLE",
+          "why": "Helps screen reader users navigate the page structure like a table of contents."
+        },
+        {
+          "category": "WCAG 3.1.1 / BITV 9.3.1.1",
+          "description": "Ensure every HTML document has a lang attribute",
+          "fix": "Add a lang attribute (e.g., lang=\"en\") to the <html> tag.",
+          "help": "<html> element must have a lang attribute",
+          "nodes": [],
+          "ruleId": "html-has-lang",
+          "source": "Unit",
+          "status": "INAPPLICABLE",
+          "why": "Enables screen readers to use the correct pronunciation and accent."
+        },
+        {
+          "category": "WCAG 1.1.1 / BITV 9.1.1.1",
+          "description": "Ensure <img> elements have alternative text or a role of none or presentation",
+          "fix": "Add a descriptive alt attribute to the image.",
+          "help": "Images must have alternative text",
+          "nodes": [],
+          "ruleId": "image-alt",
+          "source": "Unit",
+          "status": "INAPPLICABLE",
+          "why": "Provides a verbal description of images for blind users."
+        },
+        {
+          "category": "WCAG 1.3.1 / BITV 9.1.3.1",
+          "description": "Ensure every form element has a label",
+          "fix": "Use a <label> element or aria-label for every form input.",
+          "help": "Form elements must have labels",
+          "nodes": [],
+          "ruleId": "label",
+          "source": "Unit",
+          "status": "INAPPLICABLE",
+          "why": "Allows users to know what information is expected in a form field."
+        },
+        {
+          "category": "WCAG 1.3.1 / BITV 9.1.3.1",
+          "description": "Ensure the document has a main landmark",
+          "fix": "Ensure the page has exactly one <main> landmark.",
+          "help": "Document should have one main landmark",
+          "nodes": [],
+          "ruleId": "landmark-one-main",
+          "source": "Unit",
+          "status": "INAPPLICABLE",
+          "why": "Helps users skip navigation and jump directly to the primary content."
+        },
+        {
+          "category": "WCAG 1.3.1 / BITV 9.1.3.1",
+          "description": "Ensure that lists are structured correctly",
+          "fix": "Ensure <ul> or <ol> elements contain only <li> children.",
+          "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+          "nodes": [],
+          "ruleId": "list",
+          "source": "Unit",
+          "status": "INAPPLICABLE",
+          "why": "Correct list structure allows screen readers to announce the number of items."
+        },
+        {
+          "category": "WCAG 1.3.1 / BITV 9.1.3.1",
+          "description": "Ensure <li> elements are used semantically",
+          "fix": "Ensure <li> elements are contained within a <ul> or <ol>.",
+          "help": "<li> elements must be contained in a <ul> or <ol>",
+          "nodes": [],
+          "ruleId": "listitem",
+          "source": "Unit",
+          "status": "INAPPLICABLE",
+          "why": "Standalone list items are not recognized as part of a list by assistive tech."
+        },
+        {
+          "category": "WCAG 1.3.1 / BITV 9.1.3.1",
+          "description": "Ensure all page content is contained by landmarks",
+          "fix": "Add an aria-label to any element with a region role.",
+          "help": "All page content should be contained by landmarks",
+          "nodes": [],
+          "ruleId": "region",
+          "source": "Unit",
+          "status": "INAPPLICABLE",
+          "why": "Identifies the purpose of layout regions in the document tree."
+        }
+      ],
+      "name": "AppFooter",
+      "passes": 10,
+      "violations": 0
+    }
+  ],
+  "regression": false,
+  "stats": {
+    "duration": "9.43",
+    "timestamp": "2026-03-27T12:18:26.565Z",
+    "totalPasses": 10,
+    "totalViolations": 0
+  }
+}

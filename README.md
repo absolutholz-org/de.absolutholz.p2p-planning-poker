@@ -15,6 +15,7 @@ This application provides a real-time agile estimation tool for small teams (up 
 - **Fibonacci Scale:** Standard agile voting scale `[0, 1, 2, 3, 5, 8, 13, 21, "☕️", "?"]`.
 - **Session Persistence**: Built-in `sessionStorage` backup ensures that both Hosts and Guests can refresh their browser without losing their identity or room state.
 - **Relay Bridge**: Integrated Metered.ca TURN/STUN relay ensures connectivity even behind strict corporate firewalls and Symmetric NATs.
+- **A11y Certification**: Automated WCAG 2.2 AA auditing and a dedicated responsive dashboard for real-time compliance reporting.
 
 ## 🛠️ Tech Stack
 

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { type ComponentProps } from 'react';
+import { MemoryRouter } from 'react-router-dom';
 
 import { RoomContext } from '../../../context/RoomContext';
 import { LobbyForm } from './_LobbyForm';
@@ -25,7 +26,9 @@ const meta = {
 						userName: '',
 					}}
 				>
-					<Story />
+					<MemoryRouter>
+						<Story />
+					</MemoryRouter>
 				</RoomContext.Provider>
 			);
 		},
