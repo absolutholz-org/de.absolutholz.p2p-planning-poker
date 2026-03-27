@@ -52,7 +52,7 @@
       "join": "Raum beitreten",
       "create": "Raum erstellen",
       "error": "Fehler beim Beitreten in den Raum",
-      "connecting": "[TODO: de] Connecting..."
+      "connecting": "Verbinden..."
     },
     "extra_text": "Keine Anmeldung erforderlich. Für immer kostenlos. P2P Poker ist ein serverloses Echtzeit-Schätzungstool, basierend auf WebRTC.",
     "footer": {
@@ -62,12 +62,12 @@
     },
     "privacy_disclaimer": "Mit dem Beitritt erklärst du dich mit unserer Datenschutzerklärung bezüglich Peer-to-Peer-Verbindungen einverstanden.",
     "status": {
-      "establishing": "[TODO: de] Establishing secure peer connection..."
+      "establishing": "Sichere Peer-Verbindung wird hergestellt..."
     },
     "debug": {
-      "title": "[TODO: de] Connectivity Diagnostics",
-      "hide": "[TODO: de] Hide diagnostics",
-      "show": "[TODO: de] Show connectivity diagnostics"
+      "title": "Verbindungsdiagnose",
+      "hide": "Diagnose ausblenden",
+      "show": "Verbindungsdiagnose anzeigen"
     }
   },
   "room": {

@@ -53,7 +53,7 @@
       "error": "Erreur lors de l'accès à la salle",
       "create": "Créer la Salle",
       "extra_text": "Aucune inscription requise. Gratuit pour toujours. P2P Poker est un outil d'estimation en temps réel sans serveur basé sur WebRTC.",
-      "connecting": "[TODO: fr] Connecting..."
+      "connecting": "Connexion en cours..."
     },
     "footer": {
       "impressum": "Mentions Légales",
@@ -63,12 +63,12 @@
     "privacy_disclaimer": "En rejoignant, vous acceptez notre politique de confidentialité concernant les connexions peer-to-peer.",
     "extra_text": "Aucune inscription requise. Gratuit pour toujours. P2P Poker est un outil d'estimation en temps réel sans serveur basé sur WebRTC.",
     "status": {
-      "establishing": "[TODO: fr] Establishing secure peer connection..."
+      "establishing": "Établissement d'une connexion sécurisée..."
     },
     "debug": {
-      "title": "[TODO: fr] Connectivity Diagnostics",
-      "hide": "[TODO: fr] Hide diagnostics",
-      "show": "[TODO: fr] Show connectivity diagnostics"
+      "title": "Diagnostics de connectivité",
+      "hide": "Masquer les diagnostics",
+      "show": "Afficher les diagnostics de connectivité"
     }
   },
   "room": {
@@ -146,7 +146,7 @@
         }
       },
       "banner": {
-        "everyone_ready": "[TODO: fr] Everyone is ready!"
+        "everyone_ready": "Tout le monde est prêt !"
       }
     },
     "deck": {
