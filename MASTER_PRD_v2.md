@@ -50,7 +50,7 @@ The application relies on passing strict message payloads over PeerJS data chann
 
 The interface should be clean and split into two primary views.
 
-- **Lobby View:** A simple entry form containing inputs for "Name" and "Room Code" (conditionally hidden if accessed via a deep link). Leaving the Room Code blank and proceeding creates a new room as a Host.
+- **Lobby View:** A simple entry form containing inputs for "Name" and "Room Code" (conditionally hidden if accessed via a deep link). Leaving the Room Code blank and proceeding creates a new room as a Host. Includes a "How it Works & Privacy" disclosure providing information about the P2P and serverless architecture.
 - **Estimation View:**
 - **Header:** Clearly displays a dynamic "Share" menu (with native OS sharing and clipboard deep-link copying) alongside the "Reveal" and "Reset" controls.
 - **Voting Deck:** A grid of cards representing the voting scale. Emotion should be used to style active/selected states when a user clicks their choice.

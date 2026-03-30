@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useRoom } from '../../../hooks/useRoom';
 import { Button } from '../../Shared/Button';
+import { Disclosure } from '../../Shared/Disclosure';
 import { Form } from '../../Shared/Form';
 import { Icon } from '../../Shared/Icon';
 import { Input } from '../../Shared/Input';
@@ -214,6 +215,19 @@ export function LobbyForm() {
 				<S.ExtraText>
 					<p>{t('lobby.extra_text')}</p>
 				</S.ExtraText>
+
+				<Disclosure title={t('lobby.faq.title')} icon="info">
+					<Stack spacing="md">
+						<Stack spacing="xs">
+							<h4>{t('lobby.faq.p2p_title')}</h4>
+							<p>{t('lobby.faq.p2p_body')}</p>
+						</Stack>
+						<Stack spacing="xs">
+							<h4>{t('lobby.faq.persistence_title')}</h4>
+							<p>{t('lobby.faq.persistence_body')}</p>
+						</Stack>
+					</Stack>
+				</Disclosure>
 			</Stack>
 			{logs.length > 0 && showLogs && (
 				<S.DebugSection>

@@ -84,6 +84,13 @@
       "title": "Verbindungsdiagnose",
       "hide": "Diagnose ausblenden",
       "show": "Verbindungsdiagnose anzeigen"
+    },
+    "faq": {
+      "title": "Wie es funktioniert & Datenschutz",
+      "p2p_title": "Serverlos & Privat",
+      "p2p_body": "Wir verwenden WebRTC, um Sie direkt mit Ihrem Team zu verbinden. Ihre Daten landen niemals auf einem Server.",
+      "persistence_title": "Keine Speicherung",
+      "persistence_body": "Sitzungen sind temporär. Wenn der Host seinen Tab schließt, werden die Daten für maximale Privatsphäre dauerhaft gelöscht."
     }
   },
   "room": {

@@ -84,7 +84,14 @@
       "privacy": "Privacy Policy",
       "storybook": "Storybook"
     },
-    "privacy_disclaimer": "By joining, you agree to our Privacy Policy regarding peer-to-peer connections."
+    "privacy_disclaimer": "By joining, you agree to our Privacy Policy regarding peer-to-peer connections.",
+    "faq": {
+      "title": "How it works & Privacy",
+      "p2p_title": "Serverless & Private",
+      "p2p_body": "We use WebRTC to connect you directly to your teammates. Your data never touches a server.",
+      "persistence_title": "No Persistence",
+      "persistence_body": "Sessions are temporary. If the host closes their tab, the data is deleted forever for maximum privacy."
+    }
   },
   "room": {
     "status": {

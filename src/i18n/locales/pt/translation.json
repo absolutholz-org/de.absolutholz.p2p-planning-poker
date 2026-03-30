@@ -84,6 +84,13 @@
       "title": "Diagnóstico de Conectividade",
       "hide": "Ocultar diagnóstico",
       "show": "Mostrar diagnóstico de conectividade"
+    },
+    "faq": {
+      "title": "Como funciona e Privacidade",
+      "p2p_title": "Sem servidor e Privado",
+      "p2p_body": "Usamos WebRTC para conectar você diretamente à sua equipe. Seus dados nunca tocam um servidor.",
+      "persistence_title": "Sem Persistência",
+      "persistence_body": "As sessões são temporárias. Se o anfitrião fechar a guia, os dados são excluídos para sempre para máxima privacidade."
     }
   },
   "room": {

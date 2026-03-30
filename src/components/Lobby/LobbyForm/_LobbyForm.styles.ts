@@ -9,7 +9,7 @@ export const CardContainer = styled.div`
 	background-color: var(--sys-color-surface);
 	border: 1px solid var(--sys-color-border);
 	border-radius: var(--sys-radius-xl);
-	box-shadow: var(--sys-shadow-lg);
+	// box-shadow: var(--sys-shadow-lg);
 	padding: var(--sys-spacing-xl);
 	width: 100%;
 `;
