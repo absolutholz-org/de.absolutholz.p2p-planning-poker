@@ -65,7 +65,8 @@
     },
     "submit": {
       "join": "Entrar na Sala",
-      "create": "Criar Sala",
+      "create": "Hospedar uma sessão",
+      "create_hint": "Como anfitrião, você detém a única cópia desta sessão. Se você fechar seu navegador, a sala será encerrada.",
       "error": "Erro ao entrar na sala",
       "connecting": "Conectando..."
     },

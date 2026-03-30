@@ -65,9 +65,9 @@
     },
     "submit": {
       "join": "Rejoindre la Salle",
+      "create": "Héberger une session",
+      "create_hint": "En tant qu'hôte, vous détenez la seule copie de cette session. Si vous fermez votre navigateur, la salle est dissoute.",
       "error": "Erreur lors de l'accès à la salle",
-      "create": "Créer la Salle",
-      "extra_text": "Aucune inscription requise. Gratuit pour toujours. P2P Poker est un outil d'estimation en temps réel sans serveur basé sur WebRTC.",
       "connecting": "Connexion en cours..."
     },
     "footer": {

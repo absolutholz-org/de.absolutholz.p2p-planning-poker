@@ -65,7 +65,8 @@
     },
     "submit": {
       "join": "Raum beitreten",
-      "create": "Raum erstellen",
+      "create": "Sitzung hosten",
+      "create_hint": "Als Host besitzen Sie die einzige Kopie dieser Sitzung. Wenn Sie Ihren Browser schließen, wird der Raum aufgelöst.",
       "error": "Fehler beim Beitreten in den Raum",
       "connecting": "Verbinden..."
     },

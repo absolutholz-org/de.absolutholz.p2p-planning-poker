@@ -65,7 +65,8 @@
     },
     "submit": {
       "join": "Join Room",
-      "create": "Create Room",
+      "create": "Host a Session",
+      "create_hint": "As the host, you hold the only copy of this session. If you close your browser, the room dissolves.",
       "error": "Error joining room",
       "connecting": "Connecting..."
     },

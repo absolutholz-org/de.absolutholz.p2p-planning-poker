@@ -176,6 +176,9 @@ export function LobbyForm() {
 							<Button
 								type="submit"
 								variant="primary"
+								aria-describedby={
+									!roomCode.trim() ? 'host-hint' : undefined
+								}
 								disabled={
 									!name.trim() ||
 									connectionStatus === 'connecting'
@@ -184,10 +187,17 @@ export function LobbyForm() {
 								{connectionStatus === 'connecting'
 									? t('lobby.submit.connecting')
 									: roomCode.trim()
-										? `${t('lobby.submit.join')}`
-										: `${t('lobby.submit.create')}`}
+										? t('lobby.submit.join')
+										: t('lobby.submit.create')}
 								<Icon name="arrow_right" size="sm" />
 							</Button>
+
+							{!roomCode.trim() && (
+								<S.DisclaimerText id="host-hint" role="status">
+									{t('lobby.submit.create_hint')}
+								</S.DisclaimerText>
+							)}
+
 							{connectionStatus === 'connecting' ? (
 								<S.DisclaimerText>
 									{t('lobby.status.establishing')}
