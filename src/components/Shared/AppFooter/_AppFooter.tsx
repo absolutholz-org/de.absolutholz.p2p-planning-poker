@@ -104,7 +104,7 @@ export function AppFooter() {
 				>
 					<li>
 						<S.StaticFooterLink
-							href="https://github.com/absolutholz/p2p-planning-poker"
+							href="https://github.com/absolutholz-org/de.absolutholz.p2p-planning-poker"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
