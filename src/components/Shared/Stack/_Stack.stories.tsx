@@ -8,6 +8,10 @@ const meta = {
 			control: 'select',
 			options: ['start', 'center', 'end', 'stretch', 'baseline'],
 		},
+		crossSpacing: {
+			control: 'select',
+			options: ['none', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+		},
 		direction: {
 			control: 'radio',
 			options: ['row', 'column'],
@@ -90,5 +94,26 @@ export const Nested: Story = {
 		),
 		direction: 'column',
 		spacing: 'xl',
+	},
+};
+
+export const WrappedWithMixedSpacing: Story = {
+	args: {
+		children: (
+			<>
+				<Placeholder />
+				<Placeholder />
+				<Placeholder />
+				<Placeholder />
+				<Placeholder />
+				<Placeholder />
+				<Placeholder />
+				<Placeholder />
+			</>
+		),
+		crossSpacing: 'xl',
+		direction: 'row',
+		spacing: 'sm',
+		wrap: true,
 	},
 };

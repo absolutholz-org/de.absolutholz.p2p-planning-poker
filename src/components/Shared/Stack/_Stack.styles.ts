@@ -27,13 +27,17 @@ const getAlign = (align?: string) => {
 export const StyledStack = styled.div<{
 	$direction: string;
 	$spacing: StackSpacing;
+	$crossSpacing?: StackSpacing;
 	$align: string;
 	$justify: string;
 	$wrap: boolean;
 }>`
 	display: flex;
 	flex-direction: ${(props) => props.$direction};
-	gap: ${(props) => getGap(props.$spacing)};
+	gap: ${(props) =>
+		props.$direction === 'row'
+			? `${getGap(props.$crossSpacing || props.$spacing)} ${getGap(props.$spacing)}`
+			: `${getGap(props.$spacing)} ${getGap(props.$crossSpacing || props.$spacing)}`};
 	align-items: ${(props) => getAlign(props.$align)};
 	justify-content: ${(props) => getAlign(props.$justify)};
 	flex-wrap: ${(props) => (props.$wrap ? 'wrap' : 'nowrap')};

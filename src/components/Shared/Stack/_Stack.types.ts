@@ -17,6 +17,10 @@ export interface IStack extends React.HTMLAttributes<HTMLDivElement> {
 	 */
 	spacing?: StackSpacing;
 	/**
+	 * Spacing between wrapped elements on the cross axis
+	 */
+	crossSpacing?: StackSpacing;
+	/**
 	 * Alignment of elements along the cross axis
 	 * @default 'stretch'
 	 */

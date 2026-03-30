@@ -5,6 +5,7 @@ export function Stack({
 	align = 'stretch',
 	children,
 	component = 'div',
+	crossSpacing,
 	direction = 'column',
 	justify = 'start',
 	spacing = 'md',
@@ -16,6 +17,7 @@ export function Stack({
 			as={component}
 			$direction={direction}
 			$spacing={spacing}
+			$crossSpacing={crossSpacing}
 			$align={align}
 			$justify={justify}
 			$wrap={wrap}
