@@ -46,3 +46,39 @@ export const AlignedStart: Story = {
 		align: 'start',
 	},
 };
+
+// Variant Story: Demonstration of auto-dismiss when an internal action is clicked
+export const WithActions: Story = {
+	args: {
+		align: 'bottom',
+		children: [
+			<Button key="trigger" variant="primary">
+				Action Menu
+			</Button>,
+			<div
+				key="content"
+				style={{
+					display: 'flex',
+					flexDirection: 'column',
+					gap: '8px',
+					padding: '16px',
+				}}
+			>
+				<Button
+					key="action-1"
+					variant="ghost"
+					style={{ textAlign: 'left' }}
+				>
+					First Action
+				</Button>
+				<Button
+					key="action-2"
+					variant="ghost"
+					style={{ textAlign: 'left' }}
+				>
+					Second Action
+				</Button>
+			</div>,
+		],
+	},
+};

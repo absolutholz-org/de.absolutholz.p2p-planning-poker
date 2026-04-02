@@ -15,6 +15,7 @@ For any new component named `[ComponentName]`, you must create the following fil
 ```text
 src/components/
 └── [ComponentName]/
+    ├── _[ComponentName].a11y.ts     <-- Mandatory Playwright A11y Test
     ├── _[ComponentName].stories.tsx
     ├── _[ComponentName].styles.ts
     ├── _[ComponentName].tsx
@@ -119,6 +120,36 @@ export { MyComponent } from './_[ComponentName]';
 - Import `Meta` and `StoryObj` from `@storybook/react-vite`.
 - The meta object must be fully typed and include `layout: 'centered'` and `tags: ['autodocs']`.
 - Create separate, named stories for all important variants and states (e.g., Default, Disabled, Interactive).
+
+### 7. `_[ComponentName].a11y.ts` (Accessibility Certification)
+
+- **Surgical Scoping**: All tests MUST target the `#storybook-root` element to isolate the component from Storybook's internal UI and prevent "Audit Noise" (e.g., missing page landmarks).
+- **Network Resilience**: Use `{ waitUntil: 'networkidle' }` in `page.goto()` to ensure the component is fully initialized before the audit begins.
+- **Template Requirement**:
+
+```typescript
+import { test, expect } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+
+test.describe('[ComponentName] A11y Certification', () => {
+  test('should pass all WCAG 2.2 and BITV 2.0 standards', async ({ page }) => {
+    // Navigate to the component in isolation
+    await page.goto('/iframe.html?id=[story-id]--default', {
+      waitUntil: 'networkidle',
+    });
+
+    // Confirm the component is rendered before starting the engine
+    await expect(page.locator('#storybook-root')).toBeVisible();
+
+    const results = await new AxeBuilder({ page })
+      .include('#storybook-root')
+      .withTags(['wcag22aa', 'best-practice'])
+      .analyze();
+
+    expect(results.violations).toEqual([]);
+  });
+});
+```
 
 ## Execution Principle
 

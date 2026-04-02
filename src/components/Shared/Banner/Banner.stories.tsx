@@ -14,11 +14,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Success: Story = {
 	args: {
-		action: (
-			<Button size="sm" variant="primary">
-				Reveal Now
-			</Button>
-		),
+		action: <Button variant="primary">Reveal Now</Button>,
 		message: 'Everyone is ready!',
 		variant: 'success',
 	},

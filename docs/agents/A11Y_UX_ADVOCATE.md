@@ -75,3 +75,9 @@ export function VoteCheckbox({ label, onSelect }) {
   );
 }
 ```
+
+### 5. Automated Certification (Playwright & Axe)
+
+- **Mandatory Scoping:** You MUST ensure tests only audit the component root (`#storybook-root`). Veto any test that audits the entire document and returns "Document Noise" like missing landmarks or page-level headings.
+- **Dynamic State Testing:** If a component has interactive states (e.g., expanded, active, focused), you MUST mandate test cases that simulate these interactions using `page.click()` or `page.focus()` before running the Axe analysis.
+- **Mobile Reflow (WCAG 1.4.10):** For layout components like `Stack`, mandate a test case at a `320px` viewport width to verify content does not overlap or force horizontal scrolling.

@@ -56,3 +56,15 @@ To ensure speed and architectural consistency:
 - **Permission Required**: If you feel a search is absolutely necessary for a non-standard third-party library, you must state the reason and wait for user confirmation before executing.
 - **Semantic Verification**: "VERIFICATION" requirements in prompts are instructions for CODE LOGIC and STATIC ANALYSIS only.
 - **No Manual Inspection**: Do not use the browser tool to "confirm" UI states in an inspector. Instead, verify that the code logic (e.g., conditional templates, string concatenation) correctly generates the expected attributes.
+
+## 🧪 7. Automated Certification Protocol
+
+- **Surgical Audits**: All accessibility tests MUST use the `.include('#storybook-root')` modifier. This prevents "Audit Noise" from Storybook’s internal wrapper (e.g., reporting missing main landmarks or H1s that are not the component's responsibility).
+- **Interactive Verification**: For components with dynamic states (e.g., Icons with labels vs. decorative), both states must be audited in the `.[ComponentName].a11y.ts` file.
+- **The Dashboard**: The final authority on project quality and "Definition of Done" is the generated `certification.html`. Agents must review this report to identify and fix violations before finalizing any task.
+
+## 🧪 8. Environmental Stress Testing
+
+- **Text Resizing (WCAG 1.4.4/1.4.12)**: Every component must be tested with `text-spacing` overrides and 200% zoom emulation to ensure containers expand without clipping text.
+- **Contrast & Themes**: Audits MUST be performed against both `--sys-color-mode: light` and `dark` tokens.
+- **Forced Colors Mode**: Emulate `forced-colors: active` in Playwright to ensure borders and high-contrast outlines are visible when the system strips custom colors.

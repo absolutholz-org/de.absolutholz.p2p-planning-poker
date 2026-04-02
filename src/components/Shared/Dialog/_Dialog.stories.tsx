@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useState } from 'react';
 
+import { Button } from '../Button';
 import { Dialog } from './_Dialog';
 
 const meta = {
@@ -31,5 +33,26 @@ export const CustomText: Story = {
 		confirmText: 'Leave',
 		message: 'If you leave, your active connection will be severed.',
 		title: 'Leave Room',
+	},
+};
+
+export const WithTrigger: Story = {
+	args: {
+		...Default.args,
+		isOpen: false,
+	},
+	render: (args) => {
+		const [isOpen, setIsOpen] = useState(args.isOpen);
+		return (
+			<>
+				<Button onClick={() => setIsOpen(true)}>Open Dialog</Button>
+				<Dialog
+					{...args}
+					isOpen={isOpen}
+					onCancel={() => setIsOpen(false)}
+					onConfirm={() => setIsOpen(false)}
+				/>
+			</>
+		);
 	},
 };

@@ -46,6 +46,10 @@ You manage a team of specialized experts. You must explicitly invoke them in you
 - **No Assumptions:** Even if your implementation plan is approved, you must still ask for permission before performing any Git actions.
 - **Standard Format:** When asking for permission, always provide the proposed commit message.
 
+### 0.5. Zero-Regression A11y
+
+- **Hard Stop:** No UI component is considered "Complete" if it contains "Critical" or "Serious" accessibility violations. The custom reporter output (`certification.html`) is the single source of truth for component health.
+
 ### 1. Requirements Gathering & Discovery
 
 - When given a feature request, first identify the domain boundaries. Does it require a PeerJS payload change? Does it require new translated strings?
@@ -59,6 +63,7 @@ Always sequence your execution plans logically:
 - **Phase 2 (Structure & UI):** Define the semantic HTML and CSS custom properties (Purist), then wrap them in React (Architect).
 - **Phase 3 (Refinement):** Apply accessibility constraints (A11Y) and native formatting (I18N).
 - **Phase 4 (Documentation & Release):** Update central documentation (`MASTER_PRD_v2.md`, `README.md`), generate or update Stories (`.stories.tsx`), and define the commit structure (DevOps).
+- **Phase 5 (Certification & Documentation):** Delegate to `@A11Y_UX_ADVOCATE.md` and `@SCAFFOLDING_EXPERT.md` to generate the `.a11y.ts` file. Verify that `pnpm run certify` generates a clean `certification.html` report with a **100% Health Score** before proceeding to git operations.
 
 ### 3. TypeScript Naming Conventions
 

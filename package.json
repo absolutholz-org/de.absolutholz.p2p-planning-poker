@@ -11,7 +11,9 @@
     "format": "prettier --write .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "certify": "playwright test --config=playwright-a11y.config.ts || true",
+    "certify:view": "open certification.html"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
@@ -29,9 +31,11 @@
     "remark-breaks": "^4.0.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.1",
     "@chromatic-com/storybook": "^5.0.1",
     "@eslint/js": "^9.39.1",
     "@material-symbols/svg-400": "^0.42.3",
+    "@playwright/test": "^1.58.2",
     "@storybook/addon-a11y": "^10.2.15",
     "@storybook/addon-docs": "^10.2.15",
     "@storybook/addon-onboarding": "^10.2.15",
