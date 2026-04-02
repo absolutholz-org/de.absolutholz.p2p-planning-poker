@@ -28,3 +28,9 @@ storybook-static
 
 # Environment variables
 .env
+
+# Accessibility Audit Artifacts
+/certification.html
+/a11y-report/
+/test-results/
+/test_output.txt
