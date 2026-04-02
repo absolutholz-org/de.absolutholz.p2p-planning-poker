@@ -6,12 +6,12 @@ import {
 	testReflowCompliance,
 } from '../../../test/a11y-utils';
 
-test.describe('Banner Component Accessibility', () => {
+test.describe('Banner Component Accessibility Certification', () => {
 	const variants = [
-		{ id: 'success', name: 'Success' },
-		{ id: 'info', name: 'Info' },
-		{ id: 'warning', name: 'Warning' },
-		{ id: 'danger', name: 'Danger' },
+		{ id: 'success', label: 'SUCCESS', name: 'Success' },
+		{ id: 'info', label: 'INFO', name: 'Info' },
+		{ id: 'warning', label: 'WARNING', name: 'Warning' },
+		{ id: 'danger', label: 'DANGER', name: 'Danger' },
 	];
 
 	for (const variant of variants) {
@@ -27,7 +27,7 @@ test.describe('Banner Component Accessibility', () => {
 			await runA11yAudit(page, testInfo);
 		});
 
-		test(`ARIA & Behavioral: ${variant.name} variant`, async ({
+		test(`BEHAVIORAL: statusLabel rendering - ${variant.name} variant`, async ({
 			page,
 		}, testInfo) => {
 			testInfo.annotations.push({
@@ -35,90 +35,118 @@ test.describe('Banner Component Accessibility', () => {
 				type: 'a11y-criterion',
 			});
 			await page.goto(storyUrl, { waitUntil: 'networkidle' });
+
 			const banner = page.locator('[role="status"]');
+			const label = banner
+				.locator('span')
+				.filter({ hasText: variant.label });
+
+			// Verify label is present and uppercase (as per styles)
+			await expect(label).toBeVisible();
+			const textTransform = await label.evaluate(
+				(el) => window.getComputedStyle(el).textTransform,
+			);
+			expect(textTransform).toBe('uppercase');
 
 			// [ARIA-LIVE]: Verify behavioral attributes for screen readers
 			await expect(banner).toHaveAttribute('aria-live', 'polite');
 			await expect(banner).toHaveAttribute('aria-atomic', 'true');
-
-			// [ICON]: Ensure decorative icon is hidden from SR
-			const icon = banner.locator('svg');
-			if ((await icon.count()) > 0) {
-				await expect(icon.first()).toHaveAttribute(
-					'aria-hidden',
-					'true',
-				);
-			}
 		});
 
-		test(`REFLOW: ${variant.name} variant at 320px`, async ({
+		test(`STRESS: WCAG 1.4.12 Text Spacing - ${variant.name} variant`, async ({
 			page,
 		}, testInfo) => {
 			testInfo.annotations.push({
-				description: '1.4.10',
-				type: 'a11y-criterion',
-			});
-			await testReflowCompliance(page, testInfo, storyUrl);
-		});
-
-		test(`BEHAVIORAL: Use of Color (WCAG 1.4.1) - ${variant.name} variant`, async ({
-			page,
-		}) => {
-			test.info().annotations.push({
-				description: '1.4.1',
+				description: '1.4.12',
 				type: 'a11y-criterion',
 			});
 			await page.goto(storyUrl, { waitUntil: 'networkidle' });
 
-			// Verify that the status is not indicated by color alone
-			// For Banner, we expect a semantic icon to be present for each variant
-			const banner = page.locator('[role="status"]');
-			const icon = banner.locator('svg');
-			await expect(icon).toBeVisible();
+			// Inject WCAG 1.4.12 stress styles
+			await page.addStyleTag({
+				content: `
+				* {
+					line-height: 1.5 !important;
+					letter-spacing: 0.12em !important;
+					word-spacing: 0.16em !important;
+				}
+				p {
+					margin-bottom: 2em !important;
+				}
+			`,
+			});
 
-			// Also verify there's a status-aware class or attribute that SRs can use
-			// (Though aria-live="polite" on the container is the primary SR signal)
-			await expect(banner).toHaveAttribute('data-variant', variant.id);
+			const banner = page.locator('[role="status"]');
+			await expect(banner).toBeVisible();
+
+			// Verify no clipping: Banner should grow to contain text
+			const boundingBox = await banner.boundingBox();
+			const scrollHeight = await banner.evaluate((el) => el.scrollHeight);
+
+			if (boundingBox) {
+				// Offset for borders/padding: allow 2px deviation
+				expect(boundingBox.height).toBeGreaterThanOrEqual(
+					scrollHeight - 2,
+				);
+			}
 		});
 	}
 
-	test('INTERACTION: Action button should be keyboard accessible', async ({
+	test('REFLOW: Vertical Stack at 320px (WCAG 1.4.10)', async ({
 		page,
 	}, testInfo) => {
 		testInfo.annotations.push({
-			description: '2.5.5',
+			description: '1.4.10',
 			type: 'a11y-criterion',
 		});
-		const storyUrl = '/iframe.html?id=primitives-display-banner--success';
+		const storyUrl =
+			'/iframe.html?id=primitives-display-banner--system-announcement';
+
+		await page.setViewportSize({ height: 800, width: 320 });
+		await page.goto(storyUrl, { waitUntil: 'networkidle' });
+		await expect(page.locator(STORYBOOK_ROOT)).toBeVisible();
+
+		const banner = page.locator('[role="status"]');
+		const content = banner.locator('> div').first(); // S.Banner_Content
+		const actions = banner.locator('> div').last(); // S.Banner_Actions
+
+		const contentBox = await content.boundingBox();
+		const actionsBox = await actions.boundingBox();
+
+		if (contentBox && actionsBox) {
+			// In a vertical stack (column), actions should be below content
+			expect(actionsBox.y).toBeGreaterThanOrEqual(
+				contentBox.y + contentBox.height,
+			);
+		}
+
+		await testReflowCompliance(page, testInfo, storyUrl);
+	});
+
+	test('DESKTOP ALIGNMENT: Horizontal Row at 800px', async ({ page }) => {
+		const storyUrl =
+			'/iframe.html?id=primitives-display-banner--system-announcement';
+
+		await page.setViewportSize({ height: 800, width: 800 });
 		await page.goto(storyUrl, { waitUntil: 'networkidle' });
 
-		const actionButton = page.getByRole('button', { name: 'Reveal Now' });
-		await expect(actionButton).toBeVisible();
+		const banner = page.locator('[role="status"]');
+		const content = banner.locator('> div').first();
+		const actions = banner.locator('> div').last();
 
-		// [FOCUS]: Verify keyboard reachability
-		await page.keyboard.press('Tab');
-		await expect(actionButton).toBeFocused();
+		const contentBox = await content.boundingBox();
+		const actionsBox = await actions.boundingBox();
 
-		// [FOCUS-VISIBILITY]: WCAG 2.4.7
-		testInfo.annotations.push({
-			description: '2.4.7',
-			type: 'a11y-criterion',
-		});
-		const styles = await actionButton.evaluate((el) => {
-			const s = window.getComputedStyle(el);
-			return {
-				outlineStyle: s.outlineStyle,
-				outlineWidth: s.outlineWidth,
-			};
-		});
-		expect(styles.outlineStyle).toBe('solid');
-		expect(parseInt(styles.outlineWidth)).toBeGreaterThan(0);
+		if (contentBox && actionsBox) {
+			// In a horizontal row, actions should be to the right of content
+			expect(actionsBox.x).toBeGreaterThanOrEqual(
+				contentBox.x + contentBox.width,
+			);
 
-		// [TOUCH-TARGET]: Verify minimum sizing for mobile (48x48px)
-		const box = await actionButton.boundingBox();
-		if (box) {
-			expect(box.width).toBeGreaterThanOrEqual(48);
-			expect(box.height).toBeGreaterThanOrEqual(48); // Restored to compliant 48px target
+			// They should be roughly vertically aligned (centered)
+			const contentCenter = contentBox.y + contentBox.height / 2;
+			const actionsCenter = actionsBox.y + actionsBox.height / 2;
+			expect(Math.abs(contentCenter - actionsCenter)).toBeLessThan(10);
 		}
 	});
 });

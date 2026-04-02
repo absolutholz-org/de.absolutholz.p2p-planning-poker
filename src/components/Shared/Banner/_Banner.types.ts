@@ -14,6 +14,11 @@ export interface IBanner {
 	message: string;
 
 	/**
+	 * Explicit indicator for the status type (e.g., 'SUCCESS', 'INFO').
+	 */
+	statusLabel: string;
+
+	/**
 	 * The visual style of the banner.
 	 * @default 'info'
 	 */
