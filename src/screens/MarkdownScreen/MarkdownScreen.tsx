@@ -2,7 +2,7 @@ import { LegalView } from '../../components/Legal';
 import { AppLayout } from '../../components/Shared/AppLayout';
 
 interface MarkdownScreenProps {
-	type: 'impressum' | 'privacy';
+	type: 'impressum' | 'privacy' | 'accessibility';
 }
 
 /**

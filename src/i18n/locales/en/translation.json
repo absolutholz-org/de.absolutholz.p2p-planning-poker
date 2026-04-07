@@ -36,6 +36,8 @@
       "privacy_native": "Datenschutzerklärung",
       "impressum_en": "Legal Notice",
       "privacy_en": "Privacy Policy",
+      "accessibility_native": "Accessibility",
+      "accessibility_en": "Accessibility",
       "english_suffix": "(English)"
     },
     "aria": {
@@ -83,6 +85,7 @@
     "footer": {
       "impressum": "Legal Notice",
       "privacy": "Privacy Policy",
+      "accessibility": "Accessibility",
       "storybook": "Storybook"
     },
     "privacy_disclaimer": "By joining, you agree to our Privacy Policy regarding peer-to-peer connections.",

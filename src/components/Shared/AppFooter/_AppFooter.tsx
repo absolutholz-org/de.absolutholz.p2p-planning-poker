@@ -9,6 +9,10 @@ export function AppFooter() {
 
 	const isGerman = i18n.language.startsWith('de');
 	const isEnglish = i18n.language.startsWith('en');
+	const isFrench = i18n.language.startsWith('fr');
+	const isPortuguese = i18n.language.startsWith('pt');
+	const hasNativeAccessibility =
+		isGerman || isEnglish || isFrench || isPortuguese;
 
 	const startYear = 2026;
 	const isRange = startYear < BUILD_YEAR;
@@ -59,6 +63,18 @@ export function AppFooter() {
 								: isEnglish
 									? t('footer.legal.privacy_en')
 									: `${t('lobby.footer.privacy')} ${t('footer.legal.english_suffix')}`}
+						</S.FooterLink>
+					</li>
+					<li>
+						<S.FooterLink
+							to="/accessibility"
+							hrefLang={
+								!hasNativeAccessibility ? 'en' : undefined
+							}
+						>
+							{hasNativeAccessibility
+								? t('footer.legal.accessibility_native')
+								: `${t('lobby.footer.accessibility')} ${t('footer.legal.english_suffix')}`}
 						</S.FooterLink>
 					</li>
 				</Stack>

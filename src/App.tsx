@@ -56,6 +56,10 @@ function AppContent() {
 					path="/privacy"
 					element={<MarkdownScreen type="privacy" />}
 				/>
+				<Route
+					path="/accessibility"
+					element={<MarkdownScreen type="accessibility" />}
+				/>
 			</Routes>
 		</Suspense>
 	);

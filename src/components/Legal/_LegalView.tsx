@@ -4,6 +4,10 @@ import ReactMarkdown from 'react-markdown';
 import { useNavigate } from 'react-router-dom';
 import remarkBreaks from 'remark-breaks';
 
+import accessibilityDe from '../../assets/accessibility-de.md?raw';
+import accessibilityEn from '../../assets/accessibility-en.md?raw';
+import accessibilityFr from '../../assets/accessibility-fr.md?raw';
+import accessibilityPt from '../../assets/accessibility-pt.md?raw';
 import impressumDe from '../../assets/impressum-de.md?raw';
 import impressumEn from '../../assets/impressum-en.md?raw';
 import privacyDe from '../../assets/privacy-de.md?raw';
@@ -13,19 +17,27 @@ import { PageContainer } from '../Shared/PageContainer';
 import * as S from './_LegalView.styles';
 
 export interface LegalViewProps {
-	type: 'impressum' | 'privacy';
+	type: 'impressum' | 'privacy' | 'accessibility';
 }
 export function LegalView({ type }: LegalViewProps) {
 	const navigate = useNavigate();
 	const { i18n, t } = useTranslation();
 	const isGerman = i18n.language.startsWith('de');
+	const isFrench = i18n.language.startsWith('fr');
+	const isPortuguese = i18n.language.startsWith('pt');
 
 	const content = useMemo(() => {
 		if (type === 'impressum') {
 			return isGerman ? impressumDe : impressumEn;
 		}
+		if (type === 'accessibility') {
+			if (isGerman) return accessibilityDe;
+			if (isFrench) return accessibilityFr;
+			if (isPortuguese) return accessibilityPt;
+			return accessibilityEn;
+		}
 		return isGerman ? privacyDe : privacyEn;
-	}, [type, isGerman]);
+	}, [type, isGerman, isFrench, isPortuguese]);
 
 	return (
 		<PageContainer>

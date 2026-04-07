@@ -36,7 +36,7 @@
       "privacy_native": "Datenschutzerklärung",
       "impressum_en": "Legal Notice",
       "privacy_en": "Privacy Policy",
-      "english_suffix": "(Anglais)"
+      "accessibility_native": "Accessibilité"
     },
     "aria": {
       "legal": "Informations légales",
@@ -74,6 +74,7 @@
     "footer": {
       "impressum": "Mentions Légales",
       "privacy": "Politique de Confidentialité",
+      "accessibility": "Accessibilité",
       "storybook": "Storybook"
     },
     "privacy_disclaimer": "En rejoignant, vous acceptez notre politique de confidentialité concernant les connexions peer-to-peer.",
