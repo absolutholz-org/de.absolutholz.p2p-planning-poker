@@ -196,10 +196,10 @@
   },
   "components": {
     "settings": {
-      "title": "Room Settings",
+      "title": "Raumeinstellungen",
       "revote": {
-        "label": "Allow re-voting after reveal",
-        "description": "Participants can change their votes even after the host reveals them."
+        "label": "Erneutes Abstimmen nach Aufdecken erlauben",
+        "description": "Teilnehmer können ihre Stimmen auch nach dem Aufdecken durch den Host ändern."
       }
     }
   }

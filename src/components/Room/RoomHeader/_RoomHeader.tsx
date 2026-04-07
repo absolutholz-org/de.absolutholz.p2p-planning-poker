@@ -81,10 +81,7 @@ export function RoomHeader() {
 									ariaExpanded={isSettingsOpen}
 									ariaHasPopup="dialog"
 									icon="room_preferences"
-									label={
-										t('components.settings.title') ||
-										'Settings'
-									}
+									label={t('components.settings.title')}
 									onClick={() => setIsSettingsOpen(true)}
 									variant="secondary"
 								/>

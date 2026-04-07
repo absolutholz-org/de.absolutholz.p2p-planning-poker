@@ -213,10 +213,10 @@
   },
   "components": {
     "settings": {
-      "title": "Room Settings",
+      "title": "Configurações da Sala",
       "revote": {
-        "label": "Allow re-voting after reveal",
-        "description": "Participants can change their votes even after the host reveals them."
+        "label": "Permitir re-votação após revelação",
+        "description": "Os participantes podem alterar seus votos mesmo depois que o anfitrião os revelar."
       }
     }
   }
