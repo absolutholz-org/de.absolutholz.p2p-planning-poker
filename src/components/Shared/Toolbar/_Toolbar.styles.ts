@@ -4,17 +4,16 @@ import { Stack } from '../Stack';
 import type { ToolbarItemVariant } from './_ToolbarItem.types';
 
 export const ToolbarRoot = styled(Stack)`
-	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	display: flex;
 	gap: var(--sys-spacing-md);
+	justify-content: space-between;
 	width: fit-content;
-	padding: var(--sys-spacing-xs) var(--sys-spacing-sm);
 `;
 
 export const Group = styled.div`
-	display: flex;
 	align-items: center;
+	display: flex;
 	gap: var(--sys-spacing-md);
 `;
 
@@ -23,18 +22,18 @@ interface ItemButtonProps {
 }
 
 export const ItemButton = styled.button<ItemButtonProps>`
-	display: flex;
 	align-items: center;
-	gap: var(--sys-spacing-sm);
-	padding: var(--sys-spacing-sm) var(--sys-spacing-md);
+	border: 1px solid transparent;
 	border-radius: var(--sys-radius-sm);
+	display: flex;
+	gap: var(--sys-spacing-sm);
 	font-size: var(--sys-font-size-sm);
 	font-weight: var(--sys-font-weight-medium);
+	padding: var(--sys-spacing-sm) var(--sys-spacing-md);
 	transition:
 		background-color 0.2s ease-in-out,
 		color 0.2s ease-in-out,
 		outline 0.2s ease-in-out;
-	border: 1px solid transparent;
 
 	${({ variant }) => {
 		switch (variant) {
@@ -69,8 +68,8 @@ export const ItemButton = styled.button<ItemButtonProps>`
 	}}
 
 	&:disabled {
-		opacity: 0.5;
 		cursor: not-allowed;
+		opacity: 0.5;
 	}
 
 	&:focus-visible {

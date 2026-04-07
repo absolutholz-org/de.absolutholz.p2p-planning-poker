@@ -29,7 +29,10 @@ export function VotingDeck() {
 						value={value}
 						isSelected={myVote === value}
 						onClick={() => castVote(value)}
-						disabled={roomState.isRevealed}
+						disabled={
+							roomState.isRevealed &&
+							!roomState.allowRevoteAfterReveal
+						}
 					/>
 				))}
 			</S.Grid>

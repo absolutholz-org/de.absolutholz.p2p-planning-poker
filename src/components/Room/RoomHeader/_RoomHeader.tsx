@@ -10,6 +10,7 @@ import { Input } from '../../Shared/Input';
 import { PageContainer } from '../../Shared/PageContainer';
 import { ShareDialog } from '../../Shared/ShareDialog';
 import { Toolbar, ToolbarGroup, ToolbarItem } from '../../Shared/Toolbar';
+import { SettingsDialog } from '../SettingsDialog';
 import * as S from './_RoomHeader.styles';
 
 export function RoomHeader() {
@@ -20,6 +21,7 @@ export function RoomHeader() {
 	const [isRenameDialogOpen, setIsRenameDialogOpen] = useState(false);
 	const [newName, setNewName] = useState(userName);
 	const [isShareOpen, setIsShareOpen] = useState(false);
+	const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
 	if (!roomState) return null;
 
@@ -73,6 +75,20 @@ export function RoomHeader() {
 								onClick={openRenameDialog}
 								variant="secondary"
 							/>
+							{isHost && (
+								<ToolbarItem
+									ariaControls="settings-dialog"
+									ariaExpanded={isSettingsOpen}
+									ariaHasPopup="dialog"
+									icon="room_preferences"
+									label={
+										t('components.settings.title') ||
+										'Settings'
+									}
+									onClick={() => setIsSettingsOpen(true)}
+									variant="secondary"
+								/>
+							)}
 						</ToolbarGroup>
 					</Toolbar>
 
@@ -117,6 +133,7 @@ export function RoomHeader() {
 						}}
 					>
 						<Banner
+							statusLabel="Success"
 							message={t('room.header.banner.everyone_ready')}
 							variant="success"
 							action={
@@ -178,6 +195,10 @@ export function RoomHeader() {
 					/>
 				</div>
 			</Dialog>
+			<SettingsDialog
+				isOpen={isSettingsOpen}
+				onClose={() => setIsSettingsOpen(false)}
+			/>
 		</>
 	);
 }

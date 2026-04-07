@@ -2,6 +2,7 @@
   "common": {
     "actions": {
       "cancel": "Cancel",
+      "close": "Close",
       "reset": "Reset",
       "reveal": "Reveal Votes"
     },
@@ -191,6 +192,15 @@
     },
     "status": {
       "hidden": "Vote submitted, hidden"
+    }
+  },
+  "components": {
+    "settings": {
+      "title": "Room Settings",
+      "revote": {
+        "label": "Allow re-voting after reveal",
+        "description": "Participants can change their votes even after the host reveals them."
+      }
     }
   }
 }

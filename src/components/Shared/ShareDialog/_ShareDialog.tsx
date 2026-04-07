@@ -114,7 +114,7 @@ export function ShareDialog({ id, isOpen, onClose, roomId }: IShareDialog) {
 			isOpen={isOpen}
 			onCancel={onClose}
 			title={t('room.header.share.dialog_title')}
-			cancelText={t('common.actions.cancel')}
+			cancelText={t('common.actions.close')}
 		>
 			<ShareContent roomId={roomId} onShareSelect={onClose} />
 		</Dialog>

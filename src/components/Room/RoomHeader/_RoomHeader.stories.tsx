@@ -5,6 +5,7 @@ import { RoomContext } from '../../../context/RoomContext';
 import { RoomHeader } from './_RoomHeader';
 
 const MOCK_ROOM_STATE = {
+	allowRevoteAfterReveal: false,
 	isRevealed: false,
 	roomId: '1234-abcd-5678',
 	users: [
@@ -38,6 +39,7 @@ const meta = {
 						leaveRoom: () => {},
 						myPeerId: '1',
 						roomState: {
+							allowRevoteAfterReveal: false,
 							isRevealed: !!context.args.mockRevealed,
 							roomId: 'room-123',
 							timer: null,

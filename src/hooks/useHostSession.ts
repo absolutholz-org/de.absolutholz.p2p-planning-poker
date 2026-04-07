@@ -101,6 +101,7 @@ export function useHostSession(
 			setConnectionStatus('connected');
 
 			setRoomState({
+				allowRevoteAfterReveal: false,
 				isRevealed: false,
 				roomId: id,
 				timer: null,
@@ -163,6 +164,10 @@ export function useHostSession(
 							break;
 						case 'TOGGLE_REVEAL':
 							newState.isRevealed = true;
+							break;
+						case 'TOGGLE_ALLOW_REVOTE':
+							newState.allowRevoteAfterReveal =
+								!newState.allowRevoteAfterReveal;
 							break;
 						case 'RESET_SESSION':
 							newState.isRevealed = false;

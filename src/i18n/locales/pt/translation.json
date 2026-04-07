@@ -3,7 +3,8 @@
     "actions": {
       "cancel": "Cancelar",
       "reset": "Redefinir",
-      "reveal": "Revelar Votos"
+      "reveal": "Revelar Votos",
+      "close": "Fechar"
     },
     "poker": "P2P Planning Poker",
     "skipToMainContent": "Pular para o conteúdo principal",
@@ -208,6 +209,15 @@
     },
     "status": {
       "hidden": "Voto enviado, oculto"
+    }
+  },
+  "components": {
+    "settings": {
+      "title": "Room Settings",
+      "revote": {
+        "label": "Allow re-voting after reveal",
+        "description": "Participants can change their votes even after the host reveals them."
+      }
     }
   }
 }

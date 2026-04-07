@@ -68,6 +68,10 @@ export function RoomProvider({
 							case 'TOGGLE_REVEAL':
 								newState.isRevealed = true;
 								break;
+							case 'TOGGLE_ALLOW_REVOTE':
+								newState.allowRevoteAfterReveal =
+									!newState.allowRevoteAfterReveal;
+								break;
 							case 'RESET_SESSION':
 								newState.isRevealed = false;
 								newState.users = newState.users.map((u) => ({

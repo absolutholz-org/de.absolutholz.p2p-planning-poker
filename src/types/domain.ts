@@ -19,6 +19,7 @@ export interface TimerState {
 }
 
 export interface RoomState {
+	allowRevoteAfterReveal: boolean; // Controls whether guests can change votes after reveal
 	isRevealed: boolean; // Controls whether Guests can see other people's votes
 	roomId: string;
 	timer: null | TimerState;
@@ -33,6 +34,7 @@ export type PeerMessage =
 	| { payload: { name: string; peerId: string }; type: 'JOIN_ROOM' }
 	| { payload: { vote: VoteValue }; type: 'SUBMIT_VOTE' }
 	| { payload: undefined; type: 'TOGGLE_REVEAL' }
+	| { payload: undefined; type: 'TOGGLE_ALLOW_REVOTE' }
 	| { payload: undefined; type: 'RESET_SESSION' }
 	| { payload: { state: RoomState }; type: 'SYNC_STATE' }
 	| { payload: { duration: number }; type: 'TIMER_SET' }
