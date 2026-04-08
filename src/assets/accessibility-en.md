@@ -20,6 +20,6 @@ Rather than applying "fixes" to an inaccessible site, we are building our founda
 
 Accessibility is a work in progress, and your feedback is essential to our manual audit process. If you encounter a barrier, please let us know:
 
-- **Contact us here**: [Link to your contact or feedback form]
+- **Contact us here**: contact@planningpoker.absolutholz.de
 
 _This statement was last updated on April 7, 2026._

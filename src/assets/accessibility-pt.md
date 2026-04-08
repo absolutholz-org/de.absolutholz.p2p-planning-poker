@@ -20,6 +20,6 @@ Em vez de aplicar "remendos" a um site inacessível, estamos a construir a nossa
 
 A acessibilidade é um trabalho em progresso e o seu feedback é essencial para o nosso processo manual de auditoria. Se encontrar alguma barreira, por favor avise-nos:
 
-- **Contacte-nos aqui**: [Link para o seu formulário de contacto ou feedback]
+- **Contacte-nos aqui**: contact@planningpoker.absolutholz.de
 
 _Esta declaração foi atualizada pela última vez a 7 de abril de 2026._

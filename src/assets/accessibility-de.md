@@ -20,6 +20,6 @@ Anstatt eine nicht barrierefreie Website im Nachhinein zu „reparieren“, baue
 
 Die Barrierefreiheit ist ein fortlaufender Prozess (Work in Progress), und Ihr Feedback ist für unseren manuellen Prüfprozess unerlässlich. Wenn Sie auf eine Barriere stoßen, teilen Sie uns dies bitte mit:
 
-- **Kontaktieren Sie uns hier**: [Link zu Ihrem Kontakt- oder Feedback-Formular]
+- **Kontaktieren Sie uns hier**: contact@planningpoker.absolutholz.de
 
 _Diese Erklärung wurde zuletzt am 7. April 2026 aktualisiert._

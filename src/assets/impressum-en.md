@@ -7,4 +7,4 @@ Balanstr. 63
 Germany
 
 **Contact:**
-Email: absolutholz@yahoo.de
+Email: contact@planningpoker.absolutholz.de

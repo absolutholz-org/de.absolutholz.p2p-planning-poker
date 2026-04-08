@@ -20,6 +20,6 @@ Plutôt que d'appliquer des « correctifs » à un site inaccessible, nous const
 
 L'accessibilité est un travail en cours, et vos retours sont essentiels à notre processus d'audit manuel. Si vous rencontrez un obstacle, veuillez nous en informer :
 
-- **Contactez-nous ici** : [Lien vers votre formulaire de contact ou de retour]
+- **Contactez-nous ici** : contact@planningpoker.absolutholz.de
 
 _Cette déclaration a été mise à jour le 7 avril 2026._

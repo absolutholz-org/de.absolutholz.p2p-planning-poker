@@ -6,4 +6,4 @@ Balanstr. 63
 81541 München
 
 **Kontakt:**
-E-Mail: absolutholz@yahoo.de
+E-Mail: contact@planningpoker.absolutholz.de
