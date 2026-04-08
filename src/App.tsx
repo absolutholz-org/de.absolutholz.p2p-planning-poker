@@ -4,6 +4,7 @@ import { lazy, Suspense } from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
 
 import { RoomProvider } from './context/RoomProvider';
+import { useScrollToTop } from './hooks/useScrollToTop';
 import { Lobby } from './screens/Lobby/Lobby';
 import { globalStyles } from './theme/GlobalStyles';
 
@@ -43,6 +44,8 @@ function RoomGuard() {
 }
 
 function AppContent() {
+	useScrollToTop();
+
 	return (
 		<Suspense fallback={<div>Loading...</div>}>
 			<Routes>
