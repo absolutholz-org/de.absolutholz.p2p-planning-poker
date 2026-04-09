@@ -12,7 +12,7 @@ We are currently in a "Development and Remediation" phase. While our platform is
 
 Rather than applying "fixes" to an inaccessible site, we are building our foundation on accessibility-first components:
 
-- **High-Fidelity Atoms**: We are manually developing UI elements—like our status banners and interactive switches—that use redundant coding (icons + text) and relative scaling ($em$ units) to ensure they work for everyone.
+- **High-Fidelity Atoms**: We are manually developing UI elements—like our status banners and interactive switches—that use redundant coding (icons + text) and relative scaling (`em` units) to ensure they work for everyone.
 - **Screen Reader Integrity**: Every interactive element is built with native semantic structures and appropriate ARIA roles to ensure clarity for assistive technology.
 - **Resilient Layouts**: We audit our designs for "Forced Colors" mode and "Reflow" capabilities to support users who need high contrast or high text magnification.
 

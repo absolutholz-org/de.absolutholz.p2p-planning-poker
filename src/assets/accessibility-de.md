@@ -12,7 +12,7 @@ Wir befinden uns derzeit in einer „Entwicklungs- und Überarbeitungsphase“ (
 
 Anstatt eine nicht barrierefreie Website im Nachhinein zu „reparieren“, bauen wir unser Fundament auf Komponenten auf, bei denen Barrierefreiheit an erster Stelle steht (Accessibility-First):
 
-- **Hochpräzise Komponenten**: Wir entwickeln manuell UI-Elemente – wie unsere Statusbanner und interaktiven Schalter –, die redundante Informationsvermittlung (Icons + Text) und relative Skalierung ($em$-Einheiten) nutzen, um sicherzustellen, dass sie für alle zugänglich sind.
+- **Hochpräzise Komponenten**: Wir entwickeln manuell UI-Elemente – wie unsere Statusbanner und interaktiven Schalter –, die redundante Informationsvermittlung (Icons + Text) und relative Skalierung (`em`-Einheiten) nutzen, um sicherzustellen, dass sie für alle zugänglich sind.
 - **Screenreader-Integrität**: Jedes interaktive Element wird mit nativen semantischen Strukturen und entsprechenden ARIA-Rollen erstellt, um Klarheit für Assistenztechnologien zu gewährleisten.
 - **Anpassungsfähige Layouts**: Wir prüfen unsere Designs auf die Kompatibilität mit dem „Kontrastmodus“ (Forced Colors) und dem automatischen Zeilenumbruch („Reflow“), um Nutzer zu unterstützen, die hohe Kontraste oder eine starke Textvergrößerung benötigen.
 

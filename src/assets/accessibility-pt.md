@@ -12,7 +12,7 @@ Atualmente, estamos numa fase de "Desenvolvimento e Correção". Embora a nossa 
 
 Em vez de aplicar "remendos" a um site inacessível, estamos a construir a nossa fundação em componentes pensados primeiramente para a acessibilidade (Accessibility-First):
 
-- **Átomos de Alta Fidelidade**: Desenvolvemos manualmente elementos de interface — como os nossos banners de estado e interruptores interativos — que usam codificação redundante (ícones + texto) e dimensionamento relativo (unidades $em$) para garantir que funcionam para todos.
+- **Átomos de Alta Fidelidade**: Desenvolvemos manualmente elementos de interface — como os nossos banners de estado e interruptores interativos — que usam codificação redundante (ícones + texto) e dimensionamento relativo (unidades `em`) para garantir que funcionam para todos.
 - **Integridade para Leitores de Ecrã**: Cada elemento interativo é construído com estruturas semânticas nativas e funções ARIA apropriadas para garantir clareza para tecnologias de assistência.
 - **Layouts Resilientes**: Auditamos os nossos designs para o modo de "Cores Forçadas" (Forced Colors) e capacidades de "Refluxo" (Reflow) para apoiar os utilizadores que precisam de alto contraste ou alta ampliação de texto.
 

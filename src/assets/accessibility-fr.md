@@ -12,7 +12,7 @@ Nous sommes actuellement dans une phase de « Développement et de Mise aux Norm
 
 Plutôt que d'appliquer des « correctifs » à un site inaccessible, nous construisons nos fondations avec des composants pensés pour l'accessibilité dès le départ (Accessibility-First) :
 
-- **Éléments d'Interface Haute Fidélité** : Nous développons manuellement des éléments d'interface utilisateur — comme nos bannières d'état et nos commutateurs interactifs — qui utilisent un codage redondant (icônes + texte) et une mise à l'échelle relative (unités $em$) pour s'assurer qu'ils fonctionnent pour tout le monde.
+- **Éléments d'Interface Haute Fidélité** : Nous développons manuellement des éléments d'interface utilisateur — comme nos bannières d'état et nos commutateurs interactifs — qui utilisent un codage redondant (icônes + texte) et une mise à l'échelle relative (unités `em`) pour s'assurer qu'ils fonctionnent pour tout le monde.
 - **Intégrité pour les Lecteurs d'Écran** : Chaque élément interactif est construit avec des structures sémantiques natives et des rôles ARIA appropriés pour garantir la clarté pour les technologies d'assistance.
 - **Mises en Page Résilientes** : Nous auditons nos conceptions pour le mode de « Couleurs Forcées » (Forced Colors) et les capacités de « Redistribution » (Reflow) pour soutenir les utilisateurs qui ont besoin d'un contraste élevé ou d'un fort grossissement du texte.
 
