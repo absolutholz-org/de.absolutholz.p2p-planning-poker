@@ -47,6 +47,7 @@ export const Danger: Story = {
 
 export const SystemAnnouncement: Story = {
 	args: {
+		action: <Button variant="secondary">Learn More</Button>,
 		message:
 			'A synchronized reset has been triggered by the session host. Please prepare for a fresh round of voting. All current selections will be cleared across all peers to maintain state integrity.',
 		statusLabel: 'SYSTEM ANNOUNCEMENT',
