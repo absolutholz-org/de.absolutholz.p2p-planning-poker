@@ -25,17 +25,18 @@ export const DisclosureContainer = styled.div`
 		font-weight: 600;
 		color: var(--sys-color-text-primary);
 		font-size: var(--sys-font-size-sm);
-		outline: none;
+		outline: 2px solid transparent;
+		outline-offset: 2px;
 		border-radius: var(--sys-radius-sm);
 		user-select: none;
-		transition: color 0.2s;
+		transition: all 0.2s;
 
 		&:hover {
 			color: var(--sys-color-primary);
 		}
 
 		&:focus-visible {
-			box-shadow: 0 0 0 2px var(--sys-color-primary);
+			outline-color: var(--sys-color-info);
 		}
 	}
 `;
