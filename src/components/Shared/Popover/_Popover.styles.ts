@@ -11,7 +11,9 @@ export const PopoverContent = styled.div`
 	inset: auto;
 	z-index: 100;
 
-	background-color: var(--sys-color-surface);
+	background-color: var(--sys-color-surface, #ffffff);
+	color: var(--sys-color-text-primary);
+	opacity: 1;
 	border: 1px solid var(--sys-color-border);
 	border-radius: var(--sys-radius-lg);
 	box-shadow: var(--sys-shadow-lg);
@@ -27,7 +29,7 @@ export const PopoverContent = styled.div`
 	}
 
 	&:popover-open {
-		/* Only standard visible state triggers. */
+		display: block;
 		opacity: 1;
 		transform: translateY(0);
 	}

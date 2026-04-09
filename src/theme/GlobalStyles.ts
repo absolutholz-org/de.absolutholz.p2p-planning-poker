@@ -16,7 +16,7 @@ const lightTheme = {
 	surface: 'oklch(1 0 0)',
 	'surface-subtle': 'oklch(0.97 0 0)',
 	'text-primary': 'oklch(0.205 0 0)',
-	'text-secondary': 'oklch(0.50 0 0)',
+	'text-secondary': 'oklch(0.40 0 0)',
 	warning: 'oklch(0.50 0.15 75.32)',
 	'warning-hover': 'oklch(0.45 0.15 75.32)',
 };
@@ -37,7 +37,7 @@ const darkTheme = {
 	surface: 'oklch(0.205 0 0)',
 	'surface-subtle': 'oklch(0.25 0 0)',
 	'text-primary': 'oklch(0.99 0 0)',
-	'text-secondary': 'oklch(0.80 0 0)',
+	'text-secondary': 'oklch(0.90 0 0)',
 	warning: 'oklch(0.76 0.177 75.32)',
 	'warning-hover': 'oklch(0.72 0.177 75.32)',
 };

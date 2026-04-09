@@ -20,6 +20,36 @@ test.describe('Popover Component Accessibility', () => {
 		await expect(trigger).toHaveAttribute('popovertarget', popoverId!);
 	});
 
+	test('THEME INTEGRITY: Light vs Dark tokens (WCAG 1.4.3)', async ({
+		page,
+	}, testInfo) => {
+		await page.goto(storyUrl, { waitUntil: 'networkidle' });
+		const trigger = page.getByRole('button', { name: 'Open Menu' });
+		const popover = page.locator('[popover="auto"]');
+
+		// Open popover
+		await trigger.click();
+		await expect(popover).toBeVisible();
+
+		// Test Light Theme
+		await page.evaluate(() =>
+			document.documentElement.setAttribute('data-color-scheme', 'light'),
+		);
+		await runA11yAudit(page, testInfo, {
+			label: 'Light Theme',
+			selector: '[popover="auto"]',
+		});
+
+		// Test Dark Theme
+		await page.evaluate(() =>
+			document.documentElement.setAttribute('data-color-scheme', 'dark'),
+		);
+		await runA11yAudit(page, testInfo, {
+			label: 'Dark Theme',
+			selector: '[popover="auto"]',
+		});
+	});
+
 	test('OPEN/CLOSE: should toggle on click and pass Axe scan', async ({
 		page,
 	}, testInfo) => {
