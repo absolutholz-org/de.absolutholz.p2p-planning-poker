@@ -5,9 +5,13 @@ import { RoomContext } from '../../../context/RoomContext';
 import { VotingDeck } from './_VotingDeck';
 
 const MOCK_ROOM_STATE = {
-	allowRevoteAfterReveal: false,
 	isRevealed: false,
 	roomId: '1234-abcd',
+	settings: {
+		allowRevoteAfterReveal: false,
+		anyoneCanReveal: false,
+		revealOnlyWhenAllVoted: false,
+	},
 	users: [
 		{ id: '1', isConnected: true, isHost: true, name: 'Alice', vote: null },
 	],
@@ -31,9 +35,13 @@ const meta = {
 						leaveRoom: () => {},
 						myPeerId: '1',
 						roomState: {
-							allowRevoteAfterReveal: false,
 							isRevealed: !!context.args.mockRevealed,
 							roomId: '1234-abcd',
+							settings: {
+								allowRevoteAfterReveal: false,
+								anyoneCanReveal: false,
+								revealOnlyWhenAllVoted: false,
+							},
 							timer: null,
 							users: MOCK_ROOM_STATE.users,
 						},

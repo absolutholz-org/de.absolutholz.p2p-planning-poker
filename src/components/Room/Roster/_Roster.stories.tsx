@@ -31,9 +31,13 @@ const MOCK_USERS = [
 ];
 
 const MOCK_ROOM_STATE = {
-	allowRevoteAfterReveal: false,
 	isRevealed: false,
 	roomId: '1234-abcd',
+	settings: {
+		allowRevoteAfterReveal: false,
+		anyoneCanReveal: false,
+		revealOnlyWhenAllVoted: false,
+	},
 	users: MOCK_USERS,
 };
 
@@ -55,9 +59,13 @@ const meta = {
 						leaveRoom: () => {},
 						myPeerId: '1',
 						roomState: {
-							allowRevoteAfterReveal: false,
 							isRevealed: !!context.args.mockRevealed,
 							roomId: '1234-abcd',
+							settings: {
+								allowRevoteAfterReveal: false,
+								anyoneCanReveal: false,
+								revealOnlyWhenAllVoted: false,
+							},
 							timer: null,
 							users: MOCK_USERS,
 						},
