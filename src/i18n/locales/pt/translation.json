@@ -116,7 +116,8 @@
         "voting": "Controles de votação",
         "copy": "O código da sala é {{code}}. Clique para copiar.",
         "reset": "Redefinir o quadro de votação para todos",
-        "reveal": "Revelar votos para todos"
+        "reveal": "Revelar votos para todos",
+        "reveal_waiting": "Aguardando que todos os participantes votem"
       },
       "reset_dialog": {
         "title": "Redefinir Quadro",
@@ -220,6 +221,14 @@
       "revote": {
         "label": "Permitir re-votação após revelação",
         "description": "Os participantes podem alterar seus votos mesmo depois que o anfitrião os revelar."
+      },
+      "anyoneCanReveal": {
+        "label": "Permitir que qualquer usuário revele",
+        "description": "Ativa o botão Revelar para todos os participantes. Se desativado, apenas o anfitrião pode revelar."
+      },
+      "revealOnlyWhenAllVoted": {
+        "label": "Revelar apenas após todos votarem",
+        "description": "Desativa o botão Revelar para TODOS (incluindo o anfitrião) até que todos os participantes tenham votado."
       }
     }
   }

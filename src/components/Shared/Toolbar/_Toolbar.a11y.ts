@@ -73,7 +73,10 @@ test.describe('Toolbar Component Accessibility', () => {
 		await page.goto(storyUrl, { waitUntil: 'networkidle' });
 
 		const firstItem = page.locator('[data-toolbar-item="true"]').nth(0);
-		await firstItem.focus();
+
+		// Reach the element via keyboard to trigger :focus-visible indicators
+		await page.keyboard.press('Tab');
+		await expect(firstItem).toBeFocused();
 
 		// Verify the focus ring is visible according to our design system
 		const styles = await firstItem.evaluate((el) => {

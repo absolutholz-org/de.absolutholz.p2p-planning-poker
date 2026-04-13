@@ -46,10 +46,10 @@ test.describe('Dialog Component Accessibility', () => {
 		const cancelButton = page.getByRole('button', { name: 'Cancel' });
 		const confirmButton = page.getByRole('button', { name: 'Reset Votes' });
 
-		// Focus Trap Check: Tab should cycle only between Dialog elements
-		await page.keyboard.press('Tab');
+		// Native dialog with showModal() automatically focuses the first focusable element
 		await expect(cancelButton).toBeFocused();
 
+		// Focus Trap Check: Tab should cycle only between Dialog elements
 		await page.keyboard.press('Tab');
 		await expect(confirmButton).toBeFocused();
 
@@ -92,7 +92,10 @@ test.describe('Dialog Component Accessibility', () => {
 		await page.goto(storyUrl, { waitUntil: 'networkidle' });
 
 		const cancelButton = page.getByRole('button', { name: 'Cancel' });
-		await cancelButton.focus();
+
+		// Reach the element via keyboard to trigger :focus-visible indicators
+		await page.keyboard.press('Tab');
+		await expect(cancelButton).toBeFocused();
 
 		// Verify the focus ring is visible according to design system
 		const styles = await cancelButton.evaluate((el) => {
@@ -118,20 +121,32 @@ test.describe('Dialog Component Accessibility', () => {
 		// Headline -> Message -> Actions
 		const title = page.locator('#dialog-title');
 		const message = page.locator('#dialog-message');
-		const actions = page.locator('footer');
+		const footer = page.locator('footer');
 
-		const titleIndex = await title.evaluate((el) =>
-			Array.from(document.querySelectorAll('*')).indexOf(el),
-		);
-		const messageIndex = await message.evaluate((el) =>
-			Array.from(document.querySelectorAll('*')).indexOf(el),
-		);
-		const actionsIndex = await actions.evaluate((el) =>
-			Array.from(document.querySelectorAll('*')).indexOf(el),
+		// Verify the logical order of content in the DOM matches the visual/expected sequence
+		// Headline -> Message -> Footer (Actions)
+		const isTitleBeforeMessage = await title.evaluate(
+			(t, m) => {
+				return !!(
+					t.compareDocumentPosition(m) &
+					Node.DOCUMENT_POSITION_FOLLOWING
+				);
+			},
+			(await message.elementHandle())!,
 		);
 
-		expect(titleIndex).toBeLessThan(messageIndex);
-		expect(messageIndex).toBeLessThan(actionsIndex);
+		const isMessageBeforeFooter = await message.evaluate(
+			(m, f) => {
+				return !!(
+					m.compareDocumentPosition(f) &
+					Node.DOCUMENT_POSITION_FOLLOWING
+				);
+			},
+			(await footer.elementHandle())!,
+		);
+
+		expect(isTitleBeforeMessage).toBe(true);
+		expect(isMessageBeforeFooter).toBe(true);
 	});
 
 	test('TEXT RESILIENCE: WCAG 1.4.12 spacing overrides', async ({

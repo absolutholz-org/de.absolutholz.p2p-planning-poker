@@ -29,6 +29,17 @@ export function RoomHeader() {
 		roomState.users.length > 0 &&
 		roomState.users.every((u) => u.vote !== null);
 
+	const isRevealVisible = isHost || roomState.settings.anyoneCanReveal;
+	const isRevealDisabled =
+		(roomState.settings.revealOnlyWhenAllVoted && !allVoted) ||
+		roomState.isRevealed ||
+		roomState.users.every((u) => u.vote === null);
+
+	const revealAriaLabel =
+		roomState.settings.revealOnlyWhenAllVoted && !allVoted
+			? t('room.header.aria.reveal_waiting')
+			: t('common.actions.reveal');
+
 	const handleReset = () => {
 		sendAction({ payload: undefined, type: 'RESET_SESSION' });
 		setIsResetDialogOpen(false);
@@ -90,32 +101,31 @@ export function RoomHeader() {
 					</Toolbar>
 
 					{/* Voting Controls Toolbar */}
-					{isHost && (
+					{isRevealVisible && (
 						<Toolbar aria-label={t('room.header.aria.voting')}>
 							<ToolbarGroup>
-								<ToolbarItem
-									ariaControls="reset-dialog"
-									ariaExpanded={isResetDialogOpen}
-									ariaHasPopup="dialog"
-									icon="refresh"
-									label={t('common.actions.reset')}
-									onClick={() => setIsResetDialogOpen(true)}
-									disabled={roomState.users.every(
-										(u) => u.vote === null,
-									)}
-									variant="secondary"
-								/>
+								{isHost && (
+									<ToolbarItem
+										ariaControls="reset-dialog"
+										ariaExpanded={isResetDialogOpen}
+										ariaHasPopup="dialog"
+										icon="refresh"
+										label={t('common.actions.reset')}
+										onClick={() =>
+											setIsResetDialogOpen(true)
+										}
+										disabled={roomState.users.every(
+											(u) => u.vote === null,
+										)}
+										variant="secondary"
+									/>
+								)}
 								{(!allVoted || roomState.isRevealed) && (
 									<ToolbarItem
 										icon="visibility"
-										label={t('common.actions.reveal')}
+										label={revealAriaLabel}
 										onClick={handleReveal}
-										disabled={
-											roomState.isRevealed ||
-											roomState.users.every(
-												(u) => u.vote === null,
-											)
-										}
+										disabled={isRevealDisabled}
 										variant="primary"
 									/>
 								)}
@@ -123,7 +133,7 @@ export function RoomHeader() {
 						</Toolbar>
 					)}
 				</S.SubHeaderContainer>
-				{isHost && allVoted && !roomState.isRevealed && (
+				{isRevealVisible && allVoted && !roomState.isRevealed && (
 					<div
 						style={{
 							marginTop: 'var(--sys-spacing-md)',
@@ -140,6 +150,8 @@ export function RoomHeader() {
 									aria-label={t('room.header.aria.reveal')}
 									icon="visibility"
 									size="sm"
+									disabled={isRevealDisabled}
+									title={revealAriaLabel}
 									style={{
 										color: 'var(--sys-color-primary-text)',
 									}}

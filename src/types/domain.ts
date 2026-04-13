@@ -18,10 +18,16 @@ export interface TimerState {
 	startedAt: null | number; // timestamp when timer started/resumed
 }
 
-export interface RoomState {
+export interface RoomSettings {
 	allowRevoteAfterReveal: boolean; // Controls whether guests can change votes after reveal
+	anyoneCanReveal: boolean; // Allows guests to reveal votes
+	revealOnlyWhenAllVoted: boolean; // Disables reveal until everyone has voted
+}
+
+export interface RoomState {
 	isRevealed: boolean; // Controls whether Guests can see other people's votes
 	roomId: string;
+	settings: RoomSettings;
 	timer: null | TimerState;
 	users: User[];
 }
@@ -35,6 +41,8 @@ export type PeerMessage =
 	| { payload: { vote: VoteValue }; type: 'SUBMIT_VOTE' }
 	| { payload: undefined; type: 'TOGGLE_REVEAL' }
 	| { payload: undefined; type: 'TOGGLE_ALLOW_REVOTE' }
+	| { payload: undefined; type: 'TOGGLE_ANYONE_CAN_REVEAL' }
+	| { payload: undefined; type: 'TOGGLE_REVEAL_ONLY_WHEN_ALL_VOTED' }
 	| { payload: undefined; type: 'RESET_SESSION' }
 	| { payload: { state: RoomState }; type: 'SYNC_STATE' }
 	| { payload: { duration: number }; type: 'TIMER_SET' }

@@ -114,7 +114,8 @@
         "voting": "Contrôles de vote",
         "copy": "Le code de la salle est {{code}}. Cliquez pour copier.",
         "reset": "Réinitialiser le tableau de vote pour tous les participants",
-        "reveal": "Révéler les votes à tous les participants"
+        "reveal": "Révéler les votes à tous les participants",
+        "reveal_waiting": "En attente du vote de tous les participants"
       },
       "reset_dialog": {
         "title": "Réinitialiser le Tableau",
@@ -216,6 +217,14 @@
       "revote": {
         "label": "Autoriser le re-vote après révélation",
         "description": "Les participants peuvent modifier leurs votes même après que l'hôte les a révélés."
+      },
+      "anyoneCanReveal": {
+        "label": "Autoriser tout utilisateur à révéler",
+        "description": "Active le bouton Révéler pour tous les participants. Si désactivé, seul l'hôte peut révéler."
+      },
+      "revealOnlyWhenAllVoted": {
+        "label": "Révéler seulement après le vote de tous",
+        "description": "Désactive le bouton Révéler pour TOUT LE MONDE (y compris l'hôte) jusqu'à ce que tous les participants aient voté."
       }
     }
   }

@@ -116,7 +116,8 @@
         "voting": "Voting-Steuerung",
         "copy": "Der Raumcode ist {{code}}. Zum Kopieren klicken.",
         "reset": "Voting-Board für alle Teilnehmer zurücksetzen",
-        "reveal": "Votes für alle Teilnehmer aufdecken"
+        "reveal": "Votes für alle Teilnehmer aufdecken",
+        "reveal_waiting": "Warten, bis alle Teilnehmer abgestimmt haben"
       },
       "reset_dialog": {
         "title": "Board zurücksetzen",
@@ -203,6 +204,14 @@
       "revote": {
         "label": "Erneutes Abstimmen nach Aufdecken erlauben",
         "description": "Teilnehmer können ihre Stimmen auch nach dem Aufdecken durch den Host ändern."
+      },
+      "anyoneCanReveal": {
+        "label": "Allen Benutzern das Aufdecken erlauben",
+        "description": "Aktiviert die Schaltfläche 'Aufdecken' für alle Teilnehmer. Wenn deaktiviert, kann nur der Gastgeber aufdecken."
+      },
+      "revealOnlyWhenAllVoted": {
+        "label": "Erst aufdecken, wenn alle abgestimmt haben",
+        "description": "Deaktiviert die Schaltfläche 'Aufdecken' für ALLE (einschließlich Gastgeber), bis alle Teilnehmer abgestimmt haben."
       }
     }
   }

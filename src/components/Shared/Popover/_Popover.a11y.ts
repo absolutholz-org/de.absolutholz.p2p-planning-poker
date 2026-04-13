@@ -24,7 +24,13 @@ test.describe('Popover Component Accessibility', () => {
 		page,
 	}, testInfo) => {
 		await page.goto(storyUrl, { waitUntil: 'networkidle' });
-		const trigger = page.getByRole('button', { name: 'Open Menu' });
+		// Force explicit theme to ensure contrast audit is consistent with story background
+		await page.evaluate(() =>
+			document.documentElement.setAttribute('data-color-scheme', 'light'),
+		);
+		await page.waitForLoadState('networkidle');
+
+		const trigger = page.getByRole('button', { name: 'Open Popover' });
 		const popover = page.locator('[popover="auto"]');
 
 		// Open popover

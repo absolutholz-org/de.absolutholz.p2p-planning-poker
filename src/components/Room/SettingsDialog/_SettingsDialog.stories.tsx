@@ -26,24 +26,41 @@ type Story = StoryObj<typeof meta>;
 
 function MockRoomProvider({
 	children,
-	initialRevote,
+	initialSettings,
 }: {
 	children: React.ReactNode;
-	initialRevote: boolean;
+	initialSettings: {
+		allowRevoteAfterReveal: boolean;
+		anyoneCanReveal: boolean;
+		revealOnlyWhenAllVoted: boolean;
+	};
 }) {
-	const [revote, setRevote] = useState(initialRevote);
+	const [settings, setSettings] = useState(initialSettings);
 
 	const mockValue = {
 		roomState: {
-			allowRevoteAfterReveal: revote,
 			isRevealed: false,
 			roomId: 'mock',
+			settings,
 			timer: null,
 			users: [],
 		},
 		sendAction: (action: PeerMessage) => {
 			if (action.type === 'TOGGLE_ALLOW_REVOTE') {
-				setRevote(!revote);
+				setSettings((s) => ({
+					...s,
+					allowRevoteAfterReveal: !s.allowRevoteAfterReveal,
+				}));
+			} else if (action.type === 'TOGGLE_ANYONE_CAN_REVEAL') {
+				setSettings((s) => ({
+					...s,
+					anyoneCanReveal: !s.anyoneCanReveal,
+				}));
+			} else if (action.type === 'TOGGLE_REVEAL_ONLY_WHEN_ALL_VOTED') {
+				setSettings((s) => ({
+					...s,
+					revealOnlyWhenAllVoted: !s.revealOnlyWhenAllVoted,
+				}));
 			}
 		},
 	} as unknown as RoomContextValue;
@@ -59,7 +76,13 @@ export const Default: Story = {
 	render: (args) => {
 		const [isOpen, setIsOpen] = useState(true);
 		return (
-			<MockRoomProvider initialRevote={false}>
+			<MockRoomProvider
+				initialSettings={{
+					allowRevoteAfterReveal: false,
+					anyoneCanReveal: false,
+					revealOnlyWhenAllVoted: false,
+				}}
+			>
 				<button onClick={() => setIsOpen(true)}>Open Settings</button>
 				<SettingsDialog
 					{...args}

@@ -93,7 +93,7 @@ test.describe('Switch A11y Certification', () => {
 		);
 
 		// Verify track and label elements individually to avoid matching the track thumb span
-		const labelText = page.locator('label > span');
+		const labelText = page.locator('label > span').first();
 		const track = page.locator('label > div');
 
 		const labelBox = await labelText.boundingBox();
@@ -168,7 +168,7 @@ test.describe('Switch A11y Certification', () => {
 
 		expect(results.violations).toEqual([]);
 
-		const labelText = page.locator('label > span');
+		const labelText = page.locator('label > span').first();
 		const track = page.locator('label > div');
 
 		const labelBox = await labelText.boundingBox();

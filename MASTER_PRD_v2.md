@@ -31,7 +31,10 @@ Because there is no central server, the application relies on a "Host" and "Gues
 - **Observation:** As a user, I want to see a visual roster of everyone in the room indicating who has and hasn't voted yet.
 - **Revealing:** As any user, I want to click a "Reveal" button so that all hidden votes are broadcasted and shown to everyone simultaneously.
 - **Resetting:** As any user, I want to click a "Reset" button to clear the board and prepare for the next ticket.
-- **Room Settings (Host only):** As a Host, I want to toggle whether participants can change their votes after they have been revealed.
+- **Room Settings (Host only):** As a Host, I want to toggle granular session rules:
+  - **Allow Re-vote:** Whether participants can change their votes after they have been revealed.
+  - **Anyone Can Reveal:** Whether the "Reveal" action is available to all participants or restricted to the host.
+  - **Reveal Only When All Voted:** Whether the "Reveal" button remains disabled for everyone until all participants have cast their vote.
 
 ## 5. Core Data & Event Dictionary
 
@@ -39,14 +42,16 @@ The application relies on passing strict message payloads over PeerJS data chann
 
 **Voting Scale:** Standard Fibonacci `[0, 1, 2, 3, 5, 8, 13, 21, "☕️", "?"]`
 
-| Action/Event          | Sender → Receiver | Description                                                                             |
-| --------------------- | ----------------- | --------------------------------------------------------------------------------------- |
-| `JOIN_ROOM`           | Guest → Host      | Guest provides their name and unique Peer ID. Host adds them to the master user list.   |
-| `SUBMIT_VOTE`         | Guest → Host      | Guest sends their selected vote value. Host updates that user's record in the state.    |
-| `TOGGLE_REVEAL`       | Any Client → Host | Triggers the Host to change the session's reveal state to `true`.                       |
-| `TOGGLE_ALLOW_REVOTE` | Host -> Host      | Host toggles whether participants can re-vote after a reveal.                           |
-| `RESET_SESSION`       | Any Client → Host | Triggers the Host to clear all current votes and hide the board.                        |
-| `SYNC_STATE`          | Host → All Guests | The Host pushes the complete, updated room object to everyone whenever a change occurs. |
+| Action/Event                        | Sender → Receiver | Description                                                                                 |
+| ----------------------------------- | ----------------- | ------------------------------------------------------------------------------------------- |
+| `JOIN_ROOM`                         | Guest → Host      | Guest provides their name and unique Peer ID. Host adds them to the master user list.       |
+| `SUBMIT_VOTE`                       | Guest → Host      | Guest sends their selected vote value. Host updates that user's record in the state.        |
+| `TOGGLE_REVEAL`                     | Any Client → Host | Triggers the Host to change the session's reveal state to `true`. (Subject to permissions). |
+| `TOGGLE_ALLOW_REVOTE`               | Host -> Host      | Host toggles whether participants can re-vote after a reveal.                               |
+| `TOGGLE_ANYONE_CAN_REVEAL`          | Host -> Host      | Host toggles whether guests can trigger a reveal.                                           |
+| `TOGGLE_REVEAL_ONLY_WHEN_ALL_VOTED` | Host -> Host      | Host toggles whether all votes are required before reveal.                                  |
+| `RESET_SESSION`                     | Any Client → Host | Triggers the Host to clear all current votes and hide the board.                            |
+| `SYNC_STATE`                        | Host → All Guests | The Host pushes the complete, updated room object to everyone whenever a change occurs.     |
 
 ## 6. UI/UX Requirements
 

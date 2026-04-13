@@ -31,7 +31,7 @@ export function VotingDeck() {
 						onClick={() => castVote(value)}
 						disabled={
 							roomState.isRevealed &&
-							!roomState.allowRevoteAfterReveal
+							!roomState.settings.allowRevoteAfterReveal
 						}
 					/>
 				))}

@@ -116,7 +116,8 @@
         "voting": "Voting controls",
         "copy": "Room Code is {{code}}. Click to copy.",
         "reset": "Reset the voting board for all peers",
-        "reveal": "Reveal votes to all peers"
+        "reveal": "Reveal votes to all peers",
+        "reveal_waiting": "Waiting for all participants to vote"
       },
       "reset_dialog": {
         "title": "Reset Board",
@@ -203,6 +204,14 @@
       "revote": {
         "label": "Allow re-voting after reveal",
         "description": "Participants can change their votes even after the host reveals them."
+      },
+      "anyoneCanReveal": {
+        "label": "Allow any user to reveal votes",
+        "description": "Enables the Reveal button for all participants. If disabled, only the host can reveal."
+      },
+      "revealOnlyWhenAllVoted": {
+        "label": "Reveal only after all votes are in",
+        "description": "Disables the Reveal button for EVERYONE (including host) until all participants have voted."
       }
     }
   }

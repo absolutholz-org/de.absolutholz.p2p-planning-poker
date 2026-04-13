@@ -1,0 +1,93 @@
+
+Running 9 tests using 6 workers
+
+  ✓  6 [chromium] › src/components/Shared/Dialog/_Dialog.a11y.ts:64:2 › Dialog Component Accessibility › BEHAVIORAL: Focus Return (WCAG 2.4.3) (1.5s)
+  ✓  3 [chromium] › src/components/Shared/Dialog/_Dialog.a11y.ts:152:2 › Dialog Component Accessibility › TEXT RESILIENCE: WCAG 1.4.12 spacing overrides (2.1s)
+  ✓  5 [chromium] › src/components/Shared/Dialog/_Dialog.a11y.ts:10:2 › Dialog Component Accessibility › STATIC & SURGICAL AUDIT: should have correct ARIA and pass Axe scan (2.1s)
+  ✓  7 [chromium] › src/components/Shared/Dialog/_Dialog.a11y.ts:178:2 › Dialog Component Accessibility › OS-LEVEL: forced-colors mode emulation (1.5s)
+  ✓  9 [chromium] › src/components/Shared/Dialog/_Dialog.a11y.ts:215:2 › Dialog Component Accessibility › REFLOW: 1.4.10 compliance at 320px (1.5s)
+  ✓  8 [chromium] › src/components/Shared/Dialog/_Dialog.a11y.ts:188:2 › Dialog Component Accessibility › THEME INTEGRITY: Light vs Dark tokens (WCAG 1.4.3) (2.6s)
+  ✘  4 [chromium] › src/components/Shared/Dialog/_Dialog.a11y.ts:87:2 › Dialog Component Accessibility › BEHAVIORAL: Focus Visibility (WCAG 2.4.7) (6.8s)
+  ✘  2 [chromium] › src/components/Shared/Dialog/_Dialog.a11y.ts:32:2 › Dialog Component Accessibility › BEHAVIORAL: Focus Trap and Keyboard Dismissal (WCAG 2.1.1, 2.4.3, 2.1.2) (6.9s)
+  ✘  1 [chromium] › src/components/Shared/Dialog/_Dialog.a11y.ts:113:2 › Dialog Component Accessibility › BEHAVIORAL: Meaningful Sequence (WCAG 1.3.2) (30.0s)
+
+
+  1) [chromium] › src/components/Shared/Dialog/_Dialog.a11y.ts:32:2 › Dialog Component Accessibility › BEHAVIORAL: Focus Trap and Keyboard Dismissal (WCAG 2.1.1, 2.4.3, 2.1.2) 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeFocused[2m([22m[2m)[22m failed
+
+    Locator:  getByRole('button', { name: 'Cancel' })
+    Expected: focused
+    Received: inactive
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeFocused" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Cancel' })[22m
+    [2m    9 × locator resolved to <button data-size="md" class="css-kk2w3q" data-variant="secondary">Cancel</button>[22m
+    [2m      - unexpected value "inactive"[22m
+
+
+      55 |
+      56 | 		await page.keyboard.press('Tab');
+    > 57 | 		await expect(cancelButton).toBeFocused(); // Wrapped back
+         | 		                           ^
+      58 |
+      59 | 		// Keyboard Dismissal: Escape should close the dialog
+      60 | 		await page.keyboard.press('Escape');
+        at /Users/swoo/Workspaces/p2p-planning-poker/src/components/Shared/Dialog/_Dialog.a11y.ts:57:30
+
+    Error Context: test-results/components-Shared-Dialog-_-0b821-sal-WCAG-2-1-1-2-4-3-2-1-2--chromium/error-context.md
+
+  2) [chromium] › src/components/Shared/Dialog/_Dialog.a11y.ts:87:2 › Dialog Component Accessibility › BEHAVIORAL: Focus Visibility (WCAG 2.4.7) 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeFocused[2m([22m[2m)[22m failed
+
+    Locator:  getByRole('button', { name: 'Cancel' })
+    Expected: focused
+    Received: inactive
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeFocused" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Cancel' })[22m
+    [2m    9 × locator resolved to <button data-size="md" class="css-kk2w3q" data-variant="secondary">Cancel</button>[22m
+    [2m      - unexpected value "inactive"[22m
+
+
+       96 | 		// Reach the element via keyboard to trigger :focus-visible indicators
+       97 | 		await page.keyboard.press('Tab');
+    >  98 | 		await expect(cancelButton).toBeFocused();
+          | 		                           ^
+       99 |
+      100 | 		// Verify the focus ring is visible according to design system
+      101 | 		const styles = await cancelButton.evaluate((el) => {
+        at /Users/swoo/Workspaces/p2p-planning-poker/src/components/Shared/Dialog/_Dialog.a11y.ts:98:30
+
+    Error Context: test-results/components-Shared-Dialog-_-070df-ocus-Visibility-WCAG-2-4-7--chromium/error-context.md
+
+  3) [chromium] › src/components/Shared/Dialog/_Dialog.a11y.ts:113:2 › Dialog Component Accessibility › BEHAVIORAL: Meaningful Sequence (WCAG 1.3.2) 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.elementHandle: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('footer')[22m
+
+
+      143 | 				);
+      144 | 			},
+    > 145 | 			(await footer.elementHandle())!,
+          | 			              ^
+      146 | 		);
+      147 |
+      148 | 		expect(isTitleBeforeMessage).toBe(true);
+        at /Users/swoo/Workspaces/p2p-planning-poker/src/components/Shared/Dialog/_Dialog.a11y.ts:145:18
+
+    Error Context: test-results/components-Shared-Dialog-_-bb2aa-ingful-Sequence-WCAG-1-3-2--chromium/error-context.md
+
+  3 failed
+    [chromium] › src/components/Shared/Dialog/_Dialog.a11y.ts:32:2 › Dialog Component Accessibility › BEHAVIORAL: Focus Trap and Keyboard Dismissal (WCAG 2.1.1, 2.4.3, 2.1.2) 
+    [chromium] › src/components/Shared/Dialog/_Dialog.a11y.ts:87:2 › Dialog Component Accessibility › BEHAVIORAL: Focus Visibility (WCAG 2.4.7) 
+    [chromium] › src/components/Shared/Dialog/_Dialog.a11y.ts:113:2 › Dialog Component Accessibility › BEHAVIORAL: Meaningful Sequence (WCAG 1.3.2) 
+  6 passed (31.1s)

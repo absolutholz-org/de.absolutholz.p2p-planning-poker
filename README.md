@@ -13,6 +13,7 @@ This application provides a real-time agile estimation tool for small teams (up 
 - **Deep Linking:** Dynamic SPA routing ensures users can share semantic URLs (`/room/:roomId`) natively to instantly onboard teammates.
 - **Global Localization:** Fully localized in English, German, French, and Portuguese contexts seamlessly.
 - **Fibonacci Scale:** Standard agile voting scale `[0, 1, 2, 3, 5, 8, 13, 21, "☕️", "?"]`.
+- **Governance Settings:** Host-controlled democratic reveal permissions and mandatory voting consensus rules.
 - **Session Persistence**: Built-in `sessionStorage` backup ensures that both Hosts and Guests can refresh their browser without losing their identity or room state.
 - **Relay Bridge**: Integrated Metered.ca TURN/STUN relay ensures connectivity even behind strict corporate firewalls and Symmetric NATs.
 

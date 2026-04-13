@@ -21,10 +21,6 @@ export function SettingsDialog({
 
 	if (!roomState) return null;
 
-	const handleToggleRevote = () => {
-		sendAction({ payload: undefined, type: 'TOGGLE_ALLOW_REVOTE' });
-	};
-
 	return (
 		<Dialog
 			id={id}
@@ -38,11 +34,52 @@ export function SettingsDialog({
 					<Switch
 						id={`${id}-revote`}
 						label={t('components.settings.revote.label')}
-						checked={roomState.allowRevoteAfterReveal}
-						onChange={handleToggleRevote}
+						checked={roomState.settings.allowRevoteAfterReveal}
+						onChange={() =>
+							sendAction({
+								payload: undefined,
+								type: 'TOGGLE_ALLOW_REVOTE',
+							})
+						}
 					/>
 					<S.Description>
 						{t('components.settings.revote.description')}
+					</S.Description>
+				</S.SettingRow>
+				<S.SettingRow>
+					<Switch
+						id={`${id}-anyone-reveal`}
+						label={t('components.settings.anyoneCanReveal.label')}
+						checked={roomState.settings.anyoneCanReveal}
+						onChange={() =>
+							sendAction({
+								payload: undefined,
+								type: 'TOGGLE_ANYONE_CAN_REVEAL',
+							})
+						}
+					/>
+					<S.Description>
+						{t('components.settings.anyoneCanReveal.description')}
+					</S.Description>
+				</S.SettingRow>
+				<S.SettingRow>
+					<Switch
+						id={`${id}-only-all-voted`}
+						label={t(
+							'components.settings.revealOnlyWhenAllVoted.label',
+						)}
+						checked={roomState.settings.revealOnlyWhenAllVoted}
+						onChange={() =>
+							sendAction({
+								payload: undefined,
+								type: 'TOGGLE_REVEAL_ONLY_WHEN_ALL_VOTED',
+							})
+						}
+					/>
+					<S.Description>
+						{t(
+							'components.settings.revealOnlyWhenAllVoted.description',
+						)}
 					</S.Description>
 				</S.SettingRow>
 			</S.ContentContainer>

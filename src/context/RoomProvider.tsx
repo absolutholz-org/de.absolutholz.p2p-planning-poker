@@ -69,8 +69,27 @@ export function RoomProvider({
 								newState.isRevealed = true;
 								break;
 							case 'TOGGLE_ALLOW_REVOTE':
-								newState.allowRevoteAfterReveal =
-									!newState.allowRevoteAfterReveal;
+								newState.settings = {
+									...newState.settings,
+									allowRevoteAfterReveal:
+										!newState.settings
+											.allowRevoteAfterReveal,
+								};
+								break;
+							case 'TOGGLE_ANYONE_CAN_REVEAL':
+								newState.settings = {
+									...newState.settings,
+									anyoneCanReveal:
+										!newState.settings.anyoneCanReveal,
+								};
+								break;
+							case 'TOGGLE_REVEAL_ONLY_WHEN_ALL_VOTED':
+								newState.settings = {
+									...newState.settings,
+									revealOnlyWhenAllVoted:
+										!newState.settings
+											.revealOnlyWhenAllVoted,
+								};
 								break;
 							case 'RESET_SESSION':
 								newState.isRevealed = false;
