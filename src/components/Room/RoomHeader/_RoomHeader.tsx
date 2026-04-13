@@ -44,6 +44,15 @@ export function RoomHeader() {
 
 	const handleReveal = () => {
 		sendAction({ payload: undefined, type: 'TOGGLE_REVEAL' });
+
+		if (window.innerWidth < 768) {
+			const element = document.getElementById('participant-list-section');
+			if (element) {
+				element.scrollIntoView({ behavior: 'smooth' });
+				const title = document.getElementById('roster-title');
+				title?.focus();
+			}
+		}
 	};
 
 	return (
@@ -96,7 +105,7 @@ export function RoomHeader() {
 										variant="secondary"
 									/>
 								)}
-								{(!allVoted || roomState.isRevealed) && (
+								{!roomState.isRevealed && (
 									<ToolbarItem
 										icon="visibility"
 										label={revealAriaLabel}

@@ -1,16 +1,10 @@
 import styled from '@emotion/styled';
 
 export const SubHeaderContainer = styled.div`
+	align-items: center;
 	display: flex;
-	flex-direction: column;
 	gap: var(--sys-spacing-md);
 	justify-content: space-between;
-	align-items: stretch;
-
-	@media (min-width: 600px) {
-		flex-direction: row;
-		align-items: center;
-	}
 `;
 
 export const Toast = styled.div`

@@ -11,8 +11,12 @@ export function Roster() {
 	if (!roomState) return null;
 
 	return (
-		<S.RosterContainer aria-labelledby="roster-title" aria-live="polite">
-			<S.SectionTitle id="roster-title">
+		<S.RosterContainer
+			id="participant-list-section"
+			aria-labelledby="roster-title"
+			aria-live="polite"
+		>
+			<S.SectionTitle id="roster-title" tabIndex={-1}>
 				<span>{t('room.roster.title')}</span>
 				<S.VoteCountBadge>
 					{roomState.users.filter((u) => u.vote !== null).length} /{' '}
