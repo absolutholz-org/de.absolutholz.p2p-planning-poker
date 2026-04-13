@@ -131,7 +131,8 @@
         "confirm": "Update Name",
         "aria": {
           "open": "Open rename dialog",
-          "input": "Enter your new display name"
+          "input": "Enter your new display name",
+          "rename_yourself": "Rename yourself"
         }
       },
       "share": {

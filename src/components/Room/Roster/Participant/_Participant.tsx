@@ -1,4 +1,10 @@
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { useRoom } from '../../../../hooks/useRoom';
+import { Dialog } from '../../../Shared/Dialog';
 import { Icon } from '../../../Shared/Icon';
+import { Input } from '../../../Shared/Input';
 import * as S from './_Participant.styles';
 import type { IParticipant } from './_Participant.types';
 
@@ -14,6 +20,23 @@ export function Participant({
 	vote,
 	youText,
 }: IParticipant) {
+	const { t } = useTranslation();
+	const { updateName } = useRoom();
+	const [isRenameDialogOpen, setIsRenameDialogOpen] = useState(false);
+	const [newName, setNewName] = useState(name);
+
+	const handleRename = () => {
+		if (newName.trim() && newName !== name) {
+			updateName(newName.trim());
+		}
+		setIsRenameDialogOpen(false);
+	};
+
+	const openRenameDialog = () => {
+		setNewName(name);
+		setIsRenameDialogOpen(true);
+	};
+
 	return (
 		<S.Participant style={{ opacity: isConnected ? 1 : 0.5 }}>
 			<div>
@@ -23,9 +46,21 @@ export function Participant({
 					)}
 					{name}{' '}
 					{isMe && (
-						<S.Participant_MeBadge>
-							({youText})
-						</S.Participant_MeBadge>
+						<>
+							<S.Participant_MeBadge>
+								({youText})
+							</S.Participant_MeBadge>
+							<S.EditButton
+								onClick={openRenameDialog}
+								className="rename-trigger"
+								aria-label={t(
+									'room.header.rename_dialog.aria.rename_yourself',
+								)}
+								title={t('room.header.rename_dialog.button')}
+							>
+								<Icon name="edit" size="xs" />
+							</S.EditButton>
+						</>
 					)}
 				</>
 				{!isConnected ? (
@@ -63,6 +98,33 @@ export function Participant({
 					)}
 				</S.Participant_Status>
 			</div>
+
+			{isMe && (
+				<Dialog
+					id="rename-dialog-participant"
+					isOpen={isRenameDialogOpen}
+					title={t('room.header.rename_dialog.title')}
+					confirmText={t('room.header.rename_dialog.confirm')}
+					onConfirm={handleRename}
+					cancelText={t('common.actions.cancel')}
+					onCancel={() => setIsRenameDialogOpen(false)}
+				>
+					<div style={{ paddingTop: 'var(--sys-spacing-sm)' }}>
+						<Input
+							value={newName}
+							onChange={(
+								e: React.ChangeEvent<HTMLInputElement>,
+							) => setNewName(e.target.value)}
+							placeholder={t('lobby.name.placeholder')}
+							label={t('room.header.rename_dialog.label')}
+							autoFocus
+							onKeyDown={(e: React.KeyboardEvent) => {
+								if (e.key === 'Enter') handleRename();
+							}}
+						/>
+					</div>
+				</Dialog>
+			)}
 		</S.Participant>
 	);
 }

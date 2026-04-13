@@ -156,7 +156,8 @@
         "confirm": "Mettre à jour le Nom",
         "aria": {
           "open": "Ouvrir la boîte de dialogue de changement de nom",
-          "input": "Saisissez votre nouveau nom d'affichage"
+          "input": "Saisissez votre nouveau nom d'affichage",
+          "rename_yourself": "Se renommer"
         },
         "button": "Renommer"
       },

@@ -143,7 +143,8 @@
         "confirm": "Name aktualisieren",
         "aria": {
           "open": "Namensänderungsdialog öffnen",
-          "input": "Gib deinen neuen Anzeigenamen ein"
+          "input": "Gib deinen neuen Anzeigenamen ein",
+          "rename_yourself": "Sich selbst umbenennen"
         },
         "button": "Umbenennen"
       },

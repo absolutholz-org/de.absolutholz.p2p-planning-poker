@@ -6,7 +6,6 @@ import { useRoom } from '../../../hooks/useRoom';
 import { Banner } from '../../Shared/Banner';
 import { Button } from '../../Shared/Button';
 import { Dialog } from '../../Shared/Dialog';
-import { Input } from '../../Shared/Input';
 import { PageContainer } from '../../Shared/PageContainer';
 import { ShareDialog } from '../../Shared/ShareDialog';
 import { Toolbar, ToolbarGroup, ToolbarItem } from '../../Shared/Toolbar';
@@ -15,11 +14,9 @@ import * as S from './_RoomHeader.styles';
 
 export function RoomHeader() {
 	const { t } = useTranslation();
-	const { isHost, roomState, sendAction, updateName, userName } = useRoom();
+	const { isHost, roomState, sendAction } = useRoom();
 	const { roomId } = useParams<{ roomId?: string }>();
 	const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
-	const [isRenameDialogOpen, setIsRenameDialogOpen] = useState(false);
-	const [newName, setNewName] = useState(userName);
 	const [isShareOpen, setIsShareOpen] = useState(false);
 	const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
@@ -49,18 +46,6 @@ export function RoomHeader() {
 		sendAction({ payload: undefined, type: 'TOGGLE_REVEAL' });
 	};
 
-	const handleRename = () => {
-		if (newName.trim() && newName !== userName) {
-			updateName(newName.trim());
-		}
-		setIsRenameDialogOpen(false);
-	};
-
-	const openRenameDialog = () => {
-		setNewName(userName);
-		setIsRenameDialogOpen(true);
-	};
-
 	return (
 		<>
 			<PageContainer>
@@ -75,15 +60,6 @@ export function RoomHeader() {
 								icon="share"
 								label={t('room.header.share.button')}
 								onClick={() => setIsShareOpen(true)}
-								variant="secondary"
-							/>
-							<ToolbarItem
-								ariaControls="rename-dialog"
-								ariaExpanded={isRenameDialogOpen}
-								ariaHasPopup="dialog"
-								icon="edit"
-								label={t('room.header.rename_dialog.button')}
-								onClick={openRenameDialog}
 								variant="secondary"
 							/>
 							{isHost && (
@@ -181,29 +157,6 @@ export function RoomHeader() {
 				cancelText={t('common.actions.cancel')}
 				onCancel={() => setIsResetDialogOpen(false)}
 			/>
-
-			<Dialog
-				id="rename-dialog"
-				isOpen={isRenameDialogOpen}
-				title={t('room.header.rename_dialog.title')}
-				confirmText={t('room.header.rename_dialog.confirm')}
-				onConfirm={handleRename}
-				cancelText={t('common.actions.cancel')}
-				onCancel={() => setIsRenameDialogOpen(false)}
-			>
-				<div style={{ paddingTop: 'var(--sys-spacing-sm)' }}>
-					<Input
-						value={newName}
-						onChange={(e) => setNewName(e.target.value)}
-						placeholder={t('lobby.name.placeholder')}
-						label={t('room.header.rename_dialog.label')}
-						autoFocus
-						onKeyDown={(e) => {
-							if (e.key === 'Enter') handleRename();
-						}}
-					/>
-				</div>
-			</Dialog>
 			<SettingsDialog
 				isOpen={isSettingsOpen}
 				onClose={() => setIsSettingsOpen(false)}

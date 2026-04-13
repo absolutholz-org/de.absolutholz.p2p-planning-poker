@@ -12,6 +12,11 @@ export const Participant = styled.div`
 	font-weight: var(--sys-font-weight-medium);
 	grid-template-columns: 1fr auto;
 	padding: var(--sys-spacing-sm-md);
+
+	/* Show rename trigger on hover */
+	&:hover .rename-trigger {
+		opacity: 0.6;
+	}
 `;
 
 export const Participant_HostBadge = styled(Icon)`
@@ -21,6 +26,39 @@ export const Participant_HostBadge = styled(Icon)`
 `;
 
 export const Participant_MeBadge = styled.span``;
+
+export const EditButton = styled.button`
+	align-items: center;
+	background: transparent;
+	border: none;
+	border-radius: var(--sys-radius-sm);
+	color: var(--sys-color-text-secondary);
+	cursor: pointer;
+	display: inline-flex;
+	justify-content: center;
+	line-height: 1;
+	margin-left: 0.25em;
+	opacity: 0;
+	padding: var(--sys-spacing-xs);
+	transition: all var(--sys-transition-base);
+	vertical-align: middle;
+
+	&:hover,
+	&:focus-visible {
+		background-color: var(--sys-color-surface-neutral);
+		color: var(--sys-color-primary);
+		opacity: 1 !important;
+	}
+
+	&:active {
+		transform: scale(0.95);
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--sys-color-primary);
+		outline-offset: 2px;
+	}
+`;
 
 export const Participant_Status_Text = styled.span`
 	color: var(--sys-color-text-secondary);
