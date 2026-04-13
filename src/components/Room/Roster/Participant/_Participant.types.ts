@@ -10,5 +10,4 @@ export interface IParticipant {
 	readyText: string;
 	thinkingText: string;
 	disconnectedText: string;
-	youText: string;
 }

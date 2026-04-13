@@ -32,7 +32,6 @@ export const Default: Story = {
 		readyText: 'test',
 		thinkingText: 'test',
 		vote: null,
-		youText: 'test',
 	},
 };
 

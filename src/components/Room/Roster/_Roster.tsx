@@ -33,7 +33,6 @@ export function Roster() {
 						readyText={t('room.roster.ready')}
 						thinkingText={t('room.roster.thinking')}
 						disconnectedText={t('room.roster.disconnected')}
-						youText={t('room.roster.you')}
 					/>
 				))}
 			</S.ParticipantGrid>

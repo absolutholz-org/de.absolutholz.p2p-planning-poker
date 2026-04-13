@@ -18,7 +18,6 @@ export function Participant({
 	readyText,
 	thinkingText,
 	vote,
-	youText,
 }: IParticipant) {
 	const { t } = useTranslation();
 	const { updateName } = useRoom();
@@ -40,29 +39,24 @@ export function Participant({
 	return (
 		<S.Participant style={{ opacity: isConnected ? 1 : 0.5 }}>
 			<div>
-				<>
+				<S.Participant_Identification>
 					{isHost && (
 						<S.Participant_HostBadge name="crown" size="sm" />
 					)}
 					{name}{' '}
 					{isMe && (
-						<>
-							<S.Participant_MeBadge>
-								({youText})
-							</S.Participant_MeBadge>
-							<S.EditButton
-								onClick={openRenameDialog}
-								className="rename-trigger"
-								aria-label={t(
-									'room.header.rename_dialog.aria.rename_yourself',
-								)}
-								title={t('room.header.rename_dialog.button')}
-							>
-								<Icon name="edit" size="xs" />
-							</S.EditButton>
-						</>
+						<S.EditButton
+							onClick={openRenameDialog}
+							className="rename-trigger"
+							aria-label={t(
+								'room.header.rename_dialog.aria.rename_yourself',
+							)}
+							title={t('room.header.rename_dialog.button')}
+						>
+							<Icon name="edit" size="xs" />
+						</S.EditButton>
 					)}
-				</>
+				</S.Participant_Identification>
 				{!isConnected ? (
 					<S.Participant_Status_Text_Disconnected>
 						{disconnectedText}

@@ -193,7 +193,6 @@
       "ready": "Prêt",
       "thinking": "En train de réfléchir...",
       "voted_label": "Voté",
-      "you": "vous",
       "aria": {
         "label": "Liste de l'équipe",
         "not_voted": "{{name}} n'a pas encore voté"

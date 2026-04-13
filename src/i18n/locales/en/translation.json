@@ -180,7 +180,6 @@
       "thinking": "Thinking...",
       "voted_label": "Voted",
       "disconnected": "Disconnected",
-      "you": "you",
       "aria": {
         "label": "Team roster",
         "not_voted": "{{name}} has not voted yet"

@@ -12,11 +12,10 @@ export const Participant = styled.div`
 	font-weight: var(--sys-font-weight-medium);
 	grid-template-columns: 1fr auto;
 	padding: var(--sys-spacing-sm-md);
+`;
 
-	/* Show rename trigger on hover */
-	&:hover .rename-trigger {
-		opacity: 0.6;
-	}
+export const Participant_Identification = styled.div`
+	display: flex;
 `;
 
 export const Participant_HostBadge = styled(Icon)`
@@ -25,7 +24,9 @@ export const Participant_HostBadge = styled(Icon)`
 	vertical-align: text-bottom;
 `;
 
-export const Participant_MeBadge = styled.span``;
+export const Participant_MeBadge = styled.span`
+	display: none;
+`;
 
 export const EditButton = styled.button`
 	align-items: center;
@@ -38,7 +39,7 @@ export const EditButton = styled.button`
 	justify-content: center;
 	line-height: 1;
 	margin-left: 0.25em;
-	opacity: 0;
+	opacity: 0.6;
 	padding: var(--sys-spacing-xs);
 	transition: all var(--sys-transition-base);
 	vertical-align: middle;
@@ -65,6 +66,7 @@ export const Participant_Status_Text = styled.span`
 	display: block;
 	font-size: var(--sys-font-size-xs);
 	font-weight: var(--sys-font-weight-normal);
+	margin-top: var(--sys-spacing-xs);
 `;
 
 export const Participant_Status_Text_Disconnected = styled(

@@ -180,7 +180,6 @@
       "ready": "Bereit",
       "thinking": "Denken...",
       "voted_label": "Gestimmt",
-      "you": "Sie",
       "aria": {
         "label": "Team-Liste",
         "not_voted": "{{name}} hat noch nicht abgestimmt"

@@ -197,7 +197,6 @@
       "ready": "Pronto",
       "thinking": "Pensando...",
       "voted_label": "Votado",
-      "you": "tu",
       "aria": {
         "label": "Lista da Equipe",
         "not_voted": "{{name}} ainda não votou"
