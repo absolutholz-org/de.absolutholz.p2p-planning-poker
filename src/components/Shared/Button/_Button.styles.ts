@@ -97,7 +97,7 @@ export const Button = styled.button<{ 'data-variant': ButtonVariant }>`
 		border: none;
 
 		&:hover:not(:disabled) {
-			background-color: ${color('border-subtle')};
+			background-color: ${color('border')};
 		}
 	}
 

@@ -49,7 +49,7 @@ export const StyledInput = styled.input<{ $hasError: boolean }>`
 
 	&:hover:not(:disabled) {
 		border-color: ${(props) =>
-			props.$hasError ? color('danger') : color('primary-subtle')};
+			props.$hasError ? color('danger') : color('primary')};
 		background: ${color('surface')};
 	}
 

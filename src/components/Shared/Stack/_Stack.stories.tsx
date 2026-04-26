@@ -38,10 +38,13 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const Placeholder = ({ color = color('primary'), size = '50px' }) => (
+const Placeholder = ({
+	color: backgroundColor = color('primary'),
+	size = '50px',
+}) => (
 	<div
 		style={{
-			backgroundColor: color,
+			backgroundColor,
 			borderRadius: 'var(--sys-radius-sm)',
 			height: size,
 			opacity: 0.7,

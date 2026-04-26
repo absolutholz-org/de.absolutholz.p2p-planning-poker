@@ -33,7 +33,7 @@ export const IdentityContainer = styled(Stack)`
 `;
 
 const commonLinkStyles = `
-	color: ${color('text')};
+	color: ${color('text-primary')};
 	font-size: var(--sys-font-size-sm);
 	padding: var(--sys-spacing-xs) var(--sys-spacing-sm);
 	text-decoration: none;

@@ -28,7 +28,7 @@ export const Segment = styled.div`
 export const ProgressSegment = styled(Segment)`
 	background: linear-gradient(
 		to right,
-		${color('bg-subtle')} var(--timer-progress, 100%),
+		${color('surface-subtle')} var(--timer-progress, 100%),
 		transparent var(--timer-progress, 100%)
 	);
 	transition: background 0.3s ease;
@@ -94,7 +94,7 @@ export const ControlButton = styled.button`
 	transition: background-color 0.2s;
 
 	&:hover:not(:disabled) {
-		background-color: ${color('border-subtle')};
+		background-color: ${color('border')};
 	}
 
 	&:disabled {
@@ -121,6 +121,6 @@ export const IconButton = styled.button`
 	transition: background-color 0.2s;
 
 	&:hover:not(:disabled) {
-		background-color: ${color('border-subtle')};
+		background-color: ${color('border')};
 	}
 `;

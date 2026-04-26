@@ -47,7 +47,7 @@ export const EditButton = styled.button`
 
 	&:hover,
 	&:focus-visible {
-		background-color: ${color('surface-neutral')};
+		background-color: ${color('surface-subtle')};
 		color: ${color('primary')};
 		opacity: 1 !important;
 	}

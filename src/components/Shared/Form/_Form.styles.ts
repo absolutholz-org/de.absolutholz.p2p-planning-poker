@@ -7,7 +7,7 @@ export const StyledForm = styled.form`
 `;
 
 export const ErrorSummary = styled.div`
-	background: ${color('danger-subtle')};
+	background: ${color('surface-subtle')};
 	border-left: 4px solid ${color('danger')};
 	border-radius: var(--sys-radius-sm);
 	color: ${color('danger')};

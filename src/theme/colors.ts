@@ -17,7 +17,7 @@ export const lightTheme = {
 	'text-secondary': 'oklch(0.40 0 0)',
 	warning: 'oklch(0.50 0.15 75.32)',
 	'warning-hover': 'oklch(0.45 0.15 75.32)',
-};
+} as const;
 
 export type ThemeColor = keyof typeof lightTheme;
 
@@ -42,4 +42,4 @@ export const darkTheme = {
 	'text-secondary': 'oklch(0.90 0 0)',
 	warning: 'oklch(0.76 0.177 75.32)',
 	'warning-hover': 'oklch(0.72 0.177 75.32)',
-};
+} as const;
