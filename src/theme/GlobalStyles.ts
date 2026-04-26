@@ -17,9 +17,12 @@ const lightTheme = {
 	'surface-subtle': 'oklch(0.97 0 0)',
 	'text-primary': 'oklch(0.205 0 0)',
 	'text-secondary': 'oklch(0.40 0 0)',
-	warning: 'oklch(0.50 0.15 75.32)',
 	'warning-hover': 'oklch(0.45 0.15 75.32)',
 };
+
+export type ThemeColor = keyof typeof lightTheme;
+
+export const color = (c: ThemeColor) => `var(--sys-color-${c})`;
 
 const darkTheme = {
 	bg: 'oklch(0.145 0 0)',

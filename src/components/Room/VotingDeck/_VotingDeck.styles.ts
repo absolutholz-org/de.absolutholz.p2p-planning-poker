@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { color } from '../../../../theme/GlobalStyles';
+
 const LAYOUT_BREAKPOINT = '45rem';
 
 export const DeckContainer = styled.section`
@@ -9,7 +11,7 @@ export const DeckContainer = styled.section`
 `;
 
 export const SectionTitle = styled.h2`
-	color: var(--sys-color-text-secondary);
+	color: ${color('text-secondary')};
 	font-size: var(--sys-font-size-xs);
 	font-weight: 700;
 	letter-spacing: 0.05em;
