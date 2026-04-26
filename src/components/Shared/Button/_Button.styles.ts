@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 
+import { color } from '../../../theme/colors';
 import type { ButtonVariant } from './_Button.types';
 
 export const Button = styled.button<{ 'data-variant': ButtonVariant }>`
@@ -26,7 +27,7 @@ export const Button = styled.button<{ 'data-variant': ButtonVariant }>`
 	/* Focus ring for accessibility */
 	&:focus-visible {
 		outline: none;
-		box-shadow: 0 0 0 3px var(--sys-color-focus);
+		box-shadow: 0 0 0 3px ${color('focus')};
 	}
 
 	&:disabled {
@@ -36,67 +37,67 @@ export const Button = styled.button<{ 'data-variant': ButtonVariant }>`
 
 	/* Variants */
 	&[data-variant='primary'] {
-		background-color: var(--sys-color-primary);
-		color: var(--sys-color-primary-text);
+		background-color: ${color('primary')};
+		color: ${color('primary-text')};
 
 		&:hover:not(:disabled) {
-			background-color: var(--sys-color-primary-hover);
+			background-color: ${color('primary-hover')};
 		}
 	}
 
 	&[data-variant='success'] {
-		background-color: var(--sys-color-success);
-		color: var(--sys-color-primary-text);
+		background-color: ${color('success')};
+		color: ${color('primary-text')};
 
 		&:hover:not(:disabled) {
-			background-color: var(--sys-color-success-hover);
+			background-color: ${color('success-hover')};
 		}
 	}
 
 	&[data-variant='info'] {
-		background-color: var(--sys-color-info);
-		color: var(--sys-color-primary-text);
+		background-color: ${color('info')};
+		color: ${color('primary-text')};
 
 		&:hover:not(:disabled) {
-			background-color: var(--sys-color-info-hover);
+			background-color: ${color('info-hover')};
 		}
 	}
 
 	&[data-variant='warning'] {
-		background-color: var(--sys-color-warning);
-		color: var(--sys-color-primary-text);
+		background-color: ${color('warning')};
+		color: ${color('primary-text')};
 
 		&:hover:not(:disabled) {
-			background-color: var(--sys-color-warning-hover);
+			background-color: ${color('warning-hover')};
 		}
 	}
 
 	&[data-variant='danger'] {
-		background-color: var(--sys-color-danger);
-		color: var(--sys-color-primary-text);
+		background-color: ${color('danger')};
+		color: ${color('primary-text')};
 
 		&:hover:not(:disabled) {
-			background-color: var(--sys-color-danger-hover);
+			background-color: ${color('danger-hover')};
 		}
 	}
 
 	&[data-variant='secondary'] {
 		background-color: transparent;
-		color: var(--sys-color-text-primary);
-		border-color: var(--sys-color-border);
+		color: ${color('text-primary')};
+		border-color: ${color('border')};
 
 		&:hover:not(:disabled) {
-			background-color: var(--sys-color-border);
+			background-color: ${color('border')};
 		}
 	}
 
 	&[data-variant='ghost'] {
 		background-color: transparent;
-		color: var(--sys-color-text-primary);
+		color: ${color('text-primary')};
 		border: none;
 
 		&:hover:not(:disabled) {
-			background-color: var(--sys-color-border-subtle);
+			background-color: ${color('border-subtle')};
 		}
 	}
 

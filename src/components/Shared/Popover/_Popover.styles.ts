@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { color } from '../../../theme/colors';
+
 export const PopoverContent = styled.div`
 	/* Reset default popover styling applied natively by browsers */
 	border: none;
@@ -11,10 +13,10 @@ export const PopoverContent = styled.div`
 	inset: auto;
 	z-index: 100;
 
-	background-color: var(--sys-color-surface, #ffffff);
-	color: var(--sys-color-text-primary);
+	background-color: ${color('surface')};
+	color: ${color('text-primary')};
 	opacity: 1;
-	border: 1px solid var(--sys-color-border);
+	border: 1px solid ${color('border')};
 	border-radius: var(--sys-radius-lg);
 	box-shadow: var(--sys-shadow-lg);
 	min-width: 11.25rem;

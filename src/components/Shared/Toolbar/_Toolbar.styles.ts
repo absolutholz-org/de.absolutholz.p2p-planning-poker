@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 
+import { color } from '../../../theme/colors';
 import { Stack } from '../Stack';
 import type { ToolbarItemVariant } from './_ToolbarItem.types';
 
@@ -39,30 +40,30 @@ export const ItemButton = styled.button<ItemButtonProps>`
 		switch (variant) {
 			case 'primary':
 				return `
-					background-color: var(--sys-color-primary);
-					color: var(--sys-color-primary-text);
-					&:hover:not(:disabled) { background-color: var(--sys-color-primary-hover); }
+					background-color: ${color('primary')};
+					color: ${color('primary-text')};
+					&:hover:not(:disabled) { background-color: ${color('primary-hover')}; }
 				`;
 			case 'danger':
 				return `
-					color: var(--sys-color-danger);
+					color: ${color('danger')};
 					&:hover:not(:disabled) { 
-						background-color: var(--sys-color-danger); 
-						color: var(--sys-color-primary-text);
+						background-color: ${color('danger')}; 
+						color: ${color('primary-text')};
 					}
 				`;
 			case 'secondary':
 				return `
-					background-color: var(--sys-color-surface);
-					border-color: var(--sys-color-border);
-					color: var(--sys-color-text-primary);
-					&:hover:not(:disabled) { background-color: var(--sys-color-bg); }
+					background-color: ${color('surface')};
+					border-color: ${color('border')};
+					color: ${color('text-primary')};
+					&:hover:not(:disabled) { background-color: ${color('bg')}; }
 				`;
 			default:
 				return `
 					background-color: transparent;
-					color: var(--sys-color-text-primary);
-					&:hover:not(:disabled) { background-color: var(--sys-color-bg); }
+					color: ${color('text-primary')};
+					&:hover:not(:disabled) { background-color: ${color('bg')}; }
 				`;
 		}
 	}}
@@ -73,7 +74,7 @@ export const ItemButton = styled.button<ItemButtonProps>`
 	}
 
 	&:focus-visible {
-		outline: 2px solid var(--sys-color-primary);
+		outline: 2px solid ${color('primary')};
 		outline-offset: 2px;
 	}
 `;

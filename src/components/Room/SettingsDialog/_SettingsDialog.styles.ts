@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { color } from '../../../theme/colors';
+
 export const ContentContainer = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -14,7 +16,7 @@ export const SettingRow = styled.div`
 `;
 
 export const Description = styled.p`
-	color: var(--sys-color-text-secondary);
+	color: ${color('text-secondary')};
 	font-size: var(--sys-font-size-xs);
 	margin: 0;
 `;

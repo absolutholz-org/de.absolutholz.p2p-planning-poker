@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { color } from '../../theme/colors';
+
 export const BackButtonContainer = styled.div`
 	display: flex;
 	justify-content: flex-start;
@@ -7,7 +9,7 @@ export const BackButtonContainer = styled.div`
 `;
 
 export const MarkdownWrapper = styled.article`
-	color: var(--sys-color-text-primary);
+	color: ${color('text-primary')};
 	font-size: var(--sys-font-size-md);
 	line-height: 1.6;
 	max-width: 65ch;
@@ -20,7 +22,7 @@ export const MarkdownWrapper = styled.article`
 	h4,
 	h5,
 	h6 {
-		color: var(--sys-color-text-primary);
+		color: ${color('text-primary')};
 		font-weight: 700;
 		margin-top: var(--sys-spacing-xl);
 		margin-bottom: var(--sys-spacing-md);
@@ -40,18 +42,18 @@ export const MarkdownWrapper = styled.article`
 	}
 
 	p {
-		color: var(--sys-color-text-secondary);
+		color: ${color('text-secondary')};
 		margin-bottom: var(--sys-spacing-md);
 	}
 
 	hr {
 		border: none;
-		border-top: 1px solid var(--sys-color-border);
+		border-top: 1px solid ${color('border')};
 		margin: var(--sys-spacing-xl) 0;
 	}
 
 	a {
-		color: var(--sys-color-primary);
+		color: ${color('primary')};
 		text-decoration: none;
 
 		&:hover,
@@ -61,13 +63,13 @@ export const MarkdownWrapper = styled.article`
 	}
 
 	strong {
-		color: var(--sys-color-text-primary);
+		color: ${color('text-primary')};
 		font-weight: 600;
 	}
 
 	ul,
 	ol {
-		color: var(--sys-color-text-secondary);
+		color: ${color('text-secondary')};
 		margin-bottom: var(--sys-spacing-md);
 		padding-left: var(--sys-spacing-xl);
 	}
@@ -77,9 +79,9 @@ export const MarkdownWrapper = styled.article`
 	}
 
 	code {
-		background-color: var(--sys-color-bg);
+		background-color: ${color('bg')};
 		border-radius: var(--sys-radius-sm);
-		color: var(--sys-color-primary);
+		color: ${color('primary')};
 		font-size: 0.9em;
 		font-family: inherit; // use simple monospace if preferred
 		padding: 2px 4px;

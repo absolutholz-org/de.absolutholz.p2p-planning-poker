@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { color } from '../../../theme/colors';
+
 export const Card = styled.button<{
 	'data-selected': boolean;
 	'data-hidden': boolean;
@@ -12,9 +14,9 @@ export const Card = styled.button<{
 	align-items: center;
 	justify-content: center;
 
-	background-color: var(--sys-color-surface);
-	color: var(--sys-color-text-primary);
-	border: 2px solid var(--sys-color-border);
+	background-color: ${color('surface')};
+	color: ${color('text-primary')};
+	border: 2px solid ${color('border')};
 	border-radius: var(--sys-radius-lg);
 
 	font-size: var(--sys-font-size-3xl);
@@ -24,20 +26,20 @@ export const Card = styled.button<{
 
 	&:focus-visible {
 		outline: none;
-		box-shadow: 0 0 0 3px var(--sys-color-focus);
+		box-shadow: 0 0 0 3px ${color('focus')};
 	}
 
 	&:hover:not(:disabled) {
 		transform: translateY(-0.25rem);
-		border-color: var(--sys-color-primary);
+		border-color: ${color('primary')};
 	}
 
 	&[data-selected='true'] {
-		border-color: var(--sys-color-primary);
-		background-color: var(--sys-color-primary);
-		color: var(--sys-color-primary-text);
+		border-color: ${color('primary')};
+		background-color: ${color('primary')};
+		color: ${color('primary-text')};
 		transform: translateY(-0.5rem);
-		box-shadow: 0 10px 15px -3px var(--sys-color-focus);
+		box-shadow: 0 10px 15px -3px ${color('focus')};
 		position: relative;
 
 		&::after {
@@ -49,20 +51,20 @@ export const Card = styled.button<{
 			width: 0.375rem;
 			height: 0.375rem;
 			border-radius: 50%;
-			background-color: var(--sys-color-text-primary);
+			background-color: ${color('text-primary')};
 		}
 	}
 
 	/* Hidden State for Roster (Pending reveal) */
 	&[data-hidden='true'] {
 		background-color: transparent;
-		border-color: var(--sys-color-border);
+		border-color: ${color('border')};
 		color: transparent; /* Hide text */
 		position: relative;
 
 		&::after {
 			content: '✓';
-			color: var(--sys-color-text-primary);
+			color: ${color('text-primary')};
 			font-size: var(--sys-font-size-xl);
 			position: absolute;
 		}

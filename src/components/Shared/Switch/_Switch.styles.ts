@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { color } from '../../../theme/colors';
+
 export const Switch_Container = styled.label<{ disabled?: boolean }>`
 	display: inline-flex;
 	align-items: center;
@@ -11,14 +13,14 @@ export const Switch_Container = styled.label<{ disabled?: boolean }>`
 	width: 100%;
 
 	&:has(input:focus-visible) > div {
-		outline: 0.125em solid var(--sys-color-info);
+		outline: 0.125em solid ${color('info')};
 		outline-offset: 0.25em;
 	}
 `;
 
 export const Switch_LabelText = styled.span`
 	font-size: var(--sys-font-size-md);
-	color: var(--sys-color-text-primary);
+	color: ${color('text-primary')};
 	font-weight: var(--sys-font-weight-bold);
 `;
 
@@ -31,7 +33,7 @@ export const Switch_Track = styled.div<{ checked: boolean }>`
 	width: 3em;
 	height: 1.75em;
 	background-color: ${(props) =>
-		props.checked ? 'var(--sys-color-info)' : 'var(--sys-color-border)'};
+		props.checked ? color('info') : color('border')};
 	border-radius: var(--sys-radius-pill);
 	transition: background-color 0.2s ease-in-out;
 	flex-shrink: 0;
@@ -49,7 +51,7 @@ export const Switch_Thumb = styled.span<{ checked: boolean }>`
 	left: 0.125em;
 	width: 1.375em;
 	height: 1.375em;
-	background-color: var(--sys-color-surface);
+	background-color: ${color('surface')};
 	border-radius: var(--sys-radius-pill);
 	transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 	transform: ${(props) =>

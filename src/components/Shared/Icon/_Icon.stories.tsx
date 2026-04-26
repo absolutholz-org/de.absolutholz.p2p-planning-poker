@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { color } from '../../../theme/colors';
 import { Icon } from './_Icon';
 import { ICON_PATHS } from './IconLibrary';
 
@@ -56,7 +57,7 @@ export const Gallery: Story = {
 						gap: '0.5rem',
 					}}
 				>
-					<div style={{ color: 'var(--sys-color-primary)' }}>
+					<div style={{ color: color('primary') }}>
 						<Icon name={name} size="lg" />
 					</div>
 					<code style={{ fontSize: '0.8rem', opacity: 0.7 }}>

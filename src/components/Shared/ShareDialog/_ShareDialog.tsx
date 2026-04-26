@@ -2,6 +2,7 @@ import { QRCodeSVG } from 'qrcode.react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { color } from '../../../theme/colors';
 import * as HeaderStyles from '../../Room/RoomHeader/_RoomHeader.styles'; // Re-use toast style
 import { Button } from '../Button';
 import { Dialog } from '../Dialog';
@@ -80,7 +81,7 @@ export function ShareContent({
 						size={180}
 						bgColor="transparent"
 						fgColor="currentColor"
-						style={{ color: 'var(--sys-color-text-primary)' }}
+						style={{ color: color('text-primary') }}
 					/>
 				</S.QrCodeWrapper>
 				<S.ActionsContainer>

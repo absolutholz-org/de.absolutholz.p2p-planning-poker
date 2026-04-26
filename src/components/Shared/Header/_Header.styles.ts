@@ -1,9 +1,11 @@
 import styled from '@emotion/styled';
 
+import { color } from '../../../theme/colors';
+
 export const HeaderContainer = styled.header`
 	align-items: center;
-	background-color: var(--sys-color-bg);
-	border-bottom: 1px solid var(--sys-color-border);
+	background-color: ${color('bg')};
+	border-bottom: 1px solid ${color('border')};
 	display: flex;
 	justify-content: space-between;
 	padding: var(--sys-spacing-md) var(--page-content-padding);
@@ -18,7 +20,7 @@ export const HeaderContainer = styled.header`
 
 export const Brand = styled.div`
 	align-items: center;
-	color: var(--sys-color-text-primary);
+	color: ${color('text-primary')};
 	cursor: pointer;
 	display: flex;
 	font-size: var(--sys-font-size-lg);
@@ -33,7 +35,7 @@ export const Brand = styled.div`
 
 	&:focus-visible {
 		border-radius: var(--sys-radius-sm);
-		outline: 2px solid var(--sys-color-focus);
+		outline: 2px solid ${color('focus')};
 		outline-offset: 4px;
 	}
 `;
@@ -57,9 +59,9 @@ export const BrandText = styled.div`
 
 export const LogoIcon = styled.div`
 	align-items: center;
-	background-color: var(--sys-color-text-primary);
+	background-color: ${color('text-primary')};
 	border-radius: var(--sys-radius-md);
-	color: var(--sys-color-bg);
+	color: ${color('bg')};
 	display: flex;
 	font-size: var(--sys-font-size-md);
 	font-weight: 800;

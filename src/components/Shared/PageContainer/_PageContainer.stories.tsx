@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { color } from '../../../theme/colors';
 import { PageContainer } from '.';
 
 const meta = {
@@ -19,8 +20,8 @@ export const Default: Story = {
 		children: (
 			<div
 				style={{
-					backgroundColor: 'var(--sys-color-surface)',
-					border: '1px solid var(--sys-color-border)',
+					backgroundColor: color('surface'),
+					border: `1px solid ${color('border')}`,
 					borderRadius: 'var(--sys-radius-lg)',
 					marginBottom: 'var(--sys-spacing-xl)',
 					marginTop: 'var(--sys-spacing-xl)',

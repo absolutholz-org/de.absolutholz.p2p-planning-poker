@@ -1,3 +1,4 @@
+import { color } from '../../../theme/colors';
 import { Icon } from '../Icon';
 import * as S from './_Banner.styles';
 import { type BannerVariant, type IBanner } from './_Banner.types';
@@ -21,7 +22,7 @@ export function Banner({
 			<S.Banner_Container
 				style={
 					{
-						'--banner-accent-color': `var(--sys-color-${variant})`,
+						'--banner-accent-color': color(variant),
 					} as React.CSSProperties
 				}
 				role="status"

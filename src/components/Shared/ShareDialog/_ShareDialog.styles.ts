@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { color } from '../../../theme/colors';
+
 export const ContentContainer = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -9,9 +11,9 @@ export const ContentContainer = styled.div`
 
 export const QrCodeWrapper = styled.div`
 	padding: var(--sys-spacing-md);
-	background: var(--sys-color-surface);
+	background: ${color('surface')};
 	border-radius: var(--sys-radius-lg);
-	border: 1px solid var(--sys-color-border);
+	border: 1px solid ${color('border')};
 `;
 
 export const ActionsContainer = styled.div`
@@ -26,12 +28,12 @@ export const RoomCodeDisplay = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	padding: var(--sys-spacing-md);
-	background: var(--sys-color-bg);
+	background: ${color('bg')};
 	border-radius: var(--sys-radius-md);
-	border: 1px dashed var(--sys-color-border);
+	border: 1px dashed ${color('border')};
 	font-family: inherit;
 	font-size: var(--sys-font-size-xl);
 	font-weight: 700;
 	letter-spacing: 0.1em;
-	color: var(--sys-color-text-primary);
+	color: ${color('text-primary')};
 `;

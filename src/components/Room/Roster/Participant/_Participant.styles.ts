@@ -1,11 +1,12 @@
 import styled from '@emotion/styled';
 
+import { color } from '../../../../theme/colors';
 import { Icon } from '../../../Shared/Icon';
 
 export const Participant = styled.div`
 	align-items: center;
-	background-color: var(--sys-color-surface);
-	border: 1px solid var(--sys-color-border);
+	background-color: ${color('surface')};
+	border: 1px solid ${color('border')};
 	border-radius: var(--sys-radius-lg);
 	display: grid;
 	font-size: var(--sys-font-size-sm);
@@ -19,7 +20,7 @@ export const Participant_Identification = styled.div`
 `;
 
 export const Participant_HostBadge = styled(Icon)`
-	color: var(--sys-color-warning);
+	color: ${color('warning')};
 	margin-right: 0.5em;
 	vertical-align: text-bottom;
 `;
@@ -33,7 +34,7 @@ export const EditButton = styled.button`
 	background: transparent;
 	border: none;
 	border-radius: var(--sys-radius-sm);
-	color: var(--sys-color-text-secondary);
+	color: ${color('text-secondary')};
 	cursor: pointer;
 	display: inline-flex;
 	justify-content: center;
@@ -46,8 +47,8 @@ export const EditButton = styled.button`
 
 	&:hover,
 	&:focus-visible {
-		background-color: var(--sys-color-surface-neutral);
-		color: var(--sys-color-primary);
+		background-color: ${color('surface-neutral')};
+		color: ${color('primary')};
 		opacity: 1 !important;
 	}
 
@@ -56,13 +57,13 @@ export const EditButton = styled.button`
 	}
 
 	&:focus-visible {
-		outline: 2px solid var(--sys-color-primary);
+		outline: 2px solid ${color('primary')};
 		outline-offset: 2px;
 	}
 `;
 
 export const Participant_Status_Text = styled.span`
-	color: var(--sys-color-text-secondary);
+	color: ${color('text-secondary')};
 	display: block;
 	font-size: var(--sys-font-size-xs);
 	font-weight: var(--sys-font-weight-normal);
@@ -72,12 +73,12 @@ export const Participant_Status_Text = styled.span`
 export const Participant_Status_Text_Disconnected = styled(
 	Participant_Status_Text,
 )`
-	color: var(--sys-color-danger);
+	color: ${color('danger')};
 `;
 
 export const Participant_Status = styled.div`
 	align-items: center;
-	background-color: var(--sys-color-bg);
+	background-color: ${color('bg')};
 	border: 1px solid oklch(0.967 0.001 286.375);
 	border-radius: var(--sys-radius-md);
 	display: flex;
@@ -90,7 +91,7 @@ export const Participant_Status = styled.div`
 
 export const Participant_Status_Thinking = styled.span`
 	animation: spin 4s linear infinite;
-	border: 2px dashed var(--sys-color-border);
+	border: 2px dashed ${color('border')};
 	border-radius: var(--sys-radius-pill);
 	height: 1rem;
 	opacity: 0.5;
@@ -107,7 +108,7 @@ export const Participant_Status_Voted = styled.span`
 	align-items: center;
 	border: 2px solid;
 	border-radius: var(--sys-radius-pill);
-	color: var(--sys-color-success);
+	color: ${color('success')};
 	display: inline-flex;
 	justify-content: center;
 	height: 1.25rem;

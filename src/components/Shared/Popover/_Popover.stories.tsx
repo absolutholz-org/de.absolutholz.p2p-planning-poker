@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { color } from '../../../theme/colors';
 import { Button } from '../Button';
 import { Popover } from './_Popover';
 
@@ -27,7 +28,7 @@ export const Default: Story = {
 				<p style={{ fontWeight: 500, margin: 0 }}>Menu Content</p>
 				<p
 					style={{
-						color: 'var(--sys-color-text-secondary)',
+						color: color('text-secondary'),
 						fontSize: '14px',
 						margin: '8px 0 0',
 					}}

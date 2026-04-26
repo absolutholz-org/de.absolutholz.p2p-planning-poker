@@ -1,13 +1,15 @@
 import styled from '@emotion/styled';
 
+import { color } from '../../../theme/colors';
+
 export const ContentWrapper = styled.div`
 	margin-inline: auto;
 	max-width: 30rem;
 `;
 
 export const CardContainer = styled.div`
-	background-color: var(--sys-color-surface);
-	border: 1px solid var(--sys-color-border);
+	background-color: ${color('surface')};
+	border: 1px solid ${color('border')};
 	border-radius: var(--sys-radius-xl);
 	// box-shadow: var(--sys-shadow-lg);
 	padding: var(--sys-spacing-xl);
@@ -15,13 +17,13 @@ export const CardContainer = styled.div`
 `;
 
 export const Title = styled.h1`
-	color: var(--sys-color-text-primary);
+	color: ${color('text-primary')};
 	font-size: var(--sys-font-size-2xl);
 	font-weight: 600;
 `;
 
 export const SubTitle = styled.p`
-	color: var(--sys-color-text-secondary);
+	color: ${color('text-secondary')};
 	font-size: var(--sys-font-size-sm);
 	line-height: 1.5;
 `;
@@ -70,8 +72,8 @@ export const DebugToggle = styled.button`
 	right: var(--space-md);
 	width: 2rem;
 	height: 2rem;
-	background: var(--sys-color-bg);
-	border: 1px solid var(--sys-color-border);
+	background: ${color('bg')};
+	border: 1px solid ${color('border')};
 	border-radius: var(--sys-radius-pill);
 	display: flex;
 	align-items: center;
@@ -95,7 +97,7 @@ export const DebugToggle = styled.button`
 export const JoinCodeToggle = styled.button`
 	background: transparent;
 	border: none;
-	color: var(--sys-color-primary);
+	color: ${color('primary')};
 	cursor: pointer;
 	font-size: var(--sys-font-size-sm);
 	font-weight: 600;
@@ -106,8 +108,8 @@ export const JoinCodeToggle = styled.button`
 
 	&:hover {
 		opacity: 1;
-		background: var(--sys-color-surface-subtle);
-		color: var(--sys-color-primary-hover);
+		background: ${color('surface-subtle')};
+		color: ${color('primary-hover')};
 	}
 `;
 
@@ -125,20 +127,20 @@ export const DebugList = styled.ul`
 `;
 
 export const HelperText = styled.p`
-	color: var(--sys-color-text-secondary);
+	color: ${color('text-secondary')};
 	font-size: var(--sys-font-size-sm);
 	margin-top: 0.125rem;
 `;
 
 export const ExtraText = styled.div`
-	color: var(--sys-color-text-secondary);
+	color: ${color('text-secondary')};
 	font-size: var(--sys-font-size-xs);
 	padding-inline: var(--sys-spacing-xl);
 	text-align: center;
 `;
 
 export const DisclaimerText = styled.p`
-	color: var(--sys-color-text-secondary);
+	color: ${color('text-secondary')};
 	font-size: var(--sys-font-size-xs);
 	text-align: center;
 `;

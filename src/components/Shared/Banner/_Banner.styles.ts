@@ -1,17 +1,19 @@
 import styled from '@emotion/styled';
 
+import { color } from '../../../theme/colors';
+
 export const Banner_Root = styled.div`
 	container-type: inline-size;
 	width: 100%;
 `;
 
 export const Banner_Container = styled.div`
-	background-color: var(--sys-color-surface);
-	border: 1px solid var(--sys-color-border);
+	background-color: ${color('surface')};
+	border: 1px solid ${color('border')};
 	border-left: 4px solid var(--banner-accent-color);
 	border-radius: var(--sys-radius-lg);
 	box-shadow: var(--sys-shadow-sm);
-	color: var(--sys-color-text-primary);
+	color: ${color('text-primary')};
 	display: flex;
 	flex-direction: column;
 	font-size: var(--sys-font-size-md);

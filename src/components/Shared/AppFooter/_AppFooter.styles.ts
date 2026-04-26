@@ -1,11 +1,12 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
+import { color } from '../../../theme/colors';
 import { Stack } from '../Stack';
 
 export const FooterContainer = styled.footer`
 	align-items: center;
-	border-top: 1px solid var(--sys-color-border);
+	border-top: 1px solid ${color('border')};
 	display: flex;
 	flex-direction: column;
 	gap: var(--sys-spacing-md);
@@ -14,7 +15,7 @@ export const FooterContainer = styled.footer`
 
 	> *:not(:first-child) {
 		@media (max-width: 767px) {
-			border-top: 1px solid var(--sys-color-border);
+			border-top: 1px solid ${color('border')};
 			padding-top: var(--sys-spacing-md);
 		}
 	}
@@ -32,7 +33,7 @@ export const IdentityContainer = styled(Stack)`
 `;
 
 const commonLinkStyles = `
-	color: var(--sys-color-text);
+	color: ${color('text')};
 	font-size: var(--sys-font-size-sm);
 	padding: var(--sys-spacing-xs) var(--sys-spacing-sm);
 	text-decoration: none;
@@ -51,7 +52,7 @@ export const StaticFooterLink = styled.a`
 `;
 
 export const Copyright = styled.span`
-	color: var(--sys-color-text-secondary);
+	color: ${color('text-secondary')};
 	font-size: var(--sys-font-size-sm);
 	white-space: nowrap;
 `;

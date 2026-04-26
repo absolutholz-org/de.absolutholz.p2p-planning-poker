@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { color } from '../../../theme/colors';
+
 export const InputWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -8,7 +10,7 @@ export const InputWrapper = styled.div`
 `;
 
 export const Label = styled.label`
-	color: var(--sys-color-text-secondary);
+	color: ${color('text-secondary')};
 	font-size: var(--sys-font-size-xs);
 	font-weight: 700;
 	letter-spacing: 0.1em;
@@ -27,16 +29,13 @@ export const StyledInput = styled.input<{ $hasError: boolean }>`
 	min-height: 3.5rem;
 	padding: 0 var(--sys-spacing-md);
 
-	background: var(--sys-color-surface-subtle);
+	background: ${color('surface-subtle')};
 	backdrop-filter: blur(8px);
 	border: 2px solid
-		${(props) =>
-			props.$hasError
-				? 'var(--sys-color-danger)'
-				: 'var(--sys-color-border)'};
+		${(props) => (props.$hasError ? color('danger') : color('border'))};
 	border-radius: var(--sys-radius-lg);
 
-	color: var(--sys-color-text-primary);
+	color: ${color('text-primary')};
 	font-family: inherit;
 	font-size: var(--sys-font-size-md);
 	font-weight: 500;
@@ -44,30 +43,24 @@ export const StyledInput = styled.input<{ $hasError: boolean }>`
 	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
 	&::placeholder {
-		color: var(--sys-color-text-secondary);
+		color: ${color('text-secondary')};
 		opacity: 0.5;
 	}
 
 	&:hover:not(:disabled) {
 		border-color: ${(props) =>
-			props.$hasError
-				? 'var(--sys-color-danger)'
-				: 'var(--sys-color-primary-subtle)'};
-		background: var(--sys-color-surface);
+			props.$hasError ? color('danger') : color('primary-subtle')};
+		background: ${color('surface')};
 	}
 
 	&:focus {
 		outline: none;
 		border-color: ${(props) =>
-			props.$hasError
-				? 'var(--sys-color-danger)'
-				: 'var(--sys-color-primary)'};
-		background: var(--sys-color-surface);
+			props.$hasError ? color('danger') : color('primary')};
+		background: ${color('surface')};
 		box-shadow: 0 0 0 4px
 			${(props) =>
-				props.$hasError
-					? 'rgba(239, 68, 68, 0.1)'
-					: 'var(--sys-color-focus)'};
+				props.$hasError ? 'rgba(239, 68, 68, 0.1)' : color('focus')};
 		transform: translateY(-1px);
 	}
 
@@ -79,7 +72,7 @@ export const StyledInput = styled.input<{ $hasError: boolean }>`
 `;
 
 export const ErrorMessage = styled.span`
-	color: var(--sys-color-danger);
+	color: ${color('danger')};
 	font-size: var(--sys-font-size-xs);
 	font-weight: 500;
 	display: flex;

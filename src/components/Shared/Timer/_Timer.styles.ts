@@ -1,13 +1,14 @@
 import styled from '@emotion/styled';
 
+import { color } from '../../../theme/colors';
 import { VisuallyHidden } from '../VisuallyHidden';
 
 export const TimerContainer = styled.div`
 	display: flex;
 	align-items: stretch;
-	background: var(--sys-color-surface);
+	background: ${color('surface')};
 	border-radius: var(--sys-radius-pill);
-	border: 1px solid var(--sys-color-border);
+	border: 1px solid ${color('border')};
 	overflow: hidden;
 	height: var(--sys-spacing-xxl);
 `;
@@ -20,28 +21,28 @@ export const Segment = styled.div`
 	flex: none;
 
 	&:not(:last-child) {
-		border-right: 1px solid var(--sys-color-border);
+		border-right: 1px solid ${color('border')};
 	}
 `;
 
 export const ProgressSegment = styled(Segment)`
 	background: linear-gradient(
 		to right,
-		var(--sys-color-bg-subtle) var(--timer-progress, 100%),
+		${color('bg-subtle')} var(--timer-progress, 100%),
 		transparent var(--timer-progress, 100%)
 	);
 	transition: background 0.3s ease;
 `;
 
 export const ActionSegment = styled(Segment)`
-	background: var(--sys-color-bg);
+	background: ${color('bg')};
 `;
 
 export const TimeDisplay = styled.div`
 	font-family: var(--sys-font-mono);
 	font-size: var(--sys-font-size-xl);
 	font-weight: var(--sys-font-weight-bold);
-	color: var(--sys-color-text-primary);
+	color: ${color('text-primary')};
 	display: flex;
 	align-items: center;
 	gap: var(--sys-spacing-sm);
@@ -57,7 +58,7 @@ export const Label = styled(VisuallyHidden)``;
 export const TimerInput = styled.input`
 	background: transparent;
 	border: none;
-	color: var(--sys-color-text-primary);
+	color: ${color('text-primary')};
 	font-family: var(--sys-font-mono);
 	font-size: var(--sys-font-size-xl);
 	font-weight: var(--sys-font-weight-bold);
@@ -83,7 +84,7 @@ export const TimerInput = styled.input`
 
 export const ControlButton = styled.button`
 	align-items: center;
-	color: var(--sys-color-text-primary);
+	color: ${color('text-primary')};
 	display: flex;
 	font-size: var(--sys-font-size-lg);
 	font-weight: var(--sys-font-weight-bold);
@@ -93,7 +94,7 @@ export const ControlButton = styled.button`
 	transition: background-color 0.2s;
 
 	&:hover:not(:disabled) {
-		background-color: var(--sys-color-border-subtle);
+		background-color: ${color('border-subtle')};
 	}
 
 	&:disabled {
@@ -103,11 +104,11 @@ export const ControlButton = styled.button`
 `;
 
 export const PauseButton = styled(ControlButton)`
-	color: var(--sys-color-warning);
+	color: ${color('warning')};
 `;
 
 export const ResetButton = styled(ControlButton)`
-	color: var(--sys-color-danger);
+	color: ${color('danger')};
 `;
 
 export const IconButton = styled.button`
@@ -116,10 +117,10 @@ export const IconButton = styled.button`
 	justify-content: center;
 	width: var(--sys-spacing-xxl);
 	height: 100%;
-	color: var(--sys-color-text-primary);
+	color: ${color('text-primary')};
 	transition: background-color 0.2s;
 
 	&:hover:not(:disabled) {
-		background-color: var(--sys-color-border-subtle);
+		background-color: ${color('border-subtle')};
 	}
 `;

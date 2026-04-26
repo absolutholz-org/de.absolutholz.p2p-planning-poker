@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { color } from '../../../theme/colors';
 import { Stack } from './_Stack';
 
 const meta = {
@@ -37,7 +38,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const Placeholder = ({ color = 'var(--sys-color-primary)', size = '50px' }) => (
+const Placeholder = ({ color = color('primary'), size = '50px' }) => (
 	<div
 		style={{
 			backgroundColor: color,
@@ -82,13 +83,13 @@ export const Nested: Story = {
 		children: (
 			<>
 				<Stack direction="row" spacing="md" justify="center">
-					<Placeholder color="var(--sys-color-success)" />
-					<Placeholder color="var(--sys-color-success)" />
+					<Placeholder color={color('success')} />
+					<Placeholder color={color('success')} />
 				</Stack>
 				<Stack direction="row" spacing="md" justify="between">
-					<Placeholder color="var(--sys-color-warning)" />
-					<Placeholder color="var(--sys-color-warning)" />
-					<Placeholder color="var(--sys-color-warning)" />
+					<Placeholder color={color('warning')} />
+					<Placeholder color={color('warning')} />
+					<Placeholder color={color('warning')} />
 				</Stack>
 			</>
 		),

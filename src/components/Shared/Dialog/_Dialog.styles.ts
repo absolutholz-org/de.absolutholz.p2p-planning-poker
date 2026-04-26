@@ -1,6 +1,8 @@
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 
+import { color } from '../../../theme/colors';
+
 // Animation for the modal appearing
 export const fadeIn = keyframes`
   from { opacity: 0; transform: scale(0.95); }
@@ -38,11 +40,11 @@ export const DialogBase = styled.dialog`
 `;
 
 export const DialogContainer = styled.div`
-	background-color: var(--sys-color-surface);
-	border: 1px solid var(--sys-color-border);
+	background-color: ${color('surface')};
+	border: 1px solid ${color('border')};
 	border-radius: var(--sys-radius-xl);
 	box-shadow: var(--sys-shadow-xl);
-	color: var(--sys-color-text-primary);
+	color: ${color('text-primary')};
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
@@ -51,14 +53,14 @@ export const DialogContainer = styled.div`
 export const DialogHeader = styled.div`
 	align-items: center;
 	background-color: transparent;
-	border-bottom: 1px solid var(--sys-color-border);
+	border-bottom: 1px solid ${color('border')};
 	display: flex;
 	justify-content: space-between;
 	padding: var(--sys-spacing-lg);
 `;
 
 export const DialogTitle = styled.h2`
-	color: var(--sys-color-text-primary);
+	color: ${color('text-primary')};
 	font-size: var(--sys-font-size-2xl);
 	font-weight: 700;
 	margin: 0;
@@ -69,7 +71,7 @@ export const CloseButton = styled.button`
 	background: transparent;
 	border: none;
 	border-radius: var(--sys-radius-pill);
-	color: var(--sys-color-text-secondary);
+	color: ${color('text-secondary')};
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
@@ -77,12 +79,12 @@ export const CloseButton = styled.button`
 	transition: all 0.2s;
 
 	&:hover {
-		background-color: var(--sys-color-bg);
-		color: var(--sys-color-text-primary);
+		background-color: ${color('bg')};
+		color: ${color('text-primary')};
 	}
 
 	&:focus-visible {
-		box-shadow: 0 0 0 2px var(--sys-color-focus);
+		box-shadow: 0 0 0 2px ${color('focus')};
 		outline: none;
 	}
 
@@ -101,7 +103,7 @@ export const CloseButton = styled.button`
 `;
 
 export const DialogContent = styled.div`
-	color: var(--sys-color-text-secondary);
+	color: ${color('text-secondary')};
 	font-size: var(--sys-font-size-md);
 	line-height: 1.5;
 	padding: var(--sys-spacing-lg);

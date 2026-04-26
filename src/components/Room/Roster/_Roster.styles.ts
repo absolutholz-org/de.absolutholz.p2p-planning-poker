@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { color } from '../../../theme/colors';
+
 export const RosterContainer = styled.section`
 	// margin-inline: auto;
 	// max-width: 800px;
@@ -10,7 +12,7 @@ export const SectionTitle = styled.h2`
 	font-weight: 700;
 	letter-spacing: 0.05em;
 	text-transform: uppercase;
-	color: var(--sys-color-text-secondary);
+	color: ${color('text-secondary')};
 	margin-bottom: var(--sys-spacing-xl);
 	display: flex;
 	align-items: center;
@@ -18,10 +20,10 @@ export const SectionTitle = styled.h2`
 `;
 
 export const VoteCountBadge = styled.div`
-	background: var(--sys-color-surface);
-	border: 1px solid var(--sys-color-border);
+	background: ${color('surface')};
+	border: 1px solid ${color('border')};
 	border-radius: var(--sys-radius-pill);
-	color: var(--sys-color-text-secondary);
+	color: ${color('text-secondary')};
 	font-size: var(--sys-font-size-xs);
 	font-weight: 600;
 	margin-block: calc(-1 * (var(--sys-spacing-xs) + 1px));

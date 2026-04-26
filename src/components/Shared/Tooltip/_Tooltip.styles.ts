@@ -1,10 +1,12 @@
 import styled from '@emotion/styled';
 
+import { color } from '../../../theme/colors';
+
 export const Tooltip = styled.div`
 	margin: 0;
 	padding: var(--sys-spacing-xs) var(--sys-spacing-md);
-	background-color: var(--sys-color-primary);
-	color: var(--sys-color-primary-text);
+	background-color: ${color('primary')};
+	color: ${color('primary-text')};
 	font-size: var(--sys-font-size-xs);
 	font-weight: 500;
 	border-radius: var(--sys-radius-sm);

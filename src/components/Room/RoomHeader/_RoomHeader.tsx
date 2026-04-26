@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import { useRoom } from '../../../hooks/useRoom';
+import { color } from '../../../theme/colors';
 import { Banner } from '../../Shared/Banner';
 import { Button } from '../../Shared/Button';
 import { Dialog } from '../../Shared/Dialog';
@@ -138,7 +139,7 @@ export function RoomHeader() {
 									disabled={isRevealDisabled}
 									title={revealAriaLabel}
 									style={{
-										color: 'var(--sys-color-primary-text)',
+										color: color('primary-text'),
 									}}
 								>
 									{t('common.actions.reveal')}
