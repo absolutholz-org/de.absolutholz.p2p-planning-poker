@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { color } from '../../../../theme/GlobalStyles';
+import { color } from '../../../../theme/colors';
 
 const LAYOUT_BREAKPOINT = '45rem';
 
