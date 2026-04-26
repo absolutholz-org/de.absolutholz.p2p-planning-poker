@@ -1,17 +1,18 @@
 import styled from '@emotion/styled';
 
 import { color } from '../../../theme/colors';
+import { borderRadius, fontSize, shadow, space } from '../../../theme/tokens';
 
 export const Tooltip = styled.div`
 	margin: 0;
-	padding: var(--sys-spacing-xs) var(--sys-spacing-md);
+	padding: ${space('xs')} ${space('md')};
 	background-color: ${color('primary')};
 	color: ${color('primary-text')};
-	font-size: var(--sys-font-size-xs);
+	font-size: ${fontSize('xs')};
 	font-weight: 500;
-	border-radius: var(--sys-radius-sm);
+	border-radius: ${borderRadius('sm')};
 	border: none;
-	box-shadow: var(--sys-shadow-sm);
+	box-shadow: ${shadow('sm')};
 	z-index: 50;
 	white-space: nowrap;
 

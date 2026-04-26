@@ -1,16 +1,17 @@
 import styled from '@emotion/styled';
 
 import { color } from '../../theme/colors';
+import { borderRadius, fontSize, space } from '../../theme/tokens';
 
 export const BackButtonContainer = styled.div`
 	display: flex;
 	justify-content: flex-start;
-	margin-bottom: var(--sys-spacing-lg);
+	margin-bottom: ${space('lg')};
 `;
 
 export const MarkdownWrapper = styled.article`
 	color: ${color('text-primary')};
-	font-size: var(--sys-font-size-md);
+	font-size: ${fontSize('md')};
 	line-height: 1.6;
 	max-width: 65ch;
 
@@ -24,32 +25,32 @@ export const MarkdownWrapper = styled.article`
 	h6 {
 		color: ${color('text-primary')};
 		font-weight: 700;
-		margin-top: var(--sys-spacing-xl);
-		margin-bottom: var(--sys-spacing-md);
+		margin-top: ${space('xl')};
+		margin-bottom: ${space('md')};
 	}
 
 	h1 {
-		font-size: var(--sys-font-size-2xl);
+		font-size: ${fontSize('2xl')};
 		margin-top: 0;
 	}
 
 	h2 {
-		font-size: var(--sys-font-size-xl);
+		font-size: ${fontSize('xl')};
 	}
 
 	h3 {
-		font-size: var(--sys-font-size-lg);
+		font-size: ${fontSize('lg')};
 	}
 
 	p {
 		color: ${color('text-secondary')};
-		margin-bottom: var(--sys-spacing-md);
+		margin-bottom: ${space('md')};
 	}
 
 	hr {
 		border: none;
 		border-top: 1px solid ${color('border')};
-		margin: var(--sys-spacing-xl) 0;
+		margin: ${space('xl')} 0;
 	}
 
 	a {
@@ -70,17 +71,17 @@ export const MarkdownWrapper = styled.article`
 	ul,
 	ol {
 		color: ${color('text-secondary')};
-		margin-bottom: var(--sys-spacing-md);
-		padding-left: var(--sys-spacing-xl);
+		margin-bottom: ${space('md')};
+		padding-left: ${space('xl')};
 	}
 
 	li {
-		margin-bottom: var(--sys-spacing-xs);
+		margin-bottom: ${space('xs')};
 	}
 
 	code {
 		background-color: ${color('bg')};
-		border-radius: var(--sys-radius-sm);
+		border-radius: ${borderRadius('sm')};
 		color: ${color('primary')};
 		font-size: 0.9em;
 		font-family: inherit; // use simple monospace if preferred

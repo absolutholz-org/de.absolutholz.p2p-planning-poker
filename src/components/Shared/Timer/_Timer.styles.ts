@@ -1,23 +1,24 @@
 import styled from '@emotion/styled';
 
 import { color } from '../../../theme/colors';
+import { borderRadius, fontSize, space } from '../../../theme/tokens';
 import { VisuallyHidden } from '../VisuallyHidden';
 
 export const TimerContainer = styled.div`
 	display: flex;
 	align-items: stretch;
 	background: ${color('surface')};
-	border-radius: var(--sys-radius-pill);
+	border-radius: ${borderRadius('pill')};
 	border: 1px solid ${color('border')};
 	overflow: hidden;
-	height: var(--sys-spacing-xxl);
+	height: ${space('xxl')};
 `;
 
 export const Segment = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding-inline: var(--sys-spacing-sm-md);
+	padding-inline: ${space('sm-md')};
 	flex: none;
 
 	&:not(:last-child) {
@@ -40,12 +41,12 @@ export const ActionSegment = styled(Segment)`
 
 export const TimeDisplay = styled.div`
 	font-family: var(--sys-font-mono);
-	font-size: var(--sys-font-size-xl);
+	font-size: ${fontSize('xl')};
 	font-weight: var(--sys-font-weight-bold);
 	color: ${color('text-primary')};
 	display: flex;
 	align-items: center;
-	gap: var(--sys-spacing-sm);
+	gap: ${space('sm')};
 	white-space: nowrap;
 
 	svg {
@@ -60,7 +61,7 @@ export const TimerInput = styled.input`
 	border: none;
 	color: ${color('text-primary')};
 	font-family: var(--sys-font-mono);
-	font-size: var(--sys-font-size-xl);
+	font-size: ${fontSize('xl')};
 	font-weight: var(--sys-font-weight-bold);
 	padding: 0;
 	text-align: right;
@@ -86,11 +87,11 @@ export const ControlButton = styled.button`
 	align-items: center;
 	color: ${color('text-primary')};
 	display: flex;
-	font-size: var(--sys-font-size-lg);
+	font-size: ${fontSize('lg')};
 	font-weight: var(--sys-font-weight-bold);
-	gap: var(--sys-spacing-sm);
+	gap: ${space('sm')};
 	height: 100%;
-	padding-inline: var(--sys-spacing-md);
+	padding-inline: ${space('md')};
 	transition: background-color 0.2s;
 
 	&:hover:not(:disabled) {
@@ -115,7 +116,7 @@ export const IconButton = styled.button`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: var(--sys-spacing-xxl);
+	width: ${space('xxl')};
 	height: 100%;
 	color: ${color('text-primary')};
 	transition: background-color 0.2s;

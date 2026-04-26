@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import { color } from '../../../theme/colors';
+import { fontSize, space } from '../../../theme/tokens';
 import type { IDivider } from './_Divider.types';
 
 const LAYOUT_BREAKPOINT = '45rem';
@@ -8,10 +9,10 @@ const LAYOUT_BREAKPOINT = '45rem';
 export const StyledDivider = styled.div<IDivider>`
 	display: flex;
 	align-items: center;
-	gap: var(--sys-spacing-md);
-	margin-block: var(--sys-spacing-xl);
+	gap: ${space('md')};
+	margin-block: ${space('xl')};
 	color: ${color('text-secondary')};
-	font-size: var(--sys-font-size-sm);
+	font-size: ${fontSize('sm')};
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
 

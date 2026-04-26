@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
 import { color } from '../../../theme/colors';
+import { fontSize, space } from '../../../theme/tokens';
 import { Stack } from '../Stack';
 
 export const FooterContainer = styled.footer`
@@ -9,14 +10,14 @@ export const FooterContainer = styled.footer`
 	border-top: 1px solid ${color('border')};
 	display: flex;
 	flex-direction: column;
-	gap: var(--sys-spacing-md);
-	padding: var(--sys-spacing-lg) var(--page-content-padding);
+	gap: ${space('md')};
+	padding: ${space('lg')} var(--page-content-padding);
 	text-align: center;
 
 	> *:not(:first-child) {
 		@media (max-width: 767px) {
 			border-top: 1px solid ${color('border')};
-			padding-top: var(--sys-spacing-md);
+			padding-top: ${space('md')};
 		}
 	}
 
@@ -24,7 +25,7 @@ export const FooterContainer = styled.footer`
 		flex-direction: row;
 		gap: var(--page-content-padding);
 		justify-content: space-between;
-		padding: var(--sys-spacing-md) var(--page-content-padding);
+		padding: ${space('md')} var(--page-content-padding);
 	}
 `;
 
@@ -34,8 +35,8 @@ export const IdentityContainer = styled(Stack)`
 
 const commonLinkStyles = `
 	color: ${color('text-primary')};
-	font-size: var(--sys-font-size-sm);
-	padding: var(--sys-spacing-xs) var(--sys-spacing-sm);
+	font-size: ${fontSize('sm')};
+	padding: ${space('xs')} ${space('sm')};
 	text-decoration: none;
 
 	&:hover {
@@ -53,12 +54,12 @@ export const StaticFooterLink = styled.a`
 
 export const Copyright = styled.span`
 	color: ${color('text-secondary')};
-	font-size: var(--sys-font-size-sm);
+	font-size: ${fontSize('sm')};
 	white-space: nowrap;
 `;
 
 export const VersionInfo = styled.span`
-	font-size: var(--sys-font-size-xs);
+	font-size: ${fontSize('xs')};
 	opacity: 0.6;
 	white-space: nowrap;
 `;

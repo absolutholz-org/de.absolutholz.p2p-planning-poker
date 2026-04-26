@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import { color } from '../../../theme/colors';
+import { borderRadius, fontSize, space } from '../../../theme/tokens';
 import type { ButtonVariant } from './_Button.types';
 
 export const Button = styled.button<{ 'data-variant': ButtonVariant }>`
@@ -12,17 +13,17 @@ export const Button = styled.button<{ 'data-variant': ButtonVariant }>`
 	display: inline-flex;
 	flex-shrink: 0; // tmp because of being within a flex box parent
 	justify-content: center;
-	padding: var(--sys-spacing-sm) var(--sys-spacing-lg);
+	padding: ${space('sm')} ${space('lg')};
 
 	font-family: inherit;
-	font-size: var(--sys-font-size-md);
+	font-size: ${fontSize('md')};
 	font-weight: 500;
 
-	border-radius: var(--sys-radius-md);
+	border-radius: ${borderRadius('md')};
 	border: 1px solid transparent;
 	cursor: pointer;
 	transition: all 0.2s ease-in-out;
-	gap: var(--sys-spacing-sm);
+	gap: ${space('sm')};
 
 	/* Focus ring for accessibility */
 	&:focus-visible {
@@ -105,8 +106,8 @@ export const Button = styled.button<{ 'data-variant': ButtonVariant }>`
 	&[data-size='sm'] {
 		min-height: 2.25rem;
 		min-width: 2.25rem;
-		padding: var(--sys-spacing-xs) var(--sys-spacing-sm);
-		font-size: var(--sys-font-size-sm);
+		padding: ${space('xs')} ${space('sm')};
+		font-size: ${fontSize('sm')};
 	}
 
 	&[data-size='md'] {
@@ -117,8 +118,8 @@ export const Button = styled.button<{ 'data-variant': ButtonVariant }>`
 	&[data-size='lg'] {
 		min-height: 3.5rem;
 		min-width: 3.5rem;
-		padding: var(--sys-spacing-md) var(--sys-spacing-xl);
-		font-size: var(--sys-font-size-lg);
+		padding: ${space('md')} ${space('xl')};
+		font-size: ${fontSize('lg')};
 	}
 `;
 

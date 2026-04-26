@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { color } from '../../../theme/colors';
+import { borderRadius, space } from '../../../theme/tokens';
 import { PageContainer } from '.';
 
 const meta = {
@@ -22,16 +23,14 @@ export const Default: Story = {
 				style={{
 					backgroundColor: color('surface'),
 					border: `1px solid ${color('border')}`,
-					borderRadius: 'var(--sys-radius-lg)',
-					marginBottom: 'var(--sys-spacing-xl)',
-					marginTop: 'var(--sys-spacing-xl)',
-					padding: 'var(--sys-spacing-xl)',
+					borderRadius: borderRadius('lg'),
+					marginBottom: space('xl'),
+					marginTop: space('xl'),
+					padding: space('xl'),
 				}}
 			>
-				<h2 style={{ marginBottom: 'var(--sys-spacing-md)' }}>
-					Page Content
-				</h2>
-				<p style={{ marginBottom: 'var(--sys-spacing-sm)' }}>
+				<h2 style={{ marginBottom: space('md') }}>Page Content</h2>
+				<p style={{ marginBottom: space('sm') }}>
 					This content is constrained by the PageContainer.
 				</p>
 				<p>

@@ -1,12 +1,13 @@
 import styled from '@emotion/styled';
 
 import { color } from '../../../theme/colors';
+import { borderRadius, fontSize, shadow, space } from '../../../theme/tokens';
 
 export const Switch_Container = styled.label<{ disabled?: boolean }>`
 	display: inline-flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: var(--sys-spacing-md);
+	gap: ${space('md')};
 	cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
 	opacity: ${(props) => (props.disabled ? 0.5 : 1)};
 	user-select: none;
@@ -19,7 +20,7 @@ export const Switch_Container = styled.label<{ disabled?: boolean }>`
 `;
 
 export const Switch_LabelText = styled.span`
-	font-size: var(--sys-font-size-md);
+	font-size: ${fontSize('md')};
 	color: ${color('text-primary')};
 	font-weight: var(--sys-font-weight-bold);
 `;
@@ -34,7 +35,7 @@ export const Switch_Track = styled.div<{ checked: boolean }>`
 	height: 1.75em;
 	background-color: ${(props) =>
 		props.checked ? color('info') : color('border')};
-	border-radius: var(--sys-radius-pill);
+	border-radius: ${borderRadius('pill')};
 	transition: background-color 0.2s ease-in-out;
 	flex-shrink: 0;
 
@@ -52,9 +53,9 @@ export const Switch_Thumb = styled.span<{ checked: boolean }>`
 	width: 1.375em;
 	height: 1.375em;
 	background-color: ${color('surface')};
-	border-radius: var(--sys-radius-pill);
+	border-radius: ${borderRadius('pill')};
 	transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 	transform: ${(props) =>
 		props.checked ? 'translateX(1.25em)' : 'translateX(0)'};
-	box-shadow: var(--sys-shadow-sm);
+	box-shadow: ${shadow('sm')};
 `;

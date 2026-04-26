@@ -1,11 +1,12 @@
 import styled from '@emotion/styled';
 
 import { color } from '../../../theme/colors';
+import { borderRadius, shadow, space } from '../../../theme/tokens';
 
 export const PopoverContent = styled.div`
 	/* Reset default popover styling applied natively by browsers */
 	border: none;
-	padding: var(--sys-spacing-sm);
+	padding: ${space('sm')};
 	margin: 0;
 
 	/* Top Layer Placement Override Constraints */
@@ -17,8 +18,8 @@ export const PopoverContent = styled.div`
 	color: ${color('text-primary')};
 	opacity: 1;
 	border: 1px solid ${color('border')};
-	border-radius: var(--sys-radius-lg);
-	box-shadow: var(--sys-shadow-lg);
+	border-radius: ${borderRadius('lg')};
+	box-shadow: ${shadow('lg')};
 	min-width: 11.25rem;
 
 	/* Top layer animation handling */

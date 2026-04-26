@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import { color } from '../../../theme/colors';
+import { borderRadius, fontSize, space } from '../../../theme/tokens';
 
 export const StyledForm = styled.form`
 	width: 100%;
@@ -9,10 +10,10 @@ export const StyledForm = styled.form`
 export const ErrorSummary = styled.div`
 	background: ${color('surface-subtle')};
 	border-left: 4px solid ${color('danger')};
-	border-radius: var(--sys-radius-sm);
+	border-radius: ${borderRadius('sm')};
 	color: ${color('danger')};
-	font-size: var(--sys-font-size-sm);
+	font-size: ${fontSize('sm')};
 	font-weight: 500;
-	margin-bottom: var(--sys-spacing-md);
-	padding: var(--sys-spacing-sm) var(--sys-spacing-md);
+	margin-bottom: ${space('md')};
+	padding: ${space('sm')} ${space('md')};
 `;

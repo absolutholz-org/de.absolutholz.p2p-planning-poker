@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import { color } from '../../../theme/colors';
+import { borderRadius, fontSize, space } from '../../../theme/tokens';
 
 export const MenuContainer = styled.div`
 	display: flex;
@@ -12,15 +13,15 @@ export const MenuItem = styled.button<{ 'data-active': boolean }>`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: var(--sys-spacing-sm) var(--sys-spacing-md);
+	padding: ${space('sm')} ${space('md')};
 	background: ${(props) =>
 		props['data-active'] ? color('bg') : 'transparent'};
 	border: none;
 	width: 100%;
 	text-align: left;
-	font-size: var(--sys-font-size-sm);
+	font-size: ${fontSize('sm')};
 	color: ${color('text-primary')};
-	border-radius: var(--sys-radius-sm);
+	border-radius: ${borderRadius('sm')};
 	cursor: pointer;
 	transition: all 0.2s ease;
 
@@ -40,7 +41,7 @@ export const MenuItem = styled.button<{ 'data-active': boolean }>`
 	.option-content {
 		display: flex;
 		align-items: center;
-		gap: var(--sys-spacing-sm);
+		gap: ${space('sm')};
 	}
 
 	.option-icon {

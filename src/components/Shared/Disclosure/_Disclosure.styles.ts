@@ -1,21 +1,22 @@
 import styled from '@emotion/styled';
 
 import { color } from '../../../theme/colors';
+import { borderRadius, fontSize, shadow, space } from '../../../theme/tokens';
 
 export const DisclosureContainer = styled.div`
-	margin-top: var(--sys-spacing-md);
+	margin-top: ${space('md')};
 	width: 100%;
 
 	details {
 		background-color: ${color('surface-subtle')};
-		border-radius: var(--sys-radius-md);
+		border-radius: ${borderRadius('md')};
 		border: 1px solid ${color('border')};
-		padding: var(--sys-spacing-md);
+		padding: ${space('md')};
 		transition: all 0.2s ease-in-out;
 
 		&[open] {
 			background-color: ${color('surface')};
-			// box-shadow: var(--sys-shadow-sm);
+			// box-shadow: ${shadow('sm')};
 		}
 	}
 
@@ -26,10 +27,10 @@ export const DisclosureContainer = styled.div`
 		cursor: pointer;
 		font-weight: 600;
 		color: ${color('text-primary')};
-		font-size: var(--sys-font-size-sm);
+		font-size: ${fontSize('sm')};
 		outline: 2px solid transparent;
 		outline-offset: 2px;
-		border-radius: var(--sys-radius-sm);
+		border-radius: ${borderRadius('sm')};
 		user-select: none;
 		transition: all 0.2s;
 
@@ -44,21 +45,21 @@ export const DisclosureContainer = styled.div`
 `;
 
 export const DisclosureContent = styled.div`
-	margin-top: var(--sys-spacing-md);
-	padding-top: var(--sys-spacing-md);
+	margin-top: ${space('md')};
+	padding-top: ${space('md')};
 	border-top: 1px solid ${color('border')};
 	text-align: left;
 
 	h4 {
 		color: ${color('text-primary')};
-		font-size: var(--sys-font-size-sm);
+		font-size: ${fontSize('sm')};
 		font-weight: 600;
 		margin: 0;
 	}
 
 	p {
 		color: ${color('text-secondary')};
-		font-size: var(--sys-font-size-xs);
+		font-size: ${fontSize('xs')};
 		line-height: 1.5;
 		margin: 0;
 	}

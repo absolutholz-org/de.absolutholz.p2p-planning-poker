@@ -1,17 +1,18 @@
 import styled from '@emotion/styled';
 
 import { color } from '../../../theme/colors';
+import { borderRadius, fontSize, space } from '../../../theme/tokens';
 
 export const InputWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: var(--sys-spacing-xs);
+	gap: ${space('xs')};
 	width: 100%;
 `;
 
 export const Label = styled.label`
 	color: ${color('text-secondary')};
-	font-size: var(--sys-font-size-xs);
+	font-size: ${fontSize('xs')};
 	font-weight: 700;
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
@@ -27,17 +28,17 @@ export const InputContainer = styled.div<{ $hasError: boolean }>`
 export const StyledInput = styled.input<{ $hasError: boolean }>`
 	width: 100%;
 	min-height: 3.5rem;
-	padding: 0 var(--sys-spacing-md);
+	padding: 0 ${space('md')};
 
 	background: ${color('surface-subtle')};
 	backdrop-filter: blur(8px);
 	border: 2px solid
 		${(props) => (props.$hasError ? color('danger') : color('border'))};
-	border-radius: var(--sys-radius-lg);
+	border-radius: ${borderRadius('lg')};
 
 	color: ${color('text-primary')};
 	font-family: inherit;
-	font-size: var(--sys-font-size-md);
+	font-size: ${fontSize('md')};
 	font-weight: 500;
 
 	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -73,11 +74,11 @@ export const StyledInput = styled.input<{ $hasError: boolean }>`
 
 export const ErrorMessage = styled.span`
 	color: ${color('danger')};
-	font-size: var(--sys-font-size-xs);
+	font-size: ${fontSize('xs')};
 	font-weight: 500;
 	display: flex;
 	align-items: center;
-	gap: var(--sys-spacing-xs);
+	gap: ${space('xs')};
 	margin-top: 2px;
 	animation: fadeIn 0.3s ease-out;
 

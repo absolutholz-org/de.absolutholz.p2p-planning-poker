@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import { color } from '../../../theme/colors';
+import { fontSize, space } from '../../../theme/tokens';
 
 const LAYOUT_BREAKPOINT = '45rem';
 
@@ -12,10 +13,10 @@ export const DeckContainer = styled.section`
 
 export const SectionTitle = styled.h2`
 	color: ${color('text-secondary')};
-	font-size: var(--sys-font-size-xs);
+	font-size: ${fontSize('xs')};
 	font-weight: 700;
 	letter-spacing: 0.05em;
-	margin-bottom: var(--sys-spacing-xl);
+	margin-bottom: ${space('xl')};
 	text-align: center;
 	text-transform: uppercase;
 `;
@@ -23,7 +24,7 @@ export const SectionTitle = styled.h2`
 export const Grid = styled.div`
 	display: flex;
 	flex-wrap: wrap;
-	gap: var(--sys-spacing-md);
+	gap: ${space('md')};
 	justify-content: center;
 	margin: 0 auto;
 	max-width: 25rem; /* Constrain tightly to force the 4-4-1 wrapping cleanly */

@@ -1,22 +1,23 @@
 import styled from '@emotion/styled';
 
 import { color } from '../../../theme/colors';
+import { fontSize, space } from '../../../theme/tokens';
 
 export const ContentContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: var(--sys-spacing-lg);
-	padding-top: var(--sys-spacing-sm);
+	gap: ${space('lg')};
+	padding-top: ${space('sm')};
 `;
 
 export const SettingRow = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: var(--sys-spacing-xs);
+	gap: ${space('xs')};
 `;
 
 export const Description = styled.p`
 	color: ${color('text-secondary')};
-	font-size: var(--sys-font-size-xs);
+	font-size: ${fontSize('xs')};
 	margin: 0;
 `;

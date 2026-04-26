@@ -1,12 +1,15 @@
 import { css } from '@emotion/react';
 
 import { darkTheme, lightTheme } from './colors';
+import { fontSizes, iconSizes, radius, shadows, spacing } from './tokens';
 
-const shadows = {
-	lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-	md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-	sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-	xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+const mapEntriesToVariables = (
+	entries: Record<string, string>,
+	prefix: string,
+) => {
+	return Object.entries(entries)
+		.map(([key, value]) => `--sys-${prefix}-${key}: ${value};`)
+		.join('\n');
 };
 
 const mapThemeToVariables = (
@@ -22,50 +25,13 @@ const mapThemeToVariables = (
 		.join('\n');
 };
 
-const mapEntriesToVariables = (
-	entries: Record<string, string>,
-	prefix: string,
-) => {
-	return Object.entries(entries)
-		.map(([key, value]) => `--sys-${prefix}-${key}: ${value};`)
-		.join('\n');
-};
-
 export const globalStyles = css`
 	:root {
-		/* System Spacing */
-		--sys-spacing-xs: 0.25rem; /* 4px */
-		--sys-spacing-sm: 0.5rem; /* 8px */
-		--sys-spacing-sm-md: 0.75rem; /* 12px */
-		--sys-spacing-md: 1rem; /* 16px */
-		--sys-spacing-lg: 1.5rem; /* 24px */
-		--sys-spacing-xl: 2rem; /* 32px */
-		--sys-spacing-xxl: 3rem; /* 48px */
-
-		/* System Radius */
-		--sys-radius-sm: 4px;
-		--sys-radius-md: 8px;
-		--sys-radius-lg: 12px;
-		--sys-radius-xl: 16px;
-		--sys-radius-xxl: 24px;
-		--sys-radius-pill: calc(infinity * 1px);
-
-		/* System Icon Sizes */
-		--sys-icon-size-xs: 0.75rem; /* 12px */
-		--sys-icon-size-sm: 1rem; /* 16px */
-		--sys-icon-size-md: 1.25rem; /* 20px */
-		--sys-icon-size-lg: 1.5rem; /* 24px */
-		--sys-icon-size-xl: 2rem; /* 32px */
-		--sys-icon-size-xxl: 3rem; /* 48px */
-
-		/* System Font Sizes */
-		--sys-font-size-xs: 0.75rem; /* 12px */
-		--sys-font-size-sm: 0.875rem; /* 14px */
-		--sys-font-size-md: 1rem; /* 16px */
-		--sys-font-size-lg: 1.125rem; /* 18px */
-		--sys-font-size-xl: 1.25rem; /* 20px */
-		--sys-font-size-2xl: 1.5rem; /* 24px */
-		--sys-font-size-3xl: 2.25rem; /* 36px */
+		${mapEntriesToVariables(spacing, 'spacing')}
+		${mapEntriesToVariables(radius, 'radius')}
+		${mapEntriesToVariables(iconSizes, 'icon-size')}
+		${mapEntriesToVariables(fontSizes, 'font-size')}
+		${mapEntriesToVariables(shadows, 'shadow')}
 
 		--page-content-padding: var(--sys-spacing-md);
 		--page-content-max-width: 52rem;

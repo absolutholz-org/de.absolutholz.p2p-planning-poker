@@ -1,18 +1,19 @@
 import styled from '@emotion/styled';
 
 import { color } from '../../../../theme/colors';
+import { borderRadius, fontSize, space } from '../../../../theme/tokens';
 import { Icon } from '../../../Shared/Icon';
 
 export const Participant = styled.div`
 	align-items: center;
 	background-color: ${color('surface')};
 	border: 1px solid ${color('border')};
-	border-radius: var(--sys-radius-lg);
+	border-radius: ${borderRadius('lg')};
 	display: grid;
-	font-size: var(--sys-font-size-sm);
+	font-size: ${fontSize('sm')};
 	font-weight: var(--sys-font-weight-medium);
 	grid-template-columns: 1fr auto;
-	padding: var(--sys-spacing-sm-md);
+	padding: ${space('sm-md')};
 `;
 
 export const Participant_Identification = styled.div`
@@ -33,7 +34,7 @@ export const EditButton = styled.button`
 	align-items: center;
 	background: transparent;
 	border: none;
-	border-radius: var(--sys-radius-sm);
+	border-radius: ${borderRadius('sm')};
 	color: ${color('text-secondary')};
 	cursor: pointer;
 	display: inline-flex;
@@ -41,7 +42,7 @@ export const EditButton = styled.button`
 	line-height: 1;
 	margin-left: 0.25em;
 	opacity: 0.6;
-	padding: var(--sys-spacing-xs);
+	padding: ${space('xs')};
 	transition: all var(--sys-transition-base);
 	vertical-align: middle;
 
@@ -65,9 +66,9 @@ export const EditButton = styled.button`
 export const Participant_Status_Text = styled.span`
 	color: ${color('text-secondary')};
 	display: block;
-	font-size: var(--sys-font-size-xs);
+	font-size: ${fontSize('xs')};
 	font-weight: var(--sys-font-weight-normal);
-	margin-top: var(--sys-spacing-xs);
+	margin-top: ${space('xs')};
 `;
 
 export const Participant_Status_Text_Disconnected = styled(
@@ -80,9 +81,9 @@ export const Participant_Status = styled.div`
 	align-items: center;
 	background-color: ${color('bg')};
 	border: 1px solid oklch(0.967 0.001 286.375);
-	border-radius: var(--sys-radius-md);
+	border-radius: ${borderRadius('md')};
 	display: flex;
-	font-size: var(--sys-font-size-sm);
+	font-size: ${fontSize('sm')};
 	font-weight: var(--sys-font-weight-bold);
 	height: 1.875rem;
 	justify-content: center;
@@ -92,7 +93,7 @@ export const Participant_Status = styled.div`
 export const Participant_Status_Thinking = styled.span`
 	animation: spin 4s linear infinite;
 	border: 2px dashed ${color('border')};
-	border-radius: var(--sys-radius-pill);
+	border-radius: ${borderRadius('pill')};
 	height: 1rem;
 	opacity: 0.5;
 	width: 1rem;
@@ -107,7 +108,7 @@ export const Participant_Status_Thinking = styled.span`
 export const Participant_Status_Voted = styled.span`
 	align-items: center;
 	border: 2px solid;
-	border-radius: var(--sys-radius-pill);
+	border-radius: ${borderRadius('pill')};
 	color: ${color('success')};
 	display: inline-flex;
 	justify-content: center;

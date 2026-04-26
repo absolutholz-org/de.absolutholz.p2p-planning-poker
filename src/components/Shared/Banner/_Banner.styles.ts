@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import { color } from '../../../theme/colors';
+import { borderRadius, fontSize, shadow, space } from '../../../theme/tokens';
 
 export const Banner_Root = styled.div`
 	container-type: inline-size;
@@ -11,14 +12,14 @@ export const Banner_Container = styled.div`
 	background-color: ${color('surface')};
 	border: 1px solid ${color('border')};
 	border-left: 4px solid var(--banner-accent-color);
-	border-radius: var(--sys-radius-lg);
-	box-shadow: var(--sys-shadow-sm);
+	border-radius: ${borderRadius('lg')};
+	box-shadow: ${shadow('sm')};
 	color: ${color('text-primary')};
 	display: flex;
 	flex-direction: column;
-	font-size: var(--sys-font-size-md);
-	gap: var(--sys-spacing-md);
-	padding: var(--sys-spacing-sm-md) var(--sys-spacing-md);
+	font-size: ${fontSize('md')};
+	gap: ${space('md')};
+	padding: ${space('sm-md')} ${space('md')};
 
 	@container (min-width: 40em) {
 		align-items: center;
@@ -37,12 +38,12 @@ export const Banner_Status = styled.div`
 	align-items: center;
 	color: var(--banner-accent-color);
 	display: flex;
-	gap: var(--sys-spacing-xs);
-	margin-bottom: var(--sys-spacing-sm);
+	gap: ${space('xs')};
+	margin-bottom: ${space('sm')};
 `;
 
 export const Banner_StatusLabel = styled.span`
-	font-size: var(--sys-font-size-xs);
+	font-size: ${fontSize('xs')};
 	font-weight: var(--sys-font-weight-bold);
 	text-transform: uppercase;
 `;

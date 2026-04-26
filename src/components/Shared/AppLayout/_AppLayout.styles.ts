@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { space } from '../../../theme/tokens';
+
 export const LayoutRoot = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -9,7 +11,7 @@ export const LayoutRoot = styled.div`
 
 export const MainContent = styled.main`
 	flex: 1;
-	padding-block: var(--sys-spacing-xl);
+	padding-block: ${space('xl')};
 
 	/* Focus indicator for skip-link targets */
 	&:focus {

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import { color } from '../../../theme/colors';
+import { borderRadius, fontSize } from '../../../theme/tokens';
 
 export const Card = styled.button<{
 	'data-selected': boolean;
@@ -17,9 +18,9 @@ export const Card = styled.button<{
 	background-color: ${color('surface')};
 	color: ${color('text-primary')};
 	border: 2px solid ${color('border')};
-	border-radius: var(--sys-radius-lg);
+	border-radius: ${borderRadius('lg')};
 
-	font-size: var(--sys-font-size-3xl);
+	font-size: ${fontSize('3xl')};
 	font-weight: 800;
 	cursor: pointer;
 	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -65,7 +66,7 @@ export const Card = styled.button<{
 		&::after {
 			content: '✓';
 			color: ${color('text-primary')};
-			font-size: var(--sys-font-size-xl);
+			font-size: ${fontSize('xl')};
 			position: absolute;
 		}
 	}

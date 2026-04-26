@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { color } from '../../../theme/colors';
+import { borderRadius } from '../../../theme/tokens';
 import { Stack } from './_Stack';
 
 const meta = {
@@ -45,7 +46,7 @@ const Placeholder = ({
 	<div
 		style={{
 			backgroundColor,
-			borderRadius: 'var(--sys-radius-sm)',
+			borderRadius: borderRadius('sm'),
 			height: size,
 			opacity: 0.7,
 			width: size,

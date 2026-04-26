@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import { useRoom } from '../../../hooks/useRoom';
 import { color } from '../../../theme/colors';
+import { space } from '../../../theme/tokens';
 import { Banner } from '../../Shared/Banner';
 import { Button } from '../../Shared/Button';
 import { Dialog } from '../../Shared/Dialog';
@@ -122,7 +123,7 @@ export function RoomHeader() {
 				{isRevealVisible && allVoted && !roomState.isRevealed && (
 					<div
 						style={{
-							marginTop: 'var(--sys-spacing-md)',
+							marginTop: space('md'),
 						}}
 					>
 						<Banner

@@ -1,13 +1,14 @@
 import styled from '@emotion/styled';
 
 import { color } from '../../../theme/colors';
+import { borderRadius, fontSize, space } from '../../../theme/tokens';
 import { Stack } from '../Stack';
 import type { ToolbarItemVariant } from './_ToolbarItem.types';
 
 export const ToolbarRoot = styled(Stack)`
 	align-items: center;
 	display: flex;
-	gap: var(--sys-spacing-md);
+	gap: ${space('md')};
 	justify-content: space-between;
 	width: fit-content;
 `;
@@ -15,7 +16,7 @@ export const ToolbarRoot = styled(Stack)`
 export const Group = styled.div`
 	align-items: center;
 	display: flex;
-	gap: var(--sys-spacing-md);
+	gap: ${space('md')};
 `;
 
 interface ItemButtonProps {
@@ -25,12 +26,12 @@ interface ItemButtonProps {
 export const ItemButton = styled.button<ItemButtonProps>`
 	align-items: center;
 	border: 1px solid transparent;
-	border-radius: var(--sys-radius-sm);
+	border-radius: ${borderRadius('sm')};
 	display: flex;
-	gap: var(--sys-spacing-sm);
-	font-size: var(--sys-font-size-sm);
+	gap: ${space('sm')};
+	font-size: ${fontSize('sm')};
 	font-weight: var(--sys-font-weight-medium);
-	padding: var(--sys-spacing-sm) var(--sys-spacing-md);
+	padding: ${space('sm')} ${space('md')};
 	transition:
 		background-color 0.2s ease-in-out,
 		color 0.2s ease-in-out,

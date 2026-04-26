@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useRoom } from '../../../../hooks/useRoom';
+import { space } from '../../../../theme/tokens';
 import { Dialog } from '../../../Shared/Dialog';
 import { Icon } from '../../../Shared/Icon';
 import { Input } from '../../../Shared/Input';
@@ -103,7 +104,7 @@ export function Participant({
 					cancelText={t('common.actions.cancel')}
 					onCancel={() => setIsRenameDialogOpen(false)}
 				>
-					<div style={{ paddingTop: 'var(--sys-spacing-sm)' }}>
+					<div style={{ paddingTop: space('sm') }}>
 						<Input
 							value={newName}
 							onChange={(

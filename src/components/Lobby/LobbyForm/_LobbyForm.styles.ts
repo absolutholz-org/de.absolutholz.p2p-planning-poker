@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import { color } from '../../../theme/colors';
+import { borderRadius, fontSize, shadow, space } from '../../../theme/tokens';
 
 export const ContentWrapper = styled.div`
 	margin-inline: auto;
@@ -10,21 +11,21 @@ export const ContentWrapper = styled.div`
 export const CardContainer = styled.div`
 	background-color: ${color('surface')};
 	border: 1px solid ${color('border')};
-	border-radius: var(--sys-radius-xl);
-	// box-shadow: var(--sys-shadow-lg);
-	padding: var(--sys-spacing-xl);
+	border-radius: ${borderRadius('xl')};
+	// box-shadow: ${shadow('lg')};
+	padding: ${space('xl')};
 	width: 100%;
 `;
 
 export const Title = styled.h1`
 	color: ${color('text-primary')};
-	font-size: var(--sys-font-size-2xl);
+	font-size: ${fontSize('2xl')};
 	font-weight: 600;
 `;
 
 export const SubTitle = styled.p`
 	color: ${color('text-secondary')};
-	font-size: var(--sys-font-size-sm);
+	font-size: ${fontSize('sm')};
 	line-height: 1.5;
 `;
 
@@ -74,7 +75,7 @@ export const DebugToggle = styled.button`
 	height: 2rem;
 	background: ${color('bg')};
 	border: 1px solid ${color('border')};
-	border-radius: var(--sys-radius-pill);
+	border-radius: ${borderRadius('pill')};
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -88,7 +89,7 @@ export const DebugToggle = styled.button`
 		opacity: 1;
 		transform: scale(1.1);
 		filter: grayscale(0);
-		box-shadow: var(--sys-shadow-sm);
+		box-shadow: ${shadow('sm')};
 	}
 `;
 
@@ -99,10 +100,10 @@ export const JoinCodeToggle = styled.button`
 	border: none;
 	color: ${color('primary')};
 	cursor: pointer;
-	font-size: var(--sys-font-size-sm);
+	font-size: ${fontSize('sm')};
 	font-weight: 600;
-	padding: var(--sys-spacing-sm) var(--sys-spacing-md);
-	border-radius: var(--sys-radius-sm);
+	padding: ${space('sm')} ${space('md')};
+	border-radius: ${borderRadius('sm')};
 	transition: all 0.2s ease-in-out;
 	opacity: 0.8;
 
@@ -128,19 +129,19 @@ export const DebugList = styled.ul`
 
 export const HelperText = styled.p`
 	color: ${color('text-secondary')};
-	font-size: var(--sys-font-size-sm);
+	font-size: ${fontSize('sm')};
 	margin-top: 0.125rem;
 `;
 
 export const ExtraText = styled.div`
 	color: ${color('text-secondary')};
-	font-size: var(--sys-font-size-xs);
-	padding-inline: var(--sys-spacing-xl);
+	font-size: ${fontSize('xs')};
+	padding-inline: ${space('xl')};
 	text-align: center;
 `;
 
 export const DisclaimerText = styled.p`
 	color: ${color('text-secondary')};
-	font-size: var(--sys-font-size-xs);
+	font-size: ${fontSize('xs')};
 	text-align: center;
 `;

@@ -1,11 +1,12 @@
 import styled from '@emotion/styled';
 
 import { color } from '../../../theme/colors';
+import { borderRadius, fontSize, shadow, space } from '../../../theme/tokens';
 
 export const SubHeaderContainer = styled.div`
 	align-items: center;
 	display: flex;
-	gap: var(--sys-spacing-md);
+	gap: ${space('md')};
 	justify-content: space-between;
 `;
 
@@ -14,14 +15,14 @@ export const Toast = styled.div`
 		fadein 0.3s,
 		fadeout 0.3s 2.5s forwards;
 	background: ${color('text-primary')};
-	border-radius: var(--sys-radius-pill);
-	bottom: var(--sys-spacing-xl);
-	box-shadow: var(--sys-shadow-lg);
+	border-radius: ${borderRadius('pill')};
+	bottom: ${space('xl')};
+	box-shadow: ${shadow('lg')};
 	color: ${color('bg')};
-	font-size: var(--sys-font-size-sm);
+	font-size: ${fontSize('sm')};
 	font-weight: 500;
 	left: 50%;
-	padding: var(--sys-spacing-md) var(--sys-spacing-lg);
+	padding: ${space('md')} ${space('lg')};
 	position: fixed;
 	transform: translateX(-50%);
 	z-index: 50;

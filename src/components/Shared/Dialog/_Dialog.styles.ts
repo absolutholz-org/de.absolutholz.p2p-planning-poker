@@ -2,6 +2,7 @@ import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import { color } from '../../../theme/colors';
+import { borderRadius, fontSize, shadow, space } from '../../../theme/tokens';
 
 // Animation for the modal appearing
 export const fadeIn = keyframes`
@@ -17,7 +18,7 @@ export const slideUp = keyframes`
 export const DialogBase = styled.dialog`
 	background: transparent;
 	border: none;
-	border-radius: var(--sys-radius-xl);
+	border-radius: ${borderRadius('xl')};
 	margin: auto;
 	max-width: 40rem;
 	overflow: visible;
@@ -42,8 +43,8 @@ export const DialogBase = styled.dialog`
 export const DialogContainer = styled.div`
 	background-color: ${color('surface')};
 	border: 1px solid ${color('border')};
-	border-radius: var(--sys-radius-xl);
-	box-shadow: var(--sys-shadow-xl);
+	border-radius: ${borderRadius('xl')};
+	box-shadow: ${shadow('xl')};
 	color: ${color('text-primary')};
 	display: flex;
 	flex-direction: column;
@@ -56,12 +57,12 @@ export const DialogHeader = styled.div`
 	border-bottom: 1px solid ${color('border')};
 	display: flex;
 	justify-content: space-between;
-	padding: var(--sys-spacing-lg);
+	padding: ${space('lg')};
 `;
 
 export const DialogTitle = styled.h2`
 	color: ${color('text-primary')};
-	font-size: var(--sys-font-size-2xl);
+	font-size: ${fontSize('2xl')};
 	font-weight: 700;
 	margin: 0;
 `;
@@ -70,12 +71,12 @@ export const CloseButton = styled.button`
 	align-items: center;
 	background: transparent;
 	border: none;
-	border-radius: var(--sys-radius-pill);
+	border-radius: ${borderRadius('pill')};
 	color: ${color('text-secondary')};
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
-	padding: var(--sys-spacing-sm);
+	padding: ${space('sm')};
 	transition: all 0.2s;
 
 	&:hover {
@@ -104,14 +105,14 @@ export const CloseButton = styled.button`
 
 export const DialogContent = styled.div`
 	color: ${color('text-secondary')};
-	font-size: var(--sys-font-size-md);
+	font-size: ${fontSize('md')};
 	line-height: 1.5;
-	padding: var(--sys-spacing-lg);
+	padding: ${space('lg')};
 `;
 
 export const DialogFooter = styled.div`
 	display: flex;
-	gap: var(--sys-spacing-sm);
+	gap: ${space('sm')};
 	justify-content: flex-end;
-	padding: 0 var(--sys-spacing-lg) var(--sys-spacing-lg) var(--sys-spacing-lg);
+	padding: 0 ${space('lg')} ${space('lg')} ${space('lg')};
 `;

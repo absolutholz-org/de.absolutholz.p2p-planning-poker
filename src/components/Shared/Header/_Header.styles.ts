@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import { color } from '../../../theme/colors';
+import { borderRadius, fontSize, space } from '../../../theme/tokens';
 
 export const HeaderContainer = styled.header`
 	align-items: center;
@@ -8,13 +9,13 @@ export const HeaderContainer = styled.header`
 	border-bottom: 1px solid ${color('border')};
 	display: flex;
 	justify-content: space-between;
-	padding: var(--sys-spacing-md) var(--page-content-padding);
+	padding: ${space('md')} var(--page-content-padding);
 	position: sticky;
 	top: 0;
 	z-index: 50;
 
 	@media (max-width: 600px) {
-		padding: var(--sys-spacing-sm) var(--sys-spacing-md);
+		padding: ${space('sm')} ${space('md')};
 	}
 `;
 
@@ -23,9 +24,9 @@ export const Brand = styled.div`
 	color: ${color('text-primary')};
 	cursor: pointer;
 	display: flex;
-	font-size: var(--sys-font-size-lg);
+	font-size: ${fontSize('lg')};
 	font-weight: 700;
-	gap: var(--sys-spacing-sm);
+	gap: ${space('sm')};
 	transition: opacity 0.2s ease;
 	user-select: none;
 
@@ -34,7 +35,7 @@ export const Brand = styled.div`
 	}
 
 	&:focus-visible {
-		border-radius: var(--sys-radius-sm);
+		border-radius: ${borderRadius('sm')};
 		outline: 2px solid ${color('focus')};
 		outline-offset: 4px;
 	}
@@ -43,7 +44,7 @@ export const Brand = styled.div`
 export const BrandText = styled.div`
 	align-items: center;
 	display: flex;
-	gap: var(--sys-spacing-xs);
+	gap: ${space('xs')};
 	line-height: 1;
 
 	@media (max-width: 600px) {
@@ -52,7 +53,7 @@ export const BrandText = styled.div`
 		gap: 0.125rem;
 
 		span {
-			font-size: var(--sys-font-size-sm);
+			font-size: ${fontSize('sm')};
 		}
 	}
 `;
@@ -60,10 +61,10 @@ export const BrandText = styled.div`
 export const LogoIcon = styled.div`
 	align-items: center;
 	background-color: ${color('text-primary')};
-	border-radius: var(--sys-radius-md);
+	border-radius: ${borderRadius('md')};
 	color: ${color('bg')};
 	display: flex;
-	font-size: var(--sys-font-size-md);
+	font-size: ${fontSize('md')};
 	font-weight: 800;
 	height: 2rem;
 	justify-content: center;
@@ -73,5 +74,5 @@ export const LogoIcon = styled.div`
 export const Actions = styled.div`
 	display: flex;
 	align-items: center;
-	gap: var(--sys-spacing-md);
+	gap: ${space('md')};
 `;
