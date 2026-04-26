@@ -41,10 +41,10 @@ export function SchemeSwitcher() {
 	useEffect(() => {
 		const root = document.documentElement;
 		if (scheme === 'system') {
-			root.removeAttribute('data-color-scheme');
+			root.style.removeProperty('color-scheme');
 			localStorage.removeItem(STORAGE_KEYS.SCHEME);
 		} else {
-			root.setAttribute('data-color-scheme', scheme);
+			root.style.setProperty('color-scheme', scheme);
 			localStorage.setItem(STORAGE_KEYS.SCHEME, scheme);
 		}
 	}, [scheme]);

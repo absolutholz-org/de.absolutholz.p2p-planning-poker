@@ -49,6 +49,19 @@ const shadows = {
 	xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
 };
 
+const mapThemeToVariables = (
+	lightEntries: Record<string, string>,
+	darkEntries: Record<string, string>,
+	prefix: string,
+) => {
+	return Object.entries(lightEntries)
+		.map(([key, lightValue]) => {
+			const darkValue = darkEntries[key] || lightValue;
+			return `--sys-${prefix}-${key}: light-dark(${lightValue}, ${darkValue});`;
+		})
+		.join('\n');
+};
+
 const mapEntriesToVariables = (
 	entries: Record<string, string>,
 	prefix: string,
@@ -125,24 +138,8 @@ export const globalStyles = css`
 			--page-content-padding: var(--sys-spacing-lg);
 		}
 
-		${mapEntriesToVariables(lightTheme, 'color')}
+		${mapThemeToVariables(lightTheme, darkTheme, 'color')}
 		${mapEntriesToVariables(shadows, 'shadow')}
-	}
-
-	@media (prefers-color-scheme: dark) {
-		:root {
-			${mapEntriesToVariables(darkTheme, 'color')}
-		}
-	}
-
-	:root[data-color-scheme='light'] {
-		${mapEntriesToVariables(lightTheme, 'color')}
-		color-scheme: light;
-	}
-
-	:root[data-color-scheme='dark'] {
-		${mapEntriesToVariables(darkTheme, 'color')}
-		color-scheme: dark;
 	}
 
 	*,
