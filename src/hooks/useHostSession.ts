@@ -125,6 +125,18 @@ export function useHostSession(
 			console.log(`[Host] Incoming connection from: ${conn.peer}`);
 			connectionsRef.current.set(conn.peer, conn);
 
+			// Diagnostics: Monitor ICE connection state
+			if (conn.peerConnection) {
+				conn.peerConnection.addEventListener(
+					'iceconnectionstatechange',
+					() => {
+						console.log(
+							`[Host] ICE state with ${conn.peer}: ${conn.peerConnection.iceConnectionState}`,
+						);
+					},
+				);
+			}
+
 			conn.on('data', (data: unknown) => {
 				const msg = data as PeerMessage;
 

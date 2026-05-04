@@ -118,10 +118,45 @@ export function useGuestSession(
 			);
 
 			// RACE CONDITION FIX: connect() MUST only be executed inside peer.on('open') callback
-			const conn: DataConnection = peer.connect(roomId, {
-				reliable: true,
-			});
+			const conn: DataConnection = peer.connect(roomId);
 			connRef.current = conn;
+
+			// Diagnostics: Monitor ICE connection state and candidates
+			if (conn.peerConnection) {
+				conn.peerConnection.addEventListener(
+					'iceconnectionstatechange',
+					() => {
+						console.log(
+							`[Guest] ICE state: ${conn.peerConnection.iceConnectionState}`,
+						);
+					},
+				);
+
+				conn.peerConnection.addEventListener(
+					'icecandidate',
+					(event) => {
+						if (event.candidate) {
+							console.log(
+								`[Guest] Local ICE Candidate: ${event.candidate.type} (${event.candidate.protocol})`,
+							);
+						}
+					},
+				);
+			}
+
+			// Connection Timeout: If we don't open in 15 seconds, something is wrong
+			const connectionTimeout = setTimeout(() => {
+				if (connRef.current && !connRef.current.open) {
+					console.error(
+						'[Guest] Connection timeout: Failed to open data channel within 15s.',
+					);
+					setError(
+						'Connection timed out. This may be due to restrictive network settings or a slow Peer network.',
+					);
+					setConnectionStatus('error');
+					conn.close();
+				}
+			}, 15000);
 
 			conn.on('open', () => {
 				console.log(
@@ -136,6 +171,7 @@ export function useGuestSession(
 
 				// Initialize the 15-second severance timer upon successful connection
 				resetSeveranceTimer();
+				clearTimeout(connectionTimeout);
 			});
 
 			conn.on('data', (data: unknown) => {
